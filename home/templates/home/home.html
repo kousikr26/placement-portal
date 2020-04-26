@@ -1,0 +1,42 @@
+{% extends "home/base.html" %}
+{% block content %}
+
+
+    <div class="container jumbotron">
+          <!-- Messages -->
+      <div class="mb-3">
+        {% if messages %}
+          {% for message in messages %}
+            <div style="border-radius:0;" {% if message.tags %} class="alert alert-icon alert-{{ message.tags }} alert-dismissible fade show mb-0" role="alert" {% endif %}>
+              {{ message }}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          {% endfor %}
+        {% endif %}
+      </div>
+      <!-- End Messages -->
+
+      {% if request.user.is_authenticated %}
+      <a href="{% url 'signout' %}" class="btn-danger btn-lg p-3">logout</a>
+      <br> <br>
+      <h1>User : {{request.user.username}}</h1>
+      <h1>Email: {{request.user.email}}</h1>
+
+    {% else %}
+    <a href="{%url 'signin' %}" class="btn-info btn-lg p-3">login</a>
+    {% endif%}
+    </div>
+
+    <script type="text/javascript">
+        $(function () {
+          // Hide message
+          $(".alert").fadeTo(2000, 500).slideUp(500, function(){
+            $(".alert").slideUp(500);
+          });
+
+        });
+      </script>
+
+{% endblock %}

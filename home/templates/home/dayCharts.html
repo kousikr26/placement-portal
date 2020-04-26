@@ -1,0 +1,27 @@
+{% extends "home/base.html" %}
+
+{% block listView %}
+
+<!-- highcharts CDN -->
+    <script src="https://code.highcharts.com/highcharts.src.js"></script>
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>  
+    <script src="https://code.highcharts.com/modules/heatmap.js"></script>
+    <script src="https://code.highcharts.com/modules/treemap.js"></script>
+
+    {% load chartit %}
+    {{ chart_list|load_charts:"cht1,cht2"}}
+{% endblock %}    
+
+{% block content %}
+<div style="width:75%; margin-left:auto; margin-right:auto; display:block; margin-top:10px; min-height:auto">
+   <div id='cht1'>
+</div>
+</div>
+
+<div style="width:75%; margin-left:auto; margin-right:auto; display:block; margin-top:50px; min-height:auto">
+   <div id='cht2'>
+</div>
+</div>
+{% endblock %}

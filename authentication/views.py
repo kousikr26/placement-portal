@@ -24,7 +24,7 @@ def initialize_context(request):
 def home(request):
   context = initialize_context(request)
 
-  return render(request,'index.html', context)
+  return render(request,'home/home.html', context)
 
 def sign_in(request):
   # Get the sign-in URL
