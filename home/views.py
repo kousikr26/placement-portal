@@ -51,12 +51,12 @@ def charts(request):
 	# # 			dobj = dobj[0]
 
 	# # 		numObj = DayTotal.objects.filter(dayNum=day)
-			
+
 	# # 		if numObj.count()==0:
-				
+
 	# # 			DayTotal.objects.create(dayNum=day)
 	# # 			numObj = DayTotal.objects.get(dayNum=day)
-			
+
 	# # 		elif numObj.count()>=1:
 
 	# # 			count = 0;
@@ -69,13 +69,13 @@ def charts(request):
 
 	# # 		dobj.num += 1
 	# # 		dobj.save()
-	# 		# if student.placed==True:	
+	# 		# if student.placed==True:
 	# 	 # 		numObj.num+=1
 	# 	# 	numobj.tnum+=1
 	# # 		numObj.save();
 
 	# 	elif programs == 'M.Tech' or programs == 'MTech' or programs == 'M.Des' or programs == 'M.Sc' or programs == 'Others':
-	# 		if student.placed==True:	
+	# 		if student.placed==True:
 	# 			student.branch.mnum+=1
 	# 		student.branch.tmnum+=1
 	# # 		if dobj.count()==0:
@@ -87,12 +87,12 @@ def charts(request):
 	# # 			dobj = dobj[0]
 
 	# # 		numObj = DayTotal.objects.filter(dayNum=day)
-			
+
 	# # 		if numObj.count()==0:
-				
+
 	# # 			DayTotal.objects.create(dayNum=day)
 	# # 			numObj = DayTotal.objects.get(dayNum=day)
-			
+
 	# # 		elif numObj.count()>=1:
 
 	# # 			count = 0;
@@ -111,8 +111,8 @@ def charts(request):
 	# # 		numObj.save();
 	# 	student.branch.save()
 
-	names_to_exclude = ['Mathematics', 'Physics', 'Chemistry', 'Others'] 
-	
+	names_to_exclude = ['Mathematics', 'Physics', 'Chemistry', 'Others']
+
 
 
 	branch_data =  DataPool(
@@ -123,7 +123,7 @@ def charts(request):
                 'Bachelors(%)': 'per'}]
                 },
 
-             ]) 
+             ])
 
 	cht1 = Chart(
             datasource = branch_data,
@@ -157,7 +157,7 @@ def charts(request):
                 		'display':'none'
                 	}},
                 	},
-               
+
                 'legend': {
                     'enabled': True},
                 'credits': {
@@ -174,7 +174,7 @@ def charts(request):
                 'Masters(%)': 'mper'}]
                 },
 
-             ]) 
+             ])
 
 	cht2 = Chart(
             datasource = branch_data,
@@ -208,15 +208,15 @@ def charts(request):
                 		'display':'none'
                 	}},
                 	},
-               
+
                 'legend': {
                     'enabled': True},
                 'credits': {
                     'enabled': False},
                 'exporting': False},
                 )
-                   
-	return render(request,'home/branchCharts.html', 
+
+	return render(request,'home/branchCharts.html',
         {'chart_list': [cht1, cht2], 'nbar': 'charts',})
 
 @login_required
@@ -246,12 +246,12 @@ def dayCharts(request):
 	# 			dobj = dobj[0]
 
 	# 		numObj = DayTotal.objects.filter(dayNum=day)
-			
+
 	# 		if numObj.count()==0:
-				
+
 	# 			DayTotal.objects.create(dayNum=day)
 	# 			numObj = DayTotal.objects.get(dayNum=day)
-			
+
 	# 		elif numObj.count()>=1:
 
 	# 			count = 0;
@@ -280,12 +280,12 @@ def dayCharts(request):
 	# 			dobj = dobj[0]
 
 	# 		numObj = DayTotal.objects.filter(dayNum=day)
-			
+
 	# 		if numObj.count()==0:
-				
+
 	# 			DayTotal.objects.create(dayNum=day)
 	# 			numObj = DayTotal.objects.get(dayNum=day)
-			
+
 	# 		elif numObj.count()>=1:
 
 	# 			count = 0;
@@ -301,7 +301,7 @@ def dayCharts(request):
 
 	# 		numObj.mnum+=1;
 	# 		numObj.save();
-			
+
 	# 	student.branch.save()
 
 
@@ -347,7 +347,7 @@ def dayCharts(request):
                 		'display':'none'
                 	}},
                 	},
-               
+
                 'legend': {
                     'enabled': True},
                 'credits': {
@@ -397,14 +397,14 @@ def dayCharts(request):
                 		'display':'none'
                 	}},
                 	},
-               
+
                 'legend': {
                     'enabled': True},
                 'credits': {
                     'enabled': False},
                 'exporting': False},
                 )
-	return render(request,'home/DayCharts.html', 
+	return render(request,'home/DayCharts.html',
         {'chart_list': [cht1,cht2]})
 
 
@@ -443,7 +443,7 @@ def studentsList(request):
 # 			student.branch.num+=1
 # 			student.day=day
 # 			student.slot=slot
-			
+
 
 # 			dobj = Day.objects.filter(dayNum=day, branch=student.branch)
 # 			if programs is 'B.Tech' or programs is 'BTech':
@@ -457,12 +457,12 @@ def studentsList(request):
 # 					dobj = dobj[0]
 
 # 				numObj = DayTotal.objects.filter(dayNum=day)
-				
+
 # 				if numObj.count()==0:
-					
+
 # 					DayTotal.objects.create(dayNum=day)
 # 					numObj = DayTotal.objects.get(dayNum=day)
-				
+
 # 				elif numObj.count()>=1:
 
 # 					count = 0;
@@ -471,7 +471,7 @@ def studentsList(request):
 # 						count+=i.num
 # 						i.delete()
 
-# 					DayTotal.objects.create(dayNum=day)	
+# 					DayTotal.objects.create(dayNum=day)
 # 					numObj = DayTotal.objects.get(dayNum=day)
 # 					numObj.num=count
 
@@ -492,12 +492,12 @@ def studentsList(request):
 # 					dobj = dobj[0]
 
 # 				numObj = DayTotal.objects.filter(dayNum=day)
-				
+
 # 				if numObj.count()==0:
-					
+
 # 					DayTotal.objects.create(dayNum=day)
 # 					numObj = DayTotal.objects.get(dayNum=day)
-				
+
 # 				elif numObj.count()>=1:
 
 # 					count = 0;
@@ -506,7 +506,7 @@ def studentsList(request):
 # 						count+=i.mnum
 # 						i.delete()
 
-# 					DayTotal.objects.create(dayNum=day)	
+# 					DayTotal.objects.create(dayNum=day)
 # 					numObj = DayTotal.objects.get(dayNum=day)
 # 					numObj.mnum=count
 
@@ -518,14 +518,14 @@ def studentsList(request):
 
 # 			student.save()
 # 			student.branch.save()
-	
+
 # 		return redirect('home:students')
 # 	else:
 # 		data = {
 # 		'placed':True,
 # 		'company':student.company,
 # 			'sector':student.sector,
-# 			'profile':student.profile,	
+# 			'profile':student.profile,
 # 			'day':student.day,
 # 			'slot':student.slot}
 # 		form = StudentPlacedForm(initial=data)
@@ -552,12 +552,12 @@ def studentsList(request):
 # 		student.placed = False
 
 # 		dobj = Day.objects.get(dayNum=student.day, branch=student.branch)
-	
+
 # 		student.branch.num-=1
 
 # 		dobj.num -= 1
 # 		dobj.save()
-		
+
 # 		numObj = DayTotal.objects.get(dayNum=student.day)
 # 		numObj.num-=1;
 
@@ -579,7 +579,7 @@ def search(request):
 		students |= Student.objects.filter(profile__icontains = search_text)
 
 		students = students.order_by('name')
-		
+
 	else:
 		search_text=" "
 		students=[]
@@ -654,8 +654,8 @@ def showStudentByCompany(request):
 	context.update(csrf(request))
 	context['students']=Student.objects.all().order_by('company')
 	context['nbar']='listView'
-	
-	return render_to_response('home/showStudent.html',context)	
+
+	return render_to_response('home/showStudent.html',context)
 
 @login_required
 def searchStudent(request):
@@ -663,7 +663,7 @@ def searchStudent(request):
 		search_text=request.POST['search_text']
 		val = request.POST['val']
 		place=request.POST['place']
-		
+
 		students = Student.objects.filter(name__icontains = search_text)
 		students |= Student.objects.filter(company__icontains = search_text)
 		students |= Student.objects.filter(branch__branchName__icontains = search_text)
@@ -782,5 +782,3 @@ def branchlistshow(request):
 		students = []
 
 	return render(request, 'home/ajax_searchStudent.html', {'students': students})
-
-

@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'authentication',
+    'ccd',
+    'bootstrap4',
+    'widget_tweaks',
 
 ]
 
@@ -130,6 +133,8 @@ STATICFILES_FINDERS = [
     # searches in STATIC subfolder of each app
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR,'media/')
 
 LOGIN_URL="home"
 LOGIN_REDIRECT_URL='home'

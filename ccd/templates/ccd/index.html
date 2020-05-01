@@ -1,0 +1,203 @@
+{% extends "ccd/base.html" %}
+{%load static%}
+
+{% block head %}
+
+<!-- style for the check-box only -->
+<style>
+
+@keyframes click-wave {
+  0% {
+    height: 40px;
+    width: 40px;
+    opacity: 0.35;
+    position: relative;
+  }
+  100% {
+    height: 200px;
+    width: 200px;
+    margin-left: -80px;
+    margin-top: -80px;
+    opacity: 0;
+  }
+}
+
+#myonoffswitch {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  position: relative;
+  top: 13.33333px;
+  right: 0;
+  bottom: 0;
+  left: 40%;
+  height: 40px;
+  width: 40px;
+  transition: all 0.15s ease-out 0s;
+  background: #cbd1d8;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  margin-right: 0.5rem;
+  outline: none;
+  position: relative;
+  z-index: 1000;
+}
+#myonoffswitch:hover {
+  background: #9faab7;
+}
+#myonoffswitch:checked {
+  background: #f0ad4e;
+}
+#myonoffswitch:checked::before {
+  height: 40px;
+  width: 40px;
+  position: absolute;
+  content: '✔';
+  display: inline-block;
+  font-size: 26.66667px;
+  text-align: center;
+  line-height: 40px;
+}
+#myonoffswitch:checked::after {
+  -webkit-animation: click-wave 0.65s;
+  -moz-animation: click-wave 0.65s;
+  animation: click-wave 0.65s;
+  background: #f0ad4e;
+  content: '';
+  display: block;
+  position: relative;
+  z-index: 100;
+}
+#mymyonoffswitch{
+  margin-left: 50%;
+  border-radius: 50%;
+}
+#myonoffswitch::after {
+  border-radius: 70%;
+}
+
+
+
+</style>
+
+{% endblock head %}
+{% block content %}
+
+<div class="row ">
+  <div class="col-2 justify-content-right">
+    <p>
+      <!-- BUTTON TO TRIGGER THE ACTION -->
+      <button type="button"
+             class="btn btn-info js-create-student-btn"
+             data-url="{% url 'ccd:student_create' %}"
+              data-toggle="tooltip" data-placement="top" title="Add a new student">
+       <i class="fas fa-user-plus mr-1"></i>
+       Add Student
+     </button>
+    </p>
+
+  </div>
+</div>
+  <div class="row">
+
+    <div class="col-3">
+      <div class="form-group">
+          <label for="branch">Placed</label>
+          <select class="form-control" id="placed_filter">
+            <option selected="true"
+             value = "all">Both</option>
+            <option value='True'>Placed</option>
+            <option value="False">Not Placed</option>
+          </select>
+      </div>
+  </div>
+
+
+
+  <div class="col-3">
+    <div class="form-group">
+        <label for="branch">Branch</label>
+        <select class="form-control" id="branch_filter">
+          <option selected="true"
+          value = "all">All</option>
+        </select>
+    </div>
+  </div>
+  <div class="col-3">
+    <div class="form-group">
+        <label for="branch">Program</label>
+        <select class="form-control" id="program_filter">
+          <option selected="true"
+          value = "all">All</option>
+          <option value="B.Tech">B.Tech</option>
+          <option value="B.Des">B.Des</option>
+          <option value="M.Tech">M.Tech</option>
+          <option value="M.Des">M.Des</option>
+          <option value="M.Sc">M.Sc</option>
+          <option value="Phd">Phd</option>
+          <option value="Others">Others</option>
+        </select>
+    </div>
+  </div>
+
+  <div class="col-3">
+      <div class="form-group">
+          <label for="SortBy">Sort By</label>
+          <select class="form-control" id="sort">
+              <option selected="true" value='roll'>Roll No</option>
+              <option value='name'>Name</option>
+              <option value='programs'>Program</option>
+              <option value='branch'>Branch</option>
+              <option value='day'>Day</option>
+              <option value='company'>Company</option>
+              <option value='placed'>Placed</option>
+              <option value='profile'>Profile</option>
+              <option value='sector'>Sector</option>
+              <option value='slot'>Slot</option>
+          </select>
+
+    </div>
+  </div>
+
+</div>
+  <!-- THE MODAL WE WILL BE USING -->
+  <div class="modal fade " id="modal-student">
+    <div class="modal-dialog modal-lg " role="document">
+      <div class="modal-content bg-light">
+      </div>
+    </div>
+  </div>
+
+
+<!-- TABLE FOR ALL STUDENTS -->
+  <table class="table table-responsive " data-pattern="priority-columns"id="student-table"style="overflow-x: scroll;">
+    <thead class="bg-info">
+      <tr>
+        <th>Name</th>
+        <th>Roll No.</th>
+        <th>Program</th>
+        <th>Branch</th>
+        <th>Day</th>
+        <th>Company</th>
+        <th>Placed</th>
+        <th>Profile</th>
+        <th>Sector</th>
+        <th>Slot</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+
+      {% include "ccd/partial_student_list.html" %}
+
+    </tbody>
+  </table>
+
+{% endblock content %}
+{% block extrascripts %}
+{% endblock %}
