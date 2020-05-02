@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 
 def index(request):
 
-	return render(request,"home/base.html")
+	return render(request,"home/stats.html")
 
 # @login_required
 # def charts(request):
