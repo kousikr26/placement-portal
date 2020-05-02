@@ -9,11 +9,14 @@
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 
 <!-- Add 2 buttons -->
-<button onclick="update(data1)">Data 1</button>
-<button onclick="update(data2)">Data 2</button>
+<button type="button" class="btn btn-primary" onclick="update(data1)">B.tech</button>
+<button type="button" class="btn btn-primary" onclick="update(data2)">M.tech</button>
 
 <!-- Create a div where the graph will take place -->
-<div id="my_dataviz"></div>
+<h3> Placement Statistics </h3>
+<div id="my_dataviz">
+    
+</div>
 
 
 <script>
@@ -76,6 +79,7 @@ function update(data) {
   u
     .exit()
     .remove()
+
 
 }
 
