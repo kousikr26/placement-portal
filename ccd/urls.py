@@ -10,7 +10,7 @@ urlpatterns = [
     path('student/create/',student_create, name='student_create'),
     path('student/<str:pk>/update/', student_update, name='student_update'),
     path('student/<str:pk>/delete/', student_delete, name='student_delete'),
-    path('ajax/sort/',ajax_sort,name='ajax_sort'),
+    # path('ajax/sort/',ajax_sort,name='ajax_sort'),
     path('ajax/get/branches/',ajax_get_branch_options),
     path('ajax/filter/',ajax_filter),
 ]

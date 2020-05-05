@@ -8,14 +8,21 @@ from django.http import JsonResponse
 from django.template.loader import render_to_string
 from .forms import StudentForm
 from django.db.models.functions import Lower
+from django.contrib.auth.decorators import login_required,user_passes_test
 
 
+def is_ccd_member(user):
+    return user.is_superuser
+
+# @login_required
+# @user_passes_test(is_ccd_member)
 def home(request):
     students = Student.objects.all().order_by('roll')
 
     return render(request,'ccd/index.html',{'student_list':students})
 
-
+# @login_required
+# @user_passes_test(is_ccd_member)
 def ajax_get_branch_options(request):
     data = dict()
     if request.method =='GET' and request.is_ajax():
@@ -23,6 +30,8 @@ def ajax_get_branch_options(request):
         data['html_branch_options'] = render_to_string('ccd/partial_branch_options.html',{'branches':branches})
     return JsonResponse(data)
 
+# @login_required
+# @user_passes_test(is_ccd_member)
 def ajax_filter(request):
     data = dict()
     if request.method == 'GET' and request.is_ajax():
@@ -30,11 +39,6 @@ def ajax_filter(request):
         placed = request.GET.get('placed')
         program = request.GET.get('program')
         sortid = request.GET.get('sortid')
-        print(branch)
-        print(placed)
-        print(program)
-        print(sortid)
-        # students = Student.objects.all()
         students = Student.objects.all()
         if branch!='all':
             branch = Branch.objects.get(branchName=branch)
@@ -44,8 +48,6 @@ def ajax_filter(request):
         if program!='all':
             students = students.filter(programs=program)
         students = students.order_by(Lower(sortid))
-        # students = Student.objects.filter(branch=branch).all()
-        # print(students[0].branch)
         data['html_student_list'] = render_to_string('ccd/partial_student_list.html',
                         {
                         'student_list':students
@@ -53,6 +55,8 @@ def ajax_filter(request):
 
     return JsonResponse(data)
 
+# @login_required
+# @user_passes_test(is_ccd_member)
 def save_student_form(request, form, template_name):
     if request.is_ajax():
         data = dict()
@@ -76,6 +80,8 @@ def save_student_form(request, form, template_name):
         return JsonResponse(data)
 
 
+# @login_required
+# @user_passes_test(is_ccd_member)
 def student_create(request):
     if request.is_ajax():
         if request.method == 'POST':
@@ -85,6 +91,8 @@ def student_create(request):
         return save_student_form(request,form,'ccd/partial_student_create.html')
 
 
+# @login_required
+# @user_passes_test(is_ccd_member)
 def student_update(request,pk):
     if request.is_ajax():
         student = get_object_or_404(Student,pk=pk)
@@ -96,6 +104,8 @@ def student_update(request,pk):
             form = StudentForm(instance=student)
         return save_student_form(request,form,'ccd/partial_student_update.html')
 
+# @login_required
+# @user_passes_test(is_ccd_member)
 def student_delete(request, pk):
     if request.is_ajax():
         student = get_object_or_404(Student, pk=pk)
@@ -113,14 +123,14 @@ def student_delete(request, pk):
         return JsonResponse(data)
 
 
-# Sorting
-def ajax_sort(request):
-    data = dict()
-    if request.is_ajax():
-        if request.method == 'GET':
-            sortid = request.GET.get('sortid')
-            students = Student.objects.all().order_by(sortid)
-            data['html_student_list'] = render_to_string('ccd/partial_student_list.html', {
-                'student_list': students
-            })
-            return JsonResponse(data)
+# # Sorting
+# def ajax_sort(request):
+#     data = dict()
+#     if request.is_ajax():
+#         if request.method == 'GET':
+#             sortid = request.GET.get('sortid')
+#             students = Student.objects.all().order_by(sortid)
+#             data['html_student_list'] = render_to_string('ccd/partial_student_list.html', {
+#                 'student_list': students
+#             })
+#             return JsonResponse(data)
