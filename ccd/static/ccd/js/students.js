@@ -1,3 +1,4 @@
+
 $(function () {
 
   /* Functions */
@@ -18,6 +19,8 @@ $(function () {
     });
   };
 
+
+
   var saveForm = function () {
     var form = $(this);
     $.ajax({
@@ -29,6 +32,7 @@ $(function () {
         if (data.form_is_valid) {
           // $("#student-table tbody").html(data.html_student_list);
           ajax_filter();
+
           $("#modal-student").modal("hide");
         }
         else {
@@ -40,20 +44,20 @@ $(function () {
   };
 
 
-  var sort = function () {
-    var sortid = String($(this).val());
-    console.log(sortid);
-    $.ajax({
-      url: '/ccd/ajax/sort/',
-      type: 'GET',
-      data: { sortid: sortid },
-      dataType: 'json',
-      success: function (data) {
-          $("#student-table tbody").html(data.html_student_list);
-        }
-      });
-    return false;
-  };
+  // var sort = function () {
+  //   var sortid = String($(this).val());
+  //   console.log(sortid);
+  //   $.ajax({
+  //     url: '/ccd/ajax/sort/',
+  //     type: 'GET',
+  //     data: { sortid: sortid },
+  //     dataType: 'json',
+  //     success: function (data) {
+  //         $("#student-table tbody").html(data.html_student_list);
+  //       }
+  //     });
+  //   return false;
+  // };
 
   var getBranch = function()
   {
@@ -69,17 +73,33 @@ $(function () {
     });
   };
 
+  var pagination_on  = function()
+  {
+    $('#student-table').DataTable(
+    {
+      dom: 'Blfrtip',
+      pagingType: "full_numbers",
+      ordering: false,
+      fixedColumns: true,
+    }
+    );
+    // to change the postion of search box of the table
+    $("#searchbox").html($(".dataTables_filter"));
+    $("#tableLength").html($(".dataTables_length"));
+    $("#dtbuttons").html($(".dt-buttons"));
+    // to change the color of dt-buttons
+    $("#dtbuttons").find("button").removeClass("btn-secondary");
+    $("#dtbuttons").find("button").addClass("btn-info");
+    // setting left-margin for pagination buttons
+    $(".dataTables_paginate").css("margin-left","20%");
+  };
+
   var ajax_filter = function()
   {
     var placed = $('#placed_filter').val();
     var branch = $('#branch_filter').val();
     var program = $('#program_filter').val();
     var sortid = $('#sort').val();
-    console.log(placed);
-    console.log(branch);
-    console.log(program);
-    console.log(sortid);
-    console.log("filtering data");
     $.ajax({
       url: '/ccd/ajax/filter/',
       type:'GET',
@@ -88,16 +108,27 @@ $(function () {
       dataType:'json',
       success: function(data)
       {
+        // to update the pagination, firstly we clear the table
+        $('#student-table').dataTable().fnDestroy();
+        $("#searchbox").html("<p></p>");
+        $("#tableLength").html("<p></p>");
+        $("#dtbuttons").html("<p></p>");
+        // now update the data table
         $("#student-table tbody").html(data.html_student_list);
+        // Then initialize again after updating the html
+        // $('#student-table').dataTable();
+        pagination_on();
       }
     });
   };
 
-
+  $(document).ready(function() {
+      pagination_on();
+  } );
 
 
   /* Binding */
-  // to get all braches
+  // to get all branches
   getBranch();
   // Create Student
   $(".js-create-student-btn").click(loadForm);
@@ -113,8 +144,8 @@ $(function () {
 
 
 
-  // Sorting
- // whenever sortby option changes, the data will be sorted
+  // Sorting and Filtering
+ // whenever sortby/filter option changes, the data will be updated
 $('#sort').on('change',ajax_filter);
 $('#branch_filter').on('change',ajax_filter);
 $('#program_filter').on('change',ajax_filter);

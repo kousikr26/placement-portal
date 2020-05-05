@@ -16,7 +16,7 @@
                   class="btn btn-sm btn-outline-warning waves-effect btn-sm js-update-student-btn "
                   data-url="{% url 'ccd:student_update' student.id %}"
                    data-toggle="tooltip" data-placement="top" title="Edit details">
-            <i class="fas fa-edit mr-1"></i>Edit
+            <i class="fas fa-edit mr-1"></i>
           </button>
         </td>
         <td class="bg-light">
@@ -25,13 +25,24 @@
                   data-url="{% url 'ccd:student_delete' student.id %}"
                    data-toggle="tooltip" data-placement="top" title="Delete student">
             <i class="fa fa-trash mr-1" aria-hidden="true"></i>
-             Delete
+
           </button>
         </td>
       </tr>
 
     {% empty %}
       <tr>
-        <td colspan="12" class="text-center bg-warning">No Student found !</td>
+        <td>Nothing to show</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
       </tr>
     {% endfor %}

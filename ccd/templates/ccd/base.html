@@ -9,6 +9,69 @@
     <link rel = "icon" href =  "{% static 'images/iitg.jpg' %}" type = "image/x-icon">
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,800;0,900;1,600;1,900&display=swap" rel="stylesheet">
+    <script src="{% static 'js/jquery-3.5.1.js' %}"></script>  <!-- JQUERY HERE -->
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> -->
+
+
+    <!-- scripts for adding pagination -->
+
+
+    <script src="{% static 'js/jquery.dataTables.min.js' %}"></script>
+    <!-- <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script> -->
+
+    <script src="{% static 'js/dataTables.bootstrap4.min.js' %}"></script>
+    <!-- <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script> -->
+
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+   <script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
+   <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
+   <script src="https://cdn.datatables.net/select/1.2.5/js/dataTables.select.min.js"></script>
+   <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+   <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.bootstrap4.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
+   <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js"></script>
+   <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
+   <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.colVis.min.js"></script>
+
+  <style>
+         .dataTables_length label{
+             margin-top: 15px;
+             display: inline-flex;
+             /* width: 200px; */
+         }
+         .dataTables_length label select{
+             margin-left: 20px;
+             margin-right: 20px;
+         }
+         .dataTables_length{
+             margin-left:20px;
+             margin-right:20px;
+
+         }
+         .dataTables_wrapper {
+             display: flex;
+             flex-wrap: wrap;
+
+         }
+         .dt-buttons{
+             padding-top:10px;
+             padding-bottom:10px;
+             flex-wrap: wrap;
+             background-color: white;
+         }
+         .dataTables_filter{
+         margin-top: 12px;
+         }
+         /* .dataTables_filter {
+           display: none;
+         } */
+         table.dataTable{border-collapse:collapse !important;}
+         .pagination > li > a, .pagination > li > span{background-color:white;color:black !important;}
+         .pagination > li.active > a, .pagination > li.active > span{background-color:#5bc0de !important; color:black !important;}
+
+     </style>
     {% block head %}{% endblock head %}
     <style>
 
@@ -79,9 +142,9 @@
 </div>
     {% include "ccd/footer.html" %}
 
-    <script src="{% static 'js/jquery-3.5.0.min.js' %}"></script>  <!-- JQUERY HERE -->
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'ccd/js/students.js' %}"></script>
+
     <script src="https://kit.fontawesome.com/b955dbdd56.js" crossorigin="anonymous"></script>
     {% block extrascripts%}
     {% endblock %}
