@@ -21,6 +21,11 @@ class CreatePost(generic.CreateView):
     template_name = 'alumni_portal/create_post.html'
     success_url = reverse_lazy('alumni_portal:home')
 
+class CreateAlumniStory(generic.CreateView):
+    form_class = AlumniStoryForm
+    template_name = 'alumni_portal/create_story.html'
+    success_url = reverse_lazy('alumni_portal:home')
+
 class PostDetailView(generic.DetailView):
     model = Post
     success_url = reverse_lazy('alumni_portal:home')
