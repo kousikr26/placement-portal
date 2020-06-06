@@ -1,18 +1,189 @@
-{% load static %}
 <!DOCTYPE html>
-<html>
+{% load static %}
+<html lang="en">
 <head>
-  <title>{% block title %}{% endblock %}</title>
-  <link href="{% static "css/blog.css" %}" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel = "icon" href =  "{% static 'images/iitg.jpg' %}" type = "image/x-icon">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,800;0,900;1,600;1,900&display=swap" rel="stylesheet">
+    <script src="{% static 'js/jquery-3.5.1.js' %}"></script>  <!-- JQUERY HERE -->
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> -->
+
+  <style>
+         .dataTables_length label{
+             margin-top: 15px;
+             display: inline-flex;
+             /* width: 200px; */
+         }
+         .dataTables_length label select{
+             margin-left: 20px;
+             margin-right: 20px;
+         }
+         .dataTables_length{
+             margin-left:20px;
+             margin-right:20px;
+
+         }
+         .dataTables_wrapper {
+             display: flex;
+             flex-wrap: wrap;
+
+         }
+         .dt-buttons{
+             padding-top:10px;
+             padding-bottom:10px;
+             flex-wrap: wrap;
+             background-color: white;
+         }
+         .dataTables_filter{
+         margin-top: 12px;
+         }
+         /* .dataTables_filter {
+           display: none;
+         } */
+         table.dataTable{border-collapse:collapse !important;}
+         .pagination > li > a, .pagination > li > span{background-color:white;color:black !important;}
+         .pagination > li.active > a, .pagination > li.active > span{background-color:#5bc0de !important; color:black !important;}
+
+     </style>
+    {% block head %}{% endblock head %}
+    <style>
+
+    /* to avoid screen shaking due to scrollbar when modal appears*/
+    ::-webkit-scrollbar {
+  width: 0px!important;
+}
+
+      body {
+        /*padding-bottom: 100px;*/
+        max-width: 100%;
+        margin:0;
+      }
+      html, body {
+      overflow-x:hidden;
+      height:100%;
+
+    }
+
+    .container {
+      min-height: 100%;
+    }
+      #main {
+
+        padding-bottom: 100px;
+      }
+
+    footer {
+        width:100%;
+        height: 50px;
+        background-color:#FFF;
+        color:#000;
+        -webkit-box-shadow: 0px -1px 5px 0px rgba(100,100,100,0.75);
+        -moz-box-shadow: 0px -1px 5px 0px rgba(100,100,100,0.75);
+        box-shadow: 0px -1px 5px 0px rgba(100,100,100,0.75);
+        line-height: 1.6;
+        position: relative;
+        margin-top: -50px;
+        clear: both;
+      }
+      .link-spanner{
+        position:absolute;
+        width:100%;
+        height:100%;
+        top:0;
+        left: 0;
+        z-index: 1;
+      }
+
+      .hovr {
+        background-color:#6A62CC;
+        width:15%;
+        margin:0px;
+        padding:5px 5px 1px;
+        cursor: pointer;
+        position:relative;
+      }
+
+      .link-active {
+        background-color: #2D2F91;
+      }
+
+
+      /* for the animation of the modal*/
+
+      .modal.fade .modal-dialog {
+      -webkit-transform: scale(1);
+      -moz-transform: scale(1);
+      -ms-transform: scale(1);
+      transform: scale(1);
+      /* top: 300px; */
+      /* opacity: 0; */
+      -webkit-transition: all 0.3s;
+      -moz-transition: all 0.3s;
+      transition: all 0.3s;
+      }
+
+      .modal.fade.in .modal-dialog {
+          -webkit-transform: scale(1);
+          -moz-transform: scale(1);
+          -ms-transform: scale(1);
+          transform: scale(1);
+          -webkit-transform: translate3d(0, -300px, 0);
+          transform: translate3d(0, -300px, 0);
+          opacity: 1;
+      }
+
+    </style>
 </head>
-<body>
-  <div id="content">
+<body style = "font-family:Arial, Helvetica, sans-serif;">
+
+  <div class="container">
+    <div id="main">
+
+
+
+
+        <div  class="row mt-5" style="min-height:75px; width:100%; position:relative">
+
+          <div class="col-4"
+              <a  href="https://www.iitg.ac.in"><img src="/static/images/iitg.jpg" style="width:auto; max-height:65px"></a>
+          </div>
+
+          <div class="justify-content-center col-4"style="font-size: 30px; font-family:Lato;
+          color:#2D2F91; font-weight:bold; line-height:34px">
+          <center>BLOG</center>
+          </div>
+
+          <div class="col-4" title="Logout" style="height:auto">
+              <a href="{% url "signout" %}"><i class="fa fa-sign-out" aria-hidden="true" style="float:right;width:auto; font-size:50px; color:#2D2F91;"></i></a>
+          </div>
+      </div>
+
+
+      <div style=" display: flex;
+          justify-content: center;
+          flex-wrap: wrap;
+          width: 100%;
+          padding: 20px;
+          margin: auto;
+          height: 31.6px;
+          position: relative;
+          text-align:center;">
+      </div>
+
     {% block content %}
     {% endblock %}
+
   </div>
-  <div id="sidebar">
-    <h2>My blog</h2>
-      <p>This is my blog.</p>
-  </div>
+</div>
+
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="https://kit.fontawesome.com/b955dbdd56.js" crossorigin="anonymous"></script>
+    {% block extrascripts%}
+    {% endblock %}
 </body>
+
 </html>

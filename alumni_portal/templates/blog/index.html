@@ -1,9 +1,8 @@
-{% extends "home/base.html" %}
+{% extends "blog/base.html" %}
 
-{% block title %}My Blog{% endblock %}
+{% block title %}Blog{% endblock %}
 
 {% block content %}
-  <h1>Alumni Portal</h1>
 
 <a href="{% url "blog:create_post" %}" class="btn btn-bg btn-success">New Post</a>
 {% endblock %}
