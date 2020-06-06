@@ -9,8 +9,8 @@
         <p class="date">
           Published {{ post.publish }} by {{ post.author }}
         </p>
-        <a class ='btn btn-bg btn-success' href="{% url 'blog:update_post' post.pk %}">Edit</a>
-        <a class = 'btn btn-bg btn-success' href="{% url 'blog:delete_post' post.pk %}">Delete</a>
+        <a class ='btn btn-bg btn-success' href="{% url 'alumni_portal:update_post' post.pk %}">Edit</a>
+        <a class = 'btn btn-bg btn-success' href="{% url 'alumni_portal:delete_post' post.pk %}">Delete</a>
 
       </div>
       {% endfor %}

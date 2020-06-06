@@ -23,7 +23,7 @@ class CreatePost(generic.CreateView):
 
 class PostDetailView(generic.DetailView):
     model = Post
-    success_url = reverse_lazy('blog:home')
+    success_url = reverse_lazy('alumni_portal:home')
 
 class UserPostsView(LoginRequiredMixin,generic.ListView):
     def get_queryset(self):
@@ -35,8 +35,8 @@ class UpdatePost(LoginRequiredMixin,generic.UpdateView):
     form_class = PostForm
     model = Post
     template_name = 'alumni_portal/create_post.html'
-    success_url = reverse_lazy('blog:user_posts')
+    success_url = reverse_lazy('alumni_portal:user_posts')
 
 class DeletePost(LoginRequiredMixin,generic.DeleteView):
     model = Post
-    success_url = reverse_lazy('blog:user_posts')
+    success_url = reverse_lazy('alumni_portal:user_posts')
