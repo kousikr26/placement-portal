@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'alumni_portal',
     'bootstrap4',
     'widget_tweaks',
+    'django_forms_bootstrap',
 
 ]
 

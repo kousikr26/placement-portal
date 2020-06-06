@@ -7,6 +7,7 @@ from .views import *
 app_name = "blog"
 urlpatterns = [
     path('',home, name='home'),
+    path('new',CreatePost.as_view(),name="create_post"),
 ]
 
 if settings.DEBUG:
