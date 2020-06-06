@@ -14,9 +14,10 @@
 {% endblock head %}
 
 {% block content %}
+<a href="{% url "alumni_portal:home" %}" class="btn btn-bg btn-success">All Posts</a>
 
 <a href="{% url "alumni_portal:create_post" %}" class="btn btn-bg btn-success">New Post</a>
-
+<a href="{% url "alumni_portal:user_posts" %}" class="btn btn-bg btn-success">My Posts</a>
 {% for post in posts %}
 
 <!-- Card -->
