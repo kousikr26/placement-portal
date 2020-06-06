@@ -8,18 +8,21 @@ from .models import *
 def home(request):
     # only published posts will be shown
     posts = Post.objects.all().filter(status='published');
-    # # truncatewords
-    # for i in range(len(posts)):
-    #     l = len(posts[i].body)
-    #     l = min(l,300)
-    #     posts[i].body = posts[i].body[:l]
     context = {'posts':posts}
     return render(request,"alumni_portal/index.html",context)
     return render(request,"alumni_portal/index.html")
+
+
+
 class CreatePost(generic.CreateView):
     form_class = PostForm
     template_name = 'alumni_portal/create_post.html'
     success_url = reverse_lazy('alumni_portal:home')
+
+    def get_form_kwargs(self):
+        kwargs = super(CreatePost, self).get_form_kwargs()
+        kwargs['request'] = self.request
+        return kwargs
 
 class PostDetailView(generic.DetailView):
     model = Post
@@ -36,6 +39,11 @@ class UpdatePost(LoginRequiredMixin,generic.UpdateView):
     model = Post
     template_name = 'alumni_portal/create_post.html'
     success_url = reverse_lazy('alumni_portal:user_posts')
+
+    def get_form_kwargs(self):
+        kwargs = super(UpdatePost, self).get_form_kwargs()
+        kwargs['request'] = self.request
+        return kwargs
 
 class DeletePost(LoginRequiredMixin,generic.DeleteView):
     model = Post
