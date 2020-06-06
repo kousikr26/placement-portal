@@ -22,6 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('authentication.urls')),
     path('ccd/',include('ccd.urls')),
+    path('blog/',include('alumni_portal.urls'))
 ]
 if settings.DEBUG:
     urlpatterns+=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

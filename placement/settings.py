@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'authentication',
     'ccd',
+    'alumni_portal',
     'bootstrap4',
     'widget_tweaks',
 
