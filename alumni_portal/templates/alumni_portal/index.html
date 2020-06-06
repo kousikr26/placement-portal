@@ -1,0 +1,10 @@
+{% extends "alumni_portal/base.html" %}
+
+{% block title %}Blog{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<a href="{% url "blog:create_post" %}" class="btn btn-bg btn-success">New Post</a>
+<a href="{% url "blog:user_posts" %}" class="btn btn-bg btn-success">My Posts</a>
+{% endif %}
+{% endblock %}

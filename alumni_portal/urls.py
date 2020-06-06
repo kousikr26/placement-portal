@@ -8,6 +8,9 @@ app_name = "blog"
 urlpatterns = [
     path('',home, name='home'),
     path('new',CreatePost.as_view(),name="create_post"),
+    path('myposts',UserPostsView.as_view(),name = "user_posts"),
+    path('<int:pk>/delete_post',DeletePost.as_view(),name = "delete_post"),
+    path('<int:pk>/update_post',UpdatePost.as_view(),name = "update_post"),
 ]
 
 if settings.DEBUG:
