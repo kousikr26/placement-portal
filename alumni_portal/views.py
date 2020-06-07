@@ -47,4 +47,4 @@ class UpdatePost(LoginRequiredMixin,generic.UpdateView):
 
 class DeletePost(LoginRequiredMixin,generic.DeleteView):
     model = Post
-    success_url = reverse_lazy('alumni_portal:user_posts')
+    success_url = reverse_lazy('alumni_portal:user_posts')  
