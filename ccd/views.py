@@ -21,6 +21,18 @@ def home(request):
 
     return render(request,'ccd/index.html',{'student_list':students})
 
+def ajax_update_database(request):
+    data = dict()
+    data['success']=False
+    if request.is_ajax() and request.method=='GET':
+        headings = request.GET.get('headings')
+        print(headings)
+        datalist = request.GET.get('data_list')
+        print(headings)
+        data['success']=True
+    return JsonResponse(data)
+
+
 # @login_required
 # @user_passes_test(is_ccd_member)
 def ajax_get_branch_options(request):
