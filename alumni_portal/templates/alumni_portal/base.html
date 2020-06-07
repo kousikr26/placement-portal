@@ -49,6 +49,145 @@
          .pagination > li.active > a, .pagination > li.active > span{background-color:#5bc0de !important; color:black !important;}
 
      </style>
+
+
+ <!-- style for the post card-->
+  <style type="text/css">
+
+    .discuss-container {
+      margin-bottom: 30px;
+      border-radius: 3px;
+    }
+    .discuss-container > h1 {
+      font-size: 20px;
+      font-weight: 300;
+      margin: 0 0 15px;
+    }
+    .discuss-container > h1 .fa {
+      margin-right: 7px;
+    }
+    .topic-container {
+      background: white;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      position: relative;
+      -webkit-transition: -webkit-transform 0.18s ease-in-out, -webkit-box-shadow 0.18s ease-in-out;
+      transition: -webkit-transform 0.18s ease-in-out, -webkit-box-shadow 0.18s ease-in-out;
+      -o-transition: transform 0.18s ease-in-out, box-shadow 0.18s ease-in-out;
+      transition: transform 0.18s ease-in-out, box-shadow 0.18s ease-in-out;
+      transition: transform 0.18s ease-in-out, box-shadow 0.18s ease-in-out, -webkit-transform 0.18s ease-in-out, -webkit-box-shadow 0.18s ease-in-out;
+      border-bottom: 1px solid #eeeeee;
+    }
+    .topic-container > div {
+      padding: 15px;
+    }
+    .topic-container:hover {
+      -webkit-box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.06);
+              box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.06);
+      -webkit-transform: translateY(-2px);
+              transform: translateY(-2px);
+      z-index: 1;
+    }
+    .topic-container:first-child {
+      border-top: 1px solid #eeeeee;
+    }
+    .topic-container:last-child {
+      border-bottom: none;
+    }
+    .topic-left-pane {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-flex: 0;
+          -ms-flex: 0 0 55px;
+              flex: 0 0 55px;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+          -ms-flex-direction: column;
+              flex-direction: column;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      overflow-x: hidden;
+    }
+    .topic-left-pane .fa {
+      color: #616161;
+    }
+    .topic-left-pane span {
+      font-weight: bold;
+    }
+    .topic-right-pane {
+      -webkit-box-flex: 1;
+          -ms-flex: 1 1 auto;
+              flex: 1 1 auto;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .topic-right-pane a {
+      pointer-events: all;
+    }
+    .topic-header {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+    }
+    .topic-avatar {
+      margin-right: 10px;
+    }
+    .topic-title {
+      font-size: 20px;
+      margin: 0;
+    }
+    .topic-details {
+      font-size: 12px;
+      color: #757575;
+    }
+    .topic-content {
+      margin: 15px 0;
+      max-height: 100px;
+      position: relative;
+      overflow-y: hidden;
+    }
+    .topic-content-mask {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0)), to(rgba(255, 255, 255, 0.5)));
+      background: -o-linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5));
+      background: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5));
+    }
+    .topic-overlay {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+    .topic-overlay:focus {
+      outline: none;
+    }
+    .topic-extra > span {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      color: #616161;
+    }
+    .topic-extra > span .fa {
+      margin-right: 7px;
+    }
+
+    </style>
+
+
     {% block head %}{% endblock head %}
     <style>
 
@@ -157,22 +296,10 @@
           <center>Alumni Portal</center>
           </div>
 
-          <div class="col-4" title="Logout" style="height:auto">
-              <a href="{% url "signout" %}"><i class="fa fa-sign-out" aria-hidden="true" style="float:right;width:auto; font-size:50px; color:#2D2F91;"></i></a>
-          </div>
       </div>
 
 
-      <div style=" display: flex;
-          justify-content: center;
-          flex-wrap: wrap;
-          width: 100%;
-          padding: 20px;
-          margin: auto;
-          height: 31.6px;
-          position: relative;
-          text-align:center;">
-      </div>
+    
 
     {% block content %}
     {% endblock %}

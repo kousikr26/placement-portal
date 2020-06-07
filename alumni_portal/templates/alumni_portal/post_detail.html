@@ -1,18 +1,398 @@
 {% extends "alumni_portal/base.html" %}
 {% block title %}{{post.title}}{% endblock %}
 
+{% block head %}
+<style type='text/css'>
+.css-1gk7v15 {
+    display: flex;
+    flex-direction: column;
+    z-index: 0;
+    overflow-y: auto;
+    background-color: rgb(245, 245, 245);
+    flex: 1 1 auto;
+}
+.css-1gk7v15 > div {
+    max-width: 1240px;
+    margin: 0px auto;
+}
+.css-pt4l9v-DiscussWrapper {
+    margin: 0px 0px 40px;
+}
+.css-1b3x0n5-ContentWrapper {
+    width: 100%;
+}
+
+.topic-container__3Kpd {
+    background: white;
+    -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+}
+.root__3ov- {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-shadow: inset 0 -1px 0 0 #eeeeee;
+    box-shadow: inset 0 -1px 0 0 #eeeeee;
+    overflow: hidden;
+    height: 50px;
+}
+.back__2_XS {
+    padding: 13px 16px 13px 16px;
+}
+.right-border__2-Gs {
+    margin-right: 16px;
+    position: relative;
+}
+.back-link__3028 {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    font-size: 14px;
+    color: #78909c;
+    cursor: pointer;
+    -webkit-transition: color 0.3s;
+    -o-transition: color 0.3s;
+    transition: color 0.3s;
+}
+.css-e1fwjp-Container {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    min-width: 0px;
+    flex: 1 1 auto;
+}
+.css-920agt-PinIconCont {
+    color: black;
+    margin-right: 8px;
+    font-size: 18px;
+    cursor: auto;
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out 0s;
+}
+svg:not(:root) {
+    overflow: hidden;
+}
+.css-1mdt1kb-BlockIcon {
+    display: block;
+}
+.icon__3Su4 {
+    width: 1em;
+    height: 1em;
+    vertical-align: middle;
+    fill: currentColor;
+    overflow: hidden;
+}
+*, *::before, *::after {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+*, *::before, *::after {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+}
+svg[Attributes Style] {
+    width: 1em;
+    height: 1em;
+}
+.css-w6djpe-Title {
+    min-width: 0px;
+    text-overflow: ellipsis;
+    white-space: pre;
+    margin: 0px;
+    overflow: hidden;
+}
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+    margin-bottom: 0.5em;
+    color: rgba(0, 0, 0, 0.85);
+    font-weight: 500;
+}
+h5 {
+    font-size: 16px;
+    font-weight: 400;
+}
+.css-18ew7z0-LeetCoinIconCont-SpacedRewardedIcon {
+    color: rgb(255, 183, 77);
+    font-size: 18px;
+    cursor: pointer;
+    margin-right: 8px;
+    margin-left: 10px;
+}
+.icon__3Su4 {
+    width: 1em;
+    height: 1em;
+    vertical-align: middle;
+    fill: currentColor;
+    overflow: hidden;
+}
+.css-1mdt1kb-BlockIcon {
+    display: block;
+}
+.actions__1sP6 {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    margin: 0 20px 0 5px;
+}
+.main__11QT {
+    position: relative;
+}
+.container__K-8V {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin-top: 10px;
+    padding: 0 20px;
+}
+.container__3r81 {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+<style type="text/css">/**
+ * No mixins for output here.
+ * If you want to expose some mixins,
+ * define them to `legacy/common/styles/atomic`
+ */
+/* stylelint-disable */
+.root__3bcS {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.avatar__7D9c {
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  display: inline-block;
+  background-color: #f5f5f5;
+}
+.name__2jm2 {
+  color: #424242;
+  margin-left: 10px;
+}
+.admin__axwt {
+  color: #90a4ae;
+  margin-left: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.admin__axwt svg {
+  height: 14px;
+  width: 14px;
+  color: #b0bec5;
+  margin-right: 3px;
+}
+.reputation___jPr {
+  color: #90a4ae;
+  margin-left: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.reputation___jPr svg {
+  width: 14px;
+  height: 14px;
+  color: #b0bec5;
+  margin-right: 4px;
+}
+.user-info__2b-x {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  line-height: 1;
+  font-size: 12px;
+}
+.post-info__1K06 {
+  color: #bdbdbd;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-left: 25px;
+}
+.post-info__1K06 > p {
+  margin: 0;
+  font-size: 12px;
+}
+.post-info__1K06 > p:not(:last-child) {
+  margin-right: 10px;
+}
+.view-count__dBuq {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  text-align: right;
+}
+.link__Lpjq {
+  color: #9e9e9e;
+}
+.link__Lpjq:hover {
+  color: #424242;
+}
+.reputation-loader__2oz- {
+  width: 25px;
+  height: 14px;
+}
+.container__3Ldq {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+.anonymous-avatar__2wS_ {
+  border-radius: 50%;
+  opacity: 0.7;
+}
+.pinned__1WX0 {
+  margin-left: 8px;
+  font-size: 12px;
+  color: #546e7a;
+}
+.pin-icon__1WHw {
+  color: #546e7a;
+  margin-right: 4px;
+}
+</style>
+
+
+
+
+{% endblock head %}
 
 {% block content %}
 
-<div class="container">
-  <div class="jumbotron">
-    <h1>{{post.title}}</h1>
-    <p>Last Updated: {{post.updated}}</p>
-    <br>
-    <br>
-    <p>{{post.body}}</p>
-  </div>
+<div class="css-1llqyb4">
+  <div id="discuss-container" class="css-1gk7v15">
+    <div class="css-1b3x0n5-ContentWrapper e5i1odf0">
+      <div class="css-pt4l9v-DiscussWrapper e5i1odf1">
+        <div class="topic-container__3Kpd">
+          <div class="root__3ov-">
+            <div class="back__2_XS right-border__2-Gs">
+              <!-- back link-->
+              <a class="back-link__3028" href="javascript:history.back()"><svg viewBox="0 0 24 24" width="1em" height="1em" class="icon__3Su4"><path fill-rule="evenodd" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path></svg><span>Back</span></a>
+            </div>
 
-</div>
 
+            <div class="css-e1fwjp-Container e5i1odf0">
+
+              <h5 title="{{post.title}}" class="css-w6djpe-Title e5i1odf4">{{post.title}}</h5>
+
+            </div>
+            <div class="actions__1sP6">
+              <svg viewBox="0 0 24 24" width="1em" height="1em" class="icon__3Su4">
+                <path fill-rule="evenodd" d="M17 5V2l5 5h-9a2 2 0 0 0-2 2v8H9V9a4 4 0 0 1 4-4h4zm3 14V9h2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3v2H4v14h16z">
+                </path>
+              </svg>
+              <svg viewBox="0 0 24 24" width="1em" height="1em" class="icon__3Su4"><path fill-rule="evenodd" d="M12 22c-1.1 0-2-.9-2-2h4c0 1.1-.9 2-2 2zm6-6l2 2v1H4v-1l2-2v-5c0-3.08 1.64-5.64 4.5-6.32V4c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v.68C16.37 5.36 18 7.93 18 11v5zm-2 1v-6c0-2.48-1.51-4.5-4-4.5S8 8.52 8 11v6h8z">
+                </path>
+              </svg>
+                <svg viewBox="0 0 24 24" width="1em" height="1em" class="icon__3Su4">
+                  <path fill-rule="evenodd" d="M1 22L12 2l11 20H1zm18.617-2L12 6.15 4.383 20h15.234zM13 19h-2v-2h2v2zm0-3h-2v-5h2v5z">
+                  </path>
+                </svg>
+              </div>
+            </div>
+            <div class="main__11QT">
+              <div class="container__K-8V mb-5">
+                <div class="action-area__3aY4">
+                  <div class="container__3-ij container__3r81">
+                    <!-- <div title="Upvote" class="vote__3Zp9 vote__3btZ" data-is-voted="false">
+                      <svg viewBox="0 0 24 24" width="1em" height="1em" class="icon__3Su4">
+                        <path fill-rule="evenodd" d="M7 14l5-5 5 5z">
+                        </path>
+                      </svg>
+                    </div>
+                    <div title="Vote count" class="count__I8pP count__GRlR">
+                      <span>57</span>
+                    </div>
+                    <div title="Downvote" class="vote__3Zp9 vote__3btZ" data-is-voted="false">
+                      <svg viewBox="0 0 24 24" width="1em" height="1em" class="icon__3Su4">
+                        <path fill-rule="evenodd" d="M7 10l5 5 5-5z">
+                        </path>
+                      </svg>
+                    </div> -->
+                  </div>
+                </div>
+                <div class="post-area__3YJL">
+                  <div class="root__3bcS mb-3">
+                      <div>
+                        <div>
+                          <a href="#" target="_blank">
+                            <img alt="{{post.author}}'s avatar" class="avatar__7D9c" src="https://nulm.gov.in/images/user.png"></a>
+                          <div class="user-info__2b-x">
+                            <span class="name__2jm2"><a href="#" target="_blank" class="link__Lpjq">
+                              {{post.author}}</a>
+                            </span>
+                            </div>
+                            <div class="post-info__1K06"><p> {{post.created}}</p>
+                            </div>
+                            <div class="post-info__1K06 float-right"><p>Last Edit: {{post.updated}}</p>
+                              <p class="view-count__dBuq"> xyz VIEWS</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="content-area__2vnF">
+                        <div class="discuss-markdown-container">
+                        {{post.body}}
+                      </div>
+                    </div>
+            <div class="tag-list-container__2cDj">
+              <div class="css-9sdfuf">
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="root__3XxC">
+          <div class="header___QdN">
+            <div class="comment-count__28iT">
+              <span>
+                <svg viewBox="0 0 24 24" width="1em" height="1em" class="icon__3Su4 chat-icon__3usv">
+                <path fill-rule="evenodd" d="M8.995 22a.955.955 0 0 1-.704-.282.955.955 0 0 1-.282-.704V18.01H3.972c-.564 0-1.033-.195-1.409-.586A1.99 1.99 0 0 1 2 15.99V3.97c0-.563.188-1.032.563-1.408C2.94 2.188 3.408 2 3.972 2h16.056c.564 0 1.033.188 1.409.563.375.376.563.845.563 1.409V15.99a1.99 1.99 0 0 1-.563 1.432c-.376.39-.845.586-1.409.586h-6.103l-3.709 3.71c-.22.187-.454.281-.704.281h-.517zm.986-6.01v3.1l3.099-3.1h6.948V3.973H3.972V15.99h6.01zm-3.99-9.013h12.018v2.018H5.991V6.977zm0 4.037h9.014v1.972H5.99v-1.972z">
+                </path>
+              </svg>
+
+              Comments: xyz
+            </span>
+          </div>
+        </div></div></div></div></div></div></div></div>
+
+
+
+        <br>
+        <br><br>
 {% endblock content %}

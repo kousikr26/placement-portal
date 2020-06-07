@@ -23,55 +23,43 @@
 
 {% for post in posts %}
 
-<!-- Card -->
-<div class="card promoting-card p-2 mt-5">
+<div class="mt-5">
 
-  <!-- Card content -->
-  <div class="card-body d-flex flex-row">
 
-    <!-- Avatar -->
-    <img src="https://icons.iconarchive.com/icons/artua/dragon-soft/512/User-icon.png" class="rounded-circle mr-3" height="50px" width="50px" alt="avatar">
+<div class="topic-container">
+  <div class="topic-left-pane">
+    {# <i class="fa fa-caret-up"></i><span></span> #}
 
-    <!-- Content -->
-    <div>
-
-      <!-- Title -->
-      <h4 class="card-title font-weight-bold mb-2">{{post.title}}</h4>
-      <!-- Subtitle -->
-      <p class="card-text"><i class="far fa-clock pr-2"></i>{{post.created}}</p>
-
+  </div>
+  <div class="topic-right-pane">
+    <div class="topic-header">
+      <div class="simple-avatar__1nLM"><a href="#" target="_blank">
+        <img class="simp-avatar__mRN_ topic-avatar" src="https://nulm.gov.in/images/user.png" alt="{{post.author}}" data-has-link="true" style="height: 32px; width: 32px;"></a>
+      </div>
+      <div>
+        <h2 class="topic-title">{{post.title}}</h2>
+        <span class="topic-details">posted by <a href="#">{{post.author}}</a> {{post.created}}</span>
+      <a href="{% url 'alumni_portal:update_post' post.slug %}" class="btn btn-sm btn-outline-warning waves-effect ml-3"><i class="fa fa-pencil-square-o pr-2 " aria-hidden="true"></i>edit</a>
+        <a href="{% url 'alumni_portal:delete_post' post.slug %}" class="btn btn-sm btn-outline-danger waves-effect ml-3"><i class="fa fa-trash-o pr-2" aria-hidden="true"></i>delete</a>
+      </div>
     </div>
+    <div class="topic-content">
+      <div class="discuss-markdown-container">
+          {{post.body}}
+      </div>
+<div class="topic-content-mask">
+</div>
+</div>
+<div class="topic-extra">
+  <span><i class="fa fa-commenting-o"></i> xyx comments</span>
+<span class="topic-details float-right">Last updated: {{post.updated}}</span>
 
-  </div>
+</div>
+</div>
 
-  <!-- Card image -->
-  <div class="view overlay">
-    {# <img class="card-img-top rounded-0" src="https://mdbootstrap.com/img/Photos/Horizontal/Food/full page/2.jpg" alt="Card image cap"> #}
-    <a href="#!">
-      <div class="mask rgba-white-slight"></div>
-    </a>
-  </div>
-
-  <!-- Card content -->
-  <div class="card-body">
-
-    <div class="collapse-content">
-
-      <!-- Text -->
-      <p class="card-text" id="collapseContent">{{post.body|truncatewords:25}}...</p>
-      <!-- Button -->
-      <!-- <a class="btn btn-flat red-text p-1 my-1 mr-0 mml-1 collapsed" data-toggle="collapse" href="#collapseContent" aria-expanded="false" aria-controls="collapseContent">View</a> -->
-      <a href="{% url 'alumni_portal:post_detail' post.slug %}" class="btn btn-bg text-dark btn-info">view more</a>
-      <a href="{% url 'alumni_portal:update_post' post.slug %}" class="btn btn-bg text-dark btn-info">Edit</a>
-      <a href="{% url 'alumni_portal:delete_post' post.slug %}" class="btn btn-bg text-dark btn-info">Delete</a>
-      <!-- <i class="fas fa-share-alt text-muted float-right p-1 my-1" data-toggle="tooltip" data-placement="top" title="Share this post"></i> -->
-      <!-- <i class="fas fa-heart text-muted float-right p-1 my-1 mr-3" data-toggle="tooltip" data-placement="top" title="I like it"></i> -->
-      <p class ="float-right"> <strong>Last updated:</strong> {{post.updated}}</p>
-    </div>
-
-  </div>
+<a href="{% url 'alumni_portal:post_detail' post.slug %}" class="topic-overlay"></a>
+</div>
 
 </div>
 {%endfor%}
-<!-- Card -->
 {% endblock %}
