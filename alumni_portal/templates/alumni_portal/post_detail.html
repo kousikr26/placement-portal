@@ -386,7 +386,40 @@ h5 {
                 </path>
               </svg>
 
-              Comments: xyz
+              Comments: 
+  <div class="col-md-8 card mb-4  mt-3 ">
+        <div class="card-body">
+          <!-- comments -->
+          <h2>{{ comments.count }} comments</h2>
+
+          {% for comment in comments %}
+          <div class="comments" style="padding: 10px;">
+            <p class="font-weight-bold">
+
+              <span class=" text-muted font-weight-normal">
+                {{ comment.create_date }}
+              </span>
+            </p>
+            {{comment.author.username}}
+            {{ comment.text| linebreaks }}
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+        {% if user.is_authenticated %}
+      <div class="col-md-8 card mb-4  mt-3 ">
+        <div class="card-body">
+
+          <h3>Leave a comment</h3>
+          <form method="post" style="margin-top: 1.3em;">
+            {{ comment_form.as_p }}
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary  btn-lg">Submit</button>
+          </form>
+
+        </div>
+      </div>
+        {% endif %}
             </span>
           </div>
         </div></div></div></div></div></div></div></div>

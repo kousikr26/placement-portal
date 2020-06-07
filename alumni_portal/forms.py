@@ -19,3 +19,11 @@ class PostForm(ModelForm):
         post.save()
         # student.room_no = (self.cleaned_data.get('room_no'))
         return post
+
+class CommentForm(ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['text']
+
+
+    

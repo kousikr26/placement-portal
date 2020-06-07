@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404,redirect
 from django.views import generic
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy,reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import *
 from .models import *
@@ -24,10 +24,35 @@ class CreatePost(generic.CreateView):
         kwargs['request'] = self.request
         return kwargs
 
-class PostDetailView(generic.DetailView):
-    model = Post
-    success_url = reverse_lazy('alumni_portal:home')
+# class PostDetailView(generic.DetailView):
+#     model = Post
+#     success_url = reverse_lazy('alumni_portal:home')
 
+def post_detail(request, slug):
+    template_name = 'alumni_portal/post_detail.html'
+    post = get_object_or_404(Post, slug=slug)
+    comments = post.comments.all()
+    new_comment = None
+    # Comment posted
+    if request.method == 'POST':
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
+
+            # Create Comment object but don't save to database yet
+            new_comment = comment_form.save(commit=False)
+            new_comment.author = request.user
+            # Assign the current post to the comment
+            new_comment.post = post
+            # Save the comment to the database
+            new_comment.save()
+            return redirect(reverse('alumni_portal:post_detail' ,kwargs={'slug':slug}))
+    else:
+        comment_form = CommentForm()
+
+    return render(request, template_name, {'post': post,
+                                           'comments': comments,
+                                           'new_comment': new_comment,
+                                           'comment_form': comment_form})
 class UserPostsView(LoginRequiredMixin,generic.ListView):
     def get_queryset(self):
         return Post.objects.filter(author = self.request.user)
