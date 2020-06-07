@@ -12,11 +12,10 @@
           {% bootstrap_form  form %}
           <input type="submit" class='btn btn-primary'  value="Post">
     </form>
-
 {% endblock %}
 
 {% block extrascripts%}
 <script>
-
+        CKEDITOR.replace( 'id_body' );
 </script>
 {% endblock %}
