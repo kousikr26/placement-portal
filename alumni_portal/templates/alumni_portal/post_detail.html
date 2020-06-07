@@ -386,23 +386,28 @@ h5 {
                 </path>
               </svg>
 
-              Comments: 
+              Comments: {{ comments.count }}
+            </span>
   <div class="col-md-8 card mb-4  mt-3 ">
-        <div class="card-body">
-          <!-- comments -->
-          <h2>{{ comments.count }} comments</h2>
+        <div class="">
 
           {% for comment in comments %}
-          <div class="comments" style="padding: 10px;">
-            <p class="font-weight-bold">
-
-              <span class=" text-muted font-weight-normal">
-                {{ comment.create_date }}
+          <div>
+            <a href="#" target="_blank">
+              <img alt="{{post.author}}'s avatar" class="avatar__7D9c" src="https://nulm.gov.in/images/user.png"></a>
+            <div class="user-info__2b-x">
+              <span class="name__2jm2"><a href="#" target="_blank" class="link__Lpjq">
+                {{comment.author}}</a>
               </span>
-            </p>
-            {{comment.author.username}}
-            {{ comment.text| linebreaks }}
-          </div>
+              </div>
+              <div class="post-info__1K06"><p> {{comment.create_date}}</p>
+              </div>
+            <div class="comment ml-5">
+              {{ comment.text| linebreaks }}
+            </div>
+
+            </div>
+
           {% endfor %}
         </div>
       </div>
