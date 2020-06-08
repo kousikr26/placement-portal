@@ -44,21 +44,6 @@ $(function () {
   };
 
 
-  // var sort = function () {
-  //   var sortid = String($(this).val());
-  //   console.log(sortid);
-  //   $.ajax({
-  //     url: '/ccd/ajax/sort/',
-  //     type: 'GET',
-  //     data: { sortid: sortid },
-  //     dataType: 'json',
-  //     success: function (data) {
-  //         $("#student-table tbody").html(data.html_student_list);
-  //       }
-  //     });
-  //   return false;
-  // };
-
   var getBranch = function()
   {
     console.log("getting branches");
@@ -75,6 +60,7 @@ $(function () {
 
   var pagination_on  = function()
   {
+    if (!$.fn.DataTable.isDataTable('#student-table')) {
     $('#student-table').DataTable(
     {
       dom: 'Blfrtip',
@@ -92,6 +78,7 @@ $(function () {
        {
            extend: 'csv',
            footer: false,
+           fieldBoundary: '',
            exportOptions: {
                 columns: [0,1,2,3,4,5,6,7,8,9]
             }
@@ -119,7 +106,7 @@ $(function () {
        },
     ]
     }
-    );
+  );}
     // to change the postion of search box of the table
     $("#searchbox").html($(".dataTables_filter"));
     $("#tableLength").html($(".dataTables_length"));
@@ -129,6 +116,8 @@ $(function () {
     $("#dtbuttons").find("button").addClass("btn-info");
     // setting left-margin for pagination buttons
     $(".dataTables_paginate").css("margin-left","20%");
+    $("#student-table-loader").prop('hidden',true);
+    $('#student-table-div').prop('hidden',false);
   };
 
   var ajax_filter = function()
@@ -145,8 +134,12 @@ $(function () {
       dataType:'json',
       success: function(data)
       {
+        $("#student-table-loader").prop('hidden',false);
+        $('#student-table-div').prop('hidden',true);
         // to update the pagination, firstly we clear the table
-        $('#student-table').dataTable().fnDestroy();
+        if ($.fn.DataTable.isDataTable('#student-table')) {
+              $('#student-table').dataTable().fnDestroy();
+            }
         $("#searchbox").html("<p></p>");
         $("#tableLength").html("<p></p>");
         $("#dtbuttons").html("<p></p>");
@@ -155,6 +148,8 @@ $(function () {
         // Then initialize again after updating the html
         // $('#student-table').dataTable();
         pagination_on();
+        // var tttt = setTimeout(pagination_on,200);
+        console.log("table updated!");
       }
     });
   };

@@ -12,9 +12,10 @@
     <script src="{% static 'js/jquery-3.5.1.js' %}"></script>  <!-- JQUERY HERE -->
     <!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> -->
 
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'ccd/js/students.js' %}"></script>
 
-    <!-- scripts for adding pagination -->
-
+    <!-- datatables scripts for adding pagination and all-->
 
     <script src="{% static 'js/jquery.dataTables.min.js' %}"></script>
     <!-- <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script> -->
@@ -173,8 +174,6 @@
 </div>
     {% include "ccd/footer.html" %}
 
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'ccd/js/students.js' %}"></script>
 
     <script src="https://kit.fontawesome.com/b955dbdd56.js" crossorigin="anonymous"></script>
     {% block extrascripts%}
