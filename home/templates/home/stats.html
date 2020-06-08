@@ -1,49 +1,57 @@
 {% extends "home/base.html" %}
 {% block content %}
 {% load static %}
-<style>
-.float-container {
-    
-    padding: 20px;
-}
 
-.float-child {
-    width: 50%;
-    float: left;
-    padding: 20px;
-    
-}  
-</style>
 <!-- Load d3.js -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.6.0/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.6.0/d3.min.js"></script>
 <!-- Color scale -->
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+ 
+
+<!-- Resources -->
+<script src="https://www.amcharts.com/lib/4/core.js"></script>
+<script src="https://www.amcharts.com/lib/4/charts.js"></script>
+<script src="https://www.amcharts.com/lib/4/themes/kelly.js"></script>
+<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+
+<!-- Chart code -->
+
 
 <!-- Add 2 buttons -->
-<button type="button" class="btn btn-primary" onclick="render(data1);render2(data3)">B.tech</button>
-<button type="button" class="btn btn-primary" onclick="render(data2);render2(data4)">M.tech</button>
-<h3> Placement statistics <div id="progtype"></div></h3>
-<div class="float-container">
+<div style="text-align:center;">
+<button type="button"  class="btn btn-primary button" onclick="updateGauge(currentpos,btech_placed_frac);updateBarChart(data3);">B.tech</button>
+<button type="button" class="btn btn-primary button" onclick="updateGauge(currentpos,mtech_placed_frac);updateBarChart(data4);">M.tech</button>
+</div>
+<div style="text-align:center;">
+<h3> Placement statistics </h3>
 
-  <div class="float-child">
-    <div id="donut"></div>
-  </div>
-  
-  <div class="float-child">
-    <div id="bar"></div>
-  </div>
-  
+<svg width="960" height="500" id="gauge">
+ viewBox="0 0 960 500"
+  preserveAspectRatio="xMidYMid meet">
+  </svg>
+<div style="margin-bottom:70px;"></div>
+<h3> Branchwise placement statistics</h3>
+<div id="chartdiv"></div>
+<div style="margin-bottom:500px;"></div>
 </div>
 
 
-
-<link rel="stylesheet" type="text/css" href="{% static 'home/donut.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'home/buttons.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'home/gauge.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'home/barchart.css' %}">
 <script>
+var delayBarChart=100000;
 var data1 = {{ btech_percent_placed|safe }};
 var data2 = {{ mtech_percent_placed|safe }};
+var btech_placed_frac=data1["Placed"]/(data1["Placed"]+data1["Not placed"]);
+var mtech_placed_frac=data2["Placed"]/(data2["Placed"]+data2["Not placed"]);
 var data3 = {{ btech_branchwise_placements|safe }};
 var data4 = {{ mtech_branchwise_placements|safe }};
+console.log(data1);
 </script>
-<script src="{% static '/home/donut.js' %}" type="text/javascript"></script>  
-<script src="{% static '/home/bar.js' %}" type="text/javascript"></script>  
+
+
+<script src="{% static 'home/gauge.js' %}"> </script>
+<script src="{% static 'home/barchart.js' %}"> </script>
+
 {% endblock %}

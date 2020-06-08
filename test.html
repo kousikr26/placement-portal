@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+  <style>
+    .middle-text {
+      fill: black;
+      font-family: 'Roboto', sans-serif;
+    }
+  </style>
+
+  <script>
+    $(document).ready(function () {
+
+      buildSVG = function (value1, value2) {
+
+        $('svg').remove();
+
+        var w = 150, h = 150;
+
+        var w = $(document).width();
+        var OnePercent = (w/100 * 1);
+        var margin = OnePercent;
+
+        var w = w - margin - margin;
+        var h = w / 2;
+
+        var outerRadius = (w / 2) - (OnePercent * 5);
+        var innerRadius = (w / 2) - (OnePercent * 1);
+
+        var color = ['#e0e0e0', '#eb3323'];
+
+        var ammount = value1;
+        var total = value2;
+        var percent = (ammount / total) * 100;
+        var ratio = percent / 100;
+        var piePercent = Math.PI * ratio;
+
+        var arc = d3.arc()
+          .innerRadius(innerRadius)
+          .outerRadius(outerRadius)
+          .startAngle(0)
+          .endAngle(Math.PI);
+
+        var arcLine = d3.arc()
+          .innerRadius(innerRadius)
+          .outerRadius(outerRadius)
+          .startAngle(0)
+          .endAngle(piePercent);
+
+        var svg = d3.select("#chart")
+          .append("svg")
+          .attr("width", w)
+          .attr("height", h)
+          .append('g')
+          .attr("transform", 'translate(' + w / 2 + ',' + h + ')');
+
+        var path = svg.append('path')
+          .attr("d", arc)
+          .attr("transform", 'rotate(-90)')
+          .attr("fill", color[0]);
+
+        var path2 = svg.append('path')
+          .attr("d", arcLine)
+          .attr("transform", 'rotate(-90)')
+          .attr("fill", color[1]);
+
+        var middleCount = svg.append('text')
+          .text(Math.round(percent) + "%")
+          .attr("class", "middle-text")
+          .attr('text-anchor', 'middle')
+          .attr('dy', -OnePercent / 2)
+          .attr('font-size', OnePercent * 25 + 'px')
+      }
+
+      // Just needed to cycle over some test values.
+
+      var values = [
+        {
+          lower: 0,
+          upper: 1000
+        },
+        {
+          lower: 22,
+          upper: 1000
+        },
+        {
+          lower: 200,
+          upper: 1000
+        },
+        {
+          lower: 3.5,
+          upper: 10
+        },
+        {
+          lower: 5000,
+          upper: 10000
+        },
+        {
+          lower: 820,
+          upper: 1000
+        },
+        {
+          lower: 1000,
+          upper: 1000
+        }
+      ]
+
+      var i = -1;
+      setInterval(function () {
+        i = i === (values.length - 1) ? -1 : i;
+        i++;
+        buildSVG(values[i].lower, values[i].upper);
+      }, 1000);
+
+    });
+
+  </script>
+
+</head>
+
+<body>
+  <div id="chart"></div>
+</body>
+
+</html>
