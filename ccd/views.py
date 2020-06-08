@@ -9,6 +9,8 @@ from django.template.loader import render_to_string
 from .forms import StudentForm
 from django.db.models.functions import Lower
 from django.contrib.auth.decorators import login_required,user_passes_test
+from django.views.decorators.csrf import csrf_exempt
+import json
 
 
 def is_ccd_member(user):
@@ -20,17 +22,62 @@ def home(request):
     students = Student.objects.all().order_by('roll')
 
     return render(request,'ccd/index.html',{'student_list':students})
-
+@csrf_exempt
 def ajax_update_database(request):
-    data = dict()
-    data['success']=False
-    if request.is_ajax() and request.method=='GET':
-        headings = request.GET.get('headings')
-        print(headings)
-        datalist = request.GET.get('data_list')
-        print(headings)
-        data['success']=True
-    return JsonResponse(data)
+    context = dict()
+    context['success']=False
+    if request.is_ajax() and request.method=='POST':
+        data = json.loads(request.body)
+        # print(data)
+        heading = data['headings']
+        heading[len(heading)-1] =heading[len(heading)-1][:len(heading[len(heading)-1])-1]
+        print(heading)
+        data_list = data['data_list']
+        for i in range(len(data_list)):
+            data_list[i][len(data_list[i])-1] = data_list[i][len(data_list[i])-1][:len(data_list[i][len(data_list[i])-1])-1]
+
+        t=-1
+        d = {    "Name":"name",
+                 "Roll":"roll",
+                 "Program":'programs',
+                 "Branch":'branch_id',
+                 "Day":'day',
+                 "Company":'company',
+                 "Placed":'placed',
+                 "Sector":'sector',
+                 "Profile":'profile',
+                 "Slot":'slot',
+                }
+        for i in range(len(heading)):
+            if heading[i]=='Roll':
+                t=i
+                break
+
+
+        if t!=-1:
+            print(len(data_list))
+            print(data_list[1060])
+            for i in range(len(data_list)):
+                if(len(data_list[i])!=len(heading)):
+                    print("list length error for row {}!".format(i))
+                    pass
+                else:
+                    student_dict = {}
+                    for h,val in zip(heading,data_list[i]):
+                        student_dict[d[h]]= val
+                    if(student_dict['roll']==''):
+                        pass
+                    else:
+                        print(student_dict)
+                        # obj, created = Student.objects.get_or_create(**student_dict)
+                        # obj.save()
+            context['success']=True
+
+
+
+
+
+    return JsonResponse(context)
 
 
 # @login_required

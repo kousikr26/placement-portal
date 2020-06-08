@@ -331,6 +331,7 @@ animation: spin .4s linear infinite;
 {% block extrascripts %}
 
 <script type="text/javascript">
+
     $(function () {
         $("#data_btn").on("click", function () {
           // $("#data-btn-text").html('<i class="fa fa-spinner fa-spin"></i>Processing');
@@ -454,11 +455,12 @@ animation: spin .4s linear infinite;
                   console.log(data_list);
 
                   $.ajax({
-
+                    contentType: 'application/json; charset=utf-8',
                     url:'/ccd/ajax/update-database',
-                    type: 'GET',
-                    data :{'headings':headings,'data_list':data_list,},
+                    type: 'POST',
+                    data :JSON.stringify({'headings':headings,'data_list':data_list,'csrfmiddlewaretoken': '{{ csrf_token }}'}),
                     dataType: 'json',
+
                     success: function(data)
                     {
                       if(data.success)
