@@ -81,6 +81,43 @@ $(function () {
       pagingType: "full_numbers",
       ordering: false,
       fixedColumns: true,
+      buttons: [
+       {
+           extend: 'pdf',
+           footer: true,
+           exportOptions: {
+                columns: [0,1,2,3,4,5,6,7,8,9]
+            }
+       },
+       {
+           extend: 'csv',
+           footer: false,
+           exportOptions: {
+                columns: [0,1,2,3,4,5,6,7,8,9]
+            }
+       },
+       {
+           extend: 'excel',
+           footer: false,
+           exportOptions: {
+                columns: [0,1,2,3,4,5,6,7,8,9]
+            }
+       },
+       {
+           extend: 'copy',
+           footer: false,
+           exportOptions: {
+                columns: [0,1,2,3,4,5,6,7,8,9]
+            }
+       },
+       {
+           extend: 'print',
+           footer: false,
+           exportOptions: {
+                columns: [0,1,2,3,4,5,6,7,8,9]
+            }
+       },
+    ]
     }
     );
     // to change the postion of search box of the table
