@@ -20,9 +20,6 @@ def is_ccd_member(user):
 # @user_passes_test(is_ccd_member)
 def home(request):
     students = Student.objects.all().order_by('roll')
-    branches = Branch.objects.all()
-    for b in branches:
-        print("{} : {}".format(b,b.pk))
     return render(request,'ccd/index.html',{'student_list':students})
 
 @csrf_exempt
@@ -50,7 +47,7 @@ def ajax_update_database(request):
                 }
 
         if len(headings)==10:
-            print(len(data_list))
+            # print(len(data_list))
             for i in range(len(data_list)):
                 if(len(data_list[i])!=len(headings)):
                     print("list length error for row {}!".format(i+1))
@@ -191,10 +188,10 @@ def student_update(request,pk):
     if request.is_ajax():
         student = get_object_or_404(Student,pk=pk)
         if request.method == 'POST':
-            print("post student")
+            # print("post student")
             form = StudentForm(request.POST,instance=student)
         else:
-            print("get student")
+            # print("get student")
             form = StudentForm(instance=student)
         return save_student_form(request,form,'ccd/partial_student_update.html')
 

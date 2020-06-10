@@ -60,6 +60,7 @@ $(function() {
                 dom: 'Blfrtip',
                 pagingType: "full_numbers",
                 responsive: true,
+                autoWidth: true,
                 ordering: false,
                 fixedColumns: true,
                 buttons: [{
@@ -84,13 +85,13 @@ $(function() {
                             columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
                         }
                     },
-                    {
-                        extend: 'copy',
-                        footer: false,
-                        exportOptions: {
-                            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-                        }
-                    },
+                    // {
+                    //     extend: 'copy',
+                    //     footer: false,
+                    //     exportOptions: {
+                    //         columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+                    //     }
+                    // },
                     {
                         extend: 'print',
                         footer: false,
@@ -98,9 +99,13 @@ $(function() {
                             columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
                         }
                     },
+                    'colvis',
+
                 ]
             });
         }
+        $("#student-table_info-div").html($("#student-table_info"));
+        $("#student-table_paginate_div").html($("#student-table_paginate"));
         $("#student-table-loader").prop('hidden', true);
         $('#student-table-div').prop('hidden', false);
     };
