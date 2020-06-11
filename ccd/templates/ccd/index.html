@@ -246,20 +246,7 @@ animation: spin .4s linear infinite;
     }
 }
 
-.dataTables_wrapper .dataTables_filter input {
-  display: block;
-  width: 100%;
-  padding: .375rem .75rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  color: #495057;
-  background-color: #fff;
-  background-clip: padding-box;
-  border: 1px solid #c6c3d2;
-  border-radius: .25rem;
-  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-  margin-left:10%;
-}
+
 thead, tfoot {
     background: #7774e7;
 }
@@ -387,144 +374,8 @@ table.dataTable.no-footer {
     background-color: rgba(0, 0, 0, .075)
 }
 
-.table-primary,
-.table-primary>td,
-.table-primary>th {
-    background-color: #c1e2fc
-}
-
-.table-hover .table-primary:hover,
-.table-hover .table-primary:hover>td,
-.table-hover .table-primary:hover>th {
-    background-color: #a9d7fb
-}
-
-.table-secondary,
-.table-secondary>td,
-.table-secondary>th {
-    background-color: #dddfe2
-}
-
-.table-hover .table-secondary:hover,
-.table-hover .table-secondary:hover>td,
-.table-hover .table-secondary:hover>th {
-    background-color: #cfd2d6
-}
-
-.table-success,
-.table-success>td,
-.table-success>th {
-    background-color: #cde9ce
-}
-
-.table-hover .table-success:hover,
-.table-hover .table-success:hover>td,
-.table-hover .table-success:hover>th {
-    background-color: #bbe1bd
-}
-
-.table-info,
-.table-info>td,
-.table-info>th {
-    background-color: #b8ecf3
-}
-
-.table-hover .table-info:hover,
-.table-hover .table-info:hover>td,
-.table-hover .table-info:hover>th {
-    background-color: #a2e6ef
-}
-
-.table-warning,
-.table-warning>td,
-.table-warning>th {
-    background-color: #fff9c8
-}
-
-.table-hover .table-warning:hover,
-.table-hover .table-warning:hover>td,
-.table-hover .table-warning:hover>th {
-    background-color: #fff6af
-}
-
-.table-danger,
-.table-danger>td,
-.table-danger>th {
-    background-color: #fccac7
-}
-
-.table-hover .table-danger:hover,
-.table-hover .table-danger:hover>td,
-.table-hover .table-danger:hover>th {
-    background-color: #fbb3af
-}
-
-.table-light,
-.table-light>td,
-.table-light>th {
-    background-color: #fdfdfe
-}
-
-.table-hover .table-light:hover,
-.table-hover .table-light:hover>td,
-.table-hover .table-light:hover>th {
-    background-color: #ececf6
-}
-
-.table-dark,
-.table-dark>td,
-.table-dark>th {
-    background-color: #c6c8ca
-}
-
-.table-hover .table-dark:hover,
-.table-hover .table-dark:hover>td,
-.table-hover .table-dark:hover>th {
-    background-color: #b9bbbe
-}
-
-.table-active,
-.table-active>td,
-.table-active>th,
-.table-hover .table-active:hover,
-.table-hover .table-active:hover>td,
-.table-hover .table-active:hover>th {
-    background-color: rgba(0, 0, 0, .075)
-}
-
-.table .thead-dark th {
-    color: #fff;
-    background-color: #212529;
-    border-color: #32383e
-}
-
-.table .thead-light th {
-    color: #495057;
-    background-color: #e9ecef;
-    border-color: #e9ecef
-}
-
-.table-dark {
-    color: #fff;
-    background-color: #212529
-}
-
-.table-dark td,
-.table-dark th,
-.table-dark thead th {
-    border-color: #32383e
-}
-
-.table-dark.table-bordered {
-    border: 0
-}
-
-.table-dark.table-striped tbody tr:nth-of-type(odd) {
-    background-color: hsla(0, 0%, 100%, .05)
-}
-
-.table-dark.table-hover tbody tr:hover {
-    background-color: hsla(0, 0%, 100%, .075)
+.table-hover tbody tr:hover {
+    background-color: #c6c3d2
 }
 
 @media (max-width:575px) {
@@ -711,9 +562,52 @@ only screen and (max-width: 760px),
 	}
 
 }
+
+.dataTables_filter input
+{
+  position: relative;
+  padding: 10px 10px 1px 10px;
+  width: 100px;
+  color: #5c4949;
+  font-size: 16px;
+  font-weight: 100;
+  letter-spacing: 1.5px;
+  border-radius: 5px;
+  border-style:solid;
+  border-color: #7774e7;
+  transition: width 0.4s ease;
+  outline: none;
+}
+
+.dataTables_filter input:focus {
+  width: 200px;
+  border-color: #7774e7;
+}
+
+
+.form-control {
+    display: block;
+    width: 100%;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    outline: none;
+    /* border: none !important; */
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
+}
 </style>
 {% endblock head %}
 {% block content %}
+
+
 <div id="loader" class="">
     <div class="spinner"></div>
 </div>
@@ -722,7 +616,7 @@ window.addEventListener('load', () => {
     const loader = document.getElementById('loader');
     setTimeout(() => {
         loader.classList.add('fadeOut');
-    }, 300);
+    }, 100);
 });
 </script>
 <!-- THE MODAL WE WILL BE USING -->
@@ -809,7 +703,7 @@ window.addEventListener('load', () => {
 <div id="student-table_wrapper" class="dataTables_wrapper" >
 
     <div class="table-responsive-lg" hidden id="student-table-div">
-        <table class="table table-striped table-bordered" cellspacing="0" width="100%" id="student-table" style="overflow-x: scroll;">
+        <table class="table table-hover table-striped table-bordered" cellspacing="0" width="100%" id="student-table" style="overflow-x: scroll;">
             <thead class="">
                 <tr>
                     <th>Name</th>
@@ -868,6 +762,42 @@ window.addEventListener('load', () => {
         <!-- Card content -->
         <!-- Card content -->
         <div class="card-body">
+          <div class="" style="display: flex;justify-content: center;">
+              <div id="update-loader-text" class="p-4" hidden>
+                  <div class="loader"></div>
+              </div>
+          </div>
+          <div class="collapse m-3" id="success-message">
+            <div class="alert alert-success">
+            <div class="container" style="display:flex;justify-content:center;">
+              <div class="d-flex">
+                <!-- <div class="alert-icon">
+                  <i class="ion-ios-checkmark-circle"></i>
+                </div> -->
+                <p class="mb-0 ml-2"><b>Success Alert:</b> Yuhuuu! Database updated successfully.</p>
+            <!--
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true"><i class="ion-ios-close"></i></span>
+              </button> -->
+            </div>
+          </div>
+          </div>
+          </div>
+          <div class=" collapse m-3" id="error-message">
+            <div class="alert alert-danger">
+			        <div class="container" style="display:flex;justify-content:center;">
+			        	<div class="d-flex">
+				          <!-- <div class="alert-icon">
+				            <i class="ion-ios-information-circle-outline"></i>
+				          </div> -->
+				          <p class="mb-0 ml-2"><b>Error Alert:</b> Damn man! Something must be screwed up...</p>
+			          </div>
+			          <!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			            <span aria-hidden="true"><i class="ion-ios-close"></i></span>
+			          </button> -->
+			        </div>
+			      </div>
+          </div>
             <div class="">
                 <!-- Text -->
                 <div class=" " id="">
@@ -885,7 +815,7 @@ window.addEventListener('load', () => {
                     </div>
                     <div class="mt-3 " id="data-table" hidden>
                         <div class="table-responsive">
-                            <table class="table table-striped table-bordered " cellspacing="0" width="100%" id="csv-data-table" style="overflow-x: scroll;">
+                            <table class="table  table-hover table-striped table-bordered " cellspacing="0" width="100%" id="csv-data-table" style="overflow-x: scroll;">
                                 <thead class="">
                                     <tr id="csv_file_headings">
                                     </tr>
@@ -911,25 +841,14 @@ window.addEventListener('load', () => {
                         <label for="update_type"><strong>Choose update type </strong> </label>
                         <select class="form-control" id="update_type" disabled>
                             <option selected="false" value="0">Choose option</option>
-                            <option value="1">Update already existed students </option>
-                            <option value="2">Add new students</option>
+                            <option value="1">Update pre-existing students data</option>
+                            <option value="2">Add new students data</option>
                             <option value="3">Both</option>
                         </select>
                     </div>
                     <button type="button" class="btn btn-danger" id="database-update-btn" disabled>Update</button>
-                    <div class="" style="display: flex;justify-content: center;">
-                        <div id="update-loader-text" class="p-4" hidden>
-                            <div class="loader"></div>
-                        </div>
-                    </div>
-                    <div class="collapse m-3" id="success-message">
-                        <p class="bg-light border border-success rounded" style="display:flex;justify-content:center;"> <span class="p-2 font-weight-bold"> Success!</span>
-                            <p>
-                    </div>
-                    <div class="collapse m-3" id="error-message">
-                        <p class="bg-light border border-danger rounded" style="display:flex;justify-content:center;"> <span class=" p-2 font-weight-bold"> Error! database update failed</span>
-                            <p>
-                    </div>
+
+
                 </div>
             </div>
         </div>
@@ -1033,7 +952,7 @@ $(function() {
         } else {
             alert("Please upload a valid CSV file.");
         }
-        myVar = setTimeout(dataProccessingDone, 2000);
+        myVar = setTimeout(dataProccessingDone, 1000);
 
     });
 });
@@ -1171,6 +1090,9 @@ var update_database = function() {
             if ($.fn.DataTable.isDataTable('#csv-data-table')) {
                 $('#csv-data-table').dataTable().fnDestroy();
             }
+            $("#csv-data-table_info-div").html('');
+            $("#csv-data-table_paginate_div").html('');
+
 
             // if there is some data in the table remove it
             $("#csv_file_data").html('');
@@ -1208,15 +1130,15 @@ var update_database = function() {
                         if (data.success) {
                             console.log("success!");
                             toggle_success_msg();
-                            var ss = setTimeout(reset, 500);
-                            var xyz = setTimeout(toggle_success_msg, 3000)
-                            ajax_filter();
+                            var ss = setTimeout(reset, 300);
+                            var xyz = setTimeout(toggle_success_msg, 5000);
+                            var dsd = setTimeout(ajax_filter,3000);
 
                         } else {
                             console.log("error!");
                             toggle_error_msg();
-                            var ss = setTimeout(reset, 500);
-                            var xyz = setTimeout(toggle_error_msg, 3000)
+                            var ss = setTimeout(reset, 300);
+                            var xyz = setTimeout(toggle_error_msg, 5000)
                         }
                     }
                 });

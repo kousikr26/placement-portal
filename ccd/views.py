@@ -45,8 +45,9 @@ def ajax_update_database(request):
                  "Profile":'profile',
                  "Slot":'slot',
                 }
-
-        if len(headings)==10:
+        headings_required = ["Name", "Roll No.", "Program","Branch","Day","Company","Placed","Sector","Profile","Slot",]
+        sorted(headings)
+        if len(headings)==10 and sorted(headings)==sorted(headings_required):
             # print(len(data_list))
             for i in range(len(data_list)):
                 if(len(data_list[i])!=len(headings)):
