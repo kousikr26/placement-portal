@@ -72,4 +72,9 @@ class UpdatePost(LoginRequiredMixin,generic.UpdateView):
 
 class DeletePost(LoginRequiredMixin,generic.DeleteView):
     model = Post
-    success_url = reverse_lazy('alumni_portal:user_posts')  
+    success_url = reverse_lazy('alumni_portal:user_posts')
+
+class AlumnusProfileCreation(generic.CreateView):
+    form_class = AlumnusProfileForm
+    template_name = 'alumni_portal/create_alumnus_profile.html'
+    success_url = reverse_lazy('alumni_portal:home')

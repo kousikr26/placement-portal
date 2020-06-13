@@ -12,6 +12,7 @@ urlpatterns = [
     path('myposts',UserPostsView.as_view(),name = "user_posts"),
     path('post/<str:slug>/delete_post',DeletePost.as_view(),name = "delete_post"),
     path('post/<str:slug>/update_post',UpdatePost.as_view(),name = "update_post"),
+    path('create_alumnus_profile',AlumnusProfileCreation.as_view(),name = 'create_alumnus_profile'),
 ]
 
 if settings.DEBUG:

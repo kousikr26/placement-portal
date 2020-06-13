@@ -26,4 +26,19 @@ class CommentForm(ModelForm):
         fields = ['text']
 
 
-    
+class AlumnusProfileForm(ModelForm):
+    class Meta:
+        model = AlumnusProfile
+        fields = ['personal_email',
+        'iitg_email',
+        'roll_number',
+        'first_name',
+        'middle_name',
+        'last_name',
+        'year_of_graduation',
+        'program',
+        'branch',
+        'date_of_birth',
+        'current_country',
+        'current_city',
+        ]

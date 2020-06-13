@@ -1,15 +1,15 @@
 {% extends "alumni_portal/base.html" %}
 {% load bootstrap4 %}
+
 {% block content %}
 
   <br>
   <br>
-  <h1>Write your Story!</h1>
+  <h1>Create Your Profile</h1>
 
     <form  method="post">
           {% csrf_token %}
           {% bootstrap_form  form %}
           <input type="submit" class='btn btn-primary'  value="Post">
     </form>
-
 {% endblock %}
