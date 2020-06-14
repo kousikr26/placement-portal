@@ -516,10 +516,8 @@ table.dataTable.no-footer {
 
 }
 </style>
-
 <style>
-
-/*
+    /*
 Max width before this PARTICULAR table gets nasty
 This query will take effect for any screen smaller than 760px
 and also iPads specifically.
@@ -528,38 +526,38 @@ and also iPads specifically.
 only screen and (max-width: 760px),
 (min-device-width: 768px) and (max-device-width: 1024px)  {
 
-	/* Force table to not be like tables anymore */
-	table, thead, tbody, th, td, tr {
-		display: block;
-	}
+    /* Force table to not be like tables anymore */
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
 
-	/* Hide table headers (but not display: none;, for accessibility) */
-	thead tr {
-		position: absolute;
-		top: -9999px;
-		left: -9999px;
-	}
+    /* Hide table headers (but not display: none;, for accessibility) */
+    thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
 
-	tr { border: 1px solid #ccc; }
+    tr { border: 1px solid #ccc; }
 
-	td {
-		/* Behave  like a "row" */
-		border: none;
-		border-bottom: 1px solid #eee;
-		position: relative;
-		padding-left: 50%;
-	}
+    td {
+        /* Behave  like a "row" */
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50%;
+    }
 
-	td:before {
-		/* Now like a table header */
-		position: absolute;
-		/* Top/left values mimic padding */
-		top: 6px;
-		left: 6px;
-		width: 45%;
-		padding-right: 10px;
-		white-space: nowrap;
-	}
+    td:before {
+        /* Now like a table header */
+        position: absolute;
+        /* Top/left values mimic padding */
+        top: 6px;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+    }
 
 }
 
@@ -603,11 +601,16 @@ only screen and (max-width: 760px),
     -moz-box-shadow: none !important;
     box-shadow: none !important;
 }
+.btn-group-vertical>.btn, .btn-group>.btn {
+    position: relative;
+    -webkit-box-flex: 0;
+    -ms-flex: 0 1 auto;
+    flex: 0 1 auto;
+    margin-bottom: 5px;
+}
 </style>
 {% endblock head %}
 {% block content %}
-
-
 <div id="loader" class="">
     <div class="spinner"></div>
 </div>
@@ -627,323 +630,727 @@ window.addEventListener('load', () => {
     </div>
 </div>
 <!-- TABLE FOR ALL STUDENTS -->
-
 <div class="" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); margin:1%;padding:2% 0%;">
-<div class="row" style="padding-left:2%;">
-    <div class="col">
-        <p>
-            <!-- BUTTON TO TRIGGER THE ACTION -->
-            <button type="button" class="btn js-create-student-btn" data-url="{% url 'ccd:student_create' %}" data-toggle="tooltip" data-placement="top" title="Add a new student" style="color: #e9ecef;
+    <div class="row" style="padding-left:2%;">
+        <div class="col">
+            <p>
+                <!-- BUTTON TO TRIGGER THE ACTION -->
+                <button type="button" class="btn js-create-student-btn" data-url="{% url 'ccd:student_create' %}" data-toggle="tooltip" data-placement="top" title="Add a new student" style="color: #e9ecef;
                 background-color: #7774e7;
                 border-color: #c6c3d2;">
-                <i class="fas fa-user-plus mr-1"></i>
-                Add Student
-            </button>
-        </p>
-    </div>
-    <!-- <div class="col">
+                    <i class="fas fa-user-plus mr-1"></i>
+                    Add Student
+                </button>
+            </p>
+        </div>
+        <!-- <div class="col">
        <div class="float-right"  id="searchbox">
          <input class="form-control" id="searchbox" type="text" placeholder="Type to search..." />
        </div>
   </div> -->
-</div>
-
-<div class="row" style="padding:0% 2%;">
-    <div class="col-6 col-lg-3">
-        <div class="form-group">
-            <label for="branch">Placed</label>
-            <select class="form-control" id="placed_filter">
-                <option selected="true" value="all">Both</option>
-                <option value='True'>Placed</option>
-                <option value="False">Not Placed</option>
-            </select>
-        </div>
     </div>
-    <div class="col-6 col-lg-3">
-        <div class="form-group">
-            <label for="branch">Branch</label>
-            <select class="form-control" id="branch_filter">
-                <option selected="true" value="all">All</option>
-            </select>
-        </div>
-    </div>
-    <div class="col-6 col-lg-3">
-        <div class="form-group">
-            <label for="branch">Program</label>
-            <select class="form-control" id="program_filter">
-                <option selected="true" value="all">All</option>
-                <option value="B.Tech">B.Tech</option>
-                <option value="B.Des">B.Des</option>
-                <option value="M.Tech">M.Tech</option>
-                <option value="M.Des">M.Des</option>
-                <option value="M.Sc">M.Sc</option>
-                <option value="Phd">Phd</option>
-                <option value="Others">Others</option>
-            </select>
-        </div>
-    </div>
-    <div class="col-6 col-lg-3">
-        <div class="form-group">
-            <label for="SortBy">Sort By</label>
-            <select class="form-control" id="sort">
-                <option selected="true" value='roll'>Roll No</option>
-                <option value='name'>Name</option>
-                <option value='programs'>Program</option>
-                <option value='branch'>Branch</option>
-                <option value='day'>Day</option>
-                <option value='company'>Company</option>
-                <option value='placed'>Placed</option>
-                <option value='profile'>Profile</option>
-                <option value='sector'>Sector</option>
-                <option value='slot'>Slot</option>
-            </select>
-        </div>
-    </div>
-</div>
-<div id="student-table_wrapper" class="dataTables_wrapper" >
-
-    <div class="table-responsive-lg" hidden id="student-table-div">
-        <table class="table table-hover table-striped table-bordered" cellspacing="0" width="100%" id="student-table" style="overflow-x: scroll;">
-            <thead class="">
-                <tr>
-                    <th>Name</th>
-                    <th>Roll No.</th>
-                    <th>Program</th>
-                    <th>Branch</th>
-                    <th>Day</th>
-                    <th>Company</th>
-                    <th>Placed</th>
-                    <th>Profile</th>
-                    <th>Sector</th>
-                    <th>Slot</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tfoot>
-                <tr>
-                    <th>Name</th>
-                    <th>Roll No.</th>
-                    <th>Program</th>
-                    <th>Branch</th>
-                    <th>Day</th>
-                    <th>Company</th>
-                    <th>Placed</th>
-                    <th>Profile</th>
-                    <th>Sector</th>
-                    <th>Slot</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </tfoot>
-            <tbody>
-                {% include "ccd/partial_student_list.html" %}
-            </tbody>
-        </table>
-        <div class="row pl-3"style="padding:2%;">
-            <div class="col-12 col-lg-6" id="student-table_info-div">
-
+    <div class="row" style="padding:0% 2%;">
+        <div class="col-6 col-lg-3">
+            <div class="form-group">
+                <label for="branch">Placed</label>
+                <select class="form-control" id="placed_filter">
+                    <option selected="true" value="all">Both</option>
+                    <option value='True'>Placed</option>
+                    <option value="False">Not Placed</option>
+                </select>
             </div>
-            <div class="col-12 col-lg-6" id="student-table_paginate_div" style="overflow-x:scroll;">
-
+        </div>
+        <div class="col-6 col-lg-3">
+            <div class="form-group">
+                <label for="branch">Branch</label>
+                <select class="form-control" id="branch_filter">
+                    <option selected="true" value="all">All</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-6 col-lg-3">
+            <div class="form-group">
+                <label for="branch">Program</label>
+                <select class="form-control" id="program_filter">
+                    <option selected="true" value="all">All</option>
+                    <option value="B.Tech">B.Tech</option>
+                    <option value="B.Des">B.Des</option>
+                    <option value="M.Tech">M.Tech</option>
+                    <option value="M.Des">M.Des</option>
+                    <option value="M.Sc">M.Sc</option>
+                    <option value="Phd">Phd</option>
+                    <option value="Others">Others</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-6 col-lg-3">
+            <div class="form-group">
+                <label for="SortBy">Sort By</label>
+                <select class="form-control" id="sort">
+                    <option selected="true" value='roll'>Roll No</option>
+                    <option value='name'>Name</option>
+                    <option value='programs'>Program</option>
+                    <option value='branch'>Branch</option>
+                    <option value='day'>Day</option>
+                    <option value='company'>Company</option>
+                    <option value='placed'>Placed</option>
+                    <option value='profile'>Profile</option>
+                    <option value='sector'>Sector</option>
+                    <option value='slot'>Slot</option>
+                </select>
             </div>
         </div>
     </div>
-</div>
-
-<div class="mt-5" style="display:flex;justify-content:center">
-    <button class="btn " id="collapseContent-btn" style="color: #e9ecef;
-    background-color: #7774e7;
-    border-color: #c6c3d2;">Update database</button>
-</div>
-<div class="collapse" id="collapseContent">
-    <!-- Card -->
-    <div class="card promoting-card p-5 ">
-        <!-- Card content -->
-        <!-- Card content -->
-        <div class="card-body">
-          <div class="" style="display: flex;justify-content: center;">
-              <div id="update-loader-text" class="p-4" hidden>
-                  <div class="loader"></div>
-              </div>
-          </div>
-          <div class="collapse m-3" id="success-message">
-            <div class="alert alert-success">
-            <div class="container" style="display:flex;justify-content:center;">
-              <div class="d-flex">
-                <!-- <div class="alert-icon">
-                  <i class="ion-ios-checkmark-circle"></i>
-                </div> -->
-                <p class="mb-0 ml-2"><b>Success Alert:</b> Yuhuuu! Database updated successfully.</p>
-            <!--
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true"><i class="ion-ios-close"></i></span>
-              </button> -->
-            </div>
-          </div>
-          </div>
-          </div>
-          <div class=" collapse m-3" id="error-message">
-            <div class="alert alert-danger">
-			        <div class="container" style="display:flex;justify-content:center;">
-			        	<div class="d-flex">
-				          <!-- <div class="alert-icon">
-				            <i class="ion-ios-information-circle-outline"></i>
-				          </div> -->
-				          <p class="mb-0 ml-2"><b>Error Alert:</b> Damn man! Something must be screwed up...</p>
-			          </div>
-			          <!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-			            <span aria-hidden="true"><i class="ion-ios-close"></i></span>
-			          </button> -->
-			        </div>
-			      </div>
-          </div>
-            <div class="">
-                <!-- Text -->
-                <div class=" " id="">
-                    <p class=""></p>
-                    <p><strong>Select .csv file</strong></p>
-                    <p style="opacity:.7;font-style:italic;" class="">Note: The file data must be formatted in the same pattern, as shown in this portal. </p>
-                    <input type="file" name="fileUpload" id="fileUpload">
-                    <button type="button" class="btn" id="data_btn" disabled style="color: #e9ecef;
-              background-color: #7774e7;
-              border-color: #c6c3d2;"> Read File</button>
-                    <div class="" style="display: flex;justify-content: center;">
-                        <div id="data-btn-text" class="p-4" hidden>
-                            <div class="loader"></div>
-                        </div>
-                    </div>
-                    <div class="mt-3 " id="data-table" hidden>
-                        <div class="table-responsive">
-                            <table class="table  table-hover table-striped table-bordered " cellspacing="0" width="100%" id="csv-data-table" style="overflow-x: scroll;">
-                                <thead class="">
-                                    <tr id="csv_file_headings">
-                                    </tr>
-                                </thead>
-                                <tfoot>
-                                    <tr id="csv_file_footer">
-                                    </tr>
-                                </tfoot>
-                                <tbody id="csv_file_data">
-                                </tbody>
-                            </table>
-                            <div class="row pl-3">
-                                <div class="col-12 col-lg-6" id="csv-data-table_info-div">
-
-                                </div>
-                                <div class="col-12 col-lg-6" id="csv-data-table_paginate_div" style="overflow-x:scroll">
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group mt-5">
-                        <label for="update_type"><strong>Choose update type </strong> </label>
-                        <select class="form-control" id="update_type" disabled>
-                            <option selected="false" value="0">Choose option</option>
-                            <option value="1">Update pre-existing students data</option>
-                            <option value="2">Add new students data</option>
-                            <option value="3">Both</option>
-                        </select>
-                    </div>
-                    <button type="button" class="btn btn-danger" id="database-update-btn" disabled>Update</button>
-
-
+    <div id="student-table_wrapper" class="dataTables_wrapper">
+        <div class="table-responsive-lg" hidden id="student-table-div">
+            <table class="table table-hover table-striped table-bordered" cellspacing="0" width="100%" id="student-table" style="overflow-x: scroll;">
+                <thead class="">
+                    <tr>
+                        <th>Name</th>
+                        <th>Roll No.</th>
+                        <th>Program</th>
+                        <th>Branch</th>
+                        <th>Day</th>
+                        <th>Company</th>
+                        <th>Placed</th>
+                        <th>Profile</th>
+                        <th>Sector</th>
+                        <th>Slot</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Name</th>
+                        <th>Roll No.</th>
+                        <th>Program</th>
+                        <th>Branch</th>
+                        <th>Day</th>
+                        <th>Company</th>
+                        <th>Placed</th>
+                        <th>Profile</th>
+                        <th>Sector</th>
+                        <th>Slot</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    {# {% include "ccd/partial_student_list.html" %} #}
+                </tbody>
+            </table>
+            <div class="row pl-3" style="padding:2%;">
+                <div class="col-12 col-lg-6" id="student-table_info-div">
+                </div>
+                <div class="col-12 col-lg-6" id="student-table_paginate_div" style="overflow-x:scroll;">
                 </div>
             </div>
         </div>
     </div>
-  </div>
+    <div class="row">
+        <div class="col-12 col-lg-6">
+            <div class="mt-5" style="display:flex;justify-content:center">
+                <button class="btn " id="database-update-collapseContent-btn" style="color: #e9ecef;
+      background-color: #7774e7;
+      border-color: #c6c3d2;">Update database</button>
+            </div>
+            <div class="collapse" id="database-update-collapseContent">
+                <!-- Card -->
+                <div class="card promoting-card p-5 ">
+                    <!-- Card content -->
+                    <!-- Card content -->
+                    <div class="card-body">
+                        <div class="" style="display: flex;justify-content: center;">
+                            <div id="update-loader-text" class="p-4" hidden>
+                                <div class="loader"></div>
+                            </div>
+                        </div>
+                        <div class="collapse m-3" id="success-message">
+                            <div class="alert alert-success">
+                                <div class="container" style="display:flex;justify-content:center;">
+                                    <div class="d-flex">
+                                        <!-- <div class="alert-icon">
+                  <i class="ion-ios-checkmark-circle"></i>
+                </div> -->
+                                        <p class="mb-0 ml-2"><b>Success Alert:</b> Yuhuuu! Database updated successfully.</p>
+                                        <!--
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true"><i class="ion-ios-close"></i></span>
+              </button> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" collapse m-3" id="error-message">
+                            <div class="alert alert-danger">
+                                <div class="container" style="display:flex;justify-content:center;">
+                                    <div class="d-flex">
+                                        <!-- <div class="alert-icon">
+                            <i class="ion-ios-information-circle-outline"></i>
+                          </div> -->
+                                        <p class="mb-0 ml-2"><b>Error Alert:</b> Damn man! Something must be screwed up...</p>
+                                    </div>
+                                    <!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true"><i class="ion-ios-close"></i></span>
+                      </button> -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="">
+                            <!-- Text -->
+                            <div class=" " id="">
+                                <div class="mb-5" style="display:flex;justify-content:center">
+                                    <h2>Update Database</h2>
+                                </div>
+                                <p class=""></p>
+                                <p><strong>Select .csv file</strong></p>
+                                <p style="opacity:.7;font-style:italic;" class="">Note: The file data must be formatted in the same pattern, as shown in this portal. </p>
+                                <input type="file" name="fileUpload" id="fileUpload">
+                                <button type="button" class="btn" id="data_btn" disabled style="color: #e9ecef;
+              background-color: #7774e7;
+              border-color: #c6c3d2;"> Read File</button>
+                                <div class="" style="display: flex;justify-content: center;">
+                                    <div id="data-btn-text" class="p-4" hidden>
+                                        <div class="loader"></div>
+                                    </div>
+                                </div>
+                                <div class="mt-3 " id="data-table" hidden>
+                                    <div class="table-responsive">
+                                        <table class="table  table-hover table-striped table-bordered " cellspacing="0" width="100%" id="csv-data-table" style="overflow-x: scroll;">
+                                            <thead class="">
+                                                <tr id="csv_file_headings">
+                                                </tr>
+                                            </thead>
+                                            <tfoot>
+                                                <tr id="csv_file_footer">
+                                                </tr>
+                                            </tfoot>
+                                            <tbody id="csv_file_data">
+                                            </tbody>
+                                        </table>
+                                        <div class="row pl-3">
+                                            <div class="col-12 col-lg-3" id="csv-data-table_info-div">
+                                            </div>
+                                            <div class="col-12 col-lg-9" id="csv-data-table_paginate_div" style="overflow-x:scroll">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group mt-5">
+                                    <label for="update_type"><strong>Choose update type </strong> </label>
+                                    <select class="form-control" id="update_type" disabled>
+                                        <option selected="false" value="0">Choose option</option>
+                                        <option value="1">Update pre-existing students data</option>
+                                        <option value="2">Add new students data</option>
+                                        <option value="3">Both</option>
+                                    </select>
+                                </div>
+                                <button type="button" class="btn btn-danger" id="database-update-btn" disabled>Update</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Card -->
+        </div>
+        {% comment %} file manager {% endcomment %}
+        <div class="col-12 col-lg-6">
+            <div class="mt-5" style="display:flex;justify-content:center">
+                <button class="btn " id="collapseContent-btn-fileManager" style="color: #e9ecef;
+      background-color: #7774e7;
+      border-color: #c6c3d2;">File Manager</button>
+            </div>
+            <div class="collapse" id="collapseContent-fileManager">
+                <!-- Card -->
+                <div class="card promoting-card p-5 ">
+                    <div class="" style="display:flex;justify-content:center">
+                        <h2>File Manager</h2>
+                    </div>
+                    <!-- Card content -->
+                    <div class="card-body">
+                        <div class="" style="display:flex;justify-content:center">
+                            <button type="button" name="button" class="btn" id="file-upload-btn" style="color: #e9ecef;
+              background-color: #7774e7;
+              border-color: #c6c3d2;"> <i class="fas fa-upload pr-2"></i>Upload New File</button>
+                        </div>
+                        <div class="collapse" id="file-upload-form-collapseContent">
+                            <div class="card promoting-card p-5" id="file-upload-form-div">
+                            </div>
+                        </div>
+                        <div class="pt-5" id="files-list">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock content %}
+    {% block extrascripts %}
+    {% comment %} script for database-update feature {% endcomment %}
+    <script type="text/javascript">
+    ////////////////////////////////////////////////////////////////////////////////
+    // function to get all files using ajax and update the files list html
+    var loadFilesList = function() {
+        $.ajax({
+            url: '/ccd/files',
+            type: 'get',
+            dataType: 'json',
+            success: function(data) {
+                if (data.success) {
+                    $('#files-list').html(data.list_html);
+                    console.log("files-list fetched");
+                    $('#files-table').DataTable();
+                    // add js to delete-buttons
+                    $("#files-table").on("click", ".delete-file-btn", deleteFile);
 
-    <!-- Card -->
-</div>
-{% endblock content %}
-{% block extrascripts %}
-{% comment %} script for database-update feature {% endcomment %}
-<script type="text/javascript">
-$("#collapseContent-btn").click(function() {
+                }
 
-    $header = $(this);
-    $content = $('#collapseContent');
-    //open up the content needed - toggle the slide- if visible, slide up, if not slidedown.
-    $content.slideToggle(500, function() {
-        //execute this after slideToggle is done
-        //change text of header based on visibility of content div
-        $header.text(function() {
-            //change text based on condition
-            return $content.is(":visible") ? "Collapse" : "Update database";
+            }
+        });
+    };
+
+    ////////////////////////////////////////////////////////////////////////////////
+    // functions for file-upload form
+
+    // function to delete file
+
+    var deleteFile = function() {
+        console.log("delete")
+        var btn = $(this);
+        var name = btn.attr('name');
+        confirmation = confirm(`Are you sure you want to delete the file ${name} ?`);
+        if (confirmation) {
+            $.ajax({
+                url: btn.attr("data-url"),
+                type: 'get',
+                dataType: 'json',
+                success: function(data) {
+                    if (data.success) {
+                        loadFilesList();
+
+                    }
+                }
+            })
+        }
+    }
+
+    // function to load FileForm
+    var loadFileForm = function() {
+        $.ajax({
+            url: '/ccd/ajax/upload-file',
+            type: 'get',
+            dataType: 'json',
+            // beforeSend: function() {
+            //
+            // },
+            success: function(data) {
+                $("#file-upload-form-div").html(data.form_html);
+                console.log("file-form fetched");
+            }
+        });
+    };
+
+    // function to handle fileForm submit
+    var saveFileForm = function() {
+        console.log("saveFileForm")
+        $form = $(this)
+        var formData = new FormData(this);
+        // var form = $(this);
+        $.ajax({
+            url: '/ccd/ajax/upload-file',
+            data: formData,
+            type: 'post',
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function(data) {
+                if (data.success) {
+                    console.log("success");
+                    loadFilesList();
+                    fileUploadFormShowOrHide();
+                } else {
+                    $("#file-upload-form-div").html(data.form_html);
+                }
+            }
+        });
+        return false;
+    };
+
+
+    ////////////////////////////////////////////////////////////////////////////////
+
+    // $("#submit-ajax-file-upload-form").on("click", "#ajax-file-upload-form", saveFileForm);
+    $("#file-upload-form-div").on("submit", "#ajax-file-upload-form", saveFileForm);
+    ////////////////////////////////////////////////////////////////////////////////
+    // function to show/collapse file manager
+    var filManagerShowOrHide = function() {
+
+        $header = $(this);
+        $content = $('#collapseContent-fileManager');
+        if (!$content.is(":visible")) {
+            // first load FileForm
+            loadFilesList();
+        }
+        //open up the content needed - toggle the slide- if visible, slide up, if not slidedown.
+        $content.slideToggle(500, function() {
+            //execute this after slideToggle is done
+
+            //change text of header based on visibility of content div
+            $header.text(function() {
+                //change text based on condition
+                return $content.is(":visible") ? "Collapse" : "File Manager";
+            });
+        });
+
+    };
+
+    // $("#file-upload-form-div").on("submit", "#ajax-file-upload-form", saveFileForm);
+
+    ////////////////////////////////////////////////////////////////////////////////
+
+    // function to show/collapse fileForm
+    var fileUploadFormShowOrHide = function() {
+
+        $header = $('#file-upload-btn');
+        $content = $('#file-upload-form-collapseContent');
+        if (!$content.is(":visible")) {
+            // first load FileForm
+            loadFileForm();
+        }
+        //open up the content needed - toggle the slide- if visible, slide up, if not slidedown.
+        $content.slideToggle(500, function() {
+            //execute this after slideToggle is done
+
+            //change text of header based on visibility of content div
+            $header.html(function() {
+                //change text based on condition
+                return $content.is(":visible") ? "Cancel" : '<i class="fas fa-upload pr-2"></i>Upload New File';
+            });
+        });
+
+    };
+    $("#collapseContent-btn-fileManager").click(filManagerShowOrHide);
+    $("#file-upload-btn").click(fileUploadFormShowOrHide);
+
+
+    // // form upload
+    // $('#id_ajax_upload_form').submit(function(e){
+    //     e.preventDefault();
+    //     $form = $(this)
+    //     var formData = new FormData(this);
+    //     $.ajax({
+    //         url: window.location.pathname,
+    //         type: 'POST',
+    //         data: formData,
+    //         success: function (response) {
+    //             $('.error').remove();
+    //             console.log(response)
+    //             if(response.error){
+    //                 $.each(response.errors, function(name, error){
+    //                     error = '<small class="text-muted error">' + error + '</small>'
+    //                     $form.find('[name=' + name + ']').after(error);
+    //                 })
+    //             }
+    //             else{
+    //                 alert(response.message)
+    //                 window.location = ""
+    //             }
+    //         },
+    //         cache: false,
+    //         contentType: false,
+    //         processData: false
+    //     });
+    // });
+    // // end
+    //
+
+    ////////////////////////////////////////////////////////////////////////////////
+    // function to show/collapse database-update
+    $("#database-update-collapseContent-btn").click(function() {
+
+        $header = $(this);
+        $content = $('#database-update-collapseContent');
+        //open up the content needed - toggle the slide- if visible, slide up, if not slidedown.
+        $content.slideToggle(500, function() {
+            //execute this after slideToggle is done
+
+            //change text of header based on visibility of content div
+            $header.text(function() {
+                //change text based on condition
+                return $content.is(":visible") ? "Collapse" : "Update Database";
+            });
+        });
+
+    });
+
+    ////////////////////////////////////////////////////////////////////////////////
+    $(function() {
+
+        // whenever procced button is clicked read the file if it's valid
+        $("#data_btn").on("click", function() {
+            // check weather tabel is a data-table or not. If yes then distroy it.
+            if ($.fn.DataTable.isDataTable('#csv-data-table')) {
+                $('#csv-data-table').dataTable().fnDestroy();
+            }
+
+            // if there is some data in the table remove it
+            $("#csv_file_data").html('');
+            $("#csv_file_headings").html('');
+            $("#csv_file_footer").html('');
+
+            // regex to check file format
+            var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
+            if (regex.test($("#fileUpload").val().toLowerCase())) {
+                if (typeof(FileReader) != "undefined") {
+
+                    // disable all the buttons and show the loader
+                    $("#data_btn").prop('disabled', true);
+                    $("#data-table").prop('hidden', true);
+                    $("#data-btn-text").prop('hidden', false);
+                    $('#update_type').prop('disabled', true);
+                    $('#database-update-btn').prop('disabled', true);
+
+                    // reader
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        // spliting all rows
+                        var rows = e.target.result.split("\n");
+
+                        // creating headings html
+                        var headings = rows[0].split(",");
+                        headings_html = "";
+                        for (var i = 0; i < headings.length; i++)
+                            headings_html += "<td>" + headings[i] + "</td>";
+                        // update the heading html
+
+                        $("#csv_file_headings").html(headings_html);
+                        $("#csv_file_footer").html(headings_html);
+
+                        // now creating html for table data
+                        table_data_html = "";
+                        for (var i = 1; i < rows.length; i++) {
+                            table_data_html += "<tr>";
+                            var cells = rows[i].split(",");
+                            for (var j = 0; j < headings.length; j++) {
+                                var t;
+                                if (cells[j] == null)
+                                    t = "";
+                                else t = cells[j];
+                                table_data_html += "<td>" + t + "</td>";
+                            }
+                            table_data_html += "</tr>";
+                        }
+                        // update table data
+
+                        $("#csv_file_data").html(table_data_html);
+
+                        // now add pagination/data-table to the table
+                        pagination_on_csv_data();
+
+                    }
+                    reader.readAsText($("#fileUpload")[0].files[0]);
+
+
+
+                } else {
+                    alert("This browser does not support HTML5.");
+                }
+            } else {
+                alert("Please upload a valid CSV file.");
+            }
+            myVar = setTimeout(dataProccessingDone, 1000);
+
         });
     });
 
-});
+    var pagination_on = function() {
+        if (!$.fn.DataTable.isDataTable('#student-table')) {
+            $('#student-table').DataTable({
+                dom: 'Blfrtip',
+                pagingType: "full_numbers",
+                ordering: false,
+                fixedColumns: true,
+                buttons: [{
+                        extend: 'pdf',
+                        footer: true,
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+                        }
+                    },
 
+                    {
+                        extend: 'csv',
+                        footer: false,
+                        fieldBoundary: '',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+                        }
+                    },
+                    {
+                        extend: 'excel',
+                        footer: false,
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+                        }
+                    },
+                    // {
+                    //     extend: 'copy',
+                    //     footer: false,
+                    //     exportOptions: {
+                    //         columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+                    //     }
+                    // },
+                    {
+                        extend: 'print',
+                        footer: false,
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+                        }
+                    },
+                    'colvis',
 
-$(function() {
-
-    // whenever procced button is clicked read the file if it's valid
-    $("#data_btn").on("click", function() {
-        // check weather tabel is a data-table or not. If yes then distroy it.
-        if ($.fn.DataTable.isDataTable('#csv-data-table')) {
-            $('#csv-data-table').dataTable().fnDestroy();
+                ]
+            });
+            $("#student-table_info-div").html($("#student-table_info"));
+            $("#student-table_paginate_div").html($("#student-table_paginate"));
         }
+        // $("#student-table-loader").prop('hidden',true);
+        $('#student-table-div').prop('hidden', false);
+    };
 
-        // if there is some data in the table remove it
-        $("#csv_file_data").html('');
-        $("#csv_file_headings").html('');
-        $("#csv_file_footer").html('');
+    var ajax_filter = function() {
+        var placed = $('#placed_filter').val();
+        var branch = $('#branch_filter').val();
+        var program = $('#program_filter').val();
+        var sortid = $('#sort').val();
+        $.ajax({
+            url: '/ccd/ajax/filter/',
+            type: 'GET',
+            data: {
+                'branch': branch,
+                'sortid': sortid,
+                'placed': placed,
+                'program': program,
+            },
+            dataType: 'json',
+            success: function(data) {
+                // $("#student-table-loader").prop('hidden',false);
+                $('#student-table-div').prop('hidden', true);
+                // to update the pagination, firstly we clear the table
+                if ($.fn.DataTable.isDataTable('#student-table')) {
+                    $('#student-table').dataTable().fnDestroy();
+                }
+                // now update the data table
+                $("#student-table tbody").html(data.html_student_list);
+                // Then initialize again after updating the html
+                pagination_on();
+                console.log("table updated!");
+            }
+        });
+    }
 
-        // regex to check file format
+
+    var dataProccessingDone = function() {
+        $("#data-btn-text").prop('hidden', true);
+        $("#data-table").prop('hidden', false);
+        $("#data_btn").prop('disabled', false);
+        $('#update_type').prop('disabled', false);
+        update_option_changed();
+
+    }
+    var inputChanged = function() {
+        $('#update_type').prop('disabled', true);
+        $('#database-update-btn').prop('disabled', true);
+        var k = $("#fileUpload")[0].files[0];
+        // console.log("input changed");
+        if (k) {
+            $('#data_btn').prop('disabled', false);
+            // console.log("input found!!");
+        } else {
+            $('#data_btn').prop('disabled', true);
+            // console.log("no input");
+        }
+    }
+    var update_option_changed = function() {
+        var val = $('#update_type').val();
+        console.log(val);
+        if (val != 0)
+            $('#database-update-btn').prop('disabled', false);
+        else {
+            $('#database-update-btn').prop('disabled', true);
+        }
+    }
+
+    var update_database = function() {
+
         var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
         if (regex.test($("#fileUpload").val().toLowerCase())) {
             if (typeof(FileReader) != "undefined") {
 
-                // disable all the buttons and show the loader
-                $("#data_btn").prop('disabled', true);
-                $("#data-table").prop('hidden', true);
-                $("#data-btn-text").prop('hidden', false);
-                $('#update_type').prop('disabled', true);
                 $('#database-update-btn').prop('disabled', true);
+                $('#update-loader-text').prop('hidden', false);
+                $('#data_btn').prop('disabled', true);
+                $("#fileUpload").prop('disabled', true);
+                $('#update_type').prop('disabled', true);
+                // check weather tabel is a data-table or not. If yes then distroy it.
+                if ($.fn.DataTable.isDataTable('#csv-data-table')) {
+                    $('#csv-data-table').dataTable().fnDestroy();
+                }
+                $("#csv-data-table_info-div").html('');
+                $("#csv-data-table_paginate_div").html('');
 
-                // reader
+
+                // if there is some data in the table remove it
+                $("#csv_file_data").html('');
+                $("#csv_file_headings").html('');
+                $("#csv_file_footer").html('');
+
+
                 var reader = new FileReader();
                 reader.onload = function(e) {
                     // spliting all rows
                     var rows = e.target.result.split("\n");
 
-                    // creating headings html
+                    // creating headings
                     var headings = rows[0].split(",");
-                    headings_html = "";
-                    for (var i = 0; i < headings.length; i++)
-                        headings_html += "<td>" + headings[i] + "</td>";
-                    // update the heading html
-
-                    $("#csv_file_headings").html(headings_html);
-                    $("#csv_file_footer").html(headings_html);
-
-                    // now creating html for table data
-                    table_data_html = "";
+                    var data_list = [];
                     for (var i = 1; i < rows.length; i++) {
-                        table_data_html += "<tr>";
                         var cells = rows[i].split(",");
-                        for (var j = 0; j < headings.length; j++) {
-                            var t;
-                            if (cells[j] == null)
-                                t = "";
-                            else t = cells[j];
-                            table_data_html += "<td>" + t + "</td>";
-                        }
-                        table_data_html += "</tr>";
+                        data_list[i - 1] = cells;
                     }
-                    // update table data
+                    // console.log(headings);
+                    // console.log(data_list);
+                    var update_type = $('#update_type').val();
+                    $.ajax({
+                        contentType: 'application/json; charset=utf-8',
+                        url: '/ccd/ajax/update-database',
+                        type: 'POST',
+                        data: JSON.stringify({
+                            'headings': headings,
+                            'data_list': data_list,
+                            'csrfmiddlewaretoken': '{{ csrf_token }}',
+                            'update_type': update_type,
+                        }),
+                        dataType: 'json',
+                        success: function(data) {
+                            if (data.success) {
+                                console.log("success!");
+                                toggle_success_msg();
+                                var ss = setTimeout(reset, 300);
+                                var xyz = setTimeout(toggle_success_msg, 5000);
+                                var dsd = setTimeout(ajax_filter, 3000);
 
-                    $("#csv_file_data").html(table_data_html);
-
-                    // now add pagination/data-table to the table
-                    pagination_on_csv_data();
-
+                            } else {
+                                console.log("error!");
+                                toggle_error_msg();
+                                var ss = setTimeout(reset, 300);
+                                var xyz = setTimeout(toggle_error_msg, 5000)
+                            }
+                        }
+                    });
                 }
                 reader.readAsText($("#fileUpload")[0].files[0]);
-
 
 
             } else {
@@ -952,279 +1359,79 @@ $(function() {
         } else {
             alert("Please upload a valid CSV file.");
         }
-        myVar = setTimeout(dataProccessingDone, 1000);
 
-    });
-});
-
-var pagination_on = function() {
-    if (!$.fn.DataTable.isDataTable('#student-table')) {
-        $('#student-table').DataTable({
-            dom: 'Blfrtip',
-            pagingType: "full_numbers",
-            ordering: false,
-            fixedColumns: true,
-            buttons: [{
-                    extend: 'pdf',
-                    footer: true,
-                    exportOptions: {
-                        columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-                    }
-                },
-
-                {
-                    extend: 'csv',
-                    footer: false,
-                    fieldBoundary: '',
-                    exportOptions: {
-                        columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-                    }
-                },
-                {
-                    extend: 'excel',
-                    footer: false,
-                    exportOptions: {
-                        columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-                    }
-                },
-                // {
-                //     extend: 'copy',
-                //     footer: false,
-                //     exportOptions: {
-                //         columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-                //     }
-                // },
-                {
-                    extend: 'print',
-                    footer: false,
-                    exportOptions: {
-                        columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-                    }
-                },
-                'colvis',
-
-            ]
-        });
-        $("#student-table_info-div").html($("#student-table_info"));
-        $("#student-table_paginate_div").html($("#student-table_paginate"));
     }
-    // $("#student-table-loader").prop('hidden',true);
-    $('#student-table-div').prop('hidden', false);
-};
 
-var ajax_filter = function() {
-    var placed = $('#placed_filter').val();
-    var branch = $('#branch_filter').val();
-    var program = $('#program_filter').val();
-    var sortid = $('#sort').val();
-    $.ajax({
-        url: '/ccd/ajax/filter/',
-        type: 'GET',
-        data: {
-            'branch': branch,
-            'sortid': sortid,
-            'placed': placed,
-            'program': program,
-        },
-        dataType: 'json',
-        success: function(data) {
-            // $("#student-table-loader").prop('hidden',false);
-            $('#student-table-div').prop('hidden', true);
-            // to update the pagination, firstly we clear the table
-            if ($.fn.DataTable.isDataTable('#student-table')) {
-                $('#student-table').dataTable().fnDestroy();
-            }
-            // now update the data table
-            $("#student-table tbody").html(data.html_student_list);
-            // Then initialize again after updating the html
-            pagination_on();
-            console.log("table updated!");
+    var pagination_on_csv_data = function() {
+        if (!$.fn.DataTable.isDataTable('#csv-data-table')) {
+            $('#csv-data-table').DataTable({
+                dom: 'Blfrtip',
+                pagingType: "full_numbers",
+                responsive: true,
+                ordering: true,
+                fixedColumns: true,
+                buttons: [{
+                        extend: 'pdf',
+                        footer: true,
+
+                    },
+                    {
+                        extend: 'csv',
+                        footer: false,
+                        fieldBoundary: '',
+
+                    },
+                    {
+                        extend: 'excel',
+                        footer: false,
+
+                    },
+                    // {
+                    //     extend: 'copy',
+                    //     footer: false,
+                    //
+                    // },
+                    {
+                        extend: 'print',
+                        footer: false,
+
+                    },
+                    'colvis',
+
+                ]
+            });
         }
-    });
-}
+        $("#csv-data-table_info-div").html($("#csv-data-table_info"));
+        $("#csv-data-table_paginate_div").html($("#csv-data-table_paginate"));
+    };
 
 
-var dataProccessingDone = function() {
-    $("#data-btn-text").prop('hidden', true);
-    $("#data-table").prop('hidden', false);
-    $("#data_btn").prop('disabled', false);
-    $('#update_type').prop('disabled', false);
-    update_option_changed();
+    var toggle_success_msg = function() {
 
-}
-var inputChanged = function() {
-    $('#update_type').prop('disabled', true);
-    $('#database-update-btn').prop('disabled', true);
-    var k = $("#fileUpload")[0].files[0];
-    // console.log("input changed");
-    if (k) {
+        //open up the content needed - toggle the slide- if visible, slide up, if not slidedown.
+        $("#success-message").slideToggle(500, function() {
+            // do something
+        });
+    }
+    var toggle_error_msg = function() {
+
+        //open up the content needed - toggle the slide- if visible, slide up, if not slidedown.
+        $("#error-message").slideToggle(500, function() {
+            // do something
+        });
+    }
+    var reset = function() {
+        $('#update-loader-text').prop('hidden', true);
         $('#data_btn').prop('disabled', false);
-        // console.log("input found!!");
-    } else {
-        $('#data_btn').prop('disabled', true);
-        // console.log("no input");
-    }
-}
-var update_option_changed = function() {
-    var val = $('#update_type').val();
-    console.log(val);
-    if (val != 0)
+        $("#fileUpload").prop('disabled', false);
+        $('#update_type').prop('disabled', false);
         $('#database-update-btn').prop('disabled', false);
-    else {
-        $('#database-update-btn').prop('disabled', true);
+        var file = document.getElementById("fileUpload");
+        file.value = file.defaultValue;
+        inputChanged();
     }
-}
-
-var update_database = function() {
-
-    var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
-    if (regex.test($("#fileUpload").val().toLowerCase())) {
-        if (typeof(FileReader) != "undefined") {
-
-            $('#database-update-btn').prop('disabled', true);
-            $('#update-loader-text').prop('hidden', false);
-            $('#data_btn').prop('disabled', true);
-            $("#fileUpload").prop('disabled', true);
-            $('#update_type').prop('disabled', true);
-            // check weather tabel is a data-table or not. If yes then distroy it.
-            if ($.fn.DataTable.isDataTable('#csv-data-table')) {
-                $('#csv-data-table').dataTable().fnDestroy();
-            }
-            $("#csv-data-table_info-div").html('');
-            $("#csv-data-table_paginate_div").html('');
-
-
-            // if there is some data in the table remove it
-            $("#csv_file_data").html('');
-            $("#csv_file_headings").html('');
-            $("#csv_file_footer").html('');
-
-
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                // spliting all rows
-                var rows = e.target.result.split("\n");
-
-                // creating headings
-                var headings = rows[0].split(",");
-                var data_list = [];
-                for (var i = 1; i < rows.length; i++) {
-                    var cells = rows[i].split(",");
-                    data_list[i - 1] = cells;
-                }
-                // console.log(headings);
-                // console.log(data_list);
-                var update_type = $('#update_type').val();
-                $.ajax({
-                    contentType: 'application/json; charset=utf-8',
-                    url: '/ccd/ajax/update-database',
-                    type: 'POST',
-                    data: JSON.stringify({
-                        'headings': headings,
-                        'data_list': data_list,
-                        'csrfmiddlewaretoken': '{{ csrf_token }}',
-                        'update_type': update_type,
-                    }),
-                    dataType: 'json',
-                    success: function(data) {
-                        if (data.success) {
-                            console.log("success!");
-                            toggle_success_msg();
-                            var ss = setTimeout(reset, 300);
-                            var xyz = setTimeout(toggle_success_msg, 5000);
-                            var dsd = setTimeout(ajax_filter,3000);
-
-                        } else {
-                            console.log("error!");
-                            toggle_error_msg();
-                            var ss = setTimeout(reset, 300);
-                            var xyz = setTimeout(toggle_error_msg, 5000)
-                        }
-                    }
-                });
-            }
-            reader.readAsText($("#fileUpload")[0].files[0]);
-
-
-        } else {
-            alert("This browser does not support HTML5.");
-        }
-    } else {
-        alert("Please upload a valid CSV file.");
-    }
-
-}
-
-var pagination_on_csv_data = function() {
-    if (!$.fn.DataTable.isDataTable('#csv-data-table')) {
-        $('#csv-data-table').DataTable({
-            dom: 'Blfrtip',
-            pagingType: "full_numbers",
-            responsive: true,
-            ordering: true,
-            fixedColumns: true,
-            buttons: [{
-                    extend: 'pdf',
-                    footer: true,
-
-                },
-                {
-                    extend: 'csv',
-                    footer: false,
-                    fieldBoundary: '',
-
-                },
-                {
-                    extend: 'excel',
-                    footer: false,
-
-                },
-                // {
-                //     extend: 'copy',
-                //     footer: false,
-                //
-                // },
-                {
-                    extend: 'print',
-                    footer: false,
-
-                },
-                'colvis',
-
-            ]
-        });
-    }
-    $("#csv-data-table_info-div").html($("#csv-data-table_info"));
-    $("#csv-data-table_paginate_div").html($("#csv-data-table_paginate"));
-};
-
-
-var toggle_success_msg = function() {
-
-    //open up the content needed - toggle the slide- if visible, slide up, if not slidedown.
-    $("#success-message").slideToggle(500, function() {
-        // do something
-    });
-}
-var toggle_error_msg = function() {
-
-    //open up the content needed - toggle the slide- if visible, slide up, if not slidedown.
-    $("#error-message").slideToggle(500, function() {
-        // do something
-    });
-}
-var reset = function() {
-    $('#update-loader-text').prop('hidden', true);
-    $('#data_btn').prop('disabled', false);
-    $("#fileUpload").prop('disabled', false);
-    $('#update_type').prop('disabled', false);
-    $('#database-update-btn').prop('disabled', false);
-    var file = document.getElementById("fileUpload");
-    file.value = file.defaultValue;
-    inputChanged();
-}
-$('#fileUpload').on('change', inputChanged);
-$('#update_type').on('change', update_option_changed);
-$('#database-update-btn').on('click', update_database);
-</script>
-{% endblock %}
+    $('#fileUpload').on('change', inputChanged);
+    $('#update_type').on('change', update_option_changed);
+    $('#database-update-btn').on('click', update_database);
+    </script>
+    {% endblock %}

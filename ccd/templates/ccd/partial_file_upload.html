@@ -1,0 +1,25 @@
+{% load widget_tweaks %}
+
+<form method="POST" action="{% url 'ccd:upload-file'%}" enctype="multipart/form-data" id="ajax-file-upload-form">
+    {% csrf_token %}
+  <div class="{% if form.non_field_errors %}invalid{% endif %} mb-2" >
+    {% for error in form.non_field_errors %}
+        <p class="help-block text-danger">{{ error }}</p>
+    {% endfor {% templatetag closeblock %}
+  </div>
+
+  {% for field in form %}
+    <div class="form-group">
+      <label class="font-weight-bold" style="font-family: 'Nunito';" for="{{ field.id_for_label }}">{{ field.label }}</label>
+      {% render_field field class="form-control " placeholder=field.label %}
+      <div class="{% if field.errors %} invalid{% endif %}">
+        {% for error in field.errors %}
+          <p class="help-block text-danger">{{ error }}</p>
+        {% endfor %}
+      </div>
+    </div>
+  {% endfor %}
+  <button type="submit" class="btn" formnovalidate="formnovalidate" style="color: #fff;
+  background-color: #7774e7;
+  border-color: #7774e7;">Upload</button>
+</form>

@@ -6,22 +6,99 @@ from django.shortcuts import redirect
 from home.models import Student,Branch
 from django.http import JsonResponse
 from django.template.loader import render_to_string
-from .forms import StudentForm
+from .forms import *
 from django.db.models.functions import Lower
 from django.contrib.auth.decorators import login_required,user_passes_test
 from django.views.decorators.csrf import csrf_exempt
 import json
 
-
+# function to check if user is ccd member
 def is_ccd_member(user):
     return user.is_superuser
+
+################################################################################
+# functions for the file manager
+
+
+# function to get all files
+# @login_required
+# @user_passes_test(is_ccd_member)
+def ajax_get_file_list(request):
+    data = dict()
+    data['success'] = False
+    if request.is_ajax() and request.method == 'GET':
+        files  = File.objects.all()
+        template = 'ccd/partial_files_list.html'
+        data['list_html']= render_to_string(template,{'files':files},request=request,)
+        data['success'] = True
+    return JsonResponse(data)
+
+
+# view function for get or post ajax request
+# @login_required
+# @user_passes_test(is_ccd_member)
+def ajax_upload_file(request):
+    # print(request.method)
+    # print(request.is_ajax())
+    if request.is_ajax():
+        if request.method == 'POST':
+            form = FileUploadForm(data=request.POST, files=request.FILES)
+        else:
+            form = FileUploadForm()
+        return save_file_form(request,form)
+    return JsonResponse({'error':'You are not authorized to perform this action!'})
+
+# function for validating and saving fileForm if it is a post request
+# @login_required
+# @user_passes_test(is_ccd_member)
+def save_file_form(request,form):
+    data = dict()
+    template = 'ccd/partial_file_upload.html'
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            print("form is valid")
+            data['success']=True
+        else:
+            print('form is invalid')
+            data['success']=False
+    context = {'form':form}
+    data['form_html'] = render_to_string(template,context,request=request,)
+    return JsonResponse(data)
+
+# function to delete file
+# @login_required
+# @user_passes_test(is_ccd_member)
+def ajax_delete_file(request,pk):
+    data = dict()
+    if request.is_ajax():
+        if request.method =='GET':
+            file = get_object_or_404(File,pk=pk)
+            file.delete()
+            data['success'] = True
+            return  JsonResponse(data)
+    data['error'] = 'You are not authorized to perform this action!'
+    return JsonResponse(data)
+
+
+
+################################################################################
+
+
 
 # @login_required
 # @user_passes_test(is_ccd_member)
 def home(request):
     students = Student.objects.all().order_by('roll')
-    return render(request,'ccd/index.html',{'student_list':students})
+    form = FileUploadForm
+    context = {'student_list':students,'form':form}
+    return render(request,'ccd/index.html',context)
 
+################################################################################
+# function for updating database
+
+# @login_required
+# @user_passes_test(is_ccd_member)
 @csrf_exempt
 def ajax_update_database(request):
     context = dict()
@@ -46,8 +123,8 @@ def ajax_update_database(request):
                  "Slot":'slot',
                 }
         headings_required = ["Name", "Roll No.", "Program","Branch","Day","Company","Placed","Sector","Profile","Slot",]
-        sorted(headings)
-        if len(headings)==10 and sorted(headings)==sorted(headings_required):
+
+        if sorted(headings)==sorted(headings_required):
             # print(len(data_list))
             for i in range(len(data_list)):
                 if(len(data_list[i])!=len(headings)):
@@ -112,6 +189,9 @@ def ajax_update_database(request):
 
     return JsonResponse(context)
 
+################################################################################
+
+# function to get branches list
 
 # @login_required
 # @user_passes_test(is_ccd_member)
@@ -121,6 +201,10 @@ def ajax_get_branch_options(request):
         branches =Branch.objects.all()
         data['html_branch_options'] = render_to_string('ccd/partial_branch_options.html',{'branches':branches})
     return JsonResponse(data)
+
+################################################################################
+
+# function to filter the table data
 
 # @login_required
 # @user_passes_test(is_ccd_member)
@@ -140,12 +224,15 @@ def ajax_filter(request):
         if program!='all':
             students = students.filter(programs=program)
         students = students.order_by(Lower(sortid))
-        data['html_student_list'] = render_to_string('ccd/partial_student_list.html',
-                        {
-                        'student_list':students
-                        })
+        data['html_student_list'] = render_to_string('ccd/partial_student_list.html',{'student_list':students})
 
     return JsonResponse(data)
+
+
+################################################################################
+# functions for the CRUD view of Student model
+
+
 
 # @login_required
 # @user_passes_test(is_ccd_member)
@@ -156,11 +243,6 @@ def save_student_form(request, form, template_name):
             if form.is_valid():
                 form.save()
                 data['form_is_valid'] = True
-                # students = Student.objects.all()
-                # data['html_student_list'] = render_to_string('ccd/partial_student_list.html',
-                                # {
-                                # 'student_list':students
-                                # })
             else:
                 data['form_is_valid'] = False
 
@@ -214,15 +296,4 @@ def student_delete(request, pk):
             data['html_form'] = render_to_string('ccd/partial_student_delete.html', context, request=request)
         return JsonResponse(data)
 
-
-# # Sorting
-# def ajax_sort(request):
-#     data = dict()
-#     if request.is_ajax():
-#         if request.method == 'GET':
-#             sortid = request.GET.get('sortid')
-#             students = Student.objects.all().order_by(sortid)
-#             data['html_student_list'] = render_to_string('ccd/partial_student_list.html', {
-#                 'student_list': students
-#             })
-#             return JsonResponse(data)
+################################################################################

@@ -1,0 +1,28 @@
+<div class="mt-3 " id="files-table-div">
+    <div class="table-responsive">
+        <table class="table mb-5 table-hover table-striped table-bordered " cellspacing="0" width="100%" id="files-table" style="overflow-x: scroll;">
+            <thead>
+                <tr>
+                    <th class="text-center">File Name</th>
+                    <th class="text-center">Info</th>
+                    <th class="text-center">Download</th>
+                    <th class="text-center">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for file in files%}
+                <tr>
+                    <td class="text-justify text-center font-weight-bold">{{file.name}}</td>
+                    <td class="text-justify text-center font-weight-light font-italic">{{file.info}}</td>
+                    <td class="text-center"><a href="{{file.file.url}}">
+                      <button type="button" class="btn btn-sm btn-outline-primary wave-effect" data-toggle="tooltip" data-placement="top" title="Download File {{file.name}}"><i class="fas fa-download"></i></button> </a></td>
+                    <td class="text-center">
+                        <button name="{{file.name}}" type="button" class="btn btn-sm btn-outline-danger waves-effect delete-file-btn" data-url="{% url 'ccd:delete-file' file.id %}" data-toggle="tooltip" data-placement="top" title="Delete File {{file.name}}">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </button></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -14,6 +14,9 @@ urlpatterns = [
     path('ajax/get/branches/',ajax_get_branch_options),
     path('ajax/filter/',ajax_filter),
     path('ajax/update-database',ajax_update_database),
+    path('ajax/upload-file',ajax_upload_file,name="upload-file"),
+    path('files',ajax_get_file_list,name="files"),
+    path('file/<str:pk>/delete',ajax_delete_file,name="delete-file"),
 ]
 
 if settings.DEBUG:
