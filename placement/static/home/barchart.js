@@ -7,7 +7,7 @@ function updateBarChart(data) {
         // Themes end
 
 
-        var chart = am4core.create("chartdiv", am4charts.XYChart);
+        var chart = am4core.create("barchart", am4charts.XYChart);
 
         chart.data = data;
         chart.responsive.enabled = true;

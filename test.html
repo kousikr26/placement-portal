@@ -1,130 +1,77 @@
-<!DOCTYPE html>
-<html>
+<script src="https://www.amcharts.com/lib/4/core.js"></script>
+<script src="https://www.amcharts.com/lib/4/charts.js"></script>
+<script src="https://www.amcharts.com/lib/4/plugins/wordCloud.js"></script>
+<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+<div id="chartdiv"></div>
+<style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
 
-<head>
-  <script src="https://d3js.org/d3.v4.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+#chartdiv {
+  width:100%;
+  height: 500px;
+}
+</style>
+<script>
+/**
+ * ---------------------------------------
+ * This demo was created using amCharts 4.
+ * 
+ * For more information visit:
+ * https://www.amcharts.com/
+ * 
+ * Documentation is available at:
+ * https://www.amcharts.com/docs/v4/
+ * ---------------------------------------
+ */
 
-  <style>
-    .middle-text {
-      fill: black;
-      font-family: 'Roboto', sans-serif;
-    }
-  </style>
+// Themes begin
+am4core.useTheme(am4themes_animated);
+// Themes end
 
-  <script>
-    $(document).ready(function () {
 
-      buildSVG = function (value1, value2) {
+var chart = am4core.create("chartdiv", am4plugins_wordCloud.WordCloud);
+var series = chart.series.push(new am4plugins_wordCloud.WordCloudSeries());
 
-        $('svg').remove();
+series.accuracy = 4;
+series.step = 15;
+series.rotationThreshold = 0.7;
+series.maxCount = 200;
+series.minWordLength = 2;
+series.labels.template.tooltipText = "{word}: {value}";
+series.fontFamily = "Courier New";
+series.maxFontSize = am4core.percent(30);
 
-        var w = 150, h = 150;
-
-        var w = $(document).width();
-        var OnePercent = (w/100 * 1);
-        var margin = OnePercent;
-
-        var w = w - margin - margin;
-        var h = w / 2;
-
-        var outerRadius = (w / 2) - (OnePercent * 5);
-        var innerRadius = (w / 2) - (OnePercent * 1);
-
-        var color = ['#e0e0e0', '#eb3323'];
-
-        var ammount = value1;
-        var total = value2;
-        var percent = (ammount / total) * 100;
-        var ratio = percent / 100;
-        var piePercent = Math.PI * ratio;
-
-        var arc = d3.arc()
-          .innerRadius(innerRadius)
-          .outerRadius(outerRadius)
-          .startAngle(0)
-          .endAngle(Math.PI);
-
-        var arcLine = d3.arc()
-          .innerRadius(innerRadius)
-          .outerRadius(outerRadius)
-          .startAngle(0)
-          .endAngle(piePercent);
-
-        var svg = d3.select("#chart")
-          .append("svg")
-          .attr("width", w)
-          .attr("height", h)
-          .append('g')
-          .attr("transform", 'translate(' + w / 2 + ',' + h + ')');
-
-        var path = svg.append('path')
-          .attr("d", arc)
-          .attr("transform", 'rotate(-90)')
-          .attr("fill", color[0]);
-
-        var path2 = svg.append('path')
-          .attr("d", arcLine)
-          .attr("transform", 'rotate(-90)')
-          .attr("fill", color[1]);
-
-        var middleCount = svg.append('text')
-          .text(Math.round(percent) + "%")
-          .attr("class", "middle-text")
-          .attr('text-anchor', 'middle')
-          .attr('dy', -OnePercent / 2)
-          .attr('font-size', OnePercent * 25 + 'px')
-      }
-
-      // Just needed to cycle over some test values.
-
-      var values = [
-        {
-          lower: 0,
-          upper: 1000
-        },
-        {
-          lower: 22,
-          upper: 1000
-        },
-        {
-          lower: 200,
-          upper: 1000
-        },
-        {
-          lower: 3.5,
-          upper: 10
-        },
-        {
-          lower: 5000,
-          upper: 10000
-        },
-        {
-          lower: 820,
-          upper: 1000
-        },
-        {
-          lower: 1000,
-          upper: 1000
-        }
-      ]
-
-      var i = -1;
-      setInterval(function () {
-        i = i === (values.length - 1) ? -1 : i;
-        i++;
-        buildSVG(values[i].lower, values[i].upper);
-      }, 1000);
-
-    });
-
-  </script>
-
-</head>
-
-<body>
-  <div id="chart"></div>
-</body>
-
-</html>
+  series.data=[{
+  "tag": "Breaking News",
+  "weight": 60
+}, {
+  "tag": "Environment",
+  "weight": 80
+}, {
+  "tag": "Politics",
+  "weight": 90
+}, {
+  "tag": "Business",
+  "weight": 25
+}, {
+  "tag": "Lifestyle",
+  "weight": 30
+}, {
+  "tag": "World",
+  "weight": 45
+}, {
+  "tag": "Sports",
+  "weight": 160
+}, {
+  "tag": "Fashion",
+  "weight": 20
+}, {
+  "tag": "Education",
+  "weight": 78
+}]
+console.log("hi");
+series.dataFields.word = "tag";
+series.dataFields.value = "weight"; 
+</script>

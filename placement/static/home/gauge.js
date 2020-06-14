@@ -66,7 +66,7 @@ function textTween(newValue) {
             i = d3.interpolate(d.oldValue, newValue);
 
         return function (t) {
-            that.text(d3.format('.1% placed')(scale.invert(i(t))));
+            that.text(d3.format('.1%')(scale.invert(i(t)))+" placed");
         };
     };
 }
