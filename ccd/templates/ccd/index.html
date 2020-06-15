@@ -737,7 +737,7 @@ window.addEventListener('load', () => {
                     </tr>
                 </tfoot>
                 <tbody>
-                    {# {% include "ccd/partial_student_list.html" %} #}
+                    {% include "ccd/partial_student_list.html" %}
                 </tbody>
             </table>
             <div class="row pl-3" style="padding:2%;">
@@ -1159,7 +1159,7 @@ window.addEventListener('load', () => {
             } else {
                 alert("Please upload a valid CSV file.");
             }
-            myVar = setTimeout(dataProccessingDone, 1000);
+            myVar = setTimeout(dataProccessingDone, 100);
 
         });
     });
@@ -1339,7 +1339,7 @@ window.addEventListener('load', () => {
                                 toggle_success_msg();
                                 var ss = setTimeout(reset, 300);
                                 var xyz = setTimeout(toggle_success_msg, 5000);
-                                var dsd = setTimeout(ajax_filter, 3000);
+                                ajax_filter();
 
                             } else {
                                 console.log("error!");
