@@ -38,8 +38,11 @@ class Comment(models.Model):
         return self.text
 
 class AlumnusProfile(models.Model):
+
     # Personal
-    profile_picture = models.ImageField(blank=True, null=True, upload_to='Images')
+    user = models.OneToOneField(User,related_name ='profile',on_delete =models.CASCADE)
+    profile_picture = models.ImageField(blank=True, null=True, upload_to='profile_pics')
+    headline = models.CharField(max_length = 512,null=True,blank = True)
     roll_number = models.IntegerField(unique=True, primary_key=True)
     first_name = models.CharField(max_length=50, null=True)
     middle_name = models.CharField(max_length=50, blank=True, null=True)
@@ -65,7 +68,7 @@ class AlumnusProfile(models.Model):
     facebook_link = models.URLField(max_length=200, blank=True, null=True)
     twitter_link = models.URLField(max_length=200, blank=True, null=True)
     github_link = models.URLField(max_length=200, blank=True, null=True)
-
+    website_link = models.URLField(max_length=200,blank=True,null=True)
     # Professional
     linkedin_link = models.CharField(max_length=250, blank=True, null=True)
     current_position = models.CharField(max_length=150, choices=OCCUPATIONS, null=True)
@@ -83,9 +86,9 @@ class AlumnusProfile(models.Model):
     company_2 = models.CharField(max_length=100, blank=True, null=True)
 
 
-    your_interests = models.TextField(blank=True, null=True)
-    about_you = models.TextField(blank=True, null=True)
-    your_message = models.TextField(blank=True, null=True)
+    my_interests = models.TextField(blank=True, null=True)
+    about_me = models.TextField(blank=True, null=True)
+    my_message = models.TextField(blank=True, null=True)
 
 
 class Education(models.Model):
@@ -105,8 +108,8 @@ class Job(models.Model):
     alumnus_profile = models.ForeignKey(AlumnusProfile,related_name='jobs',on_delete = models.CASCADE)
     company = models.CharField(max_length=50, null=True)
     position = models.CharField(max_length=50, null=True)
-    start_date = models.DateField(blank=True, null=True)
-    end_date = models.DateField(blank=True, null=True)
+    start_year = models.IntegerField(blank=True, null=True)
+    end_year = models.IntegerField(blank=True, null=True)
     description = models.CharField(max_length=50, blank=True, null=True)
     occupation = models.CharField(max_length=50, null=True, choices=OCCUPATIONS)
     city = models.CharField(max_length=50, null=True)

@@ -1,9 +1,135 @@
 {% extends 'alumni_portal/base.html' %}
+{% load static %}
 {% block content %}
-<div class="container">
-  <div class="intro-section">
-    <p>abcd</p>
 
-  </div>
+<header class="header">
+    <div class="container clearfix">
+        <a data-url="{% url 'alumni_portal:intro_edit' profile.roll_number %}"class="btn edit-intro top-right"><i class="fas fa-edit"></i>Edit</a>
+        {% if profile.profile_picture %}
+        <img class="profile-image img-fluid float-left rounded-circle" src="{{profile.profile_picture.url}}" alt="profile image" />
+        {% else %}
+        <img class="profile-image img-fluid float-left rounded-circle" src="{% static 'images/default-avatar.jpg' %}" alt="profile image" />
+        {% endif %}
+        <div class="profile-content float-left">
+
+            <h1 class="name">{{profile.first_name}} {{profile.last_name}} </h1>
+
+            <h2 class="desc">{{profile.headline}}</h2>
+
+            <ul class="social list-inline">
+                <li class="list-inline-item"><a href="#"><i class="fab fa-twitter"></i></a></li>
+                <li class="list-inline-item"><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                <li class="list-inline-item"><a href="#"><i class="fab fa-github-alt"></i></a></li>
+
+            </ul>
+
+        </div><!--//profile-->
+
+        <a class="btn btn-primary float-right">Contact Me</a>
+    </div><!--//container-->
+</header><!--//header-->
+
+
+<div class="container sections-wrapper">
+
+    <div class="row">
+
+        <div class="primary col-lg-8 col-12">
+            <section class="about section">
+
+                <div class="section-inner shadow-sm rounded">
+                  <a data-url="{% url 'alumni_portal:about_edit' profile.roll_number %}" class="btn edit-about-me float-right"><i class="fas fa-edit"></i>Edit</a>
+                    <h2 class="heading">About Me</h2>
+                    <div class="content">
+                        <p>{{profile.about_me}}</p>
+                    </div><!--//content-->
+                </div><!--//section-inner-->
+            </section><!--//section-->
+
+
+
+            <section class="experience section">
+                <div class="section-inner shadow-sm rounded">
+                    <a  data-url="{% url 'alumni_portal:create_job' %}"class="btn add-job float-right"><i class="fas fa-plus"></i>Add</a>
+                    <h2 class="heading">Work Experience</h2>
+                    <div class="content">
+                        {% for job in profile.jobs.all|dictsortreversed:'start_year' %}
+                        <div class="item">
+                            <a data-url ="{% url 'alumni_portal:edit_job' job.pk %}"class="btn edit-job float-right"><i class="fas fa-edit"></i>Edit</a>
+                            <h3 class="title">{{job.position}}- <span class="place"><a href="#">{{job.company}}</a></span> <span class="year">({{job.start_year}} - {{job.end_year}})</span></h3>
+
+                            <p>{{job.description}}</p>
+                        </div><!--//item-->
+                        {% endfor %}
+                    </div><!--//content-->
+                </div><!--//section-inner-->
+            </section><!--//section-->
+
+        </div><!--//primary-->
+        <div class="secondary col-lg-4 col-12">
+             <aside class="info aside section">
+                <div class="section-inner shadow-sm rounded">
+                    <a data-url="{% url 'alumni_portal:basic_info_edit' profile.roll_number %}" class="btn edit-basic-info float-right"><i class="fas fa-edit"></i>Edit</a>
+                    <h2 class="heading">Basic Information</h2>
+                    <div class="content">
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-map-marker-alt"></i><span class="sr-only">Location:</span>{{profile.current_city}}, {{profile.current_country}}</li>
+                            <li><i class="fas fa-envelope"></i><span class="sr-only">Email:</span><a href="#">{{profile.personal_email}}</a></li>
+                            <li><i class="fas fa-link"></i><span class="sr-only">Website:</span><a href="#">{{profile.website_link}}</a></li>
+                        </ul>
+                    </div><!--//content-->
+                </div><!--//section-inner-->
+            </aside><!--//aside-->
+
+
+            <aside class="education aside section">
+                <div class="section-inner shadow-sm rounded">
+                      <a  data-url="{% url 'alumni_portal:create_education' %}"class="btn add-education float-right"><i class="fas fa-plus"></i>Add</a>
+                    <h2 class="heading">Education</h2>
+                    <div class="content">
+                      {% for degree in profile.degrees.all %}
+                      <div class="item">
+                          <a  data-url="{% url 'alumni_portal:edit_education' degree.pk %}"class="btn edit-education float-right"><i class="fas fa-edit"></i>Edit</a>
+                          <h3 class="title"><i class="fas fa-graduation-cap"></i> {{degree.degree}} {{degree.department}}</h3>
+                          <h4 class="university">{{degree.institute}}<span class="year">,{{degree.start_year}}-{{degree.pass_out_year}}</span></h4>
+                      </div><!--//item-->
+                      {% endfor %}
+                        <div class="item">
+                            <h3 class="title"><i class="fas fa-graduation-cap"></i> {{profile.program}} {{profile.branch}}</h3>
+                            <h4 class="university">IIT Guwahati<span class="year">,{{profile.year_of_graduation}}</span></h4>
+                        </div><!--//item-->
+                    </div><!--//content-->
+                </div><!--//section-inner-->
+            </aside><!--//section-->
+
+
+            <aside class="blog aside section">
+                <div class="section-inner shadow-sm rounded">
+                    <h2 class="heading">Latest Blog Posts</h2>
+                     <a class='btn btn-primary' href="{% url 'alumni_portal:user_posts' %}">My Posts</a>
+
+                </div><!--//section-inner-->
+            </aside><!--//section-->
+
+            <div class="modal fade" id="modal-form">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                </div>
+              </div>
+            </div>
+
+            <div class="modal fade" id="modal-delete-form">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                </div>
+              </div>
+            </div>
+
+
+        </div><!--//secondary-->
+    </div><!--//row-->
 </div>
+
+
+
 {% endblock %}

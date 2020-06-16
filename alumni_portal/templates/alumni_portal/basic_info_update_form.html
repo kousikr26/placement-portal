@@ -1,0 +1,14 @@
+{% load widget_tweaks %}
+<form method="post" action="{% url 'alumni_portal:basic_info_edit' form.instance.roll_number %}" class='basic-info-update-form'>
+  {% csrf_token %}
+  <div class="modal-header">
+    <h4 class="modal-title">Update</h4>
+  </div>
+  <div class="modal-body">
+    {% include 'alumni_portal/partial_data_form.html' %}
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    <button class ='btn btn-default' type="submit">Update</button>
+  </div>
+</form>

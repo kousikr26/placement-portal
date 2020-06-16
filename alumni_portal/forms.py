@@ -29,7 +29,8 @@ class CommentForm(ModelForm):
 class AlumnusProfileForm(ModelForm):
     class Meta:
         model = AlumnusProfile
-        fields = ['personal_email',
+        fields = [
+        'personal_email',
         'iitg_email',
         'roll_number',
         'first_name',
@@ -42,3 +43,37 @@ class AlumnusProfileForm(ModelForm):
         'current_country',
         'current_city',
         ]
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request')
+        super(AlumnusProfileForm, self).__init__(*args, **kwargs)
+
+    def save(self):
+        profile = super().save(commit = False)
+        profile.user = self.request.user
+        profile.save()
+        
+
+class EditIntroForm(ModelForm):
+    class Meta:
+        model = AlumnusProfile
+        fields = ['first_name','last_name','headline']
+
+class EditAboutForm(ModelForm):
+    class Meta:
+        model = AlumnusProfile
+        fields =['about_me']
+
+class EditBasicInfoForm(ModelForm):
+    class Meta:
+        model = AlumnusProfile
+        fields = ['current_city','current_country','personal_email','website_link']
+
+class JobForm(ModelForm):
+    class Meta:
+        model = Job
+        exclude = ['alumnus_profile']
+
+class EducationForm(ModelForm):
+    class Meta:
+        model = Education
+        exclude = ['alumnus_profile']

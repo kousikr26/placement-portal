@@ -1,0 +1,16 @@
+{% load widget_tweaks %}
+<form method="post" action="{% url 'alumni_portal:edit_job' form.instance.pk %}" class='edit-job-form'>
+  {% csrf_token %}
+  <div class="modal-header">
+    <h4 class="modal-title">Edit Job</h4>
+  </div>
+  <div class="modal-body">
+    {% include 'alumni_portal/partial_data_form.html' %}
+  </div>
+  <div class="modal-footer">
+    <button data-url="{% url 'alumni_portal:delete_job' form.instance.pk  %}"type="button" class="btn job-delete btn-default mr-auto" data-dismiss="modal">Delete</button>
+
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    <button class ='btn btn-default' type="submit">Update</button>
+  </div>
+</form>
