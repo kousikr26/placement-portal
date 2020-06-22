@@ -168,6 +168,5 @@ $(function() {
     $('#branch_filter').on('change', ajax_filter);
     $('#program_filter').on('change', ajax_filter);
     $('#placed_filter').on('change', ajax_filter);
-    $('#branch_filter').on('change', ajax_filter);
 
 });

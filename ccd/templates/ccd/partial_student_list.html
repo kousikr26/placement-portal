@@ -1,21 +1,21 @@
 
     {% for student in student_list %}
       <tr class="">
-        <td>{{ student.name }}</td>
-        <td>{{ student.roll }}</td>
-        <td>{{ student.programs }}</td>
-        <td>{{ student.branch }}</td>
-        <td>{{ student.day }}</td>
-        <td>{{ student.company }}</td>
+        <td class="text-center">{{ student.name }}</td>
+        <td class="text-center">{{ student.roll }}</td>
+        <td class="text-center">{{ student.programs }}</td>
+        <td class="text-center">{{ student.branch }}</td>
+        <td class="text-center">{{ student.day }}</td>
+        <td  class="text-center">{{ student.company }}</td>
         {% if student.placed is False %}
-        <td>Not Placed</td>
+        <td  class="text-center">Not Placed</td>
         {% else %}
-        <td>Placed</td>
+        <td  class="text-center">Placed</td>
         {% endif%}
 
-        <td>{{ student.sector }}</td>
-        <td>{{ student.profile }}</td>
-        <td>{{ student.slot }}</td>
+        <td  class="text-center">{{ student.sector }}</td>
+        <td  class="text-center">{{ student.profile }}</td>
+        <td  class="text-center">{{ student.slot }}</td>
         <td class="">
           <button type="button"
                   class="btn btn-sm btn-outline-warning waves-effect btn-sm js-update-student-btn "

@@ -3,8 +3,11 @@ from .models import *
 from .forms import *
 from django.template import RequestContext
 from django.template.context_processors import csrf
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect,JsonResponse
 from django.contrib.auth.decorators import login_required
+from django.db.models.functions import Lower
+from django.template.loader import render_to_string
+
 import json
 
 def index(request):
@@ -64,5 +67,37 @@ def index(request):
 			"company_count":comp_count_lis,
 			}
 
-	print(context)
+	# print(context)
 	return render(request, "home/stats.html",context )
+
+################################################################################
+# function to render the table
+
+def get_table(request):
+	students  = Student.objects.filter(placed=True)
+	branches = Branch.objects.all()
+	context = {'students':students,'branches':branches}
+	return render(request,'home/table_home.html',context)
+
+################################################################################
+
+# function to filter the table data
+def ajax_table_filter(request):
+    data = dict()
+    if request.method == 'GET' and request.is_ajax():
+        branch = request.GET.get('branch')
+        program = request.GET.get('program')
+        sortid = request.GET.get('sortid')
+        students = Student.objects.filter(placed=True)
+        if branch!='all':
+            branch = Branch.objects.get(branchName=branch)
+            students = students.filter(branch=branch)
+        if program!='all':
+            students = students.filter(programs=program)
+        students = students.order_by(Lower(sortid))
+        data['table_data_html'] = render_to_string('home/table_data.html',{'students':students})
+        data['success'] = True
+    else:
+        data['success'] = False
+    return JsonResponse(data)
+################################################################################

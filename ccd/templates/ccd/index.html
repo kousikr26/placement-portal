@@ -611,9 +611,13 @@ only screen and (max-width: 760px),
 </style>
 {% endblock head %}
 {% block content %}
+
+{% comment %} loader {% endcomment %}
 <div id="loader" class="">
     <div class="spinner"></div>
 </div>
+
+{% comment %} script for loader {% endcomment %}
 <script type="text/javascript">
 window.addEventListener('load', () => {
     const loader = document.getElementById('loader');
@@ -622,6 +626,9 @@ window.addEventListener('load', () => {
     }, 100);
 });
 </script>
+
+
+
 <!-- THE MODAL WE WILL BE USING -->
 <div class="modal fade " id="modal-student">
     <div class="modal-dialog modal-lg " role="document">
