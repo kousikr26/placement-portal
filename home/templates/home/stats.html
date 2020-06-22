@@ -1,49 +1,124 @@
 {% extends "home/base.html" %}
 {% block content %}
 {% load static %}
-<style>
-.float-container {
-    
-    padding: 20px;
-}
 
-.float-child {
-    width: 50%;
-    float: left;
-    padding: 20px;
-    
-}  
-</style>
 <!-- Load d3.js -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.6.0/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.6.0/d3.min.js"></script>
 <!-- Color scale -->
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+ 
+
+<!-- Resources -->
+<script src="https://www.amcharts.com/lib/4/core.js"></script>
+<script src="https://www.amcharts.com/lib/4/charts.js"></script>
+<script src="https://www.amcharts.com/lib/4/themes/kelly.js"></script>
+<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+<script src="https://www.amcharts.com/lib/4/plugins/wordCloud.js"></script>
+<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+
+<!-- Chart code -->
+
 
 <!-- Add 2 buttons -->
-<button type="button" class="btn btn-primary" onclick="render(data1);render2(data3)">B.tech</button>
-<button type="button" class="btn btn-primary" onclick="render(data2);render2(data4)">M.tech</button>
-<h3> Placement statistics <div id="progtype"></div></h3>
-<div class="float-container">
-
-  <div class="float-child">
-    <div id="donut"></div>
-  </div>
-  
-  <div class="float-child">
-    <div id="bar"></div>
-  </div>
-  
+<div style="text-align:center;">
+<button type="button"  class="btn btn-primary button" onclick="updateGauge(currentpos,btech_placed_frac);updateBarChart(data3);">B.tech</button>
+<button type="button" class="btn btn-primary button" onclick="updateGauge(currentpos,mtech_placed_frac);updateBarChart(data4);">M.tech</button>
 </div>
+<div style="text-align:center;">
+<h3> Placement statistics </h3>
 
+<svg width="960" height="500" id="gauge">
+ viewBox="0 0 960 500"
+  preserveAspectRatio="xMidYMid meet">
+  </svg>
 
+<h3> Branchwise placement statistics</h3>
+<div style="height: 800px;"id="barchart"></div>
 
-<link rel="stylesheet" type="text/css" href="{% static 'home/donut.css' %}">
+<br>
+<br>
+<h3> Top Recruitors</h3>
+<div style="height: 800px;" id="wordcloud"></div>
+<br>
+<br>
+<div id="pictorial"></div>
+<div style="margin-bottom:200px"></div>
+<style>
+#pictorial {
+  width: 100%;
+  height: 500px;
+}
+</style>
+<link rel="stylesheet" type="text/css" href="{% static 'home/buttons.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'home/gauge.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'home/barchart.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'home/wordcloud.css' %}">
 <script>
+var delayBarChart=100000;
 var data1 = {{ btech_percent_placed|safe }};
 var data2 = {{ mtech_percent_placed|safe }};
+var btech_placed_frac=data1["Placed"]/(data1["Placed"]+data1["Not placed"]);
+var mtech_placed_frac=data2["Placed"]/(data2["Placed"]+data2["Not placed"]);
 var data3 = {{ btech_branchwise_placements|safe }};
 var data4 = {{ mtech_branchwise_placements|safe }};
+var data5 = {{ company_count|safe }};
+console.log(data5);
 </script>
-<script src="{% static '/home/donut.js' %}" type="text/javascript"></script>  
-<script src="{% static '/home/bar.js' %}" type="text/javascript"></script>  
+
+
+
+<script>
+
+// Themes begin
+am4core.useTheme(am4themes_animated);
+// Themes end
+
+var iconPath = "M221.878,74.022c3.251-0.955,6.089-3.09,6.835-6.755c2.423-11.902,4.878-23.799,7.269-35.707c1.507-7.502,5.972-18.396,0.497-25.292c-5.656-7.123-18.367-5.428-26.351-5.765c-12.73-0.535-25.462-0.615-38.2-0.377c-4.471,0.084-7.407,2.42-8.944,5.488c-1.488,0.95-2.687,2.292-2.566,4.192c0.641,9.923,2.453,19.275,4.842,28.931c2.247,9.096,3.279,20.605,8.674,28.299c0.36,0.513,0.822,0.816,1.245,1.199c-12.107,31.806-14.84,67.269-20.72,100.665c-7.896,44.846-15.948,89.663-23.921,134.496c-0.61,3.437,0.719,6.148,2.759,8.058c0.077,0.178,0.081,0.342,0.178,0.522c16.748,31.358,41.568,58.686,60.191,89.151c3.947,6.458,12.088,5.593,16.201,0c22.039-29.985,43.726-60.39,62.621-92.48c2.049-2.006,3.324-4.835,2.548-8.418C259.105,226.532,249.249,144.769,221.878,74.022z";
+
+var chart = am4core.create("pictorial", am4charts.SlicedChart);
+chart.hiddenState.properties.opacity = 0; // this makes initial fade in effect
+chart.paddingLeft = 150;
+
+chart.data = [{
+    "name": "",
+    "value": 40,
+    "disabled":true
+}, {
+    "name": "PPO",
+    "value": 60
+}];
+
+var series = chart.series.push(new am4charts.PictorialStackedSeries());
+series.dataFields.value = "value";
+series.dataFields.category = "name";
+series.alignLabels = true;
+// this makes only A label to be visible
+series.labels.template.propertyFields.disabled = "disabled";
+series.ticks.template.propertyFields.disabled = "disabled";
+
+
+series.maskSprite.path = iconPath;
+series.ticks.template.locationX = 1;
+series.ticks.template.locationY = 0;
+
+series.labelsContainer.width = 100;
+
+chart.legend = new am4charts.Legend();
+chart.legend.position = "top";
+chart.legend.paddingRight = 160;
+chart.legend.paddingBottom = 40;
+let marker = chart.legend.markers.template.children.getIndex(0);
+chart.legend.markers.template.width = 40;
+chart.legend.markers.template.height = 40;
+marker.cornerRadius(20,20,20,20);
+</script>
+
+
+
+
+
+<script src="{% static 'home/gauge.js' %}"> </script>
+<script src="{% static 'home/barchart.js' %}"> </script>
+<script src="{% static 'home/wordcloud.js' %}"> </script>
+
 {% endblock %}
