@@ -183,7 +183,7 @@
 
 
 ////////////////////////////////////////////////////////////////////////////////////
-// functions to show vertical hover effect fot the table
+// functions to show vertical hover effect for the table
   var colorchange = document.querySelector("#student-table");
   colorchange.addEventListener("mouseover",function(e) {
    if(e.target.classList[1] == "clear")
@@ -272,6 +272,8 @@
 ////////////////////////////////////////////////////////////////////////////////////
 // function to filter the table data using ajax
       var ajax_filter = function() {
+          var params = (new URL(document.location)).searchParams;
+          var company = params.get("company");
           var branch = $('#branch_filter').val();
           var program = $('#program_filter').val();
           var sortid = $('#sort').val();
@@ -282,6 +284,7 @@
                   'branch': branch,
                   'sortid': sortid,
                   'program': program,
+                  'company': company,
               },
               dataType: 'json',
               success: function(data) {
