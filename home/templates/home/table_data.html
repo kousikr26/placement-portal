@@ -1,0 +1,12 @@
+{% for student in students  %}
+<tr class = "">
+  <td class = "column1 clear text-center">{{student.name}}</td>
+  <td class = "column2 clear text-center">{{student.programs}}</td>
+  <td class = "column3 clear text-center">{{student.branch}}</td>
+  <td class = "column4 clear text-center">{{student.roll}}</td>
+  <td class = "column5 clear text-center">{{student.company}}</td>
+  <td class = "column6 clear text-center">{{student.profile}}</td>
+  <td class = "column7 clear text-center">{{student.sector}}</td>
+  {% comment %} <td class = "column8 clear">8:00 AM</td> {% endcomment %}
+</tr>
+{% endfor %}

@@ -22,7 +22,7 @@ BRANCH_CHOICES = [
 
 class Branch(models.Model):
 	branchName = models.CharField(
-		max_length=50, 
+		max_length=50,
 		choices=BRANCH_CHOICES,
 		default='CSE'
 		)
@@ -55,9 +55,9 @@ class Student(models.Model):
 		max_length=20,
         choices=PROGRAM_CHOICES,
         default='B.Tech',
-	)	
+	)
 	branch = models.ForeignKey(Branch,on_delete=models.CASCADE)
-	day=models.IntegerField(validators=[MaxValueValidator(10),MinValueValidator(0)],default=0, blank=True)
+	day=models.IntegerField(validators=[MaxValueValidator(10),MinValueValidator(0)],default=0, blank=True,null=True)
 	company = models.CharField(max_length=100, blank=True)
 	placed = models.BooleanField(default=False)
 	sector = models.CharField(max_length=100, blank=True)
@@ -78,9 +78,6 @@ class Student(models.Model):
 		return self.name
 
 
-
-
-
 class Day(models.Model):
 	dayNum=models.IntegerField(validators=[MinValueValidator(0)],default=0)
 	num = models.IntegerField(default=0,validators=[MinValueValidator(0)])
@@ -95,13 +92,6 @@ class DayTotal(models.Model):
 	dayNum=models.IntegerField(validators=[MinValueValidator(0)],default=0)
 	num = models.IntegerField(default=0,validators=[MinValueValidator(0)])
 	mnum = models.IntegerField(default=0,validators=[MinValueValidator(0)])
-	
+
 	def __str__(self):
 		return f'{self.dayNum}-Total'
-
-
-
-
-
-
-

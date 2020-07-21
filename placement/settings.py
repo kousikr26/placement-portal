@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'authentication',
+    'ccd',
+    'bootstrap4',
+    'widget_tweaks',
 
 ]
 
@@ -131,8 +134,23 @@ STATICFILES_FINDERS = [
     # searches in STATIC subfolder of each app
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR,'media/')
 
 LOGIN_URL="home"
+# when login is required, user will be redirected to this url
 LOGIN_REDIRECT_URL='home'
 
 LOGOUT_REDIRECT_URL='home'
+
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 102400
+
+# 2.5MB - 2621440
+# 5MB - 5242880
+# 10MB - 10485760
+# 20MB - 20971520
+# 50MB - 5242880
+# 100MB 104857600
+# 250MB - 214958080
+# 500MB - 429916160
+MAX_UPLOAD_SIZE = "5242880"

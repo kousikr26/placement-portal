@@ -6,5 +6,6 @@ app_name = 'home'
 
 urlpatterns = [
     path('',views.index,name='home'),
-    
+    path('table/',views.get_table,name='table'),
+    path('ajax/tableFilter',views.ajax_table_filter,name="table_filter"),
 ]

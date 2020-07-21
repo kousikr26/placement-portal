@@ -1,0 +1,16 @@
+<form method="post" action="{% url 'ccd:student_delete' student.id %}" class="js-student-delete-form">
+  {% csrf_token %}
+  <div class="modal-header heading lead bg-danger">
+    <h3 class="modal-title text-white" style="font-family: 'Nunito';font-weight:bold;">Confirm Student deletion </h3>
+    <span class="close" data-dismiss="modal" aria-label="Close">
+        <i class="fas fa-window-close"></i>
+    </span>
+  </div>
+  <div class="modal-body">
+    <p class="lead">Are you sure you want to delete the student <span class="font-weight-bold">{{ student.name }}</span>?</p>
+  </div>
+<div class="modal-footer justify-content-center">
+      <button type="button" class="btn btn-lg btn-outline-danger waves-effect" data-dismiss="modal">Close</button>
+    <button type="submit" class="btn btn-lg btn-danger waves-effect waves-light" formnovalidate="formnovalidate">Delete Student</button>
+  </div>
+</form>

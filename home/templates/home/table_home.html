@@ -1,0 +1,315 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Table</title>
+      <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+      <!-- datatables scripts for adding pagination and all-->
+      <script src="{% static 'js/jquery-3.5.1.js' %}"></script> <!-- JQUERY HERE -->
+      <!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> -->
+      <script src="{% static 'js/bootstrap.min.js' %}"></script>
+      <script src="{% static 'js/jquery.dataTables.min.js' %}"></script>
+      <!-- <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script> -->
+      <script src="{% static 'js/dataTables.bootstrap4.min.js' %}"></script>
+      <!-- <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script> -->
+
+
+
+      <style media="screen">
+
+      .header {
+        font-size : 15px;
+        font-weight : normal;
+        background-color : black;
+        border-bottom : 1px solid black ;
+        padding :  0em 1.2em;
+        color : white;
+        text-transform : uppercase;
+        padding:25px 10px;
+        }
+      #student-table {
+        border : 1px solid white ;
+        border-collapse : collapse;
+        width : 100%;
+        height : 471px;
+        background-color : white;
+        }
+      table,tr,th,td {
+        font-family : Arial, Helvetica, sans-serif;
+        color : grey;
+        }
+
+      .row td:hover {
+        background-color : blue;
+        color : red;
+        }
+      .column1 {
+        padding-left : 25px;
+        padding-right : 10px;
+        width : 250px;
+        }
+      .column2 {
+        padding-left : 25px;
+        padding-right : 10px;
+        }
+      .column3 {
+        padding-left : 25px;
+        padding-right : 10px;
+        }
+      .column4 {
+        padding-left : 25px;
+        padding-right : 10px;
+        }
+      .column5 {
+        padding-left : 25px;
+        padding-right : 10px;
+        }
+      .column6 {
+        padding-left : 25px;
+        padding-right : 10px;
+        }
+      .column7 {
+        padding-left : 25px;
+        padding-right : 10px;
+        }
+      .column8 {
+        padding-left : 25px;
+        padding-right : 10px;
+        }
+      .light {
+        background-color : rgba(0, 0, 255, 0.1);
+        color : red;
+      }
+      .column11 {
+        padding-left : 25px;
+        padding-right : 10px;
+        width : 250px;
+        }
+      .column12 {
+        padding-left : 25px;
+        padding-right : 10px;
+        }
+      .column13 {
+        padding-left : 25px;
+        padding-right : 10px;
+        }
+      .column14 {
+        padding-left : 25px;
+        padding-right : 10px;
+        }
+      .column15 {
+        padding-left : 25px;
+        padding-right : 10px;
+        }
+      .column16 {
+        padding-left : 25px;
+        padding-right : 10px;
+        }
+      .column17 {
+        padding-left : 25px;
+        padding-right : 10px;
+        }
+      .column18 {
+        padding-left : 25px;
+        padding-right : 10px;
+        }
+      </style>
+</head>
+<body>
+
+<div class="row">
+
+      <div class="col-6 col-lg-3">
+          <div class="form-group">
+              <label for="branch">Branch</label>
+              <select class="form-control" id="branch_filter">
+                  <option selected="true" value="all">All</option>
+                  {%for branch in branches %}
+                    <option value="{{branch.branchName}}">{{branch}}</option>
+                  {% endfor %}
+              </select>
+          </div>
+      </div>
+      <div class="col-6 col-lg-3">
+          <div class="form-group">
+              <label for="branch">Program</label>
+              <select class="form-control" id="program_filter">
+                  <option selected="true" value="all">All</option>
+                  <option value="B.Tech">B.Tech</option>
+                  <option value="B.Des">B.Des</option>
+                  <option value="M.Tech">M.Tech</option>
+                  <option value="M.Des">M.Des</option>
+                  <option value="M.Sc">M.Sc</option>
+                  <option value="Phd">Phd</option>
+                  <option value="Others">Others</option>
+              </select>
+          </div>
+      </div>
+      <div class="col-6 col-lg-3">
+          <div class="form-group">
+              <label for="SortBy">Sort By</label>
+              <select class="form-control" id="sort">
+                  <option selected="true" value='roll'>Roll No</option>
+                  <option value='name'>Name</option>
+                  <option value='programs'>Program</option>
+                  <option value='branch'>Branch</option>
+                  <option value='company'>Company</option>
+                  <option value='profile'>Profile</option>
+                  <option value='sector'>Sector</option>
+              </select>
+          </div>
+      </div>
+</div>
+
+<table id = "student-table">
+  <thead>
+  <tr class = "first-row">
+    <th class="header  text-center">Name</th>
+    <th class="header  text-center">Program</th>
+    <th class="header  text-center">Branch</th>
+    <th class="header  text-center">Roll No.</th>
+    <!-- <th class="header">Day</th> -->
+    <th class="header  text-center">Company</th>
+    <th class="header  text-center">Profile</th>
+    <th class="header  text-center">Sector</th>
+  </tr>
+</thead>
+<tbody>
+  {% include 'home/table_data.html'%}
+</tbody>
+</table>
+<script>
+
+
+////////////////////////////////////////////////////////////////////////////////////
+// functions to show vertical hover effect for the table
+  var colorchange = document.querySelector("#student-table");
+  colorchange.addEventListener("mouseover",function(e) {
+   if(e.target.classList[1] == "clear")
+        {
+            var parent = e.target.parentNode;
+            parent.classList.add("light");
+            // console.log(e.target.classList[0]);
+            var class1 = e.target.classList[0];
+            // console.log(class1);
+            var child = colorchange.querySelectorAll("." + class1);
+            // console.log(child.length);
+            for(var i = 0;i<child.length;i++)
+                {
+                  child[i].classList.add("light");
+                }
+        }
+  });
+
+    colorchange.addEventListener("mouseout",function(e) {
+      if(e.target.classList[1] == "clear")
+         {
+              var parent = e.target.parentNode;
+              parent.classList.remove("light");
+             var class1 = e.target.classList[0];
+              var child = colorchange.querySelectorAll("." + class1);
+              for(var i = 0;i<child.length;i++)
+                  {
+                  child[i].classList.remove("light");
+                  }
+          }
+    });
+////////////////////////////////////////////////////////////////////////////////////
+// fucntion to add DataTable to the table
+        var activeDataTable = function() {
+            if (!$.fn.DataTable.isDataTable('#student-table')) {
+                $('#student-table').DataTable({
+                    dom: 'Blfrtip',
+                    pagingType: "full_numbers",
+                    responsive: true,
+                    autoWidth: true,
+                    ordering: false,
+                    fixedColumns: true,
+                    buttons: [{
+                            extend: 'pdf',
+                            footer: true,
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+                            }
+                        },
+                        {
+                            extend: 'csv',
+                            footer: false,
+                            fieldBoundary: '',
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+                            }
+                        },
+                        {
+                            extend: 'excel',
+                            footer: false,
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+                            }
+                        },
+                        // {
+                        //     extend: 'copy',
+                        //     footer: false,
+                        //     exportOptions: {
+                        //         columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+                        //     }
+                        // },
+                        {
+                            extend: 'print',
+                            footer: false,
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+                            }
+                        },
+                        'colvis',
+
+                    ]
+                });
+            }
+        };
+      activeDataTable();
+////////////////////////////////////////////////////////////////////////////////////
+// function to filter the table data using ajax
+      var ajax_filter = function() {
+          var params = (new URL(document.location)).searchParams;
+          var company = params.get("company");
+          var branch = $('#branch_filter').val();
+          var program = $('#program_filter').val();
+          var sortid = $('#sort').val();
+          $.ajax({
+              url: '/home/ajax/tableFilter',
+              type: 'GET',
+              data: {
+                  'branch': branch,
+                  'sortid': sortid,
+                  'program': program,
+                  'company': company,
+              },
+              dataType: 'json',
+              success: function(data) {
+                  if ($.fn.DataTable.isDataTable('#student-table')) {
+                      $('#student-table').dataTable().fnDestroy();
+                      console.log('pagination removed');
+                  }
+                  // $("#student-table tbody").html('');
+                  $("#student-table tbody").html(data.table_data_html);
+                  activeDataTable();
+                  console.log("table updated!");
+              }
+          });
+      };
+
+      // Sorting and Filtering
+      // whenever sortby/filter option changes, the data will be updated
+      $('#sort').on('change', ajax_filter);
+      $('#branch_filter').on('change', ajax_filter);
+      $('#program_filter').on('change', ajax_filter);
+
+
+////////////////////////////////////////////////////////////////////////////////////
+
+
+</script>
+  </body>
+</html>

@@ -33,6 +33,8 @@
     {% else %}
     <a href="{%url 'signin' %}" class="btn-info btn-lg p-3">login</a>
     {% endif%}
+
+    <a href="{% url 'home:table' %}" class="btn btn-info btn-lg">Table</a>
     </div>
 
     <script type="text/javascript">
@@ -44,5 +46,6 @@
 
         });
       </script>
+      {% block bodyblock %}{% endblock %}
   </body>
 </html>

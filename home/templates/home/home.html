@@ -27,6 +27,10 @@
     {% else %}
     <a href="{%url 'signin' %}" class="btn-info btn-lg p-3">login</a>
     {% endif%}
+    <br>
+    <a href="{% url 'home:table' %}" class="btn btn-info btn-lg p-3 mt-5">Table</a>
+    <br>
+    <a href="{% url 'home:home' %}" class="btn btn-info btn-lg p-3 mt-5">Charts</a>
     </div>
 
     <script type="text/javascript">

@@ -1,0 +1,37 @@
+
+    {% for student in student_list %}
+      <tr class="">
+        <td class="text-center">{{ student.name }}</td>
+        <td class="text-center">{{ student.roll }}</td>
+        <td class="text-center">{{ student.programs }}</td>
+        <td class="text-center">{{ student.branch }}</td>
+        <td class="text-center">{{ student.day }}</td>
+        <td  class="text-center">{{ student.company }}</td>
+        {% if student.placed is False %}
+        <td  class="text-center">Not Placed</td>
+        {% else %}
+        <td  class="text-center">Placed</td>
+        {% endif%}
+
+        <td  class="text-center">{{ student.sector }}</td>
+        <td  class="text-center">{{ student.profile }}</td>
+        <td  class="text-center">{{ student.slot }}</td>
+        <td class="">
+          <button type="button"
+                  class="btn btn-sm btn-outline-warning waves-effect btn-sm js-update-student-btn "
+                  data-url="{% url 'ccd:student_update' student.id %}"
+                   data-toggle="tooltip" data-placement="top" title="Edit details">
+            <i class="fas fa-edit mr-1"></i>
+          </button>
+        </td>
+        <td class="">
+          <button type="button"
+                  class="btn btn-sm btn-outline-danger waves-effect js-delete-student-btn"
+                  data-url="{% url 'ccd:student_delete' student.id %}"
+                   data-toggle="tooltip" data-placement="top" title="Delete student">
+            <i class="fa fa-trash mr-1" aria-hidden="true"></i>
+
+          </button>
+        </td>
+      </tr>
+    {% endfor %}
