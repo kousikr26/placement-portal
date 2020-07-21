@@ -15,22 +15,41 @@ def index(request):
 	mtech_percent_placed = json.dumps({"Placed": len(Student.objects.filter(
 		programs='M.Tech').filter(placed=True)), "Not placed": len(Student.objects.filter(programs='M.Tech').filter(placed=False))})
 	btech_all=Student.objects.filter(programs='B.Tech').filter(placed=True)
+	mtech_all=Student.objects.filter(programs='M.Tech').filter(placed=True)
 	comp_counts={}
+	comp_counts_mtech={}
+	
 	
 	for i in btech_all:
 		if(i.company in comp_counts):
 			comp_counts[i.company]+=1
 		else:
 			comp_counts[i.company]=1
-	print(comp_counts)
+
+	for i in mtech_all:
+		if(i.company in comp_counts_mtech):
+			comp_counts_mtech[i.company]+=1
+		else:
+			comp_counts_mtech[i.company]=1
 	comp_count_lis=[]
+	comp_count_lis_mtech=[]
 	for i in comp_counts:
 		tmp={}
 		if(i==""):
 			continue
 		tmp["tag"]=i
 		tmp["weight"]=comp_counts[i]
+		tmp["urlval"]=i.replace(' ','%20')
+		
 		comp_count_lis.append(tmp)
+	for i in comp_counts_mtech:
+		tmp={}
+		if(i==""):
+			continue
+		tmp["tag"]=i
+		tmp["weight"]=comp_counts_mtech[i]
+		tmp["urlval"]=i.replace(' ','%20')
+		comp_count_lis_mtech.append(tmp)
 	btech_branchwise_placements=[]
 	mtech_branchwise_placements = []
 	cse_wc=[]
@@ -62,6 +81,7 @@ def index(request):
             "btech_branchwise_placements": json.dumps(btech_branchwise_placements), 
 			"mtech_branchwise_placements": json.dumps(mtech_branchwise_placements),
 			"company_count":comp_count_lis,
+			"company_count_mtech":comp_count_lis_mtech
 			}
 
 	print(context)
