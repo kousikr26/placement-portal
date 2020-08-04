@@ -2,7 +2,8 @@
 {% block content %}
 
 
-    <div class="container jumbotron">
+
+    <div class="">
           <!-- Messages -->
       <div class="mb-3">
         {% if messages %}
@@ -18,6 +19,25 @@
       </div>
       <!-- End Messages -->
 
+      <style>
+        .c-button-1:before{
+          height:100%;
+          border-radius:0 17px 17px;
+          background-color:#FED72C;
+          position:absolute;
+          top:0;
+          left:0;
+          z-index:0;
+          transition:all 1s ease-in-out;
+          -ms-transform:translateX(-100%);
+          transform:translateX(-100%)
+      }
+      .c-button-1--paypal:before{
+          background-color:#FED72C
+      }
+
+      </style>
+
       {% if request.user.is_authenticated %}
       <a href="{% url 'signout' %}" class="btn-danger btn-lg p-3">logout</a>
       <br> <br>
@@ -25,12 +45,26 @@
       <h1>Email: {{request.user.email}}</h1>
 
     {% else %}
-    <a href="{%url 'signin' %}" class="btn-info btn-lg p-3">login</a>
+    <button class="c-sub__button c-button-1 c-button-1--paypal js-register-button">
+      <span class="c-icon c-icon--play" style="left: 10%"></span>
+      <span><a style="color: white;" href="{%url 'signin' %}">Login</a></span>
+      </button>
+    
+    
     {% endif%}
     <br>
-    <a href="{% url 'home:table' %}" class="btn btn-info btn-lg p-3 mt-5">Table</a>
+    <button class="c-sub__button c-button-1 c-button-1--paypal js-register-button">
+      <span class="c-icon c-icon--play" style="left: 10%"></span>
+      <span><a style="color: white;" href="{% url 'home:table' %}">Table</a></span>
+      </button>
+    
     <br>
-    <a href="{% url 'home:home' %}" class="btn btn-info btn-lg p-3 mt-5">Charts</a>
+    <button class="c-sub__button c-button-1 c-button-1--paypal js-register-button">
+      <span class="c-icon c-icon--play" style="left: 10%"></span>
+      <span><a  style="color: white;" href="{% url 'home:home' %}">Charts</a></span>
+      </button>
+    
+    
     </div>
 
     <script type="text/javascript">

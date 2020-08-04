@@ -1,0 +1,16 @@
+@media(max-width:500px){
+    .login-media{
+        margin-left: -75px;
+    }
+   *{
+       font-size: small;
+   }
+   .h2-margin{
+       margin-left: 20px;
+   }
+   .placeholder-color{
+   color:#fff;
+   }
+
+}
+
