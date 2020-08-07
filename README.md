@@ -7,10 +7,8 @@
 - Responsive charts for visually representing data
 - Tag cloud linked with table for seamless filtering based on company name
 - Interactive tabular view with filters and download option
+- CCD admin portal for addin/updating data directly from .csv files
 
-### Dependencies
-- Django
-- django_bootstrap_components
 
 
 ### Demo
