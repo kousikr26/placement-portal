@@ -22,7 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('authentication.urls')),
     path('ccd/',include('ccd.urls')),
-    path('home/',include('home.urls'))
+    path('',include('home.urls'))
 
 ]
 if settings.DEBUG:

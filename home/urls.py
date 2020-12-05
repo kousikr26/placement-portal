@@ -1,11 +1,12 @@
 from django.urls import path
-from . import views
+from .views import *
 from django.views.generic import TemplateView
-
+from authentication.views import *
 app_name = 'home'
 
 urlpatterns = [
-    path('',views.index,name='home'),
-    path('table/',views.get_table,name='table'),
-    path('ajax/tableFilter',views.ajax_table_filter,name="table_filter"),
+    path('',home,name="home"),
+    path('charts/',index,name='charts'),
+    path('table/',get_table,name='table'),
+    path('ajax/tableFilter',ajax_table_filter,name="table_filter"),
 ]

@@ -1,138 +1,41 @@
-{% load static %}
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
+
 <head>
-    <title></title>
-    <link rel = "icon" href =  "{% static 'images/iitg.jpg' %}" type = "image/x-icon">
-   <!-- jQuery CDN -->
-    <script
-    src="https://code.jquery.com/jquery-1.12.4.min.js"
-    integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
-    crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-      crossorigin="anonymous">
-      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    {% block listView %}
-    {% endblock %}
-    <style>
+  <meta charset="utf-8">
+  <title> {% block title %}  {% endblock %}
+  </title>
 
-      body {
-        /*padding-bottom: 100px;*/
-        max-width: 100%;
-        margin:0;
-      }
-      html, body {
-      overflow-x:hidden;
-      height:100%;
+  {# bootstrap css #}
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/journal/bootstrap.min.css" integrity="sha384-QDSPDoVOoSWz2ypaRUidLmLYl4RyoBWI44iA5agn6jHegBxZkNqgm2eHb6yZ5bYs" crossorigin="anonymous">
 
+  {% block head %}
+
+  {% endblock %}
+
+  <style media="screen">
+    body{
+      background-color: #e9f5f8 !important;
     }
-
-    .container {
-      min-height: 100%;
+    .jumbotron{
+      background-color: white;
     }
-
-
-      #main {
-
-        padding-bottom: 100px;
-      }
-
-    footer {
-        width:100%;
-        height: 100px;
-        background-color:#FFF;
-        color:#000;
-        -webkit-box-shadow: 0px -1px 5px 0px rgba(100,100,100,0.75);
-        -moz-box-shadow: 0px -1px 5px 0px rgba(100,100,100,0.75);
-        box-shadow: 0px -1px 5px 0px rgba(100,100,100,0.75);
-        line-height: 1.6;
-        position: relative;
-        margin-top: -100px;
-        clear: both;
-
-      }
-      .link-spanner{
-        position:absolute;
-        width:100%;
-        height:100%;
-        top:0;
-        left: 0;
-        z-index: 1;
-      }
-
-      .hovr {
-        background-color:#6A62CC;
-        width:15%;
-        margin:0px;
-        padding:5px 5px 1px;
-        cursor: pointer;
-        position:relative;
-      }
-
-      .link-active {
-        background-color: #2D2F91;
-      }
-    </style>
+  </style>
 </head>
 
-<body style = "font-family:Arial, Helvetica, sans-serif;">
+<body>
+  {% block content %}
 
-      <div style="min-height:75px; width:100%; position:relative">
-        <div style="margin:25px 50px 0px; float:left;">
-           <a style="padding-left:5%" href="https://www.iitg.ac.in"><img src="/static/images/iitg.jpg" style="width:auto; max-height:65px"></a>
-        </div>
-        <div style="font-size: 30px; font-family:Lato;
-        position:absolute; bottom:0; padding-left:20px; left:50%; margin-left:-103px;
-        color:#2D2F91; font-weight:bold; line-height:17px">
-            <center>IIT GUWAHATI </center>
-        </div>
-        <div title="Logout" style="margin:25px 50px 0px 0px; float:right; text-align:center; height:auto">
-            <a style="padding-left:30px height:auto" href="/placement_portal/authentication/logout/"><i class="fa fa-sign-out" aria-hidden="true" style="width:auto; font-size:50px; color:#2D2F91;"></i></a>
-        </div>
-      </div>
-
-
-<div style="min-height:60px; position:relative">
-    <div style="font-size: 30px; font-family:Lato; position:absolute; bottom:0; padding:0 20px 20px; padding-left=0;width:100%; margin-top:0px; margin-left:auto; margin-right:auto; color:#2D2F91; line-height:17px">
-        <center>Placement Statistics</center>
-    </div>
-</div>
-
-<div style=" display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    width: 100%;
-    padding: 20px;
-    margin: auto;
-    height: 31.6px;
-    position: relative;
-    text-align:center;">
-
-</div>
-
-
-
-      <div margin-bottom: 500px;>
-        {% block content %}
-        {% endblock %}
-      </div>
-
+  {% endblock %}
 </body>
 
-<script>
 
-        // function backtoBasic(x){
-        //   if
-        // }
+<!-- jQuery and JS bundle w/ Popper.js -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 
-        // $(".hovr").hover(function(){
-        //   $(this).css("background-color", "#4648AA");
-        //   },function(){
-        //   $(this).css("background-color", "#6A62CC");
-        //   });
-    </script>
+{% block scripts %}
+
+{% endblock %}
+
 </html>

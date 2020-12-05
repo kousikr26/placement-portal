@@ -1,12 +1,147 @@
 {% extends "home/base.html" %}
-{% block content %}
 {% load static %}
+
+{% block head %}
+
+<style media="screen">
+
+  @media(max-width: 400px){
+  .media_q{
+      margin-top: -300px;
+  }
+}
+  @media(min-width: 1300px){
+  .marg_class{
+    margin-left: -90px;
+  }
+}
+
+</style>
+{% endblock %}
+{% block content %}
+
+
+ <nav class="navbar navbar-expand-lg navbar-dark bg-danger fixed-top d-block box">
+  <div class="container">
+    <a class="navbar-brand order-1 mr-0 hov_class" href="../" style="cursor: pointer;"> <img style="max-width: 35px;max-height: 35px;" src="{% static 'bird/assets/css/includes/img/favicon.png' %}">Placement-portal</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav marg_class" >
+        <!-- <a class="nav-item nav-link text-white" href="#home">Home <span class="sr-only">(current)</span></a> -->
+        <a class="nav-item nav-link text-white hov_class" href="#2" style="cursor: pointer;">UG/PG stats</a>
+        <a class="nav-item nav-link text-white hov_class" href="#3" style="cursor: pointer;">Branchwise stats</a>
+        <a class="nav-item nav-link text-white hov_class" href="#4"style="cursor: pointer;">Top Recruitors</a>
+      </div>
+    </div>
+  </div>
+</nav> <!-- /navbar -->
+
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top d-block box" style="background:rgb(108 122 224);">
+  <div class="container">
+    <a class="navbar-brand order-1 mr-0 hov_class" href="../" style="cursor: pointer;"> <img style="max-width: 35px;max-height: 35px;" src="{% static 'bird/assets/css/includes/img/favicon.png' %}">Placement-portal</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse">
+
+      <div class="navbar-nav mr-auto">
+        <a class="nav-item nav-link text-white hov_class" href="#2" style="cursor: pointer;">UG/PG stats</a>
+        <a class="nav-item nav-link text-white hov_class" href="#3" style="cursor: pointer;">Branchwise stats</a>
+        <a class="nav-item nav-link text-white hov_class" href="#4"style="cursor: pointer;">Top Recruitors</a>
+
+      </div>
+      {% if request.user.is_authenticated %}
+      <div class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-item nav-link text-white hov_class btn btn-primary mr-auto" href="{% url 'signout' %}" style="cursor: pointer;">Logout</a> </li>
+      </div>
+      {% endif %}
+
+    </div>
+  </div>
+</nav>
+
+
+
+
+
+<div style="padding: 10px;"id= "2">
+</div>
+
+<h1  style="margin-top:70px;text-align: center;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;"> Placement statistics </h1>
+<!-- Add 2 buttons -->
+<div style="text-align:center;">
+<button type="button"  class="btn btn-primary button" onclick="updateGauge(currentpos,btech_placed_frac);updateBarChart(data3);plot_cloud(data5);">B.tech</button>
+<div style="position:absolute"></div>
+<button type="button" class="btn btn-primary button" onclick="updateGauge(currentpos,mtech_placed_frac);updateBarChart(data4);plot_cloud(data6);">M.tech</button>
+</div>
+<div style="text-align:center;">
+
+
+<svg width="50%" height="50%" id="gauge"
+  viewBox="0 0 960 500"
+  preserveAspectRatio="xMidYMid meet" style="position: relative;left: -170px;top: 30px;">
+  </svg>
+  <div style="padding: 50px;"id= "3">
+  </div>
+    <div class="media_q">
+          <h1 style="text-align: center;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;"> Branchwise placement statistics </h1>
+        <div style="height: 500px;"id="barchart"></div>
+
+        <br>
+        <br>
+        <div style="padding: 50px;"id= "4">
+        </div>
+
+        <h1  style="text-align: center;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;"> Top Recruitors </h1>
+        <div style="height: 800px;" id="wordcloud"></div>
+        <br>
+        <br>
+
+        <div style="margin-bottom:200px"></div>
+        <style>
+        #pictorial {
+          width: 100%;
+          height: 500px;
+        }
+        </style>
+        <link rel="stylesheet" type="text/css" href="{% static 'home/buttons.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'home/gauge.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'home/barchart.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'home/wordcloud.css' %}">
+        <script>
+        var delayBarChart=100000;
+        var data1 = {{ btech_percent_placed|safe }};
+        var data2 = {{ mtech_percent_placed|safe }};
+        var btech_placed_frac=data1["Placed"]/(data1["Placed"]+data1["Not placed"]);
+        var mtech_placed_frac=data2["Placed"]/(data2["Placed"]+data2["Not placed"]);
+        var data3 = {{ btech_branchwise_placements|safe }};
+        var data4 = {{ mtech_branchwise_placements|safe }};
+        var data5 = {{ company_count|safe }};
+        var data6={{company_count_mtech|safe }};
+        console.log(data5);
+        </script>
+    </div>
+
+
+
+
+
+{% endblock %}
+
+
+
+{% block scripts %}
+
 
 <!-- Load d3.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.6.0/d3.min.js"></script>
 <!-- Color scale -->
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
- 
+
 
 <!-- Resources -->
 <script src="https://www.amcharts.com/lib/4/core.js"></script>
@@ -15,57 +150,6 @@
 <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
 <script src="https://www.amcharts.com/lib/4/plugins/wordCloud.js"></script>
 <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
-
-<!-- Chart code -->
-
-
-<!-- Add 2 buttons -->
-<div style="text-align:center;">
-<button type="button"  class="btn btn-primary button" onclick="updateGauge(currentpos,btech_placed_frac);updateBarChart(data3);plot_cloud(data5);">B.tech</button>
-<button type="button" class="btn btn-primary button" onclick="updateGauge(currentpos,mtech_placed_frac);updateBarChart(data4);plot_cloud(data6);">M.tech</button>
-</div>
-<div style="text-align:center;">
-<h3> Placement statistics </h3>
-
-<svg width="960" height="500" id="gauge">
- viewBox="0 0 960 500"
-  preserveAspectRatio="xMidYMid meet">
-  </svg>
-
-<h3> Branchwise placement statistics</h3>
-<div style="height: 800px;"id="barchart"></div>
-
-<br>
-<br>
-<h3> Top Recruitors</h3>
-<div style="height: 800px;" id="wordcloud"></div>
-<br>
-<br>
-
-<div style="margin-bottom:200px"></div>
-<style>
-#pictorial {
-  width: 100%;
-  height: 500px;
-}
-</style>
-<link rel="stylesheet" type="text/css" href="{% static 'home/buttons.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'home/gauge.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'home/barchart.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'home/wordcloud.css' %}">
-<script>
-var delayBarChart=100000;
-var data1 = {{ btech_percent_placed|safe }};
-var data2 = {{ mtech_percent_placed|safe }};
-var btech_placed_frac=data1["Placed"]/(data1["Placed"]+data1["Not placed"]);
-var mtech_placed_frac=data2["Placed"]/(data2["Placed"]+data2["Not placed"]);
-var data3 = {{ btech_branchwise_placements|safe }};
-var data4 = {{ mtech_branchwise_placements|safe }};
-var data5 = {{ company_count|safe }};
-var data6={{company_count_mtech|safe }};
-console.log(data5);
-</script>
-
 
 
 

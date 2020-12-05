@@ -21,10 +21,6 @@ def initialize_context(request):
   context['user'] = request.session.get('user', {'is_authenticated': False})
   return context
 
-def home(request):
-  context = initialize_context(request)
-
-  return render(request,'home/home.html', context)
 
 def sign_in(request):
   # Get the sign-in URL
@@ -55,12 +51,12 @@ def callback(request):
   if user is not None:
       login(request,user)
       messages.success(request,"Success: You were successfully logged in.")
-      return redirect('home')
-  return redirect('home')
+      return redirect('/')
+  return redirect('/')
 
 def sign_out(request):
   # Clear out the user and token
   logout(request)
   messages.success(request, "Successfully Logged Out")
 
-  return redirect('home')
+  return redirect('/')
