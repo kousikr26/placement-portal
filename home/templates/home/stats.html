@@ -21,48 +21,58 @@
 {% block content %}
 
 
- <nav class="navbar navbar-expand-lg navbar-dark bg-danger fixed-top d-block box">
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+
+
   <div class="container">
-    <a class="navbar-brand order-1 mr-0 hov_class" href="../" style="cursor: pointer;"> <img style="max-width: 35px;max-height: 35px;" src="{% static 'bird/assets/css/includes/img/favicon.png' %}">Placement-portal</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav marg_class" >
-        <!-- <a class="nav-item nav-link text-white" href="#home">Home <span class="sr-only">(current)</span></a> -->
-        <a class="nav-item nav-link text-white hov_class" href="#2" style="cursor: pointer;">UG/PG stats</a>
-        <a class="nav-item nav-link text-white hov_class" href="#3" style="cursor: pointer;">Branchwise stats</a>
-        <a class="nav-item nav-link text-white hov_class" href="#4"style="cursor: pointer;">Top Recruitors</a>
-      </div>
-    </div>
-  </div>
-</nav> <!-- /navbar -->
 
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top d-block box" style="background:rgb(108 122 224);">
-  <div class="container">
-    <a class="navbar-brand order-1 mr-0 hov_class" href="../" style="cursor: pointer;"> <img style="max-width: 35px;max-height: 35px;" src="{% static 'bird/assets/css/includes/img/favicon.png' %}">Placement-portal</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse">
+  <a class="navbar-brand order-0 hov_class" href="/" style="cursor: pointer;"> <img style="max-width: 35px;max-height: 35px;" src="{% static 'images/logo.png' %}">Placement-portal</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-      <div class="navbar-nav mr-auto">
-        <a class="nav-item nav-link text-white hov_class" href="#2" style="cursor: pointer;">UG/PG stats</a>
-        <a class="nav-item nav-link text-white hov_class" href="#3" style="cursor: pointer;">Branchwise stats</a>
-        <a class="nav-item nav-link text-white hov_class" href="#4"style="cursor: pointer;">Top Recruitors</a>
+  <div class="collapse navbar-collapse" id="navbarColor01">
+    <ul class="navbar-nav ml-auto">
 
-      </div>
       {% if request.user.is_authenticated %}
-      <div class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-item nav-link text-white hov_class btn btn-primary mr-auto" href="{% url 'signout' %}" style="cursor: pointer;">Logout</a> </li>
-      </div>
+      <li class="nav-item active">
+        <a class="nav-link" href="#2">UG/PG stats
+        </a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="#3">Branchwise stats
+        </a>
+      </li>
+
+
+      <li class="nav-item active">
+        <a class="nav-link" href="#4">Top Recruitors
+        </a>
+      </li>
+
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'signout' %}">Logout
+        </a>
+      </li>
+      {% else %}
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'signin' %}">Click here to Login
+        </a>
+      </li>
+
+      <a class="nav-item nav-link text-white hov_class" href="{% url 'signin' %}" style="cursor: pointer;"></a>
       {% endif %}
 
-    </div>
+    </ul>
+
   </div>
+</div>
+
 </nav>
+
+
 
 
 

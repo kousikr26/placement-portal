@@ -383,18 +383,18 @@ Placement-data Table
 		padding-bottom: 10px;
 	}
 
+
 	.dataTables_paginate ul li a {
-		background-color: #6c7ae0;
+		background-color: #78c2ad;
 		color: white;
 	}
 
 	.page-item.active .page-link {
-		z-index: 2;
-		color: #fff;
-		background-color: gray;
-		border-color: gray;
+	    z-index: 2;
+	    color: #fff;
+	    background-color: #579684;
+	    border-color: #a1d5c7;
 	}
-
 
 	@media (min-width: 276px) {
 		.mr-sm-2 {
@@ -412,23 +412,44 @@ Placement-data Table
 
 {# navbar #}
 
-	<nav class="navbar navbar-expand-lg navbar-dark fixed-top d-block box" style="background:rgb(108 122 224);">
-		<div class="container">
-			<a class="navbar-brand order-1 mr-0 hov_class" href="../" style="cursor: pointer;"> <img style="max-width: 35px;max-height: 35px;" src="{% static 'bird/assets/css/includes/img/favicon.png' %}">Placement-portal</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 
-				
 
-				<div class="navbar-nav mr-auto">
-					<li class="nav-item">
-						<a class="nav-item nav-link text-white hov_class btn btn-primary mr-auto" href="{% url 'signout' %}" style="cursor: pointer;">Logout</a> </li>
-				</div>
-			</div>
-		</div>
-	</nav>
+  <div class="container">
+
+  <a class="navbar-brand order-0 hov_class" href="/" style="cursor: pointer;"> <img style="max-width: 35px;max-height: 35px;" src="{% static 'images/logo.png' %}">Placement-portal</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarColor01">
+    <ul class="navbar-nav ml-auto">
+
+      {% if request.user.is_authenticated %}
+
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'signout' %}">Logout
+        </a>
+      </li>
+      {% else %}
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'signin' %}">Click here to Login
+        </a>
+      </li>
+
+      <a class="nav-item nav-link text-white hov_class" href="{% url 'signin' %}" style="cursor: pointer;"></a>
+      {% endif %}
+
+    </ul>
+
+  </div>
+</div>
+
+</nav>
+
+
+
+
 
 
 
@@ -443,21 +464,7 @@ Placement-data Table
 						</div>
 						<div class="acad_row">
 							<div class="acad_col-1-lg mar_med_1 svg_class_med">
-								<svg style="width: 30px;margin-left:25px;color:grey; margin-bottom:8px; margin-top:130px;" class="svg-inline--fa fa-graduation-cap fa-w-20 fa-fw mr-2" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="graduation-cap"
-									role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" data-fa-i2svg="">
-									<path fill="currentColor"
-										d="M622.34 153.2L343.4 67.5c-15.2-4.67-31.6-4.67-46.79 0L17.66 153.2c-23.54 7.23-23.54 38.36 0 45.59l48.63 14.94c-10.67 13.19-17.23 29.28-17.88 46.9C38.78 266.15 32 276.11 32 288c0 10.78 5.68 19.85 13.86 25.65L20.33 428.53C18.11 438.52 25.71 448 35.94 448h56.11c10.24 0 17.84-9.48 15.62-19.47L82.14 313.65C90.32 307.85 96 298.78 96 288c0-11.57-6.47-21.25-15.66-26.87.76-15.02 8.44-28.3 20.69-36.72L296.6 284.5c9.06 2.78 26.44 6.25 46.79 0l278.95-85.7c23.55-7.24 23.55-38.36 0-45.6zM352.79 315.09c-28.53 8.76-52.84 3.92-65.59 0l-145.02-44.55L128 384c0 35.35 85.96 64 192 64s192-28.65 192-64l-14.18-113.47-145.03 44.56z">
-									</path>
-								</svg>
-								<svg style="margin-left:30px;color:grey;margin-bottom:8px;" class="svg-inline--fa fa-user-tie fa-w-14 fa-fw mr-2" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user-tie" role="img"
-									xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
-									<path fill="currentColor"
-										d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm95.8 32.6L272 480l-32-136 32-56h-96l32 56-32 136-47.8-191.4C56.9 292 0 350.3 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-72.1-56.9-130.4-128.2-133.8z">
-									</path>
-								</svg>
-								<img src="{% static 'bird_charts/menu.png' %}" alt="" style="max-width: 33px;margin-left: 23px;margin-bottom: 8p;">
-								<img src="{% static 'bird_charts/settings.jpg' %}" alt="" style="max-width: 60px;margin-left: 10px;margin-bottom: auto;">
-								<a href="../../"><img src="{% static 'bird_charts/go back.png' %}" alt="" style="max-width: 30px;margin-left: 20px;margin-top:100px;"></a>
+								<a href="../"><img src="{% static 'bird_charts/go back.png' %}" alt="" style="max-width: 30px;margin-left: 20px;margin-top:100px;"></a>
 							</div>
 							<div class="acad_col">
 								<div style="background: rgb(233, 238, 244);padding:12px 10px;margin-left: -15.5px;border-top-left-radius:16px ;border-top-right-radius:46px;">
@@ -511,92 +518,6 @@ Placement-data Table
 
 								</div>
 
-								<!-- ========================================================================================================== -->
-								<!--
-                  <div id="student-table_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
-                    <div class="dataTables_length" id="student-table_length">
-                      <label>Show
-                        <select name="student-table_length" aria-controls="student-table" class="form-control form-control-sm">
-                          <option value="10">10</option>
-                          <option value="25">25</option>
-                          <option value="50">50</option>
-                          <option value="100">100</option>
-                        </select> entries
-                      </label>
-                    </div>
-                    <div id="student-table_filter" class="dataTables_filter">
-                      <label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="student-table">
-                      </label>
-                    </div>
-                      <table id="student-table" data-vertable="ver6" style="background-color:rgb(233, 238, 244) " class="dataTable no-footer" role="grid" aria-describedby="student-table_info">
-                    <thead style="background-color:rgb(233, 238, 244) ;">
-                      <tr class="row100 head" role="row">
-                        <th style="background-color: rgb(108, 122, 224); color: white; border-top-left-radius: 16px; width: 257.6px;" class="column100 column1 sorting_disabled" data-column="column1" rowspan="1" colspan="1">
-                          NAMES
-                        </th>
-                        <th style="background-color: rgb(108, 122, 224); color: white; width: 116.2px;" class="column100 column2 sorting_disabled" data-column="column2" rowspan="1" colspan="1">Program</th>
-                        <th style="background-color: rgb(108, 122, 224); color: white; width: 116.2px;" class="column100 column3 sorting_disabled" data-column="column3" rowspan="1" colspan="1">Branch</th>
-                        <th style="background-color: rgb(108, 122, 224); color: white; width: 116.2px;" class="column100 column4 sorting_disabled" data-column="column4" rowspan="1" colspan="1">Roll No.</th>
-                        <th style="background-color: rgb(108, 122, 224); color: white; width: 123.4px;" class="column100 column5 sorting_disabled" data-column="column5" rowspan="1" colspan="1">Company</th>
-                        <th style="background-color: rgb(108, 122, 224); color: white; width: 117px;" class="column100 column6 sorting_disabled" data-column="column6" rowspan="1" colspan="1">Profile</th>
-                        <th style="background-color: rgb(108, 122, 224); color: white; border-top-right-radius: 16px; width: 117.8px;" class="column100 column7 sorting_disabled" data-column="column7" rowspan="1" colspan="1">Sector</th>
-                      </tr>
-                    </thead>
-                      <tbody style="background-color: white;" class="child_class">
-                        {% include 'home/table_data.html'%}
-                      </tbody>
-                    </table>
-                    <div class="dataTables_info" id="student-table_info" role="status" aria-live="polite">
-                      Showing 1 to 10 of 649 entries
-                    </div>
-                    <div class="dataTables_paginate paging_full_numbers" id="student-table_paginate">
-                      <ul class="pagination">
-                        <li class="paginate_button page-item first disabled" id="student-table_first">
-                          <a href="#" aria-controls="student-table" data-dt-idx="0" tabindex="0" class="page-link">
-                            First
-                          </a>
-                        </li>
-                        <li class="paginate_button page-item previous disabled" id="student-table_previous">
-                          <a href="#" aria-controls="student-table" data-dt-idx="1" tabindex="0" class="page-link">
-                            Previous
-                          </a>
-                        </li>
-                        <li class="paginate_button page-item active"><a href="#" aria-controls="student-table" data-dt-idx="2" tabindex="0" class="page-link">1</a></li><li class="paginate_button page-item "><a href="#" aria-controls="student-table" data-dt-idx="3" tabindex="0" class="page-link">2</a></li><li class="paginate_button page-item "><a href="#" aria-controls="student-table" data-dt-idx="4" tabindex="0" class="page-link">3</a></li><li class="paginate_button page-item "><a href="#" aria-controls="student-table" data-dt-idx="5" tabindex="0" class="page-link">4</a></li><li class="paginate_button page-item "><a href="#" aria-controls="student-table" data-dt-idx="6" tabindex="0" class="page-link">5</a></li><li class="paginate_button page-item disabled" id="student-table_ellipsis"><a href="#" aria-controls="student-table" data-dt-idx="7" tabindex="0" class="page-link">…</a></li><li class="paginate_button page-item "><a href="#" aria-controls="student-table" data-dt-idx="8" tabindex="0" class="page-link">65</a></li><li class="paginate_button page-item next" id="student-table_next"><a href="#" aria-controls="student-table" data-dt-idx="9" tabindex="0" class="page-link">Next</a></li><li class="paginate_button page-item last" id="student-table_last"><a href="#" aria-controls="student-table" data-dt-idx="10" tabindex="0" class="page-link">Last</a>
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="acad_col-1-sm mob_med" style="background:#E9EEF4 ;">
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-   -->
-								<!--
-                  <div id="student-table_wrapper" class="dataTables_wrapper">
-                    <div class="table-responsive-lg" hidden id="student-table-div">
-                        <table class="table table-hover table-striped table-bordered" cellspacing="0" width="100%" id="student-table" style="overflow-x: scroll;">
-                             =================================================
-                        </table>
-                        <div class="row pl-3" style="padding:2%;">
-                            <div class="col-12 col-lg-6" id="student-table_info-div">
-                            </div>
-                            <div class="col-12 col-lg-6" id="student-table_paginate_div" style="overflow-x:scroll;">
-                            </div>
-                        </div>
-                    </div>
-                  </div>
-                 -->
-
-
-
-
-								<!-- ======================================================================= -->
-
 								<div class="acad_row new_clear_class">
 									<div class="acad_col-1-sm-sm " style="background:#E9EEF4 ;">
 									</div>
@@ -609,31 +530,29 @@ Placement-data Table
 											<div id="student-table_filter" class="dataTables_filter"></div>
 
 											<table id="student-table" data-vertable="ver6" style="background-color:rgb(233, 238, 244) ">
-												<thead style="background-color:rgb(233, 238, 244) ;">
+												<thead  class="bg-primary">
 													<tr class="row100 head">
-														<th style="background-color: #6c7ae0;color: white;border-top-left-radius: 16px;" class="column100 column1" data-column="column1">NAMES</th>
-														<th style="background-color: #6c7ae0;color: white;" class="column100 column2" data-column="column2">Program</th>
-														<th style="background-color: #6c7ae0;color: white;" class="column100 column3" data-column="column3">Branch</th>
-														<th style="background-color: #6c7ae0;color: white;" class="column100 column4" data-column="column4">Roll No.</th>
-														<!-- <th style="background-color: #6c7ae0;color: white;"class="column100 column5" data-column="column5">Wednesday</th> -->
-														<th style="background-color: #6c7ae0;color: white;" class="column100 column5 " data-column="column5">Company</th>
-														<th style="background-color: #6c7ae0;color: white;" class="column100 column6 " data-column="column6">Profile</th>
-														<th style="background-color: #6c7ae0;color: white;border-top-right-radius:  16px;" class="column100 column7" data-column="column7">Sector</th>
+														<th style="color: white;border-top-left-radius: 16px;" class="column100 column1" data-column="column1">NAME</th>
+														<th style="color: white;" class="column100 column2" data-column="column2">Program</th>
+														<th style="color: white;" class="column100 column3" data-column="column3">Branch</th>
+														<th style="color: white;" class="column100 column4" data-column="column4">Roll No.</th>
+														<th style="color: white;" class="column100 column5 " data-column="column5">Company</th>
+														<th style="color: white;" class="column100 column6 " data-column="column6">Profile</th>
+														<th style="color: white;border-top-right-radius:  16px;" class="column100 column7" data-column="column7">Sector</th>
 													</tr>
 												</thead>
 												<tbody style="background-color: white;" class="child_class">
 													{% include 'home/table_data.html'%}
 												</tbody>
-												<tfoot style="background-color:rgb(233, 238, 244) ;">
+												<tfoot class="bg-primary">
 													<tr class="row100 head">
-														<th style="background-color: #6c7ae0;color: white;border-bottom-left-radius: 16px;" class="column100 column1" data-column="column1">NAMES</th>
-														<th style="background-color: #6c7ae0;color: white;" class="column100 column2" data-column="column2">Program</th>
-														<th style="background-color: #6c7ae0;color: white;" class="column100 column3" data-column="column3">Branch</th>
-														<th style="background-color: #6c7ae0;color: white;" class="column100 column4" data-column="column4">Roll No.</th>
-														<!-- <th style="background-color: #6c7ae0;color: white;"class="column100 column5" data-column="column5">Wednesday</th> -->
-														<th style="background-color: #6c7ae0;color: white;" class="column100 column5 " data-column="column5">Company</th>
-														<th style="background-color: #6c7ae0;color: white;" class="column100 column6 " data-column="column6">Profile</th>
-														<th style="background-color: #6c7ae0;color: white;border-bottom-right-radius:  16px;" class="column100 column7" data-column="column7">Sector</th>
+														<th style="color: white;border-top-left-radius: 16px;" class="column100 column1" data-column="column1">NAME</th>
+														<th style="color: white;" class="column100 column2" data-column="column2">Program</th>
+														<th style="color: white;" class="column100 column3" data-column="column3">Branch</th>
+														<th style="color: white;" class="column100 column4" data-column="column4">Roll No.</th>
+														<th style="color: white;" class="column100 column5 " data-column="column5">Company</th>
+														<th style="color: white;" class="column100 column6 " data-column="column6">Profile</th>
+														<th style="color: white;border-top-right-radius:  16px;" class="column100 column7" data-column="column7">Sector</th>
 													</tr>
 												</tfoot>
 											</table>
