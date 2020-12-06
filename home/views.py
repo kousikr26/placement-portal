@@ -3,7 +3,7 @@ from .models import *
 from .forms import *
 from django.template import RequestContext
 from django.template.context_processors import csrf
-from django.http import HttpResponseRedirect,JsonResponse
+from django.http import HttpResponseRedirect,JsonResponse,HttpResponseNotFound
 from django.contrib.auth.decorators import login_required
 from django.db.models.functions import Lower
 from django.template.loader import render_to_string
@@ -17,6 +17,11 @@ def home(request):
 
 def permission_not_granted(request):
     return render(request,'403.html')
+
+def handler404(request,exception,template_name='404.html'):
+    return render(request,template_name)
+def handler500(request):
+    return render(request,'500.html')
 
 
 COMPANY_COUNT=70
