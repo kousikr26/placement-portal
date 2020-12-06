@@ -33,6 +33,7 @@ def sign_in(request):
   sign_in_url, state = get_sign_in_url()
   # Save the expected state so we can validate in the callback
   request.session['auth_state'] = state
+  print(sign_in_url,state)
   # Redirect to the Azure sign-in page
   return HttpResponseRedirect(sign_in_url)
 def callback(request):

@@ -141,7 +141,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media/')
 
 LOGIN_URL="signin"
 # when login is required, user will be redirected to this url
-# LOGIN_REDIRECT_URL='home'
+# LOGIN_REDIRECT_URL='charts'
 
 LOGOUT_REDIRECT_URL='home'
 

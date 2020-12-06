@@ -4,7 +4,7 @@ var width = window.innerWidth || document.documentElement.clientWidth || documen
     height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight,
     margin = 40,
     n = 10,
-    radius = width / 4 - (margin * 2),
+    radius = width/4  ,
     needleRad = 10,
     pi = Math.PI,
     halfPi = pi / 2,
@@ -19,10 +19,11 @@ var width = window.innerWidth || document.documentElement.clientWidth || documen
         .append('svg')
         .attr('width', '100%')
         .attr('height', '100%')
-        .attr('viewBox', '0' + ' ' + '0' + ' ' + width + ' ' + Math.min(height, width / 2))
+        .attr('viewBox', '0' + ' ' + '0' + ' ' + width + ' ' + Math.min(width,height))
         .attr('preserveAspectRatio', 'xMinYMin')
         .append('g')
-        .attr('transform', 'translate(' + width / 2 + ',' + (Math.min(height, width / 2) / 1.5 - margin) + ')');
+        .attr('transform', 'translate(' + width / 2 + ',' + (Math.min(height, width)/1.5  - margin) + ')');
+console.log(width, height);
 _data.push(endAngle);
 
 var arc = d3.arc()
@@ -41,7 +42,7 @@ slice
     .attr('fill', function (d) { return colorScale(d); });
 
 var needle = svg.append('g').append('path').attr('class', 'needle').attr('fill-opacity', .7).attr('stroke', 'black');
-var text = svg.append('g').append('text').attr('class', 'text').attr('text-anchor', 'middle').attr('dy', '-0.45em').classed('monospace', true);
+var text = svg.append('g').append('text').attr('class', 'text').attr('text-anchor', 'middle').attr('dy', '-0.45em').classed('monospace', true).style("font-size", "120%");
 
 function updateGauge(oldValue, newValue) {
     currentpos = newValue;

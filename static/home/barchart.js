@@ -8,16 +8,15 @@ function updateBarChart(data) {
 
 
         var chart = am4core.create("barchart", am4charts.XYChart);
-        chart.logo.disabled = true
-        chart.logo.height = -15000;
+
         chart.data = data;
         chart.responsive.enabled = true;
-        chart.padding(40, 40, 40, 40);
+        // chart.padding(40, 40, 40, 40);
 
         var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
         categoryAxis.renderer.grid.template.location = 0;
         categoryAxis.dataFields.category = "group";
-        categoryAxis.renderer.minGridDistance = 60;
+        categoryAxis.renderer.minGridDistance = 0;
         categoryAxis.renderer.grid.template.disabled = true;
         categoryAxis.renderer.labels.template.horizontalCenter = "right";
         categoryAxis.renderer.labels.template.verticalCenter = "middle";
@@ -40,6 +39,7 @@ function updateBarChart(data) {
         var labelBullet = series.bullets.push(new am4charts.LabelBullet());
         labelBullet.label.verticalCenter = "bottom";
         labelBullet.label.dy = -10;
+        labelBullet.label.fontSize=am4core.percent(80);
         labelBullet.label.text = "{values.valueY.workingValue.formatNumber('#.')}";
 
         chart.zoomOutButton.disabled = false;
@@ -51,7 +51,8 @@ function updateBarChart(data) {
 
 
         categoryAxis.sortBySeries = series;
-
+        chart.logo.disabled = true
+        chart.logo.height = -15000;
     });
 }
 updateBarChart(data3) 

@@ -10,15 +10,13 @@ function plot_cloud(data) {
 
 
         chart = am4core.create("wordcloud", am4plugins_wordCloud.WordCloud);
-        chart.logo.disabled = true
-        chart.logo.height = -15000;
+
         var series = chart.series.push(new am4plugins_wordCloud.WordCloudSeries());
 
 
         series.accuracy = 4;
-        series.step = 50;
+        series.step = 20
         series.rotationThreshold = 0;
-        series.maxCount = 15;
         series.labels.template.tooltipText = "{word}:\n[bold]{value} placed[/]";
         series.fontFamily = "Courier New";
 
@@ -38,7 +36,8 @@ function plot_cloud(data) {
             "max": am4core.color("#d2222d"),
             "dataField": "value"
         });
-
+        chart.logo.disabled = true
+        chart.logo.height = -15000;
     }); // end am4core.ready()
 
 
