@@ -76,19 +76,24 @@
 
   <!-- End Messages -->
   <div class="jumbotron">
-    <h1 class="display-4">Welcome to IITG Placement Portal!</h1>
-    <p class="lead">A portal for IITG community to display placement-statistics. </p>
+    <h2 class="display-5" style="text-align: center;">Welcome to IITG Placement Portal</h1>
+    <p class="lead">A dashboard for viewing Placement-2021 statistics </p>
     <hr class="my-4">
 
     {% if request.user.is_authenticated %}
 
-    <p class="lead"> You are logged in as <b> {{request.user.username|replace_underscores}} </b></p>
+    <p class="lead" style="display: inline-block;"> You are logged in as</p> <div style="border: 1px ;display: inline-block; color:black;padding:5px;font-weight: bold;"> {{request.user.username|replace_underscores|title}} </div>
+    <div style="text-align:center;">
+      <a class="btn btn-primary" href="/charts" role="button">Charts</a>
+      <a class="btn btn-primary" href="/table" role="button">Table</a>
+    </div>
     {% else %}
 
-    <p class="lead"> To get the access to the placement statistics, you have to login using your institute email ID</p>
-    <p class="lead">
-      <a class="btn btn-primary btn-lg" href="{% url 'signin' %}" role="button">Login</a>
-    </p>
+    <p class="lead"> To view placement statistics you need to login using your institute email ID</p>
+    <div style="text-align: center; border: 1px">
+      <a class="btn btn-outline-dark" href="{% url 'signin' %}" role="button" style="text-transform:none"><img width="20px" style="margin-bottom:3px; margin-right:5px" alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Microsoft_Office_Outlook_%282018%E2%80%93present%29.svg/1200px-Microsoft_Office_Outlook_%282018%E2%80%93present%29.svg.png" />
+      Login with Outlook</a>
+    </div>
     {% endif %}
   </div>
 
