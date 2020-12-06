@@ -8,16 +8,20 @@ from django.contrib.auth.decorators import login_required
 from django.db.models.functions import Lower
 from django.template.loader import render_to_string
 from django.utils.text import slugify
-
+from django.contrib.auth.decorators import login_required
 import json
 
 
 def home(request):
   return render(request,'home/home.html',{})
 
+def permission_not_granted(request):
+    return render(request,'403.html')
 
 
-def index(request):
+COMPANY_COUNT=70
+@login_required
+def charts(request):
 
 	branches = ["CSE", "MNC", "ECE", "EEE", "ME", "CE", "CL", "EP", "CST", "BT", "Physics", "Chemistry", "Mathematics", "Design", "Others"]
 
@@ -42,11 +46,21 @@ def index(request):
 			comp_counts_mtech[i.company]+=1
 		else:
 			comp_counts_mtech[i.company]=1
+	comp_btech_counts=list(comp_counts.values())
+	comp_mtech_counts=list(comp_counts_mtech.values())
+	comp_btech_counts.sort(reverse=True)
+	comp_mtech_counts.sort(reverse=True)
+	btech_threshold=0
+	mtech_threshold=0
+	if(len(comp_btech_counts)>COMPANY_COUNT):
+		btech_threshold=comp_btech_counts[COMPANY_COUNT]
+	if(len(comp_mtech_counts)>COMPANY_COUNT):
+		mtech_threshold=comp_mtech_counts[COMPANY_COUNT]
 	comp_count_lis=[]
 	comp_count_lis_mtech=[]
 	for i in comp_counts:
 		tmp={}
-		if(i==""):
+		if(i=="" or comp_counts[i]<btech_threshold):
 			continue
 		tmp["tag"]=i
 		tmp["weight"]=comp_counts[i]
@@ -55,7 +69,7 @@ def index(request):
 		comp_count_lis.append(tmp)
 	for i in comp_counts_mtech:
 		tmp={}
-		if(i==""):
+		if(i=="" or comp_counts_mtech[i]<mtech_threshold):
 			continue
 		tmp["tag"]=i
 		tmp["weight"]=comp_counts_mtech[i]
@@ -97,10 +111,10 @@ def index(request):
 
 	# print(context)
 	return render(request, "home/stats.html",context )
-
 ################################################################################
 # function to render the table
 
+@login_required
 def get_table(request):
 	company = request.GET.get('company')
 	if company:
@@ -115,6 +129,8 @@ def get_table(request):
 ################################################################################
 
 # function to filter the table data
+
+@login_required
 def ajax_table_filter(request):
 	data = dict()
 	if request.method == 'GET' and request.is_ajax():

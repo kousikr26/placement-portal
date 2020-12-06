@@ -28,6 +28,8 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+# AUTH_USER_MODEL = "authentication.User"
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -137,9 +139,9 @@ STATICFILES_FINDERS = [
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR,'media/')
 
-LOGIN_URL="home"
+LOGIN_URL="signin"
 # when login is required, user will be redirected to this url
-LOGIN_REDIRECT_URL='home'
+# LOGIN_REDIRECT_URL='home'
 
 LOGOUT_REDIRECT_URL='home'
 

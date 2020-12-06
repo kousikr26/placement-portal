@@ -5,7 +5,8 @@
   <meta charset="utf-8">
   <title> {% block title %}  {% endblock %}
   </title>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   {# bootstrap css #}
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/minty/bootstrap.min.css" >
 
@@ -15,10 +16,13 @@
 
   <style media="screen">
     body{
-      background-color: #e9f5f8 !important;
+      background-color: #e9f5f8;
     }
     .jumbotron{
       background-color: white;
+    }
+    html{
+      scroll-behavior: smooth;
     }
   </style>
 </head>
@@ -27,6 +31,10 @@
   {% block content %}
 
   {% endblock %}
+
+  {% include "footer.html" %}
+
+
 </body>
 
 

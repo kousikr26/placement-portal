@@ -6,7 +6,13 @@ from django.urls import reverse
 from .graph_helper import get_user
 from .auth_helper import get_sign_in_url, get_token_from_code,get_token
 from django.contrib.auth.models import User
+# from .models import User
 from django.contrib.auth import authenticate, login, logout
+import re
+
+User._meta.get_field('email')._unique = True
+User._meta.get_field('username')._unique = False
+
 def initialize_context(request):
   context = {}
 
@@ -38,12 +44,14 @@ def callback(request):
   user = get_user(token)
 
   # Get user info
-  username = user['displayName']
+  username = user['displayName'].replace(" ","_")
+  username = re.sub('[^0-9a-zA-Z_]+','',username)
   password = user['surname']
   email = user['mail']
+  print(username,password,email)
 
   try:
-      user = User.objects.get(username=username)
+      user = User.objects.get(email=email)
   except User.DoesNotExist:
       user = User.objects.create_user(username,email,password)
       user.save()

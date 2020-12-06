@@ -1,21 +1,42 @@
-<div class="row mt-5" style="min-height:75px; width:100%; position:relative">
-    <div class="col-4" <a href="https://www.iitg.ac.in"><img src="/static/images/iitg.jpg" style="width:auto; max-height:65px"></a>
-    </div>
-    <div class="justify-content-center col-4" style="font-size: 30px; font-family:Lato;
-    color:#2D2F91; font-weight:bold; line-height:34px">
-        <center>ADMIN PORTAL</center>
-    </div>
-    <div class="col-4" title="Logout" style="height:auto">
-        <a href="{% url 'signout' %}"><i class="fa fa-sign-out" aria-hidden="true" style="float:right;width:auto; font-size:50px; color:#2D2F91;"></i></a>
-    </div>
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+
+
+  <div class="container">
+
+  <a class="navbar-brand order-0 hov_class" href="/" style="cursor: pointer;"> <img style="max-width: 35px;max-height: 35px;" src="{% static 'images/logo.png' %}">Placement-portal</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarColor01">
+    <ul class="navbar-nav ml-auto">
+
+      {% if request.user.is_authenticated %}
+      <li class="nav-item active">
+        <a class="nav-link" href="/">Home
+        </a>
+      </li>
+
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'signout' %}">Logout
+        </a>
+      </li>
+      {% else %}
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'signin' %}">Click here to Login
+        </a>
+      </li>
+
+      <a class="nav-item nav-link text-white hov_class" href="{% url 'signin' %}" style="cursor: pointer;"></a>
+      {% endif %}
+
+    </ul>
+
+  </div>
 </div>
-<div style=" display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    width: 100%;
-    padding: 20px;
-    margin: auto;
-    height: 31.6px;
-    position: relative;
-    text-align:center;">
-</div>
+
+</nav>
+
+
+<br><br><br><br><br>

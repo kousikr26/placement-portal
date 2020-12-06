@@ -9,8 +9,7 @@ Placement-data Table
 
 
 {% block head %}
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <style>
 	.m-b-110 {
 		margin-bottom: 110px;
@@ -21,6 +20,7 @@ Placement-data Table
 		padding: 0px;
 		box-sizing: border-box;
 	}
+
 	body,
 	html {
 		height: 100%;
@@ -106,7 +106,7 @@ Placement-data Table
 
 	.limiter {
 		width: 100%;
-		margin: 0 auto;
+		margin: auto;
 	}
 
 	.container-table100 {
@@ -184,7 +184,7 @@ Placement-data Table
 
 	.table100.ver6 {
 		border-radius: 16px;
-		overflow: hidden;
+		/* overflow: hidden; */
 		background: rgba(255, 255, 255, 0.8);
 		box-shadow: 1px 1px 20px rgba(50, 50, 50, 0.12);
 
@@ -230,8 +230,8 @@ Placement-data Table
 		display: flex;
 		-webkit-flex-wrap: wrap;
 		flex-wrap: wrap;
-		margin-right: -15px;
-		margin-left: -15px;
+		/* margin-right: -15px; */
+		/* margin-left: -15px; */
 	}
 
 	.acad_col {
@@ -372,7 +372,7 @@ Placement-data Table
 		margin-top: 30px;
 		display: inline-block;
 		color: gray;
-		margin-left: 10px;
+		/* margin-left: 10px; */
 		padding-bottom: 10px;
 	}
 
@@ -390,10 +390,10 @@ Placement-data Table
 	}
 
 	.page-item.active .page-link {
-	    z-index: 2;
-	    color: #fff;
-	    background-color: #579684;
-	    border-color: #a1d5c7;
+		z-index: 2;
+		color: #fff;
+		background-color: #579684;
+		border-color: #a1d5c7;
 	}
 
 	@media (min-width: 276px) {
@@ -415,35 +415,40 @@ Placement-data Table
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 
 
-  <div class="container">
+	<div class="container">
 
-  <a class="navbar-brand order-0 hov_class" href="/" style="cursor: pointer;"> <img style="max-width: 35px;max-height: 35px;" src="{% static 'images/logo.png' %}">Placement-portal</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+		<a class="navbar-brand order-0 hov_class" href="/" style="cursor: pointer;"> <img style="max-width: 35px;max-height: 35px;" src="{% static 'images/logo.png' %}">Placement-portal</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
 
-  <div class="collapse navbar-collapse" id="navbarColor01">
-    <ul class="navbar-nav ml-auto">
+		<div class="collapse navbar-collapse" id="navbarColor01">
+			<ul class="navbar-nav ml-auto">
 
-      {% if request.user.is_authenticated %}
+				{% if request.user.is_authenticated %}
 
-      <li class="nav-item active">
-        <a class="nav-link" href="{% url 'signout' %}">Logout
-        </a>
-      </li>
-      {% else %}
-      <li class="nav-item active">
-        <a class="nav-link" href="{% url 'signin' %}">Click here to Login
-        </a>
-      </li>
+				<li class="nav-item active">
+					<a class="nav-link" href="/charts">Charts
+					</a>
+				</li>
 
-      <a class="nav-item nav-link text-white hov_class" href="{% url 'signin' %}" style="cursor: pointer;"></a>
-      {% endif %}
+				<li class="nav-item active">
+					<a class="nav-link" href="{% url 'signout' %}">Logout
+					</a>
+				</li>
+				{% else %}
+				<li class="nav-item active">
+					<a class="nav-link" href="{% url 'signin' %}">Click here to Login
+					</a>
+				</li>
 
-    </ul>
+				<a class="nav-item nav-link text-white hov_class" href="{% url 'signin' %}" style="cursor: pointer;"></a>
+				{% endif %}
 
-  </div>
-</div>
+			</ul>
+
+		</div>
+	</div>
 
 </nav>
 
@@ -454,83 +459,81 @@ Placement-data Table
 
 
 
-	<div class="limiter">
-		<div class="container-table100" style="margin: 50px;">
-			<div class="wrap-table100">
-				<div class="table100 ver6 m-b-110 " style="margin-left:50px;border-radius: 16px;">
-					<div class="table100 ver6">
-						<div>
+<div class="">
+	<div>
+		<div class="">
+			<div class="table100 ver6 m-b-110 " style="margin-left:50px;border-radius: 16px;">
+				<div class="">
 
-						</div>
-						<div class="acad_row">
-							<div class="acad_col-1-lg mar_med_1 svg_class_med">
-								<a href="../"><img src="{% static 'bird_charts/go back.png' %}" alt="" style="max-width: 30px;margin-left: 20px;margin-top:100px;"></a>
+					<div class="acad_row">
+
+						<div class="acad_col">
+							<div style="background: rgb(233, 238, 244);padding:12px 10px;margin-left: -15.5px;border-top-left-radius:16px ;border-top-right-radius:46px;">
 							</div>
-							<div class="acad_col">
-								<div style="background: rgb(233, 238, 244);padding:12px 10px;margin-left: -15.5px;border-top-left-radius:16px ;border-top-right-radius:46px;">
+
+							<div style="background: rgb(233, 238, 244);margin-left: -15.5px;">
+
+								<div class="col-6 col-lg-3 ml-1" style="display: inline-block;max-width: 299px;">
+									<div class="form-group">
+										<label for="branch">Branch</label>
+										<select class="form-control" id="branch_filter" style="border-color: #7774e7;">
+											<option selected="true" value="all">All</option>
+											{%for branch in branches %}
+											<option value="{{branch.branchName}}">{{branch}}</option>
+											{% endfor %}
+										</select>
+									</div>
 								</div>
 
-								<div style="background: rgb(233, 238, 244);margin-left: -15.5px;">
-
-									<div class="col-6 col-lg-3" style="display: inline-block;max-width: 299px;margin-left: 20px;">
-										<div class="form-group">
-											<label for="branch">Branch</label>
-											<select class="form-control" id="branch_filter" style="border-color: #7774e7;">
-												<option selected="true" value="all">All</option>
-												{%for branch in branches %}
-												<option value="{{branch.branchName}}">{{branch}}</option>
-												{% endfor %}
-											</select>
-										</div>
+								<div class="col-6 col-lg-3 ml-1" style="display: inline-block;max-width: 299px;">
+									<div class="form-group">
+										<label for="branch">Program</label>
+										<select class="form-control" id="program_filter" style="border-color: #7774e7;">
+											<option selected="true" value="all">All</option>
+											<option value="B.Tech">B.Tech</option>
+											<option value="B.Des">B.Des</option>
+											<option value="M.Tech">M.Tech</option>
+											<option value="M.Des">M.Des</option>
+											<option value="M.Sc">M.Sc</option>
+											<option value="Phd">Phd</option>
+											<option value="Others">Others</option>
+										</select>
 									</div>
-
-									<div class="col-6 col-lg-3" style="display: inline-block;max-width: 299px;">
-										<div class="form-group">
-											<label for="branch">Program</label>
-											<select class="form-control" id="program_filter" style="border-color: #7774e7;">
-												<option selected="true" value="all">All</option>
-												<option value="B.Tech">B.Tech</option>
-												<option value="B.Des">B.Des</option>
-												<option value="M.Tech">M.Tech</option>
-												<option value="M.Des">M.Des</option>
-												<option value="M.Sc">M.Sc</option>
-												<option value="Phd">Phd</option>
-												<option value="Others">Others</option>
-											</select>
-										</div>
-									</div>
-
-
-									<div class="col-6 col-lg-3" style="display: inline-block;max-width: 299px;">
-										<div class="form-group">
-											<label for="SortBy">Sort By</label>
-											<select class="form-control" id="sort" style="border-color: #7774e7;">
-												<option selected="true" value='roll'>Roll No</option>
-												<option value='name'>Name</option>
-												<option value='programs'>Program</option>
-												<option value='branch'>Branch</option>
-												<option value='company'>Company</option>
-												<option value='profile'>Profile</option>
-												<option value='sector'>Sector</option>
-											</select>
-										</div>
-									</div>
-
 								</div>
 
-								<div class="acad_row new_clear_class">
-									<div class="acad_col-1-sm-sm " style="background:#E9EEF4 ;">
+
+								<div class="col-6 col-lg-3 ml-1" style="display: inline-block;max-width: 299px;">
+									<div class="form-group">
+										<label for="SortBy">Sort By</label>
+										<select class="form-control" id="sort" style="border-color: #7774e7;">
+											<option selected="true" value='roll'>Roll No</option>
+											<option value='name'>Name</option>
+											<option value='programs'>Program</option>
+											<option value='branch'>Branch</option>
+											<option value='company'>Company</option>
+											<option value='profile'>Profile</option>
+											<option value='sector'>Sector</option>
+										</select>
 									</div>
-									<div class="acad_col " style="background-color: rgb(233, 238, 244);">
+								</div>
+
+							</div>
+
+							<div class="acad_row">
+								<div class="acad_col-1-sm-sm " style="background:#E9EEF4 ;">
+								</div>
+								<div class="acad_col " style="background-color: rgb(233, 238, 244);">
 
 
-										<div id="student-table_wrapper" class="dataTables_wrapper">
+									<div id="student-table_wrapper" class="dataTables_wrapper ">
 
-											<div class="dataTables_length" id="student-table_length"></div>
-											<div id="student-table_filter" class="dataTables_filter"></div>
+										<div class="dataTables_length" id="student-table_length"></div>
+										<div id="student-table_filter" class="dataTables_filter"></div>
+										<div class="table-responsive-lg">
 
-											<table id="student-table" data-vertable="ver6" style="background-color:rgb(233, 238, 244) ">
-												<thead  class="bg-primary">
+
+											<table id="student-table" data-vertable="ver6" style="background-color:rgb(233, 238, 244);">
+												<thead class="bg-primary">
 													<tr class="row100 head">
 														<th style="color: white;border-top-left-radius: 16px;" class="column100 column1" data-column="column1">NAME</th>
 														<th style="color: white;" class="column100 column2" data-column="column2">Program</th>
@@ -558,11 +561,11 @@ Placement-data Table
 											</table>
 										</div>
 									</div>
-									<div class="acad_col-1-sm mob_med" style="background:#E9EEF4 ;">
-									</div>
-									<div class="dataTables_info" id="student-table_info" role="status" aria-live="polite"></div>
-									<div class="dataTables_paginate paging_full_numbers" id="student-table_paginate"></div>
 								</div>
+								<div class="acad_col-1-sm " style="background:#E9EEF4 ;">
+								</div>
+								<div class="dataTables_info" id="student-table_info" role="status" aria-live="polite"></div>
+								<div class="dataTables_paginate paging_full_numbers" id="student-table_paginate"></div>
 							</div>
 						</div>
 					</div>
@@ -570,6 +573,7 @@ Placement-data Table
 			</div>
 		</div>
 	</div>
+</div>
 
 
 
@@ -579,136 +583,136 @@ Placement-data Table
 {% block scripts %}
 
 
-	<script>
-		(function($) {
-			"use strict";
-			$('.column100').on('mouseover', function() {
-				var table1 = $(this).parent().parent().parent();
-				var table2 = $(this).parent().parent();
-				var verTable = $(table1).data('vertable') + "";
-				var column = $(this).data('column') + "";
+<script>
+	(function($) {
+		"use strict";
+		$('.column100').on('mouseover', function() {
+			var table1 = $(this).parent().parent().parent();
+			var table2 = $(this).parent().parent();
+			var verTable = $(table1).data('vertable') + "";
+			var column = $(this).data('column') + "";
 
-				$(table2).find("." + column).addClass('hov-column-' + verTable);
-				$(table1).find(".row100.head ." + column).addClass('hov-column-head-' + verTable);
+			$(table2).find("." + column).addClass('hov-column-' + verTable);
+			$(table1).find(".row100.head ." + column).addClass('hov-column-head-' + verTable);
+		});
+
+		$('.column100').on('mouseout', function() {
+			var table1 = $(this).parent().parent().parent();
+			var table2 = $(this).parent().parent();
+			var verTable = $(table1).data('vertable') + "";
+			var column = $(this).data('column') + "";
+
+			$(table2).find("." + column).removeClass('hov-column-' + verTable);
+			$(table1).find(".row100.head ." + column).removeClass('hov-column-head-' + verTable);
+		});
+	})(jQuery);
+</script>
+
+
+<!-- datatables scripts for adding pagination and all-->
+<script src="{% static 'js/jquery-3.5.1.js' %}"></script> <!-- JQUERY HERE -->
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> -->
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/jquery.dataTables.min.js' %}"></script>
+<!-- <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script> -->
+<script src="{% static 'js/dataTables.bootstrap4.min.js' %}"></script>
+<!-- <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script> -->
+
+<script>
+	////////////////////////////////////////////////////////////////////////////////////
+	// fucntion to add DataTable to the table
+	var activeDataTable = function() {
+		if (!$.fn.DataTable.isDataTable('#student-table')) {
+			$('#student-table').DataTable({
+				dom: 'Blfrtip',
+				pagingType: "full_numbers",
+				responsive: true,
+				autoWidth: true,
+				ordering: false,
+				fixedColumns: true,
+				buttons: [{
+						extend: 'pdf',
+						footer: true,
+						exportOptions: {
+							columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+						}
+					},
+					{
+						extend: 'csv',
+						footer: false,
+						fieldBoundary: '',
+						exportOptions: {
+							columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+						}
+					},
+					{
+						extend: 'excel',
+						footer: false,
+						exportOptions: {
+							columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+						}
+					},
+					// {
+					//     extend: 'copy',
+					//     footer: false,
+					//     exportOptions: {
+					//         columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+					//     }
+					// },
+					{
+						extend: 'print',
+						footer: false,
+						exportOptions: {
+							columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+						}
+					},
+					'colvis',
+
+				]
 			});
-
-			$('.column100').on('mouseout', function() {
-				var table1 = $(this).parent().parent().parent();
-				var table2 = $(this).parent().parent();
-				var verTable = $(table1).data('vertable') + "";
-				var column = $(this).data('column') + "";
-
-				$(table2).find("." + column).removeClass('hov-column-' + verTable);
-				$(table1).find(".row100.head ." + column).removeClass('hov-column-head-' + verTable);
-			});
-		})(jQuery);
-	</script>
-
-
-	<!-- datatables scripts for adding pagination and all-->
-	<script src="{% static 'js/jquery-3.5.1.js' %}"></script> <!-- JQUERY HERE -->
-	<!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> -->
-	<script src="{% static 'js/bootstrap.min.js' %}"></script>
-	<script src="{% static 'js/jquery.dataTables.min.js' %}"></script>
-	<!-- <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script> -->
-	<script src="{% static 'js/dataTables.bootstrap4.min.js' %}"></script>
-	<!-- <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script> -->
-
-	<script>
-		////////////////////////////////////////////////////////////////////////////////////
-		// fucntion to add DataTable to the table
-		var activeDataTable = function() {
-			if (!$.fn.DataTable.isDataTable('#student-table')) {
-				$('#student-table').DataTable({
-					dom: 'Blfrtip',
-					pagingType: "full_numbers",
-					responsive: true,
-					autoWidth: true,
-					ordering: false,
-					fixedColumns: true,
-					buttons: [{
-							extend: 'pdf',
-							footer: true,
-							exportOptions: {
-								columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-							}
-						},
-						{
-							extend: 'csv',
-							footer: false,
-							fieldBoundary: '',
-							exportOptions: {
-								columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-							}
-						},
-						{
-							extend: 'excel',
-							footer: false,
-							exportOptions: {
-								columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-							}
-						},
-						// {
-						//     extend: 'copy',
-						//     footer: false,
-						//     exportOptions: {
-						//         columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-						//     }
-						// },
-						{
-							extend: 'print',
-							footer: false,
-							exportOptions: {
-								columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-							}
-						},
-						'colvis',
-
-					]
-				});
-			}
-		};
-		activeDataTable();
-		////////////////////////////////////////////////////////////////////////////////////
-		// function to filter the table data using ajax
-		var ajax_filter = function() {
-			var params = (new URL(document.location)).searchParams;
-			var company = params.get("company");
-			var branch = $('#branch_filter').val();
-			var program = $('#program_filter').val();
-			var sortid = $('#sort').val();
-			$.ajax({
-				url: '/home/ajax/tableFilter',
-				type: 'GET',
-				data: {
-					'branch': branch,
-					'sortid': sortid,
-					'program': program,
-					'company': company,
-				},
-				dataType: 'json',
-				success: function(data) {
-					if ($.fn.DataTable.isDataTable('#student-table')) {
-						$('#student-table').dataTable().fnDestroy();
-						console.log('pagination removed');
-					}
-					// $("#student-table tbody").html('');
-					$("#student-table tbody").html(data.table_data_html);
-					activeDataTable();
-					console.log("table updated!");
+		}
+	};
+	activeDataTable();
+	////////////////////////////////////////////////////////////////////////////////////
+	// function to filter the table data using ajax
+	var ajax_filter = function() {
+		var params = (new URL(document.location)).searchParams;
+		var company = params.get("company");
+		var branch = $('#branch_filter').val();
+		var program = $('#program_filter').val();
+		var sortid = $('#sort').val();
+		$.ajax({
+			url: '/ajax/tableFilter',
+			type: 'GET',
+			data: {
+				'branch': branch,
+				'sortid': sortid,
+				'program': program,
+				'company': company,
+			},
+			dataType: 'json',
+			success: function(data) {
+				if ($.fn.DataTable.isDataTable('#student-table')) {
+					$('#student-table').dataTable().fnDestroy();
+					// console.log('pagination removed');
 				}
-			});
-		};
+				// $("#student-table tbody").html('');
+				$("#student-table tbody").html(data.table_data_html);
+				activeDataTable();
+				// console.log("table updated!");
+			}
+		});
+	};
 
-		// Sorting and Filtering
-		// whenever sortby/filter option changes, the data will be updated
-		$('#sort').on('change', ajax_filter);
-		$('#branch_filter').on('change', ajax_filter);
-		$('#program_filter').on('change', ajax_filter);
+	// Sorting and Filtering
+	// whenever sortby/filter option changes, the data will be updated
+	$('#sort').on('change', ajax_filter);
+	$('#branch_filter').on('change', ajax_filter);
+	$('#program_filter').on('change', ajax_filter);
 
 
-		////////////////////////////////////////////////////////////////////////////////////
-	</script>
+	////////////////////////////////////////////////////////////////////////////////////
+</script>
 
 
-	{% endblock %}
+{% endblock %}

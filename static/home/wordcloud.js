@@ -1,5 +1,5 @@
-function plot_cloud(data){
-    
+function plot_cloud(data) {
+
     var chart;
     am4core.ready(function () {
 
@@ -7,28 +7,30 @@ function plot_cloud(data){
         am4core.useTheme(am4themes_animated);
         // Themes end
 
-        
-        
+
+
         chart = am4core.create("wordcloud", am4plugins_wordCloud.WordCloud);
+        chart.logo.disabled = true
+        chart.logo.height = -15000;
         var series = chart.series.push(new am4plugins_wordCloud.WordCloudSeries());
 
 
         series.accuracy = 4;
-        series.step = 100;
+        series.step = 50;
         series.rotationThreshold = 0;
-        series.maxCount = 200;
+        series.maxCount = 15;
         series.labels.template.tooltipText = "{word}:\n[bold]{value} placed[/]";
         series.fontFamily = "Courier New";
-        series.maxFontSize = am4core.percent(30);
+
         series.data = data;
         series.dataFields.word = "tag";
         series.dataFields.value = "weight";
         series.dataFields.urlval = "urlval"
-        series.labels.template.url = "http://127.0.0.1:8000/home/table/?company={urlval}";
+        series.labels.template.url = "/table/?company={urlval}";
         series.labels.template.urlTarget = "_blank";
 
-        series.minfontsize = 70;
-        series.maxfontsize = 70;
+        // series.minfontsize = ;
+        // series.maxfontsize = 70;
         series.heatRules.push({
             "target": series.labels.template,
             "property": "fill",

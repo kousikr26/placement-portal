@@ -1,8 +1,7 @@
 {% load widget_tweaks %}
 <form method="post" action="{% url 'ccd:student_create'%}" class="js-student-create-form">
     {% csrf_token %}
-    <div class="modal-header heading lead " style="color: #e9ecef;
-      background-color: #7774e7;">
+    <div class="modal-header heading lead ">
         <h3 class="modal-title text-white" style="font-family: 'Nunito';font-weight:bold;">ADD NEW STUDENT </h3>
         <span class="close" data-dismiss="modal" aria-label="Close">
             <i class="fas fa-window-close"></i>
@@ -12,12 +11,7 @@
         {% include "ccd/partial_student_form.html" %}
     </div>
     <div class="modal-footer justify-content-center">
-        <button type="button" class="btn btn-lg waves-effect" data-dismiss="modal" style="color: #7774e7;
-      background-color: transparent;
-      background-image: none;
-      border-color: #7774e7;">Close</button>
-        <button type="submit" class="btn btn-lg btn-info waves-effect waves-light" formnovalidate="formnovalidate" style="color: #fff;
-        background-color: #7774e7;
-        border-color: #7774e7;">Create Student</button>
+        <button type="button" class="btn btn-lg btn-secondary waves-effect" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-lg btn-info waves-effect waves-light" formnovalidate="formnovalidate" >Create Student</button>
     </div>
 </form>

@@ -1,6 +1,14 @@
 {% extends "ccd/base.html" %}
 {%load static%}
+
+{% block title %}
+
+CCD
+{% endblock %}
+
+
 {% block head %}
+
 <!-- style for the check-box only -->
 <style>
     @keyframes click-wave {
@@ -149,7 +157,7 @@ animation: spin .4s linear infinite;
 <style>
     .bgc-grey-100,
 .bgcH-grey-100:hover {
-    background-color: #f5f5f5 !important
+    /* background-color: #f5f5f5 !important */
 }
 
 .container-fluid {
@@ -162,7 +170,7 @@ animation: spin .4s linear infinite;
 
 .c-grey-900,
 .cH-grey-900:hover {
-    color: #212121 !important
+    /* color: #212121 !important */
 }
 
 .mT-10 {
@@ -185,7 +193,7 @@ animation: spin .4s linear infinite;
 
 .bgc-white,
 .bgcH-white:hover {
-    background-color: #fff !important
+    /* background-color: #fff !important */
 }
 
 .bd {
@@ -209,7 +217,7 @@ animation: spin .4s linear infinite;
     padding-right:1%;
 }
 .dataTables_wrapper .dataTables_length {
-    color: #72777a;
+    /* color: #72777a; */
     float: right;
 }
 
@@ -229,14 +237,14 @@ animation: spin .4s linear infinite;
     padding: 5px;
     margin-left: 5px;
     margin-right: 5px;
-    color: #72777a;
+    /* color: #72777a; */
     -webkit-transition: all .2s ease-in;
     -o-transition: all .2s ease-in;
     transition: all .2s ease-in
 }
 
 .dataTables_wrapper .dataTables_filter {
-    color: #313435;
+    /* color: #313435; */
     float: right
 }
 
@@ -247,25 +255,21 @@ animation: spin .4s linear infinite;
 }
 
 
-thead, tfoot {
-    background: #7774e7;
-}
-
 .dataTables_wrapper .dataTables_info {
-    color: #72777a;
+    /* color: #72777a; */
     float: left
 }
 
 .dataTables_wrapper .dataTables_processing {
-    color: #313435
+    /* color: #313435 */
 }
 
 .dataTables_wrapper .dataTables_paginate {
-  color: #7774e7;
+  /* color: #7774e7; */
 }
 
 .dataTables_wrapper .dataTables_paginate .paginate_button {
-    color: #7774e7 !important;
+    /* color: #7774e7 !important; */
     /* padding: 6px 12px; */
     border-radius: 2px;
     /* margin-right: 5px; */
@@ -306,7 +310,7 @@ thead, tfoot {
 .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover,
 .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
     color: #fff !important;
-    background: #7774e7
+    /* background: #7774e7 */
 }
 
 .dataTables_wrapper .status {
@@ -333,16 +337,16 @@ table.dataTable.no-footer {
     padding: 12px;
     padding: .75rem;
     vertical-align: top;
-    border-top: 1px solid #e9ecef
+    border-top: 1px solid ;
 }
 
 .table thead th {
     vertical-align: bottom;
-    border-bottom: 2px solid #e9ecef
+    border-bottom: 2px solid;
 }
 
 .table tbody+tbody {
-    border-top: 2px solid #e9ecef
+    border-top: 2px solid;
 }
 
 .table .table {
@@ -358,7 +362,7 @@ table.dataTable.no-footer {
 .table-bordered,
 .table-bordered td,
 .table-bordered th {
-    border: 1px solid #e9ecef
+    border: 1px solid
 }
 
 .table-bordered thead td,
@@ -456,23 +460,23 @@ table.dataTable.no-footer {
         /* padding: .5rem .75rem; */
         /* margin-left: 0px; */
         line-height: 1;
-        color: #7774e7;
-        background-color: #c6c3d2;
+        /* color: #7774e7; */
+        /* background-color: #c6c3d2; */
         border: 0px;
     }
     .page-item.active .page-link {
     z-index: 1;
     color: #fff !important;
-    background: #7774e7;
-    border-color: #7774e7;
+    /* background: #7774e7; */
+    /* border-color: #7774e7; */
     border-radius: .1em;
 }
 
 .btn-secondary {
-    color: #fff;
+    /* color: #fff;
     background-color: #7774e7;
-    border-color: #7774e7;
-    border-radius:2px;
+    border-color: #7774e7; */
+    /* border-radius:2px; */
 }
 .btn-group>.btn-group:not(:last-child)>.btn, .btn-group>.btn:not(:last-child):not(.dropdown-toggle) {
     /* border-bottom-right-radius: 0; */
@@ -498,19 +502,19 @@ table.dataTable.no-footer {
 }
 
 .dropdown-item.active, .dropdown-item:active {
-    color: #fff;
+    /* color: #fff; */
     text-decoration: none;
-    background-color: #7774e7;
+    /* background-color: #7774e7; */
 }
 .btn-secondary:hover {
-    color: #fff;
-    background-color: #534fe4;
-    border-color: #8066e4;
+    /* color: #fff; */
+    /* background-color: #534fe4; */
+    /* border-color: #8066e4; */
 }
 .btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show>.btn-secondary.dropdown-toggle {
-    color: #fff;
-    background-color: #383696;
-    border-color: #6467a9;
+    /* color: #fff; */
+    /* background-color: #383696; */
+    /* border-color: #6467a9; */
 
 
 
@@ -566,20 +570,20 @@ only screen and (max-width: 760px),
   position: relative;
   padding: 10px 10px 1px 10px;
   width: 100px;
-  color: #5c4949;
+  /* color: #5c4949; */
   font-size: 16px;
   font-weight: 100;
   letter-spacing: 1.5px;
   border-radius: 5px;
   border-style:solid;
-  border-color: #7774e7;
+  /* border-color: #7774e7; */
   transition: width 0.4s ease;
   outline: none;
 }
 
 .dataTables_filter input:focus {
   width: 200px;
-  border-color: #7774e7;
+  /* border-color: #7774e7; */
 }
 
 
@@ -589,7 +593,7 @@ only screen and (max-width: 760px),
     padding: .375rem .75rem;
     font-size: 1rem;
     line-height: 1.5;
-    color: #495057;
+    /* color: #495057; */
     background-color: #fff;
     background-clip: padding-box;
     border: 1px solid #ced4da;
@@ -614,7 +618,7 @@ only screen and (max-width: 760px),
 
 {% comment %} loader {% endcomment %}
 <div id="loader" class="">
-    <div class="spinner"></div>
+    {# <div class="spinner"></div> #}
 </div>
 
 {% comment %} script for loader {% endcomment %}
@@ -637,15 +641,13 @@ window.addEventListener('load', () => {
     </div>
 </div>
 <!-- TABLE FOR ALL STUDENTS -->
-<div class="" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); margin:1%;padding:2% 0%;">
+<div class="" style=" margin:1%;padding:2% 0%;">
     <div class="row" style="padding-left:2%;">
         <div class="col">
             <p>
                 <!-- BUTTON TO TRIGGER THE ACTION -->
-                <button type="button" class="btn js-create-student-btn" data-url="{% url 'ccd:student_create' %}" data-toggle="tooltip" data-placement="top" title="Add a new student" style="color: #e9ecef;
-                background-color: #7774e7;
-                border-color: #c6c3d2;">
-                    <i class="fas fa-user-plus mr-1"></i>
+                <button type="button" class="btn btn-primary js-create-student-btn" data-url="{% url 'ccd:student_create' %}" data-toggle="tooltip" data-placement="top" title="Add a new student">
+                <i class="fas fa-user-plus mr-1"></i>
                     Add Student
                 </button>
             </p>
@@ -710,8 +712,8 @@ window.addEventListener('load', () => {
     </div>
     <div id="student-table_wrapper" class="dataTables_wrapper">
         <div class="table-responsive-lg" hidden id="student-table-div">
-            <table class="table table-hover table-striped table-bordered" cellspacing="0" width="100%" id="student-table" style="overflow-x: scroll;">
-                <thead class="">
+            <table class="table table-hover table-bordered" cellspacing="0" width="100%" id="student-table" style="overflow-x: scroll;">
+                <thead class="bg-primary">
                     <tr>
                         <th>Name</th>
                         <th>Roll No.</th>
@@ -727,7 +729,7 @@ window.addEventListener('load', () => {
                         <th></th>
                     </tr>
                 </thead>
-                <tfoot>
+                <tfoot class="bg-primary">
                     <tr>
                         <th>Name</th>
                         <th>Roll No.</th>
@@ -758,9 +760,7 @@ window.addEventListener('load', () => {
     <div class="row">
         <div class="col-12 col-lg-6">
             <div class="mt-5" style="display:flex;justify-content:center">
-                <button class="btn " id="database-update-collapseContent-btn" style="color: #e9ecef;
-      background-color: #7774e7;
-      border-color: #c6c3d2;">Update database</button>
+                <button class="btn btn-primary" id="database-update-collapseContent-btn">Update database</button>
             </div>
             <div class="collapse" id="database-update-collapseContent">
                 <!-- Card -->
@@ -814,9 +814,7 @@ window.addEventListener('load', () => {
                                 <p><strong>Select .csv file</strong></p>
                                 <p style="opacity:.7;font-style:italic;" class="">Note: The file data must be formatted in the same pattern, as shown in this portal. </p>
                                 <input type="file" name="fileUpload" id="fileUpload">
-                                <button type="button" class="btn" id="data_btn" disabled style="color: #e9ecef;
-              background-color: #7774e7;
-              border-color: #c6c3d2;"> Read File</button>
+                                <button type="button" class="btn btn-primary" id="data_btn" disabled> Read File</button>
                                 <div class="" style="display: flex;justify-content: center;">
                                     <div id="data-btn-text" class="p-4" hidden>
                                         <div class="loader"></div>
@@ -825,11 +823,11 @@ window.addEventListener('load', () => {
                                 <div class="mt-3 " id="data-table" hidden>
                                     <div class="table-responsive">
                                         <table class="table  table-hover table-striped table-bordered " cellspacing="0" width="100%" id="csv-data-table" style="overflow-x: scroll;">
-                                            <thead class="">
+                                            <thead class="bg-primary">
                                                 <tr id="csv_file_headings">
                                                 </tr>
                                             </thead>
-                                            <tfoot>
+                                            <tfoot class="bg-primary">
                                                 <tr id="csv_file_footer">
                                                 </tr>
                                             </tfoot>
@@ -864,9 +862,7 @@ window.addEventListener('load', () => {
         {% comment %} file manager {% endcomment %}
         <div class="col-12 col-lg-6">
             <div class="mt-5" style="display:flex;justify-content:center">
-                <button class="btn " id="collapseContent-btn-fileManager" style="color: #e9ecef;
-      background-color: #7774e7;
-      border-color: #c6c3d2;">File Manager</button>
+                <button class="btn btn-primary" id="collapseContent-btn-fileManager">File Manager</button>
             </div>
             <div class="collapse" id="collapseContent-fileManager">
                 <!-- Card -->
@@ -877,9 +873,7 @@ window.addEventListener('load', () => {
                     <!-- Card content -->
                     <div class="card-body">
                         <div class="" style="display:flex;justify-content:center">
-                            <button type="button" name="button" class="btn" id="file-upload-btn" style="color: #e9ecef;
-              background-color: #7774e7;
-              border-color: #c6c3d2;"> <i class="fas fa-upload pr-2"></i>Upload New File</button>
+                            <button type="button" name="button" class="btn btn-primary" id="file-upload-btn"> <i class="fas fa-upload pr-2"></i>Upload New File</button>
                         </div>
                         <div class="collapse" id="file-upload-form-collapseContent">
                             <div class="card promoting-card p-5" id="file-upload-form-div">
@@ -893,7 +887,7 @@ window.addEventListener('load', () => {
         </div>
     </div>
     {% endblock content %}
-    {% block extrascripts %}
+    {% block scripts %}
     {% comment %} script for database-update feature {% endcomment %}
     <script type="text/javascript">
     ////////////////////////////////////////////////////////////////////////////////

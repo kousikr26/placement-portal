@@ -8,7 +8,8 @@ function updateBarChart(data) {
 
 
         var chart = am4core.create("barchart", am4charts.XYChart);
-
+        chart.logo.disabled = true
+        chart.logo.height = -15000;
         chart.data = data;
         chart.responsive.enabled = true;
         chart.padding(40, 40, 40, 40);
