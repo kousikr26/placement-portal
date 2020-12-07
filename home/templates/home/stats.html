@@ -92,18 +92,6 @@
 <div style="position:absolute"></div>
 <button type="button" class="btn btn-primary button " id="mtech-button"  onclick="updateGauge(currentpos,mtech_placed_frac);updateBarChart(data4);plot_cloud(data6);document.getElementById('heading-text').innerHTML='M.tech Placement statistics';document.getElementById('mtech-button').classList.add('disabled');document.getElementById('btech-button').classList.remove('disabled');">M.tech</button>
 </div>
-<script>
-  $(function() {
-    $('#toggle-event').change(function() {
-      if($(this).prop('checked')){
-        updateGauge(currentpos,btech_placed_frac);updateBarChart(data3);plot_cloud(data5);document.getElementById('heading-text').innerHTML='B.tech Placement statistics';
-      }
-      else{
-        updateGauge(currentpos,mtech_placed_frac);updateBarChart(data4);plot_cloud(data6);document.getElementById('heading-text').innerHTML='M.tech Placement statistics';
-      }
-    })
-  })
-</script>
 
 
 <div id="gauge"> </div>
