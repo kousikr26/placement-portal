@@ -87,7 +87,7 @@
 <h1  style="margin-top:70px;text-align: center;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;" id="heading-text"> B.Tech Placement statistics </h1>
 <!-- Add 2 buttons -->
 <div style="text-align:center;">
-<input type="checkbox" id="toggle-event" checked data-toggle="toggle" data-on="B.Tech" data-off="M.Tech" data-onstyle="success" data-offstyle="danger">
+{% comment %} <input type="checkbox" id="toggle-event" checked data-toggle="toggle" data-on="B.Tech" data-off="M.Tech" data-onstyle="success" data-offstyle="danger"> {% endcomment %}
 <button type="button"  class="btn btn-primary button disabled" id="btech-button" onclick="updateGauge(currentpos,btech_placed_frac);updateBarChart(data3);plot_cloud(data5);document.getElementById('heading-text').innerHTML='B.tech Placement statistics';document.getElementById('btech-button').classList.add('disabled');document.getElementById('mtech-button').classList.remove('disabled');">B.tech</button>
 <div style="position:absolute"></div>
 <button type="button" class="btn btn-primary button " id="mtech-button"  onclick="updateGauge(currentpos,mtech_placed_frac);updateBarChart(data4);plot_cloud(data6);document.getElementById('heading-text').innerHTML='M.tech Placement statistics';document.getElementById('mtech-button').classList.add('disabled');document.getElementById('btech-button').classList.remove('disabled');">M.tech</button>
