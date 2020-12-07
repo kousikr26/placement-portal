@@ -631,6 +631,11 @@ window.addEventListener('load', () => {
 });
 </script>
 
+<style>
+.bg-custom{
+  background-color: #023e8a;
+}
+</style>
 
 
 <!-- THE MODAL WE WILL BE USING -->
@@ -713,7 +718,7 @@ window.addEventListener('load', () => {
     <div id="student-table_wrapper" class="dataTables_wrapper">
         <div class="table-responsive-lg" hidden id="student-table-div">
             <table class="table table-hover table-bordered" cellspacing="0" width="100%" id="student-table" style="overflow-x: scroll;">
-                <thead class="bg-primary">
+                <thead class="bg-custom">
                     <tr>
                         <th>Name</th>
                         <th>Roll No.</th>
@@ -729,7 +734,7 @@ window.addEventListener('load', () => {
                         <th></th>
                     </tr>
                 </thead>
-                <tfoot class="bg-primary">
+                <tfoot class="bg-custom">
                     <tr>
                         <th>Name</th>
                         <th>Roll No.</th>
@@ -823,11 +828,11 @@ window.addEventListener('load', () => {
                                 <div class="mt-3 " id="data-table" hidden>
                                     <div class="table-responsive">
                                         <table class="table  table-hover table-striped table-bordered " cellspacing="0" width="100%" id="csv-data-table" style="overflow-x: scroll;">
-                                            <thead class="bg-primary">
+                                            <thead class="bg-custom">
                                                 <tr id="csv_file_headings">
                                                 </tr>
                                             </thead>
-                                            <tfoot class="bg-primary">
+                                            <tfoot class="bg-custom">
                                                 <tr id="csv_file_footer">
                                                 </tr>
                                             </tfoot>

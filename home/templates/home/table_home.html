@@ -381,19 +381,24 @@ Placement-data Table
 		display: block;
 		float: right;
 		padding-bottom: 10px;
+		border-color:#000000;
 	}
 
 
 	.dataTables_paginate ul li a {
-		background-color: #78c2ad;
+		background-color: #0077b6;
 		color: white;
+		border-color:#000000;
 	}
+	.paginate-button.page-item.first.disabled .a{
+		background-color: #023e8a;
 
+	}
 	.page-item.active .page-link {
 		z-index: 2;
 		color: #fff;
-		background-color: #579684;
-		border-color: #a1d5c7;
+		background-color: #023e8a;
+		border-color: #000000;
 	}
 
 	@media (min-width: 276px) {
@@ -411,8 +416,16 @@ Placement-data Table
 
 
 {# navbar #}
+<style>
+.bg-custom{
+  background-color: #023e8a;
+}
+.bg-custom-2{
+	background-color: #0077b6;
+}
+</style>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<nav class="navbar navbar-expand-lg navbar-dark bg-custom">
 
 
 	<div class="container">
@@ -533,7 +546,7 @@ Placement-data Table
 
 
 											<table id="student-table" data-vertable="ver6" style="background-color:rgb(233, 238, 244);">
-												<thead class="bg-primary">
+												<thead class="bg-custom">
 													<tr class="row100 head">
 														<th style="color: white;border-top-left-radius: 16px;" class="column100 column1" data-column="column1">NAME</th>
 														<th style="color: white;" class="column100 column2" data-column="column2">Program</th>
@@ -547,7 +560,7 @@ Placement-data Table
 												<tbody style="background-color: white;" class="child_class">
 													{% include 'home/table_data.html'%}
 												</tbody>
-												<tfoot class="bg-primary">
+												<tfoot class="bg-custom">
 													<tr class="row100 head">
 														<th style="color: white;border-top-left-radius: 16px;" class="column100 column1" data-column="column1">NAME</th>
 														<th style="color: white;" class="column100 column2" data-column="column2">Program</th>

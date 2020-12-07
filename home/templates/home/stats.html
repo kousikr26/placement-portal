@@ -20,10 +20,14 @@
 {% endblock %}
 {% block content %}
 
+<style>
+.navbar-custom{
+  background-color: #023e8a;
+}
+</style>
 
 
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
 
 
   <div class="container">
@@ -39,13 +43,13 @@
       {% if request.user.is_authenticated %}
       
       <li class="nav-item active">
-        <a class="nav-link" href="#3">Branchwise stats
+        <a class="nav-link" href="#2">Top recruitors
         </a>
       </li>
 
 
       <li class="nav-item active mr-5">
-        <a class="nav-link" href="#4">Top Recruitors
+        <a class="nav-link" href="#4">Branchwise
         </a>
       </li>
 
@@ -79,35 +83,44 @@
 
 
 
-
-
-<div style="padding: 10px;"id= "2">
+<div style="padding: 50px;"id= "2">
 </div>
 
-<h1  style="margin-top:70px;text-align: center;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;" id="heading-text"> B.Tech Placement statistics </h1>
+
 <!-- Add 2 buttons -->
-<div style="text-align:center;">
-{% comment %} <input type="checkbox" id="toggle-event" checked data-toggle="toggle" data-on="B.Tech" data-off="M.Tech" data-onstyle="success" data-offstyle="danger"> {% endcomment %}
-<button type="button"  class="btn btn-primary button disabled" id="btech-button" onclick="updateGauge(currentpos,btech_placed_frac);updateBarChart(data3);plot_cloud(data5);document.getElementById('heading-text').innerHTML='B.tech Placement statistics';document.getElementById('btech-button').classList.add('disabled');document.getElementById('mtech-button').classList.remove('disabled');">B.tech</button>
-<div style="position:absolute"></div>
-<button type="button" class="btn btn-primary button " id="mtech-button"  onclick="updateGauge(currentpos,mtech_placed_frac);updateBarChart(data4);plot_cloud(data6);document.getElementById('heading-text').innerHTML='M.tech Placement statistics';document.getElementById('mtech-button').classList.add('disabled');document.getElementById('btech-button').classList.remove('disabled');">M.tech</button>
+<div style="text-align:center;margin-top:0.5rem;display:block">
+  
+<div class="btn-group btn-toggle mb-2" > 
+ 
+          
+  <button   class="btn btn-xs btn-primary active"  id="btech-button" onclick="updateGauge(currentpos,btech_placed_frac);updateBarChart(data3);plot_cloud(data5);document.getElementById('heading-text').innerHTML='B.tech Placement statistics';">B.tech</button>
+  <button  class="btn btn-xs btn-default"  id="mtech-button"  onclick="updateGauge(currentpos,mtech_placed_frac);updateBarChart(data4);plot_cloud(data6);document.getElementById('heading-text').innerHTML='M.tech Placement statistics';">M.tech</button>
+</div>
 </div>
 
+{% comment %} <h1  style="margin-top:70px;text-align: center;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;font-size:2em;" id="heading-text"> B.Tech Placement statistics </h1> {% endcomment %}
 
-<div id="gauge"> </div>
-  <div style="padding: 100px;"id= "3">
-  </div>
-    <div class="media_q">
-          <h1 style="text-align: center;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;"> Branchwise placement statistics </h1>
-        <div style="height: 500px;"id="barchart"></div>
 
-        <br>
-        <br>
-        <div style="padding: 50px;"id= "4">
+
+  
+    <div class="media_q" style="display:block;margin-top:0.5rem">
+   
+        <h1  style="text-align: center;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;font-size:40px;"> Top Recruitors </h1>
+        
+          <div style="height: 600px;padding-top:50px" id="wordcloud"></div>
+          <h1 style="text-align: center;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;"> Percentage placed </h1>
+          <div id="gauge"> </div>
+          <div style="padding:50px" id="4"></div>
+          <h1 style="text-align: center;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;" > Branchwise placement statistics </h1>
+        
+        <div style="text-align:center;" >
+        <div style="height: 500px;margin-left:8%;margin-right:8%" id="barchart"></div>
         </div>
 
-        <h1  style="text-align: center;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;"> Top Recruitors </h1>
-        <div style="height: 800px;" id="wordcloud"></div>
+        
+        
+        
+        
         <br>
         <br>
 
@@ -151,8 +164,53 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.6.0/d3.min.js"></script>
 <!-- Color scale -->
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-<link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> 
+<script>
+  $('.btn-toggle').click(function() {
+      $(this).find('.btn').toggleClass('active');  
+      
+      if ($(this).find('.btn-primary').length>0) {
+        $(this).find('.btn').toggleClass('btn-primary');
+      }
+      if ($(this).find('.btn-danger').length>0) {
+        $(this).find('.btn').toggleClass('btn-danger');
+      }
+      if ($(this).find('.btn-success').length>0) {
+        $(this).find('.btn').toggleClass('btn-success');
+      }
+      if ($(this).find('.btn-info').length>0) {
+        $(this).find('.btn').toggleClass('btn-info');
+      }
+      
+      $(this).find('.btn').toggleClass('btn-default');
+        
+  });
+</script>
+<style>
+.btn {
+  border: 2px solid black;
+  background-color: white;
+  color: black;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  
+}
+.btn:hover {
+  background: #023e8a;
+  color: white;
+
+}
+.btn-primary:not(:disabled):not(.disabled).active{
+  background-color:#023e8a;
+}
+}
+</style>
 <!-- Resources -->
 <script src="https://www.amcharts.com/lib/4/core.js"></script>
 <script src="https://www.amcharts.com/lib/4/charts.js"></script>
