@@ -24,7 +24,7 @@ function plot_cloud(data) {
         series.dataFields.word = "tag";
         series.dataFields.value = "weight";
         series.dataFields.urlval = "urlval"
-        series.labels.template.url = "/table/?company={urlval}";
+        series.labels.template.url = "placement-portal/table/?company={urlval}";
         series.labels.template.urlTarget = "_blank";
 
         // series.minfontsize = ;
