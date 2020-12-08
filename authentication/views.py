@@ -69,4 +69,4 @@ def sign_out(request):
   logout(request)
   messages.success(request, "Successfully Logged Out")
 
-  return redirect('home')
+  return redirect('home:home')
