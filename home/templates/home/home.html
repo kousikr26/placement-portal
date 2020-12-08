@@ -35,11 +35,11 @@
       {% endif %}
 
       <li class="nav-item active">
-        <a class="nav-link" href="{% url 'charts' %}">Charts
+        <a class="nav-link" href="{% url 'home:charts' %}">Charts
         </a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="{% url 'table' %}">Table
+        <a class="nav-link" href="{% url 'home:table' %}">Table
         </a>
       </li>
       <li class="nav-item active">
@@ -98,8 +98,8 @@
 
     
     <div style="text-align:center;">
-      <a class="btn btn-primary navbar-custom" href="/charts" role="button">Charts</a>
-      <a class="btn btn-primary navbar-custom" href="/table" role="button">Tabular view</a>
+      <a class="btn btn-primary navbar-custom" href="{% url 'home:charts' %}" role="button">Charts</a>
+      <a class="btn btn-primary navbar-custom" href="{% url 'home:table' %}" role="button">Tabular view</a>
     </div>
     {% else %}
 

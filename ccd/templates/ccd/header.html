@@ -20,7 +20,7 @@
 
       {% if request.user.is_authenticated %}
       <li class="nav-item active">
-        <a class="nav-link" href="/">Home
+        <a class="nav-link" href="{% url 'home:home' %}">Home
         </a>
       </li>
 
