@@ -11,15 +11,17 @@
   background-color: #023e8a;
 }
 </style>
-<nav class="navbar navbar-expand-lg navbar-dark navbar-custom " >
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
 
 
-  <div class="container">
+  <div class="container-fluid">
 
-  <a class="navbar-brand order-0 hov_class" href="/" style="cursor: pointer;"> <img style="max-width: 35px;max-height: 35px;font-weight: 5px" src="{% static "images/logo.png" %}">Placement-portal</a>
+  <a class="navbar-brand order-0 hov_class" href="/" style="cursor: pointer;"> <img style="max-width: 35px;max-height: 35px;-webkit-filter: invert(1);filter: invert(1);" src="{% static 'images/logo.png' %}">Placement-portal</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
+
 
   <div class="collapse navbar-collapse" id="navbarColor01">
     <ul class="navbar-nav ml-auto">
@@ -61,6 +63,14 @@
 </nav>
 
 
+<style>
+.navbar-dark .navbar-nav .active>.nav-link:hover{
+    background-color:#03045e;
+}
+.navbar-dark .navbar-brand:hover{
+  background-color:#03045e;
+}
+</style>
 <br><br><br><br><br>
 
 <div class="container">
@@ -86,10 +96,10 @@
 
     {% if request.user.is_authenticated %}
 
-    {% comment %} <p class="lead" style="display: inline-block;"> You are logged in as</p> <div style="border: 1px ;display: inline-block; color:black;padding:5px;font-weight: bold;"> {{request.user.username|replace_underscores|title}} </div> {% endcomment %}
+    
     <div style="text-align:center;">
       <a class="btn btn-primary navbar-custom" href="/charts" role="button">Charts</a>
-      <a class="btn btn-primary navbar-custom" href="/table" role="button">Table</a>
+      <a class="btn btn-primary navbar-custom" href="/table" role="button">Tabular view</a>
     </div>
     {% else %}
 
@@ -104,7 +114,11 @@
 </div>
 <div style="padding:100px">
 </div>
-
+<style>
+.btn:hover{
+  background-color:#020233;
+}
+</style>
 {% include "footer_sticky.html" %}
 
 

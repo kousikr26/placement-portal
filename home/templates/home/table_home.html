@@ -212,16 +212,16 @@ Placement-data Table
 	}
 
 	.table100.ver6 .row100:hover td {
-		background-color: rgba(183, 252, 252, 0.2);
+		background-color: #90e0ef;
 	}
 
 	.table100.ver6 .hov-column-ver6 {
-		background-color: rgba(252, 252, 220, 0.4);
+		background-color: #90e0ef;
 	}
 
 
 	.table100.ver6 .row100 td:hover {
-		background-color: rgba(252, 252, 252, 0.3);
+		background-color: #90e0ef;
 	}
 
 	.acad_row {
@@ -428,9 +428,9 @@ Placement-data Table
 <nav class="navbar navbar-expand-lg navbar-dark bg-custom">
 
 
-	<div class="container">
+	<div class="container-fluid">
 
-		<a class="navbar-brand order-0 hov_class" href="/" style="cursor: pointer;"> <img style="max-width: 35px;max-height: 35px;" src="{% static 'images/logo.png' %}">Placement-portal</a>
+		<a class="navbar-brand order-0 hov_class" href="/" style="cursor: pointer;"> <img style="max-width: 35px;max-height: 35px;-webkit-filter: invert(1);filter: invert(1);" src="{% static 'images/logo.png' %}">Placement-portal</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
@@ -466,6 +466,14 @@ Placement-data Table
 </nav>
 
 
+<style>
+.navbar-dark .navbar-nav .active>.nav-link:hover{
+    background-color:#03045e;
+}
+.navbar-dark .navbar-brand:hover{
+  background-color:#03045e;
+}
+</style>
 
 
 

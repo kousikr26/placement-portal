@@ -4,7 +4,7 @@ var width = window.innerWidth || document.documentElement.clientWidth || documen
     height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight,
     margin = 40,
     n = 10,
-    radius = width/4  ,
+    radius = width/3  ,
     needleRad = 10,
     pi = Math.PI,
     halfPi = pi / 2,
@@ -42,7 +42,7 @@ slice
     .attr('fill', function (d) { return colorScale(d); });
 
 var needle = svg.append('g').append('path').attr('class', 'needle').attr('fill-opacity', .7).attr('stroke', 'black');
-var text = svg.append('g').append('text').attr('class', 'text').attr('text-anchor', 'middle').attr('dy', '-0.45em').classed('monospace', true).style("font-size", "120%");
+var text = svg.append('g').append('text').attr('class', 'text').attr('text-anchor', 'middle').attr('dy', '-0.45em').classed('monospace', true).style("font-size", "140%");
 
 function updateGauge(oldValue, newValue) {
     currentpos = newValue;
