@@ -61,12 +61,12 @@ def callback(request):
   if user is not None:
       login(request,user)
       messages.success(request,"Success: You were successfully logged in.")
-      return redirect('/')
-  return redirect('/')
+      return redirect('home')
+  return redirect('home')
 
 def sign_out(request):
   # Clear out the user and token
   logout(request)
   messages.success(request, "Successfully Logged Out")
 
-  return redirect('/')
+  return redirect('home')
