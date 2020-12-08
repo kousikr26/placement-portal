@@ -33,14 +33,14 @@ def sign_in(request):
   sign_in_url, state = get_sign_in_url()
   # Save the expected state so we can validate in the callback
   request.session['auth_state'] = state
-  print(sign_in_url,state)
+  # print(sign_in_url,state)
   # Redirect to the Azure sign-in page
   return HttpResponseRedirect(sign_in_url)
 def callback(request):
   # Get the state saved in session
   expected_state = request.session.pop('auth_state', '')
   # Make the token request
-  print("#######################################3\n",request.get_full_path())
+  # print("#######################################3\n",request.get_full_path())
   token = get_token_from_code('https://swc.iitg.ac.in'+request.get_full_path(), expected_state)
   # Get the user's profile
   user = get_user(token)
@@ -50,7 +50,7 @@ def callback(request):
   username = re.sub('[^0-9a-zA-Z_]+','',username)
   password = user['surname']
   email = user['mail']
-  print(username,password,email)
+  # print(bg-primary,password,email)
 
   try:
       user = User.objects.get(email=email)

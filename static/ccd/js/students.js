@@ -45,9 +45,12 @@ $(function() {
     var getBranch = function() {
         console.log("getting branches");
         $.ajax({
-            url: '/ccd/ajax/get/branches/',
+            url: '/placement-portal/ccd/ajax/get/branches/',
             type: 'GET',
             dataType: 'json',
+            beforeSend: function (){
+              alert("test");
+            },
             success: function(data) {
                 $('#branch_filter').html(data.html_branch_options);
             }
@@ -116,7 +119,7 @@ $(function() {
         var program = $('#program_filter').val();
         var sortid = $('#sort').val();
         $.ajax({
-            url: '/ccd/ajax/filter/',
+            url: '/placement-portal/ccd/ajax/filter/',
             type: 'GET',
             data: {
                 'branch': branch,

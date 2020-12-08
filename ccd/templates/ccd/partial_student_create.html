@@ -1,8 +1,8 @@
 {% load widget_tweaks %}
 <form method="post" action="{% url 'ccd:student_create'%}" class="js-student-create-form">
     {% csrf_token %}
-    <div class="modal-header heading lead ">
-        <h3 class="modal-title text-white" style="font-family: 'Nunito';font-weight:bold;">ADD NEW STUDENT </h3>
+    <div class="modal-header heading lead bg-primary">
+        <h3 class="modal-title text-white " style="font-weight:bold;">ADD NEW STUDENT </h3>
         <span class="close" data-dismiss="modal" aria-label="Close">
             <i class="fas fa-window-close"></i>
         </span>
@@ -12,6 +12,6 @@
     </div>
     <div class="modal-footer justify-content-center">
         <button type="button" class="btn btn-lg btn-secondary waves-effect" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-lg btn-info waves-effect waves-light" formnovalidate="formnovalidate" >Create Student</button>
+        <button type="submit" class="btn btn-lg btn-primary waves-effect waves-light" formnovalidate="formnovalidate" >Create Student</button>
     </div>
 </form>

@@ -24,9 +24,9 @@ def get_sign_in_url():
   aad_auth = OAuth2Session(settings['app_id'],
     scope=settings['scopes'],
     redirect_uri=settings['redirect'])
-  
+
   sign_in_url, state = aad_auth.authorization_url(authorize_url, prompt='login')
-  
+
   return sign_in_url, state
 
 # Method to exchange auth code for access token
@@ -36,11 +36,11 @@ def get_token_from_code(callback_url, expected_state):
     state=expected_state,
     scope=settings['scopes'],
     redirect_uri=settings['redirect'])
-  print(callback_url)  
+  # print(callback_url)
   token = aad_auth.fetch_token(token_url,
     client_secret = settings['app_secret'],
     authorization_response=callback_url)
-  
+
   return token
 
 def get_token(request):
