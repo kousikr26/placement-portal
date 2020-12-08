@@ -15,12 +15,12 @@
 
 {% block content %}
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
 
 
-  <div class="container">
+  <div class="container-fluid">
 
-  <a class="navbar-brand order-0 hov_class" href="/" style="cursor: pointer;"> <img style="max-width: 35px;max-height: 35px;" src="{% static 'images/logo.png' %}">Placement-portal</a>
+  <a class="navbar-brand order-0 hov_class" href="/" style="cursor: pointer;"> <img style="max-width: 35px;max-height: 35px;-webkit-filter: invert(1);filter: invert(1);" src="{% static 'images/logo.png' %}">Placement-portal</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -44,7 +44,7 @@
                   <p><i class="fa fa-exclamation-triangle fa-5x"></i><br/>Status Code: 404</p>
              </div>
              <div class="col-md-10 text-center">
-                  <h3>OPPSSS!!!! Sorry...</h3>
+                  <h3>Oops! Sorry...</h3>
                   <p>Either you aren't cool enough to visit this page or it doesn't exist . . . like your social life</p>
                   <a class="btn btn-danger" href="javascript:history.back()">Go Back</a>
              </div>
