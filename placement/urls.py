@@ -23,10 +23,10 @@ handler404 = 'home.views.handler404'
 handler500 = 'home.views.handler500'
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('',include('authentication.urls')),
-    path('ccd/',include('ccd.urls')),
-    path('',include('home.urls'))
+    path('placement-portal/admin/', admin.site.urls),
+    path('placement-portal/',include('authentication.urls')),
+    path('placement-portal/ccd/',include('ccd.urls')),
+    path('placement-portal/',include('home.urls'))
 
 ]
 if settings.DEBUG:
