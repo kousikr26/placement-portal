@@ -777,6 +777,8 @@ Table
 				if ($.fn.DataTable.isDataTable('#student-table')) {
 					$('#student-table').dataTable().fnDestroy();
 					// console.log('pagination removed');
+					$("#student-table_filter-div").html('');
+					$("#student-table_length-div").html('');
 				}
 				// $("#student-table tbody").html('');
 				$("#student-table tbody").html(data.table_data_html);

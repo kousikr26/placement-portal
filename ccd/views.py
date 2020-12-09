@@ -113,7 +113,7 @@ def ajax_update_database(request):
     context['success']=False
     if request.is_ajax() and request.method=='POST':
         data = json.loads(request.body)
-        print(data)
+        # print(data)
         update_type =data['update_type']
         # print(update_type)
         headings = data['headings']
@@ -132,10 +132,10 @@ def ajax_update_database(request):
                  "Slot":'slot',
                 }
         headings_required = ["Name", "Roll No.", "Program","Branch","Day","Company","Placed","Sector","Profile","Slot",]
-        print(sorted(headings))
-        print(sorted(headings_required))
+        # print(sorted(headings))
+        # print(sorted(headings_required))
         if sorted(headings)==sorted(headings_required):
-            print(len(data_list))
+            # print(len(data_list))
             for i in range(len(data_list)):
                 if(len(data_list[i])!=len(headings)):
                     print("list length error for row {}!".format(i+1))
