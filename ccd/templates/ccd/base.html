@@ -18,9 +18,9 @@
 
   {% endblock %}
 
-  <style media="screen">
-    body{
-      background-color: #e9f5f8 !important;
+  <style>
+    html,body{
+      background-color: rgb(233, 238, 244);
       overflow-x: hidden;
     }
     .jumbotron{
@@ -143,6 +143,11 @@
    }
    a { color: inherit; }
 
+
+   .bg-custom{
+     background-color: #003f88;
+   }
+
    </style>
 
 </head>
@@ -159,7 +164,7 @@
 
   <div class="text-white">
 
-    {% include "footer_sticky.html" %}
+    {% include "footer.html" %}
   </div>
   <script src="https://kit.fontawesome.com/b955dbdd56.js" crossorigin="anonymous"></script>
 

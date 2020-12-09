@@ -4,11 +4,13 @@
 
 
 {% block title %}
-Placement-data Table
+Table
 {% endblock %}
 
 
 {% block head %}
+
+
 
 <style>
 	.m-b-110 {
@@ -185,10 +187,10 @@ Placement-data Table
 	.table100.ver6 {
 		border-radius: 16px;
 		/* overflow: hidden; */
-		background: rgba(255, 255, 255, 0.8);
-		box-shadow: 1px 1px 20px rgba(50, 50, 50, 0.12);
-
+		background: rgb(233 238 244);
+		/* box-shadow: 1px 1px 20px rgba(50, 50, 50, 0.12); */
 	}
+
 
 	.table100.ver6 table {
 		background-color: transparent;
@@ -327,29 +329,26 @@ Placement-data Table
 	}
 
 	.dataTables_wrapper {
-
-		padding-left: 0px;
-		padding-right: 0px;
 		background-color: rgb(233, 238, 244);
 	}
 
-	.dataTables_length {
+	/* .dataTables_length {
 		display: block;
 		float: right;
 		margin-right: 20px;
-	}
+	} */
 
 	.dataTables_length select {
 		border-color: #7774e7;
 	}
 
 	.dataTables_filter {
-		margin-left: 5px;
+		/* margin-left: 5px; */
 	}
 
 	.dataTables_filter input {
 		position: relative;
-		padding: 10px 10px 1px 10px;
+		/* padding: 10px 10px 1px 10px; */
 		width: 269px;
 		color: #5c4949;
 		font-size: 16px;
@@ -364,7 +363,6 @@ Placement-data Table
 	}
 
 	.dataTables_filter input:focus {
-		outline: 1px solid rgb(108, 122, 224);
 		border-radius: 5px;
 	}
 
@@ -379,32 +377,58 @@ Placement-data Table
 	.dataTables_paginate {
 		margin-top: 20px;
 		display: block;
-		float: right;
+		/* float: right; */
 		padding-bottom: 10px;
-		border-color:#000000;
+		border-color: #000000;
+
 	}
 
 
 	.dataTables_paginate ul li a {
-		background-color: #0077b6;
+		background-color: #6376af;
 		color: white;
-		border-color:#000000;
+		border-color: #000000;
 	}
-	.paginate-button.page-item.first.disabled .a{
-		background-color: #023e8a;
 
-	}
+
 	.page-item.active .page-link {
-		z-index: 2;
+		/* z-index: 2; */
 		color: #fff;
 		background-color: #023e8a;
-		border-color: #000000;
+		border-color: #0063e2;
+	}
+
+	.page-item.disabled .page-link {
+		color: #fff;
+		pointer-events: none;
+		cursor: auto;
+		background-color: #c1d5ef;
+		border-color: #0063e2;
+	}
+
+	.page-link:hover {
+		background-color: #90e0ef;
+		border-color: #033e8a;
 	}
 
 	@media (min-width: 276px) {
 		.mr-sm-2 {
 			margin-right: .5rem !important;
 		}
+	}
+
+
+
+	.main_wrapper {
+		padding: 1%;
+		background-color: rgb(233 238 244);
+	}
+
+
+
+	#student-table_length{
+		display: block;
+		float: right;
 	}
 </style>
 
@@ -417,12 +441,13 @@ Placement-data Table
 
 {# navbar #}
 <style>
-.bg-custom{
-  background-color: #023e8a;
-}
-.bg-custom-2{
-	background-color: #0077b6;
-}
+	.bg-custom {
+		background-color: #023e8a;
+	}
+
+	.bg-custom-2 {
+		background-color: #0077b6;
+	}
 </style>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-custom">
@@ -467,12 +492,13 @@ Placement-data Table
 
 
 <style>
-.navbar-dark .navbar-nav .active>.nav-link:hover{
-    background-color:#03045e;
-}
-.navbar-dark .navbar-brand:hover{
-  background-color:#03045e;
-}
+	.navbar-dark .navbar-nav .active>.nav-link:hover {
+		background-color: #03045e;
+	}
+
+	.navbar-dark .navbar-brand:hover {
+		background-color: #03045e;
+	}
 </style>
 
 
@@ -480,22 +506,31 @@ Placement-data Table
 
 
 
-<div class="">
-	<div>
+
+
+<div class="main_wrapper" style="overflow-x:hidden;">
+	<br><br>
+	<div class="text-center ">
+
+		<h2 class="display-5">Tabular View</h2>
+	</div>
+	<br>
+
+	<div class="">
 		<div class="">
-			<div class="table100 ver6 m-b-110 " style="margin-left:50px;border-radius: 16px;">
+			<div class="table100 ver6 m-b-110 " style="border-radius: 16px;">
 				<div class="">
 
 					<div class="acad_row">
 
 						<div class="acad_col">
-							<div style="background: rgb(233, 238, 244);padding:12px 10px;margin-left: -15.5px;border-top-left-radius:16px ;border-top-right-radius:46px;">
+							<div style="background: rgb(233, 238, 244);padding:12px 10px;border-top-left-radius:16px ;border-top-right-radius:46px;">
 							</div>
 
-							<div style="background: rgb(233, 238, 244);margin-left: -15.5px;">
+							<div style="background: rgb(233, 238, 244);">
 
-								<div class="col-6 col-lg-3 ml-1" style="display: inline-block;max-width: 299px;">
-									<div class="form-group" >
+								<div class="col-6 col-lg-3" style="display: inline-block;max-width: 299px;">
+									<div class="form-group">
 										<label for="branch">Branch</label>
 										<select class="form-control" id="branch_filter" style="border-color: #7774e7;">
 											<option selected="true" value="all">All</option>
@@ -506,7 +541,7 @@ Placement-data Table
 									</div>
 								</div>
 
-								<div class="col-6 col-lg-3 ml-1" style="display: inline-block;max-width: 299px;">
+								<div class="col-6 col-lg-3" style="display: inline-block;max-width: 299px;">
 									<div class="form-group">
 										<label for="branch">Program</label>
 										<select class="form-control" id="program_filter" style="border-color: #7774e7;">
@@ -523,7 +558,7 @@ Placement-data Table
 								</div>
 
 
-								<div class="col-6 col-lg-3 ml-1" style="display: inline-block;max-width: 299px;">
+								<div class="col-6 col-lg-3" style="display: inline-block;max-width: 299px;">
 									<div class="form-group">
 										<label for="SortBy">Sort By</label>
 										<select class="form-control" id="sort" style="border-color: #7774e7;">
@@ -541,15 +576,16 @@ Placement-data Table
 							</div>
 
 							<div class="acad_row">
-								<div class="acad_col-1-sm-sm " style="background:#E9EEF4 ;margin-left:-16px">
-								</div>
+
 								<div class="acad_col " style="background-color: rgb(233, 238, 244);">
 
 
 									<div id="student-table_wrapper" class="dataTables_wrapper ">
+										<div class="row" style="padding-left:15px">
 
-										<div class="dataTables_length" id="student-table_length"></div>
-										<div id="student-table_filter" class="dataTables_filter" ></div>
+										<div class="col-6" id="student-table_filter-div"></div>
+										<div class="col-6" id="student-table_length-div"></div>
+									</div>
 										<div class="table-responsive-lg">
 
 
@@ -570,30 +606,43 @@ Placement-data Table
 												</tbody>
 												<tfoot class="bg-custom">
 													<tr class="row100 head">
-														<th style="color: white;border-top-left-radius: 16px;" class="column100 column1" data-column="column1">NAME</th>
+														<th style="color: white;border-bottom-left-radius: 16px;" class="column100 column1" data-column="column1">NAME</th>
 														<th style="color: white;" class="column100 column2" data-column="column2">Program</th>
 														<th style="color: white;" class="column100 column3" data-column="column3">Branch</th>
 														<th style="color: white;" class="column100 column4" data-column="column4">Roll No.</th>
 														<th style="color: white;" class="column100 column5 " data-column="column5">Company</th>
 														<th style="color: white;" class="column100 column6 " data-column="column6">Profile</th>
-														<th style="color: white;border-top-right-radius:  16px;" class="column100 column7" data-column="column7">Sector</th>
+														<th style="color: white;border-bottom-right-radius:  16px;" class="column100 column7" data-column="column7">Sector</th>
 													</tr>
 												</tfoot>
 											</table>
+
+
+										</div>
+										<div class="row pl-3 pr-3" style="padding:2%;">
+											<div class="col-12 col-lg-6" id="student-table_info-div">
+
+											</div>
+											<div class="col-12 col-lg-6" id="student-table_paginate_div" style="overflow-x:scroll;">
+
+											</div>
 										</div>
 									</div>
 								</div>
-								<div class="acad_col-1-sm " style="background:#E9EEF4 ;">
-								</div>
-								<div class="dataTables_info" id="student-table_info" role="status" aria-live="polite"></div>
-								<div class="dataTables_paginate paging_full_numbers" id="student-table_paginate"></div>
+
+
 							</div>
+
 						</div>
 					</div>
 				</div>
+
 			</div>
+			{# <br><br><br><br><br><br> #}
 		</div>
 	</div>
+
+
 </div>
 
 
@@ -632,17 +681,21 @@ Placement-data Table
 
 
 <!-- datatables scripts for adding pagination and all-->
-<script src="{% static 'js/jquery-3.5.1.js' %}"></script> <!-- JQUERY HERE -->
-<!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> -->
-<script src="{% static 'js/bootstrap.min.js' %}"></script>
-<script src="{% static 'js/jquery.dataTables.min.js' %}"></script>
-<!-- <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script> -->
-<script src="{% static 'js/dataTables.bootstrap4.min.js' %}"></script>
-<!-- <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script> -->
+<!-- <script src="{% static 'js/jquery-3.5.1.js' %}"></script>  -->
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<!-- <script src="{% static 'js/bootstrap.min.js' %}"></script> -->
+<!-- <script src="{% static 'js/jquery.dataTables.min.js' %}"></script> -->
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<!-- <script src="{% static 'js/dataTables.bootstrap4.min.js' %}"></script> -->
+<script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/iScroll/5.1.3/iscroll-zoom.js"></script>
+
+
 
 <script>
 	////////////////////////////////////////////////////////////////////////////////////
 	// fucntion to add DataTable to the table
+
 	var activeDataTable = function() {
 		if (!$.fn.DataTable.isDataTable('#student-table')) {
 			$('#student-table').DataTable({
@@ -692,6 +745,13 @@ Placement-data Table
 
 				]
 			});
+			$("#student-table_info-div").html($("#student-table_info"));
+			$("#student-table_paginate_div").html($("#student-table_paginate"));
+			$("#student-table_filter-div").html($("#student-table_filter"));
+			$("#student-table_length-div").html($("#student-table_length"));
+
+			// alert($("#student-table_info-div").html());
+
 		}
 	};
 	activeDataTable();

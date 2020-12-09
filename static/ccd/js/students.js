@@ -49,7 +49,7 @@ $(function() {
             type: 'GET',
             dataType: 'json',
             beforeSend: function (){
-              alert("test");
+              // alert("test");
             },
             success: function(data) {
                 $('#branch_filter').html(data.html_branch_options);

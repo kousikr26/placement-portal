@@ -2,7 +2,6 @@
 {% load static %}
 
 {% block head %}
-
 <style media="screen">
 
   @media(max-width: 400px){
@@ -14,6 +13,12 @@
   .marg_class{
     margin-left: -90px;
   }
+}
+.navbar-dark .navbar-nav .active>.nav-link:hover{
+    background-color:#03045e;
+}
+.navbar-dark .navbar-brand:hover{
+  background-color:#03045e;
 }
 
 </style>
@@ -78,15 +83,6 @@
 
 </nav>
 
-<style>
-.navbar-dark .navbar-nav .active>.nav-link:hover{
-    background-color:#03045e;
-}
-.navbar-dark .navbar-brand:hover{
-  background-color:#03045e;
-}
-</style>
-
 
 
 <div style="padding: 50px;"id= "2">
@@ -115,11 +111,11 @@
 
           <div style="height: 600px;padding-top:50px" id="wordcloud"></div>
           <div style="padding:50px" id="3"></div>
-          <h1 style="text-align: center;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;" > Percentage placed </h1>
+          <h1 style="text-align: center;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;" > Percentage Placed </h1>
 
           <div style="margin-top:2em" id="gauge"> </div>
           <div style="padding:10px" id="4"></div>
-          <h1 style="text-align: center;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;" > Branchwise placement statistics </h1>
+          <h1 style="text-align: center;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;" > Branchwise Percentage Placed </h1>
 
         <div style="text-align:center;" >
         <div style="height: 500px;margin-left:8%;margin-right:8%" id="barchart"></div>

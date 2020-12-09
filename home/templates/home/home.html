@@ -3,6 +3,14 @@
 
 {# load custom filters #}
 {% load custom_filters %}
+
+
+{% block title %}
+  IITG Placement Portal
+{% endblock %}
+{% block head %}
+
+{% endblock %}
 {% block content %}
 
 
@@ -71,7 +79,7 @@
   background-color:#03045e;
 }
 </style>
-<br><br><br><br><br>
+<br><br><br>
 
 <div class="container">
   <!-- Messages -->
@@ -96,7 +104,7 @@
 
     {% if request.user.is_authenticated %}
 
-    
+
     <div style="text-align:center;">
       <a class="btn btn-primary navbar-custom" href="{% url 'home:charts' %}" role="button">Charts</a>
       <a class="btn btn-primary navbar-custom" href="{% url 'home:table' %}" role="button">Tabular view</a>
@@ -112,8 +120,7 @@
   </div>
 
 </div>
-<div style="padding:100px">
-</div>
+
 <style>
 .btn:hover{
   background-color:#020233;

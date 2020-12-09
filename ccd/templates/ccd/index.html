@@ -337,16 +337,16 @@ table.dataTable.no-footer {
     padding: 12px;
     padding: .75rem;
     vertical-align: top;
-    border-top: 1px solid ;
+    /* border-top: 1px solid ; */
 }
 
 .table thead th {
     vertical-align: bottom;
-    border-bottom: 2px solid;
+    /* border-bottom: 2px solid; */
 }
 
 .table tbody+tbody {
-    border-top: 2px solid;
+    /* border-top: 2px solid; */
 }
 
 .table .table {
@@ -367,7 +367,7 @@ table.dataTable.no-footer {
 
 .table-bordered thead td,
 .table-bordered thead th {
-    border-bottom-width: 2px
+    /* border-bottom-width: 2px */
 }
 
 .table-striped tbody tr:nth-of-type(odd) {
@@ -521,49 +521,7 @@ table.dataTable.no-footer {
 }
 </style>
 <style>
-    /*
-Max width before this PARTICULAR table gets nasty
-This query will take effect for any screen smaller than 760px
-and also iPads specifically.
-*/
-@media
-only screen and (max-width: 760px),
-(min-device-width: 768px) and (max-device-width: 1024px)  {
 
-    /* Force table to not be like tables anymore */
-    table, thead, tbody, th, td, tr {
-        display: block;
-    }
-
-    /* Hide table headers (but not display: none;, for accessibility) */
-    thead tr {
-        position: absolute;
-        top: -9999px;
-        left: -9999px;
-    }
-
-    tr { border: 1px solid #ccc; }
-
-    td {
-        /* Behave  like a "row" */
-        border: none;
-        border-bottom: 1px solid #eee;
-        position: relative;
-        padding-left: 50%;
-    }
-
-    td:before {
-        /* Now like a table header */
-        position: absolute;
-        /* Top/left values mimic padding */
-        top: 6px;
-        left: 6px;
-        width: 45%;
-        padding-right: 10px;
-        white-space: nowrap;
-    }
-
-}
 
 .dataTables_filter input
 {
@@ -631,11 +589,7 @@ window.addEventListener('load', () => {
 });
 </script>
 
-<style>
-.bg-custom{
-  background-color: #003f88;
-}
-</style>
+
 
 
 <!-- THE MODAL WE WILL BE USING -->
@@ -717,10 +671,10 @@ window.addEventListener('load', () => {
     </div>
     <div id="student-table_wrapper" class="dataTables_wrapper">
         <div class="table-responsive-lg" hidden id="student-table-div">
-            <table class="table table-hover table-bordered" cellspacing="0" width="100%" id="student-table" style="overflow-x: scroll;">
+            <table class="table table-hover table-striped" cellspacing="0" width="100%" id="student-table" style="overflow-x: scroll;">
                 <thead class="bg-custom">
                     <tr style="color:white;">
-                        <th>Name</th>
+                        <th  style="border-top-left-radius: 16px">Name</th>
                         <th>Roll No.</th>
                         <th>Program</th>
                         <th>Branch</th>
@@ -731,12 +685,12 @@ window.addEventListener('load', () => {
                         <th>Sector</th>
                         <th>Slot</th>
                         <th></th>
-                        <th></th>
+                        <th  style="border-top-right-radius: 16px"></th>
                     </tr>
                 </thead>
                 <tfoot class="bg-custom">
                     <tr style="color:white;">
-                        <th>Name</th>
+                        <th style="border-bottom-left-radius: 16px">Name</th>
                         <th>Roll No.</th>
                         <th>Program</th>
                         <th>Branch</th>
@@ -747,10 +701,10 @@ window.addEventListener('load', () => {
                         <th>Sector</th>
                         <th>Slot</th>
                         <th></th>
-                        <th></th>
+                        <th style="border-bottom-right-radius: 16px"></th>
                     </tr>
                 </tfoot>
-                <tbody>
+                <tbody style="background:white;">
                     {% include "ccd/partial_student_list.html" %}
                 </tbody>
             </table>
@@ -827,7 +781,7 @@ window.addEventListener('load', () => {
                                 </div>
                                 <div class="mt-3 " id="data-table" hidden>
                                     <div class="table-responsive">
-                                        <table class="table  table-hover table-striped table-bordered " cellspacing="0" width="100%" id="csv-data-table" style="overflow-x: scroll;">
+                                        <table class="table  table-hover table-striped  " cellspacing="0" width="100%" id="csv-data-table" style="overflow-x: scroll;">
                                             <thead class="bg-custom">
                                                 <tr id="csv_file_headings">
                                                 </tr>
