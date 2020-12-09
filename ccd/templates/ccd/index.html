@@ -1075,7 +1075,8 @@ window.addEventListener('load', () => {
                     var reader = new FileReader();
                     reader.onload = function(e) {
                         // spliting all rows
-                        var rows = e.target.result.split("\n");
+                        var rows = e.target.result.split(/\r\n|\n|\r/);
+                        // console.log(rows);
 
                         // creating headings html
                         var headings = rows[0].split(",");
@@ -1270,16 +1271,18 @@ window.addEventListener('load', () => {
                 var reader = new FileReader();
                 reader.onload = function(e) {
                     // spliting all rows
-                    var rows = e.target.result.split("\n");
+                    var rows = e.target.result.split(/\r\n|\n|\r/);
 
+                    console.log(rows);
                     // creating headings
                     var headings = rows[0].split(",");
                     var data_list = [];
                     for (var i = 1; i < rows.length; i++) {
                         var cells = rows[i].split(",");
+                        console.log(cells[cells.length-1]);
                         data_list[i - 1] = cells;
                     }
-                    // console.log(headings);
+                    console.log(headings);
                     // console.log(data_list);
                     var update_type = $('#update_type').val();
                     $.ajax({

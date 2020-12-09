@@ -113,12 +113,13 @@ def ajax_update_database(request):
     context['success']=False
     if request.is_ajax() and request.method=='POST':
         data = json.loads(request.body)
+        print(data)
         update_type =data['update_type']
         # print(update_type)
         headings = data['headings']
         # print(headings)
         data_list = data['data_list']
-        # print(data_list[:2])
+        print(data_list[:2])
         d = {    "Name":"name",
                  "Roll No.":"roll",
                  "Program":'programs',
@@ -131,9 +132,10 @@ def ajax_update_database(request):
                  "Slot":'slot',
                 }
         headings_required = ["Name", "Roll No.", "Program","Branch","Day","Company","Placed","Sector","Profile","Slot",]
-
+        print(sorted(headings))
+        print(sorted(headings_required))
         if sorted(headings)==sorted(headings_required):
-            # print(len(data_list))
+            print(len(data_list))
             for i in range(len(data_list)):
                 if(len(data_list[i])!=len(headings)):
                     print("list length error for row {}!".format(i+1))
@@ -151,6 +153,7 @@ def ajax_update_database(request):
 
                         else:
                             student_dict[d[h]]= val
+                    print(student_dict)
                     if(student_dict['roll']==''):
                         pass
                     else:
@@ -190,6 +193,8 @@ def ajax_update_database(request):
                                 obj = Student.objects.create(**student_dict)
 
             context['success']=True
+        else:
+            print("headers are not matching!")
 
 
 
