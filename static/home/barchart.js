@@ -18,6 +18,7 @@ function updateBarChart(data) {
         categoryAxis.dataFields.category = "group";
         categoryAxis.renderer.minGridDistance = 0;
         categoryAxis.renderer.grid.template.disabled = true;
+        categoryAxis.renderer.inversed=true;
         categoryAxis.renderer.labels.template.horizontalCenter = "right";
         categoryAxis.renderer.labels.template.verticalCenter = "middle";
         categoryAxis.renderer.labels.template.rotation = 0;
@@ -34,7 +35,8 @@ function updateBarChart(data) {
         series.dataFields.num = "num"
         series.dataFields.den = "den"
         series.columns.template.hoverOnFocus = true;
-        series.columns.template.tooltipText = "{group} : {num} out of {den} placed ({valueX}%)"
+        series.columns.template.tooltipText = "{group} :\n{num} out of {den} placed ({valueX}%)"
+        series.columns.template.tooltip.pointerOrientation="left";
         series.columns.template.strokeOpacity = 0;
         series.columns.template.column.cornerRadiusTopRight = 5;
         series.columns.template.column.cornerRadiusBottomRight = 5;
