@@ -42,7 +42,7 @@ slice
     .attr('fill', function (d) { return colorScale(d); });
 
 var needle = svg.append('g').append('path').attr('class', 'needle').attr('fill-opacity', .7).attr('stroke', 'black');
-var text = svg.append('g').append('text').attr('class', 'text').attr('text-anchor', 'middle').attr('dy', '-0.45em').classed('monospace', true).style("font-size", "2.5em");
+var text = svg.append('g').append('text').attr('class', 'text').attr('text-anchor', 'middle').attr('dy', '-0.45em').classed('monospace', true).style("font-size", (width * 0.002) + "em");
 
 function updateGauge(oldValue, newValue) {
     currentpos = newValue;
