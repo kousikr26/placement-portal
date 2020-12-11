@@ -95,6 +95,8 @@ def charts(request):
 	for bch in branches:
 		tmp={}
 		tmp["group"]=bch
+		if bch not in dens_btech:
+			continue
 		if(bch=="Design"):
 			num=len(Student.objects.filter(programs='B.Des').filter(
 				branch__branchName=bch).filter(placed=True))
@@ -116,6 +118,8 @@ def charts(request):
 	for bch in branches:
 		tmp = {}
 		tmp["group"] = bch
+		if bch not in dens_mtech:
+			continue
 		if(bch=="Design"):
 			num=len(Student.objects.filter(programs='M.Des').filter(
 				branch__branchName=bch).filter(placed=True))
