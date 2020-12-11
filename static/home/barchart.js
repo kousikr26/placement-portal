@@ -43,10 +43,10 @@ function updateBarChart(data) {
         //series.interpolationDuration = 1500;
         //series.interpolationEasing = am4core.ease.linear;
         var labelBullet = series.bullets.push(new am4charts.LabelBullet());
-        labelBullet.label.verticalCenter = "bottom";
-        labelBullet.label.dy = -10;
+        
+        
         labelBullet.label.fontSize=am4core.percent(80);
-        labelBullet.label.text = "{values.valueY.workingValue.formatNumber('#.')}";
+        labelBullet.label.text = "{valueX}%";
 
         chart.zoomOutButton.disabled = false;
 

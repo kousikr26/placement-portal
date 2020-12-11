@@ -111,7 +111,7 @@ def charts(request):
 			den = dens_btech[bch]
 		if(den==0):
 			continue
-		tmp["value"] = (num/den)*100
+		tmp["value"] = round((num/den)*100,2)
 		tmp["num"]=num
 		tmp["den"]=den
 		btech_branchwise_placements.append(tmp)
@@ -134,7 +134,7 @@ def charts(request):
 			den = dens_mtech[bch]
 		if(den == 0):
 			continue
-		tmp["value"] = (num/den)*100
+		tmp["value"] = round((num/den)*100,2)
 		tmp["num"]=num
 		tmp["den"]=den
 		mtech_branchwise_placements.append(tmp)
