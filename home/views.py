@@ -100,15 +100,15 @@ def charts(request):
 		if(bch=="Design"):
 			num=len(Student.objects.filter(programs='B.Des').filter(
 				branch__branchName=bch).filter(placed=True))
-			den = dens_btech["bch"]
+			den = dens_btech[bch]
 		elif(bch=="EE"):
 			num = len(Student.objects.filter(programs='B.Tech').filter(
 				branch__branchName__in=["ECE","EEE"]).filter(placed=True))
-			den = dens_btech["bch"]
+			den = dens_btech[bch]
 		else:
 			num = len(Student.objects.filter(programs='B.Tech').filter(
 				branch__branchName=bch).filter(placed=True))
-			den = dens_btech["bch"]
+			den = dens_btech[bch]
 		if(den==0):
 			continue
 		tmp["value"] = (num/den)*100
@@ -123,15 +123,15 @@ def charts(request):
 		if(bch=="Design"):
 			num=len(Student.objects.filter(programs='M.Des').filter(
 				branch__branchName=bch).filter(placed=True))
-			den = dens_mtech["bch"]
+			den = dens_mtech[bch]
 		elif(bch=="EE"):
 			num = len(Student.objects.filter(programs='M.Tech').filter(
 				branch__branchName__in=["ECE","EEE"]).filter(placed=True))
-			den = dens_mtech["bch"]
+			den = dens_mtech[bch]
 		else:
 			num = len(Student.objects.filter(programs='M.Tech').filter(
 				branch__branchName=bch).filter(placed=True))
-			den = dens_mtech["bch"]
+			den = dens_mtech[bch]
 		if(den == 0):
 			continue
 		tmp["value"] = (num/den)*100
