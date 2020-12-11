@@ -519,11 +519,11 @@ Table
 	<div class="">
 		<div class="">
 			<div class="table100 ver6 m-b-110 " style="border-radius: 16px;">
-				<div class="" id="zoomable-table-div">
+				<div class="">
 
 					<div class="acad_row">
 
-						<div class="acad_col">
+						<div class="acad_col"  id="zoomable-table-div">
 							<div style="background: rgb(233, 238, 244);padding:12px 10px;border-top-left-radius:16px ;border-top-right-radius:46px;">
 							</div>
 
@@ -644,7 +644,13 @@ Table
 
 
 </div>
-
+<style>
+@media only screen and (max-width: 600px) {
+	#zoomable-table-div{
+		zoom:50%;
+	}
+}
+</style>
 
 {% include "footer.html" %}
 
@@ -655,13 +661,7 @@ Table
 
 
 <script>
-	$(window).load(function(){
-	var myScroll = new IScroll('#zoomable-table-div', {
-		scrollX: true,
-		scrollY: true,
-		zoom:true
-	});
-	});
+	
 	(function($) {
 		"use strict";
 		$('.column100').on('mouseover', function() {
@@ -695,7 +695,6 @@ Table
 <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <!-- <script src="{% static 'js/dataTables.bootstrap4.min.js' %}"></script> -->
 <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/iScroll/5.1.3/iscroll-zoom.js"></script>
 
 
 
