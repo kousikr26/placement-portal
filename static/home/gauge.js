@@ -23,7 +23,7 @@ var width = window.innerWidth || document.documentElement.clientWidth || documen
         .attr('preserveAspectRatio', 'xMinYMin')
         .append('g')
         .attr('transform', 'translate(' + width / 2 + ',' + (Math.min(height, width)/1.5  - margin) + ')');
-console.log(width, height);
+
 _data.push(endAngle);
 
 var arc = d3.arc()

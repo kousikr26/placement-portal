@@ -36,7 +36,7 @@ function updateBarChart(data) {
         series.dataFields.den = "den"
         series.columns.template.hoverOnFocus = true;
         series.columns.template.tooltipText = "{group} :\n{num} out of {den} placed ({valueX}%)"
-        series.columns.template.pointerOrientation="left";
+        series.columns.template.pointerOrientation="right";
         series.columns.template.strokeOpacity = 0;
         series.columns.template.column.cornerRadiusTopRight = 5;
         series.columns.template.column.cornerRadiusBottomRight = 5;
