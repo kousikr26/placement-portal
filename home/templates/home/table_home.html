@@ -455,7 +455,7 @@ Table
 
 	<div class="container-fluid">
 
-		<a class="navbar-brand order-0 hov_class" href="{% url 'home:home' %}" style="cursor: pointer;"> <img style="max-width: 35px;max-height: 35px;-webkit-filter: invert(1);filter: invert(1);" src="{% static 'images/logo.png' %}">Placement-portal</a>
+		<a class="navbar-brand order-0 hov_class" href="{% url 'home:home' %}" style="cursor: pointer;"> <img style="max-width: 35px;max-height: 35px;-webkit-filter: invert(1);filter: invert(1);" src="{% static 'images/logo.png' %}">Placement Portal</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
@@ -519,7 +519,7 @@ Table
 	<div class="">
 		<div class="">
 			<div class="table100 ver6 m-b-110 " style="border-radius: 16px;">
-				<div class="">
+				<div class="" id="zoomable-table-div">
 
 					<div class="acad_row">
 
@@ -655,6 +655,13 @@ Table
 
 
 <script>
+	$(window).load(function(){
+	var myScroll = new IScroll('#zoomable-table-div', {
+		scrollX: true,
+		scrollY: true,
+		zoom:true
+	});
+	});
 	(function($) {
 		"use strict";
 		$('.column100').on('mouseover', function() {
@@ -682,7 +689,7 @@ Table
 
 <!-- datatables scripts for adding pagination and all-->
 <!-- <script src="{% static 'js/jquery-3.5.1.js' %}"></script>  -->
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://code.jquery.com/jquery-2.1.4.js"></script>
 <!-- <script src="{% static 'js/bootstrap.min.js' %}"></script> -->
 <!-- <script src="{% static 'js/jquery.dataTables.min.js' %}"></script> -->
 <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>

@@ -35,7 +35,7 @@ Charts
 
   <div class="container-fluid">
 
-  <a class="navbar-brand order-0 hov_class" href="{% url 'home:home' %}" style="cursor: pointer;"> <img style="max-width: 35px;max-height: 35px;-webkit-filter: invert(1);filter: invert(1);" src="{% static 'images/logo.png' %}">Placement-portal</a>
+  <a class="navbar-brand order-0 hov_class" href="{% url 'home:home' %}" style="cursor: pointer;"> <img style="max-width: 35px;max-height: 35px;-webkit-filter: invert(1);filter: invert(1);" src="{% static 'images/logo.png' %}">Placement Portal</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -97,8 +97,8 @@ Charts
 <div class="btn-group btn-toggle mb-2" >
 
 
-  <button   class="btn btn-xs navbar-custom btn-primary active "  id="btech-button" onclick="updateGauge(currentpos,btech_placed_frac);updateBarChart(data3);plot_cloud(data5);document.getElementById('heading-text').innerHTML='B.tech Placement statistics';">B.tech</button>
-  <button  class="btn btn-xs navbar-custom btn-default "  id="mtech-button"  onclick="updateGauge(currentpos,mtech_placed_frac);updateBarChart(data4);plot_cloud(data6);document.getElementById('heading-text').innerHTML='M.tech Placement statistics';">M.tech</button>
+  <button   class="btn btn-xs navbar-custom btn-primary active "  id="btech-button" onclick="updateGauge(currentpos,btech_placed_frac);updateBarChart(data3);plot_cloud(data5);"">B.Tech</button>
+  <button  class="btn btn-xs navbar-custom btn-default "  id="mtech-button"  onclick="updateGauge(currentpos,mtech_placed_frac);updateBarChart(data4);plot_cloud(data6);"">M.Tech</button>
 </div>
 </div>
 
