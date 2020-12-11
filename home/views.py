@@ -109,7 +109,7 @@ def charts(request):
 			num = len(Student.objects.filter(programs='B.Tech').filter(
 				branch__branchName=bch).filter(placed=True))
 			den = dens_btech[bch]
-		if(den==0):
+		if(num==0):
 			continue
 		tmp["value"] = round((num/den)*100,2)
 		tmp["num"]=num
@@ -132,7 +132,7 @@ def charts(request):
 			num = len(Student.objects.filter(programs='M.Tech').filter(
 				branch__branchName=bch).filter(placed=True))
 			den = dens_mtech[bch]
-		if(den == 0):
+		if(num == 0):
 			continue
 		tmp["value"] = round((num/den)*100,2)
 		tmp["num"]=num
