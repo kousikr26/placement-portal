@@ -15,7 +15,7 @@ function plot_cloud(data) {
 
 
         series.accuracy = 4;
-        series.step = 20
+        series.step = 30
         series.rotationThreshold = 0;
         series.labels.template.tooltipText = "{word}:\n[bold]{value} placed[/]";
         series.fontFamily = "Courier New";
