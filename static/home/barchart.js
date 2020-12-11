@@ -36,8 +36,8 @@ function updateBarChart(data) {
         series.columns.template.hoverOnFocus = true;
         series.columns.template.tooltipText = "{group} : {num} out of {den} placed ({valueX}%)"
         series.columns.template.strokeOpacity = 0;
-        series.columns.template.column.cornerRadiusTopRight = 10;
-        series.columns.template.column.cornerRadiusTopLeft = 10;
+        series.columns.template.column.cornerRadiusTopRight = 5;
+        series.columns.template.column.cornerRadiusBottomRight = 5;
         //series.interpolationDuration = 1500;
         //series.interpolationEasing = am4core.ease.linear;
         var labelBullet = series.bullets.push(new am4charts.LabelBullet());
