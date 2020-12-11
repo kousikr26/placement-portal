@@ -1,6 +1,8 @@
 function plot_cloud(data) {
 
     var chart;
+    var width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
+        height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
     am4core.ready(function () {
 
         // Themes begin
@@ -15,7 +17,7 @@ function plot_cloud(data) {
 
 
         series.accuracy = 4;
-        series.step = 20
+        series.step = Math.round((2*width+1100)/91.0);
         series.rotationThreshold = 0;
         series.labels.template.tooltipText = "{word}:\n[bold]{value} placed[/]";
         series.fontFamily = "Inter Regular";

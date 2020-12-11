@@ -48,7 +48,7 @@ function updateBarChart(data) {
         labelBullet.label.fontSize=am4core.percent(80);
         labelBullet.label.text = "{valueX}%";
         labelBullet.fontWeight="bold";
-        labelBullet.dx=10;
+        labelBullet.dx=25;
 
         chart.zoomOutButton.disabled = false;
 
