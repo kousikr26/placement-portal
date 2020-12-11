@@ -31,11 +31,11 @@ def charts(request):
 	branches = ["CSE", "MNC", "ECE", "EEE", "ME", "CE", "CL", "EP", "CST", "BT", "Physics", "Chemistry", "Mathematics", "Design", "Others"]
 
 	btech_percent_placed = json.dumps({"Placed": len(Student.objects.filter(
-		programs='B.Tech').filter(placed=True)), "Not placed": len(Student.objects.filter(programs='B.Tech').filter(placed=False))})
+		programs__in=['B.Tech','B.Des']).filter(placed=True)), "Not placed": len(Student.objects.filter(programs__in=['B.Tech','B.Des']).filter(placed=False))})
 	mtech_percent_placed = json.dumps({"Placed": len(Student.objects.filter(
-		programs='M.Tech').filter(placed=True)), "Not placed": len(Student.objects.filter(programs='M.Tech').filter(placed=False))})
-	btech_all=Student.objects.filter(programs='B.Tech').filter(placed=True)
-	mtech_all=Student.objects.filter(programs='M.Tech').filter(placed=True)
+		programs__in=['M.Tech','M.Des']).filter(placed=True)), "Not placed": len(Student.objects.filter(programs__in=['M.Tech','M.Des']).filter(placed=False))})
+	btech_all=Student.objects.filter(programs__in=['B.Tech','B.Des']).filter(placed=True)
+	mtech_all=Student.objects.filter(programs__in=['M.Tech','M.Des']).filter(placed=True)
 	comp_counts={}
 	comp_counts_mtech={}
 
@@ -86,25 +86,39 @@ def charts(request):
 	for bch in branches:
 		tmp={}
 		tmp["group"]=bch
-		num = len(Student.objects.filter(programs='B.Tech').filter(
-			branch__branchName=bch).filter(placed=True))
-		den=(len(Student.objects.filter(programs='B.Tech').filter(branch__branchName=bch) ) )
+		if(bch=="Design"):
+			num=len(Student.objects.filter(programs='B.Des').filter(
+				branch__branchName=bch).filter(placed=True))
+			den = (len(Student.objects.filter(
+				programs='B.Des').filter(branch__branchName=bch)))
+		else:
+			num = len(Student.objects.filter(programs='B.Tech').filter(
+				branch__branchName=bch).filter(placed=True))
+			den=(len(Student.objects.filter(programs='B.Tech').filter(branch__branchName=bch) ) )
 		if(den==0):
 			continue
 		tmp["value"] = (num/den)*100
-
+		tmp["num"]=num
+		tmp["den"]=den
 		btech_branchwise_placements.append(tmp)
 	for bch in branches:
 		tmp = {}
 		tmp["group"] = bch
-		num = len(Student.objects.filter(programs='M.Tech').filter(
-			branch__branchName=bch).filter(placed=True))
-		den = (len(Student.objects.filter(
-			programs='M.Tech').filter(branch__branchName=bch)))
+		if(bch=="Design"):
+			num=len(Student.objects.filter(programs='M.Des').filter(
+				branch__branchName=bch).filter(placed=True))
+			den = (len(Student.objects.filter(
+				programs='M.Des').filter(branch__branchName=bch)))
+		else:
+			num = len(Student.objects.filter(programs='M.Tech').filter(
+				branch__branchName=bch).filter(placed=True))
+			den = (len(Student.objects.filter(
+				programs='M.Tech').filter(branch__branchName=bch)))
 		if(den == 0):
 			continue
 		tmp["value"] = (num/den)*100
-
+		tmp["num"]=num
+		tmp["den"]=den
 		mtech_branchwise_placements.append(tmp)
 	context = {"btech_percent_placed": btech_percent_placed,
 			"mtech_percent_placed": mtech_percent_placed,

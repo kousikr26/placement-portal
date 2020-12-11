@@ -13,24 +13,28 @@ function updateBarChart(data) {
         chart.responsive.enabled = true;
         // chart.padding(40, 40, 40, 40);
 
-        var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+        var categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis());
         categoryAxis.renderer.grid.template.location = 0;
         categoryAxis.dataFields.category = "group";
         categoryAxis.renderer.minGridDistance = 0;
         categoryAxis.renderer.grid.template.disabled = true;
         categoryAxis.renderer.labels.template.horizontalCenter = "right";
         categoryAxis.renderer.labels.template.verticalCenter = "middle";
-        categoryAxis.renderer.labels.template.rotation = 270;
-        var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+        categoryAxis.renderer.labels.template.rotation = 0;
+        var valueAxis = chart.xAxes.push(new am4charts.ValueAxis());
         valueAxis.min = 0;
-        valueAxis.extraMax = 0.1;
-        //valueAxis.rangeChangeEasing = am4core.ease.linear;
-        //valueAxis.rangeChangeDuration = 1500;
+        valueAxis.max = 100;
+        valueAxis.title.text = "% Placed";
+        valueAxis.title.fontSize = 20;
+        valueAxis.title.fontWeight = "bold";
 
         var series = chart.series.push(new am4charts.ColumnSeries());
-        series.dataFields.categoryX = "group";
-        series.dataFields.valueY = "value";
-        series.tooltipText = "{valueY.value}"
+        series.dataFields.categoryY = "group";
+        series.dataFields.valueX = "value";
+        series.dataFields.num = "num"
+        series.dataFields.den = "den"
+        series.columns.template.hoverOnFocus = true;
+        series.columns.template.tooltipText = "{group} : {num} out of {den} placed ({valueX}%)"
         series.columns.template.strokeOpacity = 0;
         series.columns.template.column.cornerRadiusTopRight = 10;
         series.columns.template.column.cornerRadiusTopLeft = 10;
