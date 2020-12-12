@@ -25,7 +25,7 @@ class HttpResponseUnauthorized(HttpResponse):
 
 # function to get all files
 @login_required
-@user_passes_test(is_ccd_member,login_url="/permission_not_granted")
+@user_passes_test(is_ccd_member,login_url="home:permission_not_granted")
 def ajax_get_file_list(request):
     data = dict()
     data['success'] = False
@@ -39,7 +39,7 @@ def ajax_get_file_list(request):
 
 # view function for get or post ajax request
 @login_required
-@user_passes_test(is_ccd_member,login_url="/permission_not_granted")
+@user_passes_test(is_ccd_member,login_url="home:permission_not_granted")
 
 def ajax_upload_file(request):
     # print(request.method)
@@ -54,7 +54,7 @@ def ajax_upload_file(request):
 
 # function for validating and saving fileForm if it is a post request
 @login_required
-@user_passes_test(is_ccd_member,login_url="/permission_not_granted")
+@user_passes_test(is_ccd_member,login_url="home:permission_not_granted")
 
 def save_file_form(request,form):
     data = dict()
@@ -73,7 +73,7 @@ def save_file_form(request,form):
 
 # function to delete file
 @login_required
-@user_passes_test(is_ccd_member,login_url="/permission_not_granted")
+@user_passes_test(is_ccd_member,login_url="home:permission_not_granted")
 
 def ajax_delete_file(request,pk):
     data = dict()
@@ -93,7 +93,7 @@ def ajax_delete_file(request,pk):
 
 
 @login_required
-@user_passes_test(is_ccd_member,login_url="/permission_not_granted")
+@user_passes_test(is_ccd_member,login_url="home:permission_not_granted")
 
 def home(request):
     students = Student.objects.all().order_by('roll')
@@ -105,7 +105,7 @@ def home(request):
 # function for updating database
 
 @login_required
-@user_passes_test(is_ccd_member,login_url="/permission_not_granted")
+@user_passes_test(is_ccd_member,login_url="home:permission_not_granted")
 
 @csrf_exempt
 def ajax_update_database(request):
@@ -207,7 +207,7 @@ def ajax_update_database(request):
 # function to get branches list
 
 @login_required
-@user_passes_test(is_ccd_member,login_url="/permission_not_granted")
+@user_passes_test(is_ccd_member,login_url="home:permission_not_granted")
 
 def ajax_get_branch_options(request):
     data = dict()
@@ -221,7 +221,7 @@ def ajax_get_branch_options(request):
 # function to filter the table data
 
 @login_required
-@user_passes_test(is_ccd_member,login_url="/permission_not_granted")
+@user_passes_test(is_ccd_member,login_url="home:permission_not_granted")
 
 def ajax_filter(request):
     data = dict()
@@ -250,7 +250,7 @@ def ajax_filter(request):
 
 
 @login_required
-@user_passes_test(is_ccd_member,login_url="/permission_not_granted")
+@user_passes_test(is_ccd_member,login_url="home:permission_not_granted")
 
 def save_student_form(request, form, template_name):
     if request.is_ajax():
@@ -271,7 +271,7 @@ def save_student_form(request, form, template_name):
 
 
 @login_required
-@user_passes_test(is_ccd_member,login_url="/permission_not_granted")
+@user_passes_test(is_ccd_member,login_url="home:permission_not_granted")
 
 def student_create(request):
     if request.is_ajax():
@@ -283,7 +283,7 @@ def student_create(request):
 
 
 @login_required
-@user_passes_test(is_ccd_member,login_url="/permission_not_granted")
+@user_passes_test(is_ccd_member,login_url="home:permission_not_granted")
 
 def student_update(request,pk):
     if request.is_ajax():
@@ -297,7 +297,7 @@ def student_update(request,pk):
         return save_student_form(request,form,'ccd/partial_student_update.html')
 
 @login_required
-@user_passes_test(is_ccd_member,login_url="/permission_not_granted")
+@user_passes_test(is_ccd_member,login_url="home:permission_not_granted")
 
 def student_delete(request, pk):
     if request.is_ajax():
