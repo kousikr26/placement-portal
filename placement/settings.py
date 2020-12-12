@@ -26,7 +26,7 @@ SECRET_KEY = 'hfaeq1p=f6t7p+m7vdc8ru*8j4=4m)7(-7+2yy)2(j54tw!ik*'
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 SECURE_SSL_REDIRECT = True
@@ -139,8 +139,8 @@ STATICFILES_FINDERS = [
     # searches in STATIC subfolder of each app
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
-MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR,'media/')
+MEDIA_URL = "/placement-portal/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
 LOGIN_URL="signin"
 # when login is required, user will be redirected to this url

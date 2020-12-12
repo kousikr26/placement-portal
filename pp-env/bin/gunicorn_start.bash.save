@@ -1,5 +1,4 @@
 
-
 #!/bin/bash
 
 NAME="placement-portal"                                  # Name of the application
@@ -7,7 +6,7 @@ DJANGODIR=/webapps/placement-portal/             # Django project directory
 SOCKFILE=/webapps/placement-portal/run/gunicorn.sock  # we will communicte using this unix socket
 USER=swc                                        # the user to run as
 GROUP=swc                                     # the group to run as
-NUM_WORKERS=10
+NUM_WORKERS=3
 DJANGO_SETTINGS_MODULE=placement.settings             # which settings file should Django use
 DJANGO_WSGI_MODULE=placement.wsgi                     # WSGI module name
 
