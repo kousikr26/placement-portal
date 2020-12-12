@@ -94,11 +94,12 @@ Charts
 <!-- Add 2 buttons -->
 <div style="text-align:center;margin-top:0.5rem;display:block">
 
-<div class="btn-group btn-toggle mb-2" >
+<div class="btn-group btn-toggle mb-3" >
 
 
-  <button   class="btn btn-xs navbar-custom btn-primary active "  id="btech-button" onclick="updateGauge(currentpos,btech_placed_frac);updateBarChart(data3);plot_cloud(data5);"">B.Tech</button>
-  <button  class="btn btn-xs navbar-custom btn-default "  id="mtech-button"  onclick="updateGauge(currentpos,mtech_placed_frac);updateBarChart(data4);plot_cloud(data6);"">M.Tech</button>
+  <button   class="btn btn-xs navbar-custom btn-primary active "  id="btech-button" onclick="btech()"">B.Tech</button>
+  <button  class="btn btn-xs navbar-custom btn-default "  id="mtech-button"  onclick="mtech()"">M.Tech</button>
+  <button class="btn btn-xs navbar-custom btn-default " id="others-button" onclick="others()"">Others</button>
 </div>
 </div>
 
@@ -154,6 +155,10 @@ Charts
         var data4 = {{ mtech_branchwise_placements|safe }};
         var data5 = {{ company_count|safe }};
         var data6={{company_count_mtech|safe }};
+        var data7={{ others_percent_placed|safe }};
+        var data8 = {{others_branchwise_placements|safe}};
+        var data9 = {{company_count_others|safe}};
+        var others_placed_frac= data7["Placed"] / (data7["Placed"] + data7["Not placed"]);
         </script>
     </div>
 
@@ -176,25 +181,45 @@ Charts
 
 
 <script>
-  $('.btn-toggle').click(function() {
-      $(this).find('.btn').toggleClass('active');
-
-      if ($(this).find('.btn-primary').length>0) {
-        $(this).find('.btn').toggleClass('btn-primary');
-      }
-      if ($(this).find('.btn-danger').length>0) {
-        $(this).find('.btn').toggleClass('btn-danger');
-      }
-      if ($(this).find('.btn-success').length>0) {
-        $(this).find('.btn').toggleClass('btn-success');
-      }
-      if ($(this).find('.btn-info').length>0) {
-        $(this).find('.btn').toggleClass('btn-info');
-      }
-
-      $(this).find('.btn').toggleClass('btn-default');
-
-  });
+   function btech(){
+     updateGauge(currentpos, btech_placed_frac); 
+     updateBarChart(data3);
+     plot_cloud(data5);
+     document.getElementById("mtech-button").classList.remove("active");
+     document.getElementById("mtech-button").classList.remove("btn-primary");
+     document.getElementById("mtech-button").classList.add("btn-default");
+     document.getElementById("others-button").classList.remove("active");
+     document.getElementById("others-button").classList.remove("btn-primary");
+     document.getElementById("others-button").classList.add("btn-default");
+     document.getElementById("btech-button").classList.add("btn-primary");
+     document.getElementById("btech-button").classList.add("active");
+   }
+   function mtech(){
+     updateGauge(currentpos, mtech_placed_frac);
+     updateBarChart(data4);
+     plot_cloud(data6);
+     document.getElementById("btech-button").classList.remove("active");
+     document.getElementById("btech-button").classList.remove("btn-primary");
+     document.getElementById("btech-button").classList.add("btn-default");
+     document.getElementById("others-button").classList.remove("active");
+     document.getElementById("others-button").classList.remove("btn-primary");
+     document.getElementById("others-button").classList.add("btn-default");
+      document.getElementById("mtech-button").classList.add("btn-primary");
+      document.getElementById("mtech-button").classList.add("active");
+   }
+   function others(){
+     updateGauge(currentpos, others_placed_frac);
+     updateBarChart(data8);
+     plot_cloud(data9);
+     document.getElementById("mtech-button").classList.remove("active");
+     document.getElementById("mtech-button").classList.remove("btn-primary");
+     document.getElementById("mtech-button").classList.add("btn-default");
+     document.getElementById("btech-button").classList.remove("active");
+     document.getElementById("btech-button").classList.remove("btn-primary");
+     document.getElementById("btech-button").classList.add("btn-default");
+      document.getElementById("others-button").classList.add("btn-primary");
+     document.getElementById("others-button").classList.add("active");
+   }
 </script>
 <style>
 .btn {
