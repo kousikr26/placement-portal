@@ -29,7 +29,7 @@ COMPANY_COUNT=70
 def charts(request):
 
 	branches = ["CSE", "MNC", "EE", "ME", "CE", "CL", "EP", "CST", "BT", "DS","Physics", "Chemistry", "Mathematics", "Design", "Others"]
-	dens_btech={"CSE":83,"MNC":56,"EE":116,"ME":70,"CL":58,"EP":22,"CST":38,"BT":49,"Design":35,"CE":52}
+	dens_btech={"CSE":83,"MNC":56,"EE":116,"ME":70,"CL":58,"EP":22,"CST":38,"BT":49,"Design":26,"CE":52}
 	dens_mtech={"CSE":54,"BT":38,"EE":74,"ME":103,"CE":85,"Design":33,"CL":68,"DS":18}
 	dens_others={"M.A Humanities":34,"M.S Energy":8,"M.Sc Physics":14,"M.Sc Chemistry":22,"M.Sc Mathematics":30}
 	btech_total=0
@@ -48,11 +48,11 @@ def charts(request):
 	btech_placed=len(btech_all)
 	mtech_placed=len(mtech_all)
 	others_placed=len(others_all)
-	
+
 	btech_percent_placed = json.dumps({"Placed": btech_placed, "Not placed": btech_total-btech_placed})
 	mtech_percent_placed = json.dumps({"Placed": mtech_placed, "Not placed": mtech_total-mtech_placed})
 	others_percent_placed = json.dumps({"Placed": others_placed, "Not placed": others_total-others_placed})
-	
+
 	comp_counts_btech={}
 	comp_counts_mtech={}
 	comp_counts_others={}
@@ -68,7 +68,7 @@ def charts(request):
 			comp_counts_mtech[i.company]+=1
 		else:
 			comp_counts_mtech[i.company]=1
-	
+
 	for i in others_all:
 		if(i.company in comp_counts_others):
 			comp_counts_others[i.company]+=1
@@ -93,7 +93,7 @@ def charts(request):
 		mtech_threshold=comp_mtech_counts[COMPANY_COUNT]
 	if(len(comp_others_counts)>COMPANY_COUNT):
 		others_threshold=comp_others_counts[COMPANY_COUNT]
-		
+
 	comp_count_lis_btech=[]
 	comp_count_lis_mtech=[]
 	comp_count_lis_others=[]
@@ -173,15 +173,15 @@ def charts(request):
 		tmp["num"]=num
 		tmp["den"]=den
 		mtech_branchwise_placements.append(tmp)
-	
+
 	for i in dens_others:
 		bch=list(i.split())[1].strip()
-		
+
 		tmp = {}
 		tmp["group"] = i
 		if i not in dens_others:
 			continue
-		
+
 		num = len(others_all.filter(branch__branchName=bch))
 		den = dens_others[i]
 		if(num == 0):

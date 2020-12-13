@@ -119,7 +119,7 @@ def ajax_update_database(request):
         headings = data['headings']
         # print(headings)
         data_list = data['data_list']
-        print(data_list[:2])
+        # print(data_list[:2])
         d = {    "Name":"name",
                  "Roll No.":"roll",
                  "Program":'programs',
