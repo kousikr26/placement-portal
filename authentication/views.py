@@ -41,7 +41,7 @@ def callback(request):
   expected_state = request.session.pop('auth_state', '')
   # Make the token request
   # print("#######################################3\n",request.get_full_path())
-  token = get_token_from_code('https://localhost:8000/'+request.get_full_path(), expected_state)
+  token = get_token_from_code('https://swc.iitg.ac.in/'+request.get_full_path(), expected_state)
   # Get the user's profile
   user = get_user(token)
 
@@ -50,18 +50,21 @@ def callback(request):
   username = re.sub('[^0-9a-zA-Z_]+','',username)
   password = user['surname']
   email = user['mail']
-  # print(bg-primary,password,email)
+  # print(password,email)
 
   try:
       user = User.objects.get(email=email)
   except User.DoesNotExist:
       user = User.objects.create_user(username,email,password)
       user.save()
-  user = authenticate(username=username,password=password)
+  user = User.objects.get(email=email)
+  # print(user)
   if user is not None:
       login(request,user)
       messages.success(request,"Success: You were successfully logged in.")
       return redirect('home:home')
+  else:
+      print("Caught an error while logging in",username,email)
   return redirect('home:home')
 
 def sign_out(request):
