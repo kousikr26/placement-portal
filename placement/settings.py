@@ -29,7 +29,8 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
-SECURE_SSL_REDIRECT = True
+if not DEBUG:
+    SECURE_SSL_REDIRECT = True
 
 # AUTH_USER_MODEL = "authentication.User"
 
