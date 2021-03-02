@@ -18,11 +18,15 @@ from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
 
+
+handler404 = 'home.views.handler404'
+handler500 = 'home.views.handler500'
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('',include('authentication.urls')),
-    path('ccd/',include('ccd.urls')),
-    path('home/',include('home.urls'))
+    path('placement-portal/admin/', admin.site.urls),
+    path('placement-portal/',include('authentication.urls')),
+    path('placement-portal/ccd/',include('ccd.urls')),
+    path('placement-portal/',include('home.urls'))
 
 ]
 if settings.DEBUG:

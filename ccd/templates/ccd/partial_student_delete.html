@@ -1,7 +1,7 @@
 <form method="post" action="{% url 'ccd:student_delete' student.id %}" class="js-student-delete-form">
   {% csrf_token %}
   <div class="modal-header heading lead bg-danger">
-    <h3 class="modal-title text-white" style="font-family: 'Nunito';font-weight:bold;">Confirm Student deletion </h3>
+    <h3 class="modal-title text-white" style="font-weight:bold;">Confirm Student deletion </h3>
     <span class="close" data-dismiss="modal" aria-label="Close">
         <i class="fas fa-window-close"></i>
     </span>

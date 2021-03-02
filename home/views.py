@@ -3,98 +3,211 @@ from .models import *
 from .forms import *
 from django.template import RequestContext
 from django.template.context_processors import csrf
-from django.http import HttpResponseRedirect,JsonResponse
+from django.http import HttpResponseRedirect,JsonResponse,HttpResponseNotFound
 from django.contrib.auth.decorators import login_required
 from django.db.models.functions import Lower
 from django.template.loader import render_to_string
 from django.utils.text import slugify
-
+from django.contrib.auth.decorators import login_required
 import json
 
-def index(request):
 
-	branches = ["CSE", "MNC", "ECE", "EEE", "ME", "CE", "CL", "EP", "CST", "BT", "Physics", "Chemistry", "Mathematics", "Design", "Others"]
-	
-	btech_percent_placed = json.dumps({"Placed": len(Student.objects.filter(
-		programs='B.Tech').filter(placed=True)), "Not placed": len(Student.objects.filter(programs='B.Tech').filter(placed=False))})
-	mtech_percent_placed = json.dumps({"Placed": len(Student.objects.filter(
-		programs='M.Tech').filter(placed=True)), "Not placed": len(Student.objects.filter(programs='M.Tech').filter(placed=False))})
-	btech_all=Student.objects.filter(programs='B.Tech').filter(placed=True)
-	mtech_all=Student.objects.filter(programs='M.Tech').filter(placed=True)
-	comp_counts={}
+def home(request):
+  return render(request,'home/home.html',{})
+
+def permission_not_granted(request):
+    return render(request,'403.html')
+
+def handler404(request,exception,template_name='404.html'):
+    return render(request,template_name)
+def handler500(request):
+    return render(request,'500.html')
+
+
+COMPANY_COUNT=70
+@login_required
+def charts(request):
+
+	branches = ["CSE", "MNC", "EE", "ME", "CE", "CL", "EP", "CST", "BT", "DS","Physics", "Chemistry", "Mathematics", "Design", "Others"]
+	dens_btech={"CSE":83,"MNC":56,"EE":116,"ME":70,"CL":58,"EP":22,"CST":38,"BT":49,"Design":26,"CE":52}
+	dens_mtech={"CSE":54,"BT":38,"EE":74,"ME":103,"CE":85,"Design":33,"CL":68,"DS":18}
+	dens_others={"M.A Humanities":34,"M.S Energy":8,"M.Sc Physics":14,"M.Sc Chemistry":22,"M.Sc Mathematics":30}
+	btech_total=0
+	mtech_total=0
+	others_total=0
+	for i in dens_btech:
+		btech_total+=dens_btech[i]
+	for i in dens_mtech:
+		mtech_total+=dens_mtech[i]
+	for i in dens_others:
+		others_total+=dens_others[i]
+	btech_all=Student.objects.filter(programs__in=['B.Tech','B.Des']).filter(placed=True)
+	mtech_all=Student.objects.filter(programs__in=['M.Tech','M.Des']).filter(placed=True)
+	others_all=Student.objects.filter(programs__in=['M.Sc','M.S',"M.A"]).filter(placed=True)
+
+	btech_placed=len(btech_all)
+	mtech_placed=len(mtech_all)
+	others_placed=len(others_all)
+
+	btech_percent_placed = json.dumps({"Placed": btech_placed, "Not placed": btech_total-btech_placed})
+	mtech_percent_placed = json.dumps({"Placed": mtech_placed, "Not placed": mtech_total-mtech_placed})
+	others_percent_placed = json.dumps({"Placed": others_placed, "Not placed": others_total-others_placed})
+
+	comp_counts_btech={}
 	comp_counts_mtech={}
-	
-	
+	comp_counts_others={}
+
 	for i in btech_all:
-		if(i.company in comp_counts):
-			comp_counts[i.company]+=1
+		if(i.company in comp_counts_btech):
+			comp_counts_btech[i.company]+=1
 		else:
-			comp_counts[i.company]=1
+			comp_counts_btech[i.company]=1
 
 	for i in mtech_all:
 		if(i.company in comp_counts_mtech):
 			comp_counts_mtech[i.company]+=1
 		else:
 			comp_counts_mtech[i.company]=1
-	comp_count_lis=[]
+
+	for i in others_all:
+		if(i.company in comp_counts_others):
+			comp_counts_others[i.company]+=1
+		else:
+			comp_counts_others[i.company]=1
+
+	comp_btech_counts=list(comp_counts_btech.values())
+	comp_mtech_counts=list(comp_counts_mtech.values())
+	comp_others_counts=list(comp_counts_others.values())
+
+	comp_btech_counts.sort(reverse=True)
+	comp_mtech_counts.sort(reverse=True)
+	comp_others_counts.sort(reverse=True)
+
+	btech_threshold=0
+	mtech_threshold=0
+	others_threshold=0
+
+	if(len(comp_btech_counts)>COMPANY_COUNT):
+		btech_threshold=comp_btech_counts[COMPANY_COUNT]
+	if(len(comp_mtech_counts)>COMPANY_COUNT):
+		mtech_threshold=comp_mtech_counts[COMPANY_COUNT]
+	if(len(comp_others_counts)>COMPANY_COUNT):
+		others_threshold=comp_others_counts[COMPANY_COUNT]
+
+	comp_count_lis_btech=[]
 	comp_count_lis_mtech=[]
-	for i in comp_counts:
+	comp_count_lis_others=[]
+
+	for i in comp_counts_btech:
 		tmp={}
-		if(i==""):
+		if(i=="" or comp_counts_btech[i]<btech_threshold):
 			continue
 		tmp["tag"]=i
-		tmp["weight"]=comp_counts[i]
+		tmp["weight"]=comp_counts_btech[i]
 		tmp["urlval"]=i.replace(' ','%20')
-		
-		comp_count_lis.append(tmp)
+		comp_count_lis_btech.append(tmp)
+
 	for i in comp_counts_mtech:
 		tmp={}
-		if(i==""):
+		if(i=="" or comp_counts_mtech[i]<mtech_threshold):
 			continue
 		tmp["tag"]=i
 		tmp["weight"]=comp_counts_mtech[i]
 		tmp["urlval"]=i.replace(' ','%20')
 		comp_count_lis_mtech.append(tmp)
+
+	for i in comp_counts_others:
+		tmp={}
+		if(i=="" or comp_counts_others[i]<others_threshold):
+			continue
+		tmp["tag"]=i
+		tmp["weight"]=comp_counts_others[i]
+		tmp["urlval"]=i.replace(' ','%20')
+		comp_count_lis_others.append(tmp)
+
 	btech_branchwise_placements=[]
 	mtech_branchwise_placements = []
-	cse_wc=[]
+	others_branchwise_placements=[]
+
 	for bch in branches:
 		tmp={}
 		tmp["group"]=bch
-		num = len(Student.objects.filter(programs='B.Tech').filter(
-			branch__branchName=bch).filter(placed=True))
-		den=(len(Student.objects.filter(programs='B.Tech').filter(branch__branchName=bch) ) )
-		if(den==0):
+		if bch not in dens_btech:
 			continue
-		tmp["value"] = (num/den)*100
-		
+		if(bch=="Design"):
+			num=len(Student.objects.filter(programs='B.Des').filter(
+				branch__branchName=bch).filter(placed=True))
+			den = dens_btech[bch]
+		elif(bch=="EE"):
+			num = len(Student.objects.filter(programs='B.Tech').filter(
+				branch__branchName__in=["ECE","EEE"]).filter(placed=True))
+			den = dens_btech[bch]
+		else:
+			num = len(btech_all.filter(branch__branchName=bch))
+			den = dens_btech[bch]
+		if(num==0):
+			continue
+		tmp["value"] = round((num/den)*100,2)
+		tmp["num"]=num
+		tmp["den"]=den
 		btech_branchwise_placements.append(tmp)
 	for bch in branches:
 		tmp = {}
 		tmp["group"] = bch
-		num = len(Student.objects.filter(programs='M.Tech').filter(
-			branch__branchName=bch).filter(placed=True))
-		den = (len(Student.objects.filter(
-			programs='M.Tech').filter(branch__branchName=bch)))
-		if(den == 0):
+		if bch not in dens_mtech:
 			continue
-		tmp["value"] = (num/den)*100
-
+		if(bch=="Design"):
+			num=len(Student.objects.filter(programs='M.Des').filter(
+				branch__branchName=bch).filter(placed=True))
+			den = dens_mtech[bch]
+		elif(bch=="EE"):
+			num = len(Student.objects.filter(programs='M.Tech').filter(
+				branch__branchName__in=["ECE","EEE"]).filter(placed=True))
+			den = dens_mtech[bch]
+		else:
+			num = len(mtech_all.filter(branch__branchName=bch))
+			den = dens_mtech[bch]
+		if(num == 0):
+			continue
+		tmp["value"] = round((num/den)*100,2)
+		tmp["num"]=num
+		tmp["den"]=den
 		mtech_branchwise_placements.append(tmp)
-	context = {"btech_percent_placed": btech_percent_placed, 
+
+	for i in dens_others:
+		bch=list(i.split())[1].strip()
+
+		tmp = {}
+		tmp["group"] = i
+		if i not in dens_others:
+			continue
+
+		num = len(others_all.filter(branch__branchName=bch))
+		den = dens_others[i]
+		if(num == 0):
+			continue
+		tmp["value"] = round((num/den)*100,2)
+		tmp["num"]=num
+		tmp["den"]=den
+		others_branchwise_placements.append(tmp)
+
+	context = {"btech_percent_placed": btech_percent_placed,
 			"mtech_percent_placed": mtech_percent_placed,
-			"btech_branchwise_placements": json.dumps(btech_branchwise_placements), 
+			"others_percent_placed":others_percent_placed,
+			"btech_branchwise_placements": json.dumps(btech_branchwise_placements),
 			"mtech_branchwise_placements": json.dumps(mtech_branchwise_placements),
-			"company_count":comp_count_lis,
-			"company_count_mtech":comp_count_lis_mtech
+			"others_branchwise_placements":json.dumps(others_branchwise_placements),
+			"company_count":comp_count_lis_btech,
+			"company_count_mtech":comp_count_lis_mtech,
+			"company_count_others":comp_count_lis_others
 			}
-	
+
 	# print(context)
 	return render(request, "home/stats.html",context )
-
 ################################################################################
 # function to render the table
 
+@login_required
 def get_table(request):
 	company = request.GET.get('company')
 	if company:
@@ -109,6 +222,8 @@ def get_table(request):
 ################################################################################
 
 # function to filter the table data
+
+@login_required
 def ajax_table_filter(request):
 	data = dict()
 	if request.method == 'GET' and request.is_ajax():

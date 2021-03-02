@@ -1,34 +1,36 @@
-function plot_cloud(data){
-    
+function plot_cloud(data) {
+
     var chart;
+    var width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
+        height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
     am4core.ready(function () {
 
         // Themes begin
         am4core.useTheme(am4themes_animated);
         // Themes end
 
-        
-        
+
+
         chart = am4core.create("wordcloud", am4plugins_wordCloud.WordCloud);
+
         var series = chart.series.push(new am4plugins_wordCloud.WordCloudSeries());
 
 
         series.accuracy = 4;
-        series.step = 100;
+        series.step = Math.round((2*width+1100)/91.0);
         series.rotationThreshold = 0;
-        series.maxCount = 200;
         series.labels.template.tooltipText = "{word}:\n[bold]{value} placed[/]";
-        series.fontFamily = "Courier New";
-        series.maxFontSize = am4core.percent(30);
+        series.fontFamily = "Inter Regular";
+
         series.data = data;
         series.dataFields.word = "tag";
         series.dataFields.value = "weight";
         series.dataFields.urlval = "urlval"
-        series.labels.template.url = "http://127.0.0.1:8000/home/table/?company={urlval}";
+        series.labels.template.url = "/placement-portal/table/?company={urlval}";
         series.labels.template.urlTarget = "_blank";
 
-        series.minfontsize = 70;
-        series.maxfontsize = 70;
+        // series.minfontsize = ;
+        // series.maxfontsize = 70;
         series.heatRules.push({
             "target": series.labels.template,
             "property": "fill",
@@ -36,7 +38,8 @@ function plot_cloud(data){
             "max": am4core.color("#d2222d"),
             "dataField": "value"
         });
-
+        chart.logo.disabled = true
+        chart.logo.height = -15000;
     }); // end am4core.ready()
 
 

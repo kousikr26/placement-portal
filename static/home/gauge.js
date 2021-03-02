@@ -1,10 +1,11 @@
 var currentpos = 0;
-var width = 960,
-    height = 500,
+
+var width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
+    height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight,
     margin = 40,
     n = 10,
-    radius = width / 2 - (margin * 2),
-    needleRad = 25,
+    radius = width/4  ,
+    needleRad = 15,
     pi = Math.PI,
     halfPi = pi / 2,
     endAngle = pi / 2,
@@ -15,14 +16,14 @@ var width = 960,
     scale = d3.scaleLinear().range([startAngle, endAngle]),
     colorScale = d3.scaleSequential(d3.interpolateRdYlGn).domain([data[0], data[data.length - 1]]),
     svg = d3.select('#gauge')
+        .append('svg')
         .attr('width', '100%')
         .attr('height', '100%')
-        .attr('viewBox', '0' + ' ' + '0' + ' ' + window.innerWidth + ' ' + window.innerHeight)
+        .attr('viewBox', '0' + ' ' + '0' + ' ' + width + ' ' + Math.min(width,height))
         .attr('preserveAspectRatio', 'xMinYMin')
-        .append('g') 
-        .attr('transform', 'translate(' + width  + ',' + (height - margin) + ')');
-console.log(window.innerHeight);
-console.log(window.innerWidth);
+        .append('g')
+        .attr('transform', 'translate(' + width / 2 + ',' + (Math.min(height, width)/1.5  - margin) + ')');
+
 _data.push(endAngle);
 
 var arc = d3.arc()
@@ -41,7 +42,7 @@ slice
     .attr('fill', function (d) { return colorScale(d); });
 
 var needle = svg.append('g').append('path').attr('class', 'needle').attr('fill-opacity', .7).attr('stroke', 'black');
-var text = svg.append('g').append('text').attr('class', 'text').attr('text-anchor', 'middle').attr('dy', '-0.45em').classed('monospace', true);
+var text = svg.append('g').append('text').attr('class', 'text').attr('text-anchor', 'middle').attr('dy', '-0.45em').classed('monospace', true).style("font-size", (width * 0.002) + "em");
 
 function updateGauge(oldValue, newValue) {
     currentpos = newValue;
@@ -66,7 +67,7 @@ function textTween(newValue) {
             i = d3.interpolate(d.oldValue, newValue);
 
         return function (t) {
-            that.text(d3.format('.1%')(scale.invert(i(t)))+" placed");
+            that.text(d3.format('.1%')(scale.invert(i(t))) + " placed");
         };
     };
 }
@@ -109,5 +110,4 @@ function lineTween(newValue) {
         };
     };
 }
-console.log(data1);
 updateGauge(currentpos, btech_placed_frac);

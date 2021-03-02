@@ -6,7 +6,13 @@ from django.urls import reverse
 from .graph_helper import get_user
 from .auth_helper import get_sign_in_url, get_token_from_code,get_token
 from django.contrib.auth.models import User
+# from .models import User
 from django.contrib.auth import authenticate, login, logout
+import re
+
+User._meta.get_field('email')._unique = True
+User._meta.get_field('username')._unique = False
+
 def initialize_context(request):
   context = {}
 
@@ -21,46 +27,49 @@ def initialize_context(request):
   context['user'] = request.session.get('user', {'is_authenticated': False})
   return context
 
-def home(request):
-  context = initialize_context(request)
-
-  return render(request,'home/home.html', context)
 
 def sign_in(request):
   # Get the sign-in URL
   sign_in_url, state = get_sign_in_url()
   # Save the expected state so we can validate in the callback
   request.session['auth_state'] = state
+  # print(sign_in_url,state)
   # Redirect to the Azure sign-in page
   return HttpResponseRedirect(sign_in_url)
 def callback(request):
   # Get the state saved in session
   expected_state = request.session.pop('auth_state', '')
   # Make the token request
-  token = get_token_from_code(request.get_full_path(), expected_state)
+  # print("#######################################3\n",request.get_full_path())
+  token = get_token_from_code('https://swc.iitg.ac.in/'+request.get_full_path(), expected_state)
   # Get the user's profile
   user = get_user(token)
 
   # Get user info
-  username = user['displayName']
+  username = user['displayName'].replace(" ","_")
+  username = re.sub('[^0-9a-zA-Z_]+','',username)
   password = user['surname']
   email = user['mail']
+  # print(password,email)
 
   try:
-      user = User.objects.get(username=username)
+      user = User.objects.get(email=email)
   except User.DoesNotExist:
       user = User.objects.create_user(username,email,password)
       user.save()
-  user = authenticate(username=username,password=password)
+  user = User.objects.get(email=email)
+  # print(user)
   if user is not None:
       login(request,user)
       messages.success(request,"Success: You were successfully logged in.")
-      return redirect('home')
-  return redirect('home')
+      return redirect('home:home')
+  else:
+      print("Caught an error while logging in",username,email)
+  return redirect('home:home')
 
 def sign_out(request):
   # Clear out the user and token
   logout(request)
   messages.success(request, "Successfully Logged Out")
 
-  return redirect('home')
+  return redirect('home:home')

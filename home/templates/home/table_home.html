@@ -1,315 +1,809 @@
+{% extends "home/base.html" %}
+
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Table</title>
-      <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
-      <!-- datatables scripts for adding pagination and all-->
-      <script src="{% static 'js/jquery-3.5.1.js' %}"></script> <!-- JQUERY HERE -->
-      <!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> -->
-      <script src="{% static 'js/bootstrap.min.js' %}"></script>
-      <script src="{% static 'js/jquery.dataTables.min.js' %}"></script>
-      <!-- <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script> -->
-      <script src="{% static 'js/dataTables.bootstrap4.min.js' %}"></script>
-      <!-- <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script> -->
+
+{% block title %}
+Table
+{% endblock %}
+
+
+{% block head %}
 
 
 
-      <style media="screen">
+<style>
+	.m-b-110 {
+		margin-bottom: 110px;
+	}
 
-      .header {
-        font-size : 15px;
-        font-weight : normal;
-        background-color : black;
-        border-bottom : 1px solid black ;
-        padding :  0em 1.2em;
-        color : white;
-        text-transform : uppercase;
-        padding:25px 10px;
-        }
-      #student-table {
-        border : 1px solid white ;
-        border-collapse : collapse;
-        width : 100%;
-        height : 471px;
-        background-color : white;
-        }
-      table,tr,th,td {
-        font-family : Arial, Helvetica, sans-serif;
-        color : grey;
-        }
+	* {
+		margin: 0px;
+		padding: 0px;
+		box-sizing: border-box;
+	}
 
-      .row td:hover {
-        background-color : blue;
-        color : red;
-        }
-      .column1 {
-        padding-left : 25px;
-        padding-right : 10px;
-        width : 250px;
-        }
-      .column2 {
-        padding-left : 25px;
-        padding-right : 10px;
-        }
-      .column3 {
-        padding-left : 25px;
-        padding-right : 10px;
-        }
-      .column4 {
-        padding-left : 25px;
-        padding-right : 10px;
-        }
-      .column5 {
-        padding-left : 25px;
-        padding-right : 10px;
-        }
-      .column6 {
-        padding-left : 25px;
-        padding-right : 10px;
-        }
-      .column7 {
-        padding-left : 25px;
-        padding-right : 10px;
-        }
-      .column8 {
-        padding-left : 25px;
-        padding-right : 10px;
-        }
-      .light {
-        background-color : rgba(0, 0, 255, 0.1);
-        color : red;
-      }
-      .column11 {
-        padding-left : 25px;
-        padding-right : 10px;
-        width : 250px;
-        }
-      .column12 {
-        padding-left : 25px;
-        padding-right : 10px;
-        }
-      .column13 {
-        padding-left : 25px;
-        padding-right : 10px;
-        }
-      .column14 {
-        padding-left : 25px;
-        padding-right : 10px;
-        }
-      .column15 {
-        padding-left : 25px;
-        padding-right : 10px;
-        }
-      .column16 {
-        padding-left : 25px;
-        padding-right : 10px;
-        }
-      .column17 {
-        padding-left : 25px;
-        padding-right : 10px;
-        }
-      .column18 {
-        padding-left : 25px;
-        padding-right : 10px;
-        }
-      </style>
-</head>
-<body>
+	body,
+	html {
+		height: 100%;
+		font-family: sans-serif;
+	}
 
-<div class="row">
+	/* ------------------------------------ */
+	a {
+		margin: 0px;
+		transition: all 0.4s;
+		-webkit-transition: all 0.4s;
+		-o-transition: all 0.4s;
+		-moz-transition: all 0.4s;
+	}
 
-      <div class="col-6 col-lg-3">
-          <div class="form-group">
-              <label for="branch">Branch</label>
-              <select class="form-control" id="branch_filter">
-                  <option selected="true" value="all">All</option>
-                  {%for branch in branches %}
-                    <option value="{{branch.branchName}}">{{branch}}</option>
-                  {% endfor %}
-              </select>
-          </div>
-      </div>
-      <div class="col-6 col-lg-3">
-          <div class="form-group">
-              <label for="branch">Program</label>
-              <select class="form-control" id="program_filter">
-                  <option selected="true" value="all">All</option>
-                  <option value="B.Tech">B.Tech</option>
-                  <option value="B.Des">B.Des</option>
-                  <option value="M.Tech">M.Tech</option>
-                  <option value="M.Des">M.Des</option>
-                  <option value="M.Sc">M.Sc</option>
-                  <option value="Phd">Phd</option>
-                  <option value="Others">Others</option>
-              </select>
-          </div>
-      </div>
-      <div class="col-6 col-lg-3">
-          <div class="form-group">
-              <label for="SortBy">Sort By</label>
-              <select class="form-control" id="sort">
-                  <option selected="true" value='roll'>Roll No</option>
-                  <option value='name'>Name</option>
-                  <option value='programs'>Program</option>
-                  <option value='branch'>Branch</option>
-                  <option value='company'>Company</option>
-                  <option value='profile'>Profile</option>
-                  <option value='sector'>Sector</option>
-              </select>
-          </div>
-      </div>
+	a:focus {
+		outline: none !important;
+	}
+
+	a:hover {
+		text-decoration: none;
+	}
+
+	/* ------------------------------------ */
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		margin: 0px;
+	}
+
+	p {
+		margin: 0px;
+	}
+
+	li {
+		ul,
+		margin: 0px;
+		list-style-type: none;
+	}
+
+
+	/* ------------------------------------ */
+	input {
+		display: block;
+		outline: none;
+		/* border: none !important; */
+		border: 1px solid rgb(195, 195, 195);
+		width: 269px;
+	}
+
+	textarea {
+		display: block;
+		outline: none;
+	}
+
+	textarea:focus,
+	input:focus {
+		border-color: transparent !important;
+	}
+
+	/* ------------------------------------ */
+	button {
+		outline: none !important;
+		border: none;
+		background: transparent;
+	}
+
+	button:hover {
+		cursor: pointer;
+	}
+
+	iframe {
+		border: none !important;
+	}
+
+
+
+	/*//////////////////////////////////////////////////////////////////
+[ Table ]*/
+
+	.limiter {
+		width: 100%;
+		margin: auto;
+	}
+
+	.container-table100 {
+		width: 100%;
+		min-height: 100vh;
+		/* background: #d1d1d1; */
+		/* background-image: url(../color_vignette.png); */
+		background: rgb(233, 245, 248);
+		/* background: #E9EEF4; */
+
+		display: -webkit-box;
+		/* display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex; */
+		align-items: center;
+		justify-content: center;
+		flex-wrap: wrap;
+		/* padding: 33px 30px; */
+	}
+
+	.wrap-table100 {
+		width: 1400px;
+
+	}
+
+	/*//////////////////////////////////////////////////////////////////
+[ Table ]*/
+	table {
+		width: 100%;
+		background-color: #fff;
+	}
+
+	th,
+	td {
+		font-weight: unset;
+		padding-right: 10px;
+	}
+
+	.column100 {
+		width: 130px;
+		padding-left: 25px;
+	}
+
+	.column100.column1 {
+		width: 265px;
+		padding-left: 42px;
+	}
+
+	.row100.head th {
+		padding-top: 24px;
+		padding-bottom: 20px;
+	}
+
+	.row100 td {
+		padding-top: 18px;
+		padding-bottom: 14px;
+	}
+
+	.newcolumn {
+		width: 100%;
+		height: 30px;
+		padding: 10px 15px;
+	}
+
+	.column0 {
+		width: 30px;
+		padding: 0;
+		display: inline-block;
+	}
+
+	.row100 {
+		border-bottom: 2.3px solid #E9EEF4;
+	}
+
+	.table100.ver6 {
+		border-radius: 16px;
+		/* overflow: hidden; */
+		background: rgb(233 238 244);
+		/* box-shadow: 1px 1px 20px rgba(50, 50, 50, 0.12); */
+	}
+
+
+	.table100.ver6 table {
+		background-color: transparent;
+	}
+
+	.table100.ver6 td {
+		/* font-family: Lato-Regular; */
+		font-size: 16px;
+		color: black;
+		line-height: 1.4;
+	}
+
+	.table100.ver6 th {
+		/* font-family: Lato-Bold; */
+		font-size: 18px;
+		color: #000;
+		line-height: 1.4;
+		text-transform: uppercase;
+
+		background-color: rgba(255, 255, 255, 0.32);
+	}
+
+	.table100.ver6 .row100:hover td {
+		background-color: #90e0ef;
+	}
+
+	.table100.ver6 .hov-column-ver6 {
+		background-color: #90e0ef;
+	}
+
+
+	.table100.ver6 .row100 td:hover {
+		background-color: #90e0ef;
+	}
+
+	.acad_row {
+		display: -webkit-box;
+		display: -webkit-flex;
+		display: flex;
+		-webkit-flex-wrap: wrap;
+		flex-wrap: wrap;
+		/* margin-right: -15px; */
+		/* margin-left: -15px; */
+	}
+
+	.acad_col {
+		-ms-flex-preferred-size: 0;
+		flex-basis: 0;
+		-ms-flex-positive: 1;
+		flex-grow: 1;
+		min-width: 0;
+		max-width: 100%;
+		position: relative;
+		width: 100%;
+		/* padding-right: 15px;
+    padding-left: 15px; */
+	}
+
+	.acad_col-1 {
+		-webkit-box-flex: 0;
+		-webkit-flex: 0 0 8.3333333333%;
+		flex: 0 0 8.3333333333%;
+		max-width: 8.3333333333%;
+	}
+
+	.acad_col-1-sm {
+		-webkit-box-flex: 0;
+		-webkit-flex: 0 0 3.3333333333%;
+		flex: 0 0 3.3333333333%;
+		max-width: 3.3333333333%;
+	}
+
+	.acad_col-1-sm-sm {
+		-webkit-box-flex: 0;
+		-webkit-flex: 0 0 2.3333333333%;
+		flex: 0 0 2.3333333333%;
+		max-width: 2.3333333333%;
+	}
+
+	.acad_col-1-lg {
+		-webkit-box-flex: 0;
+		-webkit-flex: 0 0 5.6333333333%;
+		flex: 0 0 5.6333333333%;
+		max-width: 5.6333333333%;
+	}
+
+
+	.acad_btn-outline-info {
+		color: #17a2b8;
+		border-color: #17a2b8;
+	}
+
+	.acad_btn {
+		display: inline-block;
+		font-weight: 400;
+		color: #212529;
+		text-align: center;
+		vertical-align: middle;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+		background-color: transparent;
+		border: 1px solid transparent;
+		padding: .375rem .75rem;
+		font-size: 1rem;
+		line-height: 1.5;
+		border-radius: 2.25rem;
+		transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+	}
+
+	.child_class tr:nth-child(even) {
+		background-color: #f8f6ff;
+	}
+
+	.dropdown-menu.show {
+		display: block;
+		margin-left: 70px;
+		border: 1px solid black;
+
+	}
+
+	.drop_class {
+		border-radius: 2.25rem;
+		margin-left: 90px;
+		margin-right: 30px;
+	}
+
+	.search_class {
+		border-radius: 2.25rem;
+		margin-right: 30px;
+	}
+
+	.form_class {
+		float: right;
+	}
+
+	.dataTables_wrapper {
+		background-color: rgb(233, 238, 244);
+	}
+
+	/* .dataTables_length {
+		display: block;
+		float: right;
+		margin-right: 20px;
+	} */
+
+	.dataTables_length select {
+		border-color: #7774e7;
+	}
+
+	.dataTables_filter {
+		/* margin-left: 5px; */
+	}
+
+	.dataTables_filter input {
+		position: relative;
+		/* padding: 10px 10px 1px 10px; */
+		width: 269px;
+		color: #5c4949;
+		font-size: 16px;
+		font-weight: 100;
+		letter-spacing: 1.5px;
+		border-radius: 5px;
+		border-style: solid;
+		/* border-color: #7774e7; */
+		border-color: rgb(108, 122, 224);
+		transition: width 0.4s ease;
+		outline: none;
+	}
+
+	.dataTables_filter input:focus {
+		border-radius: 5px;
+	}
+
+	.dataTables_info {
+		margin-top: 30px;
+		display: inline-block;
+		color: gray;
+		/* margin-left: 10px; */
+		padding-bottom: 10px;
+	}
+
+	.dataTables_paginate {
+		margin-top: 20px;
+		display: block;
+		/* float: right; */
+		padding-bottom: 10px;
+		border-color: #000000;
+
+	}
+
+
+	.dataTables_paginate ul li a {
+		background-color: #6376af;
+		color: white;
+		border-color: #000000;
+	}
+
+
+	.page-item.active .page-link {
+		/* z-index: 2; */
+		color: #fff;
+		background-color: #023e8a;
+		border-color: #0063e2;
+	}
+
+	.page-item.disabled .page-link {
+		color: #fff;
+		pointer-events: none;
+		cursor: auto;
+		background-color: #c1d5ef;
+		border-color: #0063e2;
+	}
+
+	.page-link:hover {
+		background-color: #90e0ef;
+		border-color: #033e8a;
+	}
+
+	@media (min-width: 276px) {
+		.mr-sm-2 {
+			margin-right: .5rem !important;
+		}
+	}
+
+
+
+	.main_wrapper {
+		padding: 1%;
+		background-color: rgb(233 238 244);
+	}
+
+
+
+	#student-table_length{
+		display: block;
+		float: right;
+	}
+</style>
+
+
+{% endblock %}
+
+
+{% block content %}
+
+
+{# navbar #}
+<style>
+	.bg-custom {
+		background-color: #023e8a;
+	}
+
+	.bg-custom-2 {
+		background-color: #0077b6;
+	}
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-custom">
+
+
+	<div class="container-fluid">
+
+		<a class="navbar-brand order-0 hov_class" href="{% url 'home:home' %}" style="cursor: pointer;"> <img style="max-width: 35px;max-height: 35px;" src="{% static 'images/logo.png' %}">Placement Statistics</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarColor01">
+			<ul class="navbar-nav ml-auto">
+
+				{% if request.user.is_authenticated %}
+
+				<li class="nav-item active">
+					<a class="nav-link" href="{% url 'home:charts' %}">Charts
+					</a>
+				</li>
+
+				<li class="nav-item active">
+					<a class="nav-link" href="{% url 'signout' %}">Logout
+					</a>
+				</li>
+				{% else %}
+				<li class="nav-item active">
+					<a class="nav-link" href="{% url 'signin' %}">Click here to Login
+					</a>
+				</li>
+
+				<a class="nav-item nav-link text-white hov_class" href="{% url 'signin' %}" style="cursor: pointer;"></a>
+				{% endif %}
+
+			</ul>
+
+		</div>
+	</div>
+
+</nav>
+
+
+<style>
+	.navbar-dark .navbar-nav .active>.nav-link:hover {
+		text-decoration:underline;
+	}
+
+	.navbar-dark .navbar-brand:hover {
+		text-decoration:underline;
+
+	}
+</style>
+
+
+
+
+
+
+
+
+<div class="main_wrapper" style="overflow-x:hidden;">
+	<br><br>
+	<div class="text-center ">
+
+		<h2 class="display-5">Tabular View</h2>
+	</div>
+	<br>
+
+	<div class="">
+		<div class="">
+			<div class="table100 ver6 m-b-110 " style="border-radius: 16px;">
+				<div class="">
+
+					<div class="acad_row">
+
+						<div class="acad_col"  id="zoomable-table-div">
+							<div style="background: rgb(233, 238, 244);padding:12px 10px;border-top-left-radius:16px ;border-top-right-radius:46px;">
+							</div>
+
+							<div style="background: rgb(233, 238, 244);">
+
+								<div class="col-6 col-lg-3" style="display: inline-block;max-width: 299px;">
+									<div class="form-group">
+										<label for="branch">Branch</label>
+										<select class="form-control" id="branch_filter" style="border-color: #7774e7;">
+											<option selected="true" value="all">All</option>
+											{%for branch in branches %}
+											<option value="{{branch.branchName}}">{{branch}}</option>
+											{% endfor %}
+										</select>
+									</div>
+								</div>
+
+								<div class="col-6 col-lg-3" style="display: inline-block;max-width: 299px;">
+									<div class="form-group">
+										<label for="branch">Program</label>
+										<select class="form-control" id="program_filter" style="border-color: #7774e7;">
+											<option selected="true" value="all">All</option>
+											<option value="B.Tech">B.Tech</option>
+											<option value="B.Des">B.Des</option>
+											<option value="M.Tech">M.Tech</option>
+											<option value="M.Des">M.Des</option>
+											<option value="M.Sc">M.Sc</option>
+											<option value="Phd">Phd</option>
+											<option value="Others">Others</option>
+										</select>
+									</div>
+								</div>
+
+
+								<div class="col-6 col-lg-3" style="display: inline-block;max-width: 299px;">
+									<div class="form-group">
+										<label for="SortBy">Sort By</label>
+										<select class="form-control" id="sort" style="border-color: #7774e7;">
+											<option selected="true" value='roll'>Roll No</option>
+											<option value='name'>Name</option>
+											<option value='programs'>Program</option>
+											<option value='branch'>Branch</option>
+											<option value='company'>Company</option>
+											<option value='profile'>Profile</option>
+											<option value='sector'>Sector</option>
+										</select>
+									</div>
+								</div>
+
+							</div>
+
+							<div class="acad_row">
+
+								<div class="acad_col " style="background-color: rgb(233, 238, 244);">
+
+
+									<div id="student-table_wrapper" class="dataTables_wrapper ">
+										<div class="row" style="padding-left:15px">
+
+										<div class="col-6" id="student-table_filter-div"></div>
+										<div class="col-6" id="student-table_length-div"></div>
+									</div>
+										<div class="table-responsive-lg">
+
+
+											<table id="student-table" data-vertable="ver6" style="background-color:rgb(233, 238, 244);">
+												<thead class="bg-custom">
+													<tr class="row100 head">
+														<th style="color: white;border-top-left-radius: 16px;" class="column100 column1" data-column="column1">NAME</th>
+														<th style="color: white;" class="column100 column2" data-column="column2">Program</th>
+														<th style="color: white;" class="column100 column3" data-column="column3">Branch</th>
+														<th style="color: white;" class="column100 column4" data-column="column4">Roll No.</th>
+														<th style="color: white;" class="column100 column5 " data-column="column5">Company</th>
+														{% comment %} <th style="color: white;" class="column100 column6 " data-column="column6">Profile</th> {% endcomment %}
+														<th style="color: white;border-top-right-radius:  16px;" class="column100 column6" data-column="column6">Profile</th>
+													</tr>
+												</thead>
+												<tbody style="background-color: white;" class="child_class">
+													{% include 'home/table_data.html'%}
+												</tbody>
+												<tfoot class="bg-custom">
+													<tr class="row100 head">
+														<th style="color: white;border-bottom-left-radius: 16px;" class="column100 column1" data-column="column1">NAME</th>
+														<th style="color: white;" class="column100 column2" data-column="column2">Program</th>
+														<th style="color: white;" class="column100 column3" data-column="column3">Branch</th>
+														<th style="color: white;" class="column100 column4" data-column="column4">Roll No.</th>
+														<th style="color: white;" class="column100 column5 " data-column="column5">Company</th>
+														{% comment %} <th style="color: white;" class="column100 column6 " data-column="column6">Profile</th> {% endcomment %}
+														<th style="color: white;border-bottom-right-radius:  16px;" class="column100 column6" data-column="column6">Profile</th>
+													</tr>
+												</tfoot>
+											</table>
+
+
+										</div>
+										<div class="row pl-3 pr-3" style="padding:2%;">
+											<div class="col-12 col-lg-6" id="student-table_info-div">
+
+											</div>
+											<div class="col-12 col-lg-6" id="student-table_paginate_div" style="overflow-x:scroll;">
+
+											</div>
+										</div>
+									</div>
+								</div>
+
+
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+			</div>
+			{# <br><br><br><br><br><br> #}
+		</div>
+	</div>
+
+
 </div>
+<style>
+@media only screen and (max-width: 600px) {
+	#zoomable-table-div{
+		zoom:50%;
+	}
+}
+</style>
 
-<table id = "student-table">
-  <thead>
-  <tr class = "first-row">
-    <th class="header  text-center">Name</th>
-    <th class="header  text-center">Program</th>
-    <th class="header  text-center">Branch</th>
-    <th class="header  text-center">Roll No.</th>
-    <!-- <th class="header">Day</th> -->
-    <th class="header  text-center">Company</th>
-    <th class="header  text-center">Profile</th>
-    <th class="header  text-center">Sector</th>
-  </tr>
-</thead>
-<tbody>
-  {% include 'home/table_data.html'%}
-</tbody>
-</table>
+{% include "footer.html" %}
+
+{% endblock %}
+
+
+{% block scripts %}
+
+
 <script>
 
+	(function($) {
+		"use strict";
+		$('.column100').on('mouseover', function() {
+			var table1 = $(this).parent().parent().parent();
+			var table2 = $(this).parent().parent();
+			var verTable = $(table1).data('vertable') + "";
+			var column = $(this).data('column') + "";
 
-////////////////////////////////////////////////////////////////////////////////////
-// functions to show vertical hover effect for the table
-  var colorchange = document.querySelector("#student-table");
-  colorchange.addEventListener("mouseover",function(e) {
-   if(e.target.classList[1] == "clear")
-        {
-            var parent = e.target.parentNode;
-            parent.classList.add("light");
-            // console.log(e.target.classList[0]);
-            var class1 = e.target.classList[0];
-            // console.log(class1);
-            var child = colorchange.querySelectorAll("." + class1);
-            // console.log(child.length);
-            for(var i = 0;i<child.length;i++)
-                {
-                  child[i].classList.add("light");
-                }
-        }
-  });
+			$(table2).find("." + column).addClass('hov-column-' + verTable);
+			$(table1).find(".row100.head ." + column).addClass('hov-column-head-' + verTable);
+		});
 
-    colorchange.addEventListener("mouseout",function(e) {
-      if(e.target.classList[1] == "clear")
-         {
-              var parent = e.target.parentNode;
-              parent.classList.remove("light");
-             var class1 = e.target.classList[0];
-              var child = colorchange.querySelectorAll("." + class1);
-              for(var i = 0;i<child.length;i++)
-                  {
-                  child[i].classList.remove("light");
-                  }
-          }
-    });
-////////////////////////////////////////////////////////////////////////////////////
-// fucntion to add DataTable to the table
-        var activeDataTable = function() {
-            if (!$.fn.DataTable.isDataTable('#student-table')) {
-                $('#student-table').DataTable({
-                    dom: 'Blfrtip',
-                    pagingType: "full_numbers",
-                    responsive: true,
-                    autoWidth: true,
-                    ordering: false,
-                    fixedColumns: true,
-                    buttons: [{
-                            extend: 'pdf',
-                            footer: true,
-                            exportOptions: {
-                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-                            }
-                        },
-                        {
-                            extend: 'csv',
-                            footer: false,
-                            fieldBoundary: '',
-                            exportOptions: {
-                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-                            }
-                        },
-                        {
-                            extend: 'excel',
-                            footer: false,
-                            exportOptions: {
-                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-                            }
-                        },
-                        // {
-                        //     extend: 'copy',
-                        //     footer: false,
-                        //     exportOptions: {
-                        //         columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-                        //     }
-                        // },
-                        {
-                            extend: 'print',
-                            footer: false,
-                            exportOptions: {
-                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-                            }
-                        },
-                        'colvis',
+		$('.column100').on('mouseout', function() {
+			var table1 = $(this).parent().parent().parent();
+			var table2 = $(this).parent().parent();
+			var verTable = $(table1).data('vertable') + "";
+			var column = $(this).data('column') + "";
 
-                    ]
-                });
-            }
-        };
-      activeDataTable();
-////////////////////////////////////////////////////////////////////////////////////
-// function to filter the table data using ajax
-      var ajax_filter = function() {
-          var params = (new URL(document.location)).searchParams;
-          var company = params.get("company");
-          var branch = $('#branch_filter').val();
-          var program = $('#program_filter').val();
-          var sortid = $('#sort').val();
-          $.ajax({
-              url: '/home/ajax/tableFilter',
-              type: 'GET',
-              data: {
-                  'branch': branch,
-                  'sortid': sortid,
-                  'program': program,
-                  'company': company,
-              },
-              dataType: 'json',
-              success: function(data) {
-                  if ($.fn.DataTable.isDataTable('#student-table')) {
-                      $('#student-table').dataTable().fnDestroy();
-                      console.log('pagination removed');
-                  }
-                  // $("#student-table tbody").html('');
-                  $("#student-table tbody").html(data.table_data_html);
-                  activeDataTable();
-                  console.log("table updated!");
-              }
-          });
-      };
-
-      // Sorting and Filtering
-      // whenever sortby/filter option changes, the data will be updated
-      $('#sort').on('change', ajax_filter);
-      $('#branch_filter').on('change', ajax_filter);
-      $('#program_filter').on('change', ajax_filter);
-
-
-////////////////////////////////////////////////////////////////////////////////////
-
-
+			$(table2).find("." + column).removeClass('hov-column-' + verTable);
+			$(table1).find(".row100.head ." + column).removeClass('hov-column-head-' + verTable);
+		});
+	})(jQuery);
 </script>
-  </body>
-</html>
+
+
+<!-- datatables scripts for adding pagination and all-->
+<!-- <script src="{% static 'js/jquery-3.5.1.js' %}"></script>  -->
+<script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+<!-- <script src="{% static 'js/bootstrap.min.js' %}"></script> -->
+<!-- <script src="{% static 'js/jquery.dataTables.min.js' %}"></script> -->
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<!-- <script src="{% static 'js/dataTables.bootstrap4.min.js' %}"></script> -->
+<script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+
+
+
+<script>
+	////////////////////////////////////////////////////////////////////////////////////
+	// fucntion to add DataTable to the table
+
+	var activeDataTable = function() {
+		if (!$.fn.DataTable.isDataTable('#student-table')) {
+			$('#student-table').DataTable({
+				dom: 'Blfrtip',
+				pagingType: "full_numbers",
+				responsive: true,
+				autoWidth: true,
+				ordering: false,
+				fixedColumns: true,
+				buttons: [{
+						extend: 'pdf',
+						footer: true,
+						exportOptions: {
+							columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+						}
+					},
+					{
+						extend: 'csv',
+						footer: false,
+						fieldBoundary: '',
+						exportOptions: {
+							columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+						}
+					},
+					{
+						extend: 'excel',
+						footer: false,
+						exportOptions: {
+							columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+						}
+					},
+					// {
+					//     extend: 'copy',
+					//     footer: false,
+					//     exportOptions: {
+					//         columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+					//     }
+					// },
+					{
+						extend: 'print',
+						footer: false,
+						exportOptions: {
+							columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+						}
+					},
+					'colvis',
+
+				]
+			});
+			$("#student-table_info-div").html($("#student-table_info"));
+			$("#student-table_paginate_div").html($("#student-table_paginate"));
+			$("#student-table_filter-div").html($("#student-table_filter"));
+			$("#student-table_length-div").html($("#student-table_length"));
+
+			// alert($("#student-table_info-div").html());
+
+		}
+	};
+	activeDataTable();
+	////////////////////////////////////////////////////////////////////////////////////
+	// function to filter the table data using ajax
+	var ajax_filter = function() {
+		var params = (new URL(document.location)).searchParams;
+		var company = params.get("company");
+		var branch = $('#branch_filter').val();
+		var program = $('#program_filter').val();
+		var sortid = $('#sort').val();
+		$.ajax({
+			url: '/placement-portal/ajax/tableFilter',
+			type: 'GET',
+			data: {
+				'branch': branch,
+				'sortid': sortid,
+				'program': program,
+				'company': company,
+			},
+			dataType: 'json',
+			success: function(data) {
+				if ($.fn.DataTable.isDataTable('#student-table')) {
+					$('#student-table').dataTable().fnDestroy();
+					// console.log('pagination removed');
+					$("#student-table_filter-div").html('');
+					$("#student-table_length-div").html('');
+				}
+				// $("#student-table tbody").html('');
+				$("#student-table tbody").html(data.table_data_html);
+				activeDataTable();
+				// console.log("table updated!");
+			}
+		});
+	};
+
+	// Sorting and Filtering
+	// whenever sortby/filter option changes, the data will be updated
+	$('#sort').on('change', ajax_filter);
+	$('#branch_filter').on('change', ajax_filter);
+	$('#program_filter').on('change', ajax_filter);
+
+
+	////////////////////////////////////////////////////////////////////////////////////
+</script>
+
+
+{% endblock %}

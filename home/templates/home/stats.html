@@ -1,76 +1,271 @@
 {% extends "home/base.html" %}
-{% block content %}
 {% load static %}
+{% block title %}
+Charts
+{% endblock %}
+{% block head %}
+<style media="screen">
+  @media(max-width: 400px) {
+    .media_q {
+      margin-top: -300px;
+    }
+  }
 
-<!-- Load d3.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.6.0/d3.min.js"></script>
-<!-- Color scale -->
-<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
- 
+  @media(min-width: 1300px) {
+    .marg_class {
+      margin-left: -90px;
+    }
+  }
 
-<!-- Resources -->
-<script src="https://www.amcharts.com/lib/4/core.js"></script>
-<script src="https://www.amcharts.com/lib/4/charts.js"></script>
-<script src="https://www.amcharts.com/lib/4/themes/kelly.js"></script>
-<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
-<script src="https://www.amcharts.com/lib/4/plugins/wordCloud.js"></script>
-<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+  .navbar-dark .navbar-nav .active>.nav-link:hover {
+    text-decoration: underline;
+  }
 
-<!-- Chart code -->
+  .navbar-dark .navbar-brand:hover {
+    text-decoration: underline;
+  }
+</style>
+{% endblock %}
+{% block content %}
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+
+
+  <div class="container-fluid">
+
+    <a class="navbar-brand order-0 hov_class" href="{% url 'home:home' %}" style="cursor: pointer;"> <img
+        style="max-width: 35px;max-height: 35px;"
+        src="{% static 'images/logo.png' %}">Placement Statistics</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
+      aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav ml-auto">
+
+        {% if request.user.is_authenticated %}
+
+        <li class="nav-item active">
+          <a class="nav-link" href="#2">Top Recruitors
+          </a>
+        </li>
+
+        <li class="nav-item active">
+          <a class="nav-link" href="#3">Percentage Placed
+          </a>
+        </li>
+        <li class="nav-item active mr-2">
+          <a class="nav-link" href="#4">Branchwise
+          </a>
+        </li>
+
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'home:table' %}">Tabular View
+          </a>
+        </li>
+
+
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'signout' %}">Logout
+          </a>
+        </li>
+        {% else %}
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'signin' %}">Click here to Login
+          </a>
+        </li>
+
+        <a class="nav-item nav-link text-white hov_class" href="{% url 'signin' %}" style="cursor: pointer;"></a>
+        {% endif %}
+
+      </ul>
+
+    </div>
+  </div>
+
+</nav>
+
+
+
+<div style="padding: 50px;" id="2">
+</div>
 
 
 <!-- Add 2 buttons -->
-<div style="text-align:center;">
-<button type="button"  class="btn btn-primary button" onclick="updateGauge(currentpos,btech_placed_frac);updateBarChart(data3);plot_cloud(data5);">B.tech</button>
-<button type="button" class="btn btn-primary button" onclick="updateGauge(currentpos,mtech_placed_frac);updateBarChart(data4);plot_cloud(data6);">M.tech</button>
+<div style="text-align:center;margin-top:0.5rem;display:block">
+
+  <div class="btn-group btn-toggle mb-3">
+
+
+    <button class="btn btn-xs navbar-custom btn-primary active " id="btech-button" onclick="btech()"">B.Tech</button>
+  <button  class=" btn btn-xs navbar-custom btn-default "  id="mtech-button" onclick="mtech()"">M.Tech</button>
+  <button class=" btn btn-xs navbar-custom btn-default " id="others-button" onclick="others()"">Others</button>
 </div>
-<div style="text-align:center;">
-<h3> Placement statistics </h3>
+</div>
 
-<svg width="960" height="500" id="gauge">
- viewBox="0 0 960 500"
-  preserveAspectRatio="xMidYMid meet">
-  </svg>
-
-<h3> Branchwise placement statistics</h3>
-<div style="height: 800px;"id="barchart"></div>
-
-<br>
-<br>
-<h3> Top Recruitors</h3>
-<div style="height: 800px;" id="wordcloud"></div>
-<br>
-<br>
-
-<div style="margin-bottom:200px"></div>
-<style>
-#pictorial {
-  width: 100%;
-  height: 500px;
-}
-</style>
-<link rel="stylesheet" type="text/css" href="{% static 'home/buttons.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'home/gauge.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'home/barchart.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'home/wordcloud.css' %}">
-<script>
-var delayBarChart=100000;
-var data1 = {{ btech_percent_placed|safe }};
-var data2 = {{ mtech_percent_placed|safe }};
-var btech_placed_frac=data1["Placed"]/(data1["Placed"]+data1["Not placed"]);
-var mtech_placed_frac=data2["Placed"]/(data2["Placed"]+data2["Not placed"]);
-var data3 = {{ btech_branchwise_placements|safe }};
-var data4 = {{ mtech_branchwise_placements|safe }};
-var data5 = {{ company_count|safe }};
-var data6={{company_count_mtech|safe }};
-console.log(data5);
-</script>
+{% comment %} <h1  style=" margin-top:70px;text-align: center;font-family: 'Segoe UI' , Tahoma, Geneva, Verdana,
+      sans-serif;font-size:2em;" id="heading-text"> B.Tech Placement statistics </h1> {% endcomment %}
 
 
 
 
-<script src="{% static 'home/gauge.js' %}"> </script>
-<script src="{% static 'home/barchart.js' %}"> </script>
-<script src="{% static 'home/wordcloud.js' %}"> </script>
+      <div class="media_q" style="display:block;margin-top:0.5rem">
 
-{% endblock %}
+        <h1 style="text-align: center;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;font-size:40px;"> Top
+          Recruitors </h1>
+        <h6 style="text-align: center;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size:0.6rem">
+          (Click to view company filtered tabular view)</h6>
+        <div style="height: 50em;padding-top:30px" id="wordcloud"></div>
+        <div style="padding:50px" id="3"></div>
+        <h1 style="text-align: center;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;"> Percentage Placed
+        </h1>
+
+        <div style="margin-top:2em" id="gauge"> </div>
+        <div style="padding:10px" id="4"></div>
+        <h1 style="text-align: center;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;"> Branchwise
+          Percentage Placed </h1>
+
+        <div style="text-align:center;">
+          <div style="height: 500px;margin-left:6%;margin-right:6%;" id="barchart"></div>
+        </div>
+
+
+
+
+
+        <br>
+        <br>
+        <div style="text-align:center;">
+
+          <a class="btn btn-primary " style="background-color: #023e8a;color:#fff" href="{% url "home:table"%}"
+            role="button">Tabular View</a>
+        </div>
+        <div style="margin-bottom:200px"></div>
+        <style>
+          #pictorial {
+            width: 100%;
+            height: 500px;
+          }
+        </style>
+        <link rel="stylesheet" type="text/css" href="{% static 'home/buttons.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'home/gauge.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'home/barchart.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'home/wordcloud.css' %}">
+        <script>
+          var delayBarChart = 100000;
+          var data1 = {{ btech_percent_placed| safe }};
+          var data2 = {{ mtech_percent_placed| safe }};
+          var btech_placed_frac = data1["Placed"] / (data1["Placed"] + data1["Not placed"]);
+          var mtech_placed_frac = data2["Placed"] / (data2["Placed"] + data2["Not placed"]);
+          var data3 = {{ btech_branchwise_placements| safe }};
+          var data4 = {{ mtech_branchwise_placements| safe }};
+          var data5 = {{ company_count| safe }};
+          var data6 = {{ company_count_mtech| safe }};
+          var data7 = {{ others_percent_placed| safe }};
+          var data8 = {{ others_branchwise_placements| safe}};
+          var data9 = {{ company_count_others| safe}};
+          var others_placed_frac = data7["Placed"] / (data7["Placed"] + data7["Not placed"]);
+        </script>
+      </div>
+
+
+
+
+      {% include "footer.html" %}
+
+      {% endblock %}
+
+
+
+      {% block scripts %}
+
+
+      <!-- Load d3.js -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.6.0/d3.min.js"></script>
+      <!-- Color scale -->
+      <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+
+
+      <script>
+        function btech() {
+          updateGauge(currentpos, btech_placed_frac);
+          updateBarChart(data3);
+          plot_cloud(data5);
+          document.getElementById("mtech-button").classList.remove("active");
+          document.getElementById("mtech-button").classList.remove("btn-primary");
+          document.getElementById("mtech-button").classList.add("btn-default");
+          document.getElementById("others-button").classList.remove("active");
+          document.getElementById("others-button").classList.remove("btn-primary");
+          document.getElementById("others-button").classList.add("btn-default");
+          document.getElementById("btech-button").classList.add("btn-primary");
+          document.getElementById("btech-button").classList.add("active");
+        }
+        function mtech() {
+          updateGauge(currentpos, mtech_placed_frac);
+          updateBarChart(data4);
+          plot_cloud(data6);
+          document.getElementById("btech-button").classList.remove("active");
+          document.getElementById("btech-button").classList.remove("btn-primary");
+          document.getElementById("btech-button").classList.add("btn-default");
+          document.getElementById("others-button").classList.remove("active");
+          document.getElementById("others-button").classList.remove("btn-primary");
+          document.getElementById("others-button").classList.add("btn-default");
+          document.getElementById("mtech-button").classList.add("btn-primary");
+          document.getElementById("mtech-button").classList.add("active");
+        }
+        function others() {
+          updateGauge(currentpos, others_placed_frac);
+          updateBarChart(data8);
+          plot_cloud(data9);
+          document.getElementById("mtech-button").classList.remove("active");
+          document.getElementById("mtech-button").classList.remove("btn-primary");
+          document.getElementById("mtech-button").classList.add("btn-default");
+          document.getElementById("btech-button").classList.remove("active");
+          document.getElementById("btech-button").classList.remove("btn-primary");
+          document.getElementById("btech-button").classList.add("btn-default");
+          document.getElementById("others-button").classList.add("btn-primary");
+          document.getElementById("others-button").classList.add("active");
+        }
+      </script>
+      <style>
+        .btn {
+          border: 2px solid black;
+          background-color: white;
+          color: black;
+          padding: 14px 28px;
+          font-size: 16px;
+          cursor: pointer;
+          border-radius: 5px;
+
+        }
+
+        .btn:hover {
+          background: #023e8a;
+          color: white;
+
+        }
+
+        .btn-primary:not(:disabled):not(.disabled).active {
+          background-color: #023e8a;
+          border-color: #000000;
+        }
+      </style>
+      <!-- Resources -->
+      <script src="https://www.amcharts.com/lib/4/core.js"></script>
+      <script src="https://www.amcharts.com/lib/4/charts.js"></script>
+      <script src="https://www.amcharts.com/lib/4/themes/kelly.js"></script>
+      <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+      <script src="https://www.amcharts.com/lib/4/plugins/wordCloud.js"></script>
+      <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+
+
+
+      <script src="{% static 'home/gauge.js' %}"> </script>
+      <script src="{% static 'home/barchart.js' %}"> </script>
+      <script src="{% static 'home/wordcloud.js' %}"> </script>
+
+      {% endblock %}

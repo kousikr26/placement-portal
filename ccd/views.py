@@ -14,15 +14,18 @@ import json
 
 # function to check if user is ccd member
 def is_ccd_member(user):
-    return user.is_superuser
+    return user.is_superuser or user.is_staff or user.groups.filter(name = "placement team").exists()
 
 ################################################################################
 # functions for the file manager
 
+class HttpResponseUnauthorized(HttpResponse):
+    status_code = 401
+
 
 # function to get all files
-# @login_required
-# @user_passes_test(is_ccd_member)
+@login_required
+@user_passes_test(is_ccd_member,login_url="home:permission_not_granted")
 def ajax_get_file_list(request):
     data = dict()
     data['success'] = False
@@ -35,8 +38,9 @@ def ajax_get_file_list(request):
 
 
 # view function for get or post ajax request
-# @login_required
-# @user_passes_test(is_ccd_member)
+@login_required
+@user_passes_test(is_ccd_member,login_url="home:permission_not_granted")
+
 def ajax_upload_file(request):
     # print(request.method)
     # print(request.is_ajax())
@@ -49,8 +53,9 @@ def ajax_upload_file(request):
     return JsonResponse({'error':'You are not authorized to perform this action!'})
 
 # function for validating and saving fileForm if it is a post request
-# @login_required
-# @user_passes_test(is_ccd_member)
+@login_required
+@user_passes_test(is_ccd_member,login_url="home:permission_not_granted")
+
 def save_file_form(request,form):
     data = dict()
     template = 'ccd/partial_file_upload.html'
@@ -67,8 +72,9 @@ def save_file_form(request,form):
     return JsonResponse(data)
 
 # function to delete file
-# @login_required
-# @user_passes_test(is_ccd_member)
+@login_required
+@user_passes_test(is_ccd_member,login_url="home:permission_not_granted")
+
 def ajax_delete_file(request,pk):
     data = dict()
     if request.is_ajax():
@@ -86,8 +92,9 @@ def ajax_delete_file(request,pk):
 
 
 
-# @login_required
-# @user_passes_test(is_ccd_member)
+@login_required
+@user_passes_test(is_ccd_member,login_url="home:permission_not_granted")
+
 def home(request):
     students = Student.objects.all().order_by('roll')
     form = FileUploadForm
@@ -97,14 +104,16 @@ def home(request):
 ################################################################################
 # function for updating database
 
-# @login_required
-# @user_passes_test(is_ccd_member)
+@login_required
+@user_passes_test(is_ccd_member,login_url="home:permission_not_granted")
+
 @csrf_exempt
 def ajax_update_database(request):
     context = dict()
     context['success']=False
     if request.is_ajax() and request.method=='POST':
         data = json.loads(request.body)
+        # print(data)
         update_type =data['update_type']
         # print(update_type)
         headings = data['headings']
@@ -123,7 +132,8 @@ def ajax_update_database(request):
                  "Slot":'slot',
                 }
         headings_required = ["Name", "Roll No.", "Program","Branch","Day","Company","Placed","Sector","Profile","Slot",]
-
+        # print(sorted(headings))
+        # print(sorted(headings_required))
         if sorted(headings)==sorted(headings_required):
             # print(len(data_list))
             for i in range(len(data_list)):
@@ -143,6 +153,7 @@ def ajax_update_database(request):
 
                         else:
                             student_dict[d[h]]= val
+                    print(student_dict)
                     if(student_dict['roll']==''):
                         pass
                     else:
@@ -182,6 +193,8 @@ def ajax_update_database(request):
                                 obj = Student.objects.create(**student_dict)
 
             context['success']=True
+        else:
+            print("headers are not matching!")
 
 
 
@@ -193,8 +206,9 @@ def ajax_update_database(request):
 
 # function to get branches list
 
-# @login_required
-# @user_passes_test(is_ccd_member)
+@login_required
+@user_passes_test(is_ccd_member,login_url="home:permission_not_granted")
+
 def ajax_get_branch_options(request):
     data = dict()
     if request.method =='GET' and request.is_ajax():
@@ -206,8 +220,9 @@ def ajax_get_branch_options(request):
 
 # function to filter the table data
 
-# @login_required
-# @user_passes_test(is_ccd_member)
+@login_required
+@user_passes_test(is_ccd_member,login_url="home:permission_not_granted")
+
 def ajax_filter(request):
     data = dict()
     if request.method == 'GET' and request.is_ajax():
@@ -234,8 +249,9 @@ def ajax_filter(request):
 
 
 
-# @login_required
-# @user_passes_test(is_ccd_member)
+@login_required
+@user_passes_test(is_ccd_member,login_url="home:permission_not_granted")
+
 def save_student_form(request, form, template_name):
     if request.is_ajax():
         data = dict()
@@ -254,8 +270,9 @@ def save_student_form(request, form, template_name):
         return JsonResponse(data)
 
 
-# @login_required
-# @user_passes_test(is_ccd_member)
+@login_required
+@user_passes_test(is_ccd_member,login_url="home:permission_not_granted")
+
 def student_create(request):
     if request.is_ajax():
         if request.method == 'POST':
@@ -265,8 +282,9 @@ def student_create(request):
         return save_student_form(request,form,'ccd/partial_student_create.html')
 
 
-# @login_required
-# @user_passes_test(is_ccd_member)
+@login_required
+@user_passes_test(is_ccd_member,login_url="home:permission_not_granted")
+
 def student_update(request,pk):
     if request.is_ajax():
         student = get_object_or_404(Student,pk=pk)
@@ -278,8 +296,9 @@ def student_update(request,pk):
             form = StudentForm(instance=student)
         return save_student_form(request,form,'ccd/partial_student_update.html')
 
-# @login_required
-# @user_passes_test(is_ccd_member)
+@login_required
+@user_passes_test(is_ccd_member,login_url="home:permission_not_granted")
+
 def student_delete(request, pk):
     if request.is_ajax():
         student = get_object_or_404(Student, pk=pk)

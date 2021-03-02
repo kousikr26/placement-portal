@@ -1,0 +1,62 @@
+
+{% extends "home/base.html" %}
+{%load static%}
+{% block head %}
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+
+<!-- Title -->
+<title>Sorry, This Page Can&#39;t Be Accessed</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+
+
+{% endblock %}
+
+{% block content %}
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+
+
+  <div class="container-fluid">
+
+  <a class="navbar-brand order-0 hov_class" href="{% url 'home:home' %}" style="cursor: pointer;"> <img style="max-width: 35px;max-height: 35px;" src="{% static 'images/logo.png' %}">Placement Statistics</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarColor01">
+    <ul class="navbar-nav ml-auto">
+
+    </ul>
+
+  </div>
+</div>
+
+</nav>
+
+
+
+<div class=" py-5">
+   <div class="container py-5">
+        <div class="row">
+             <div class="col-md-2 text-center">
+                  <p><i class="fa fa-exclamation-triangle fa-5x"></i><br/>Status Code: 500</p>
+             </div>
+             <div class="col-md-10 text-center">
+                  <h3>Oops!</h3>
+                  <br>
+                  <p> <b>Internal server error.</b><br>We will be back soon!</p>
+                  <br><br>
+                  <a class="btn btn-danger" href="javascript:history.back()">Go Back</a>
+             </div>
+        </div>
+   </div>
+
+</div>
+
+{% include "footer_sticky.html" %}
+
+
+{% endblock %}

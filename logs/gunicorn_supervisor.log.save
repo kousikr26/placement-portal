@@ -1,0 +1,9 @@
+
+supervisor: couldn't exec /webapps/placement-portal/pp-env/bin/gunicorn_start.bash: ENOEXEC
+supervisor: child process was not spawned
+supervisor: couldn't exec /webapps/placement-portal/pp-env/bin/gunicorn_start.bash: ENOEXEC
+supervisor: child process was not spawned
+supervisor: couldn't exec /webapps/placement-portal/pp-env/bin/gunicorn_start.bash: ENOEXEC
+supervisor: child process was not spawned
+supervisor: couldn't exec /webapps/placement-portal/pp-env/bin/gunicorn_start.bash: ENOEXEC
+supervisor: child process was not spawned

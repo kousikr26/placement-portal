@@ -22,11 +22,17 @@ TEMPLATES_DIR =os.path.join(BASE_DIR,'templates')
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'hfaeq1p=f6t7p+m7vdc8ru*8j4=4m)7(-7+2yy)2(j54tw!ik*'
 
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
+if not DEBUG:
+    SECURE_SSL_REDIRECT = True
 
+# AUTH_USER_MODEL = "authentication.User"
 
 # Application definition
 
@@ -124,7 +130,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
-STATIC_URL = '/static/'
+STATIC_URL = '/placement-portal/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
@@ -134,12 +140,12 @@ STATICFILES_FINDERS = [
     # searches in STATIC subfolder of each app
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
-MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR,'media/')
+MEDIA_URL = "/placement-portal/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
-LOGIN_URL="home"
+LOGIN_URL="signin"
 # when login is required, user will be redirected to this url
-LOGIN_REDIRECT_URL='home'
+# LOGIN_REDIRECT_URL='charts'
 
 LOGOUT_REDIRECT_URL='home'
 

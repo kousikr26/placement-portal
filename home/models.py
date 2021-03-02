@@ -2,30 +2,26 @@ from django.db import models
 from django.core.validators import MaxValueValidator,MinValueValidator
 
 
-BRANCH_CHOICES = [
-	('CSE', 'Computer Science and Engineering'),
-	('MNC', 'Mathematics and Computing'),
-	('ECE', 'Electronics and Communication Engineering'),
-	('EEE', 'Electronics and Electrical Engineering'),
-	('ME', 'Mechanical Engineering'),
-	('CE', 'Civil Engineering'),
-	('CL', 'Chemical Engineering'),
-	('EP' , 'Engineering Physics'),
-	('CST','Chemical Science and Technology'),
-	('BT','Biotechnology'),
-	('Physics','Physics'),
-	('Chemistry','Chemistry'),
-	('Mathematics','Mathematics'),
-	('Design','Design'),
-	('Others','Others'),
-]
+# BRANCH_CHOICES = [
+# 	('CSE', 'Computer Science and Engineering'),
+# 	('MNC', 'Mathematics and Computing'),
+# 	('ECE', 'Electronics and Communication Engineering'),
+# 	('EEE', 'Electronics and Electrical Engineering'),
+# 	('ME', 'Mechanical Engineering'),
+# 	('CE', 'Civil Engineering'),
+# 	('CL', 'Chemical Engineering'),
+# 	('EP' , 'Engineering Physics'),
+# 	('CST','Chemical Science and Technology'),
+# 	('BT','Biotechnology'),
+# 	('Physics','Physics'),
+# 	('Chemistry','Chemistry'),
+# 	('Mathematics','Mathematics'),
+# 	('Design','Design'),
+# 	('Others','Others'),
+# ]
 
 class Branch(models.Model):
-	branchName = models.CharField(
-		max_length=50,
-		choices=BRANCH_CHOICES,
-		default='CSE'
-		)
+	branchName = models.CharField(max_length=50,blank=False,null=True,unique=True)
 	num = models.IntegerField(default=0,validators=[MinValueValidator(0)])
 	mnum = models.IntegerField(default=0,validators=[MinValueValidator(0)])
 	tnum = models.IntegerField(default=0,validators=[MinValueValidator(0)])
@@ -68,11 +64,7 @@ class Student(models.Model):
         ('S3', 'Slot 3'),
     ]
 
-	slot = models.CharField(
-		max_length=20,
-        choices=SLOT_CHOICES,
-        blank=True
-	)
+	slot = models.CharField(max_length=20,blank=True,null=True)
 
 	def __str__(self):
 		return self.name

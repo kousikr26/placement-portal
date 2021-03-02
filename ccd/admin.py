@@ -7,3 +7,6 @@ class Admin(admin.ModelAdmin):
     list_display = ('name','info','file','updated_at','created_at')
     search_fields = ('name','info',)
     ordering = ('updated_at',)
+
+
+admin.site.site_url = "/placement-portal"
