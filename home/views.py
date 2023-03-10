@@ -28,22 +28,25 @@ COMPANY_COUNT=70
 @login_required
 def charts(request):
 
-	branches = ["CSE", "MNC", "EE", "ME", "CE", "CL", "EP", "CST", "BT", "DS","Physics", "Chemistry", "Mathematics", "Design", "Others"]
-	dens_btech={"CSE":83,"MNC":56,"EE":116,"ME":70,"CL":58,"EP":22,"CST":38,"BT":49,"Design":26,"CE":52}
+	years = '2023'
+	branches = ["CSE", "MNC", 'DSAI', "EE", "ME", "CE", "CL", "EP", "CST", "BT", "DS","Physics", "Chemistry", "Mathematics", "Design", "Others"]
+	dens_btech={
+		'2022' : {"CSE":83,"MNC":56, "DSAI" : 0 , "EE":116, "ME":70,"CL":58,"EP":22,"CST":38,"BT":49,"Design":26,"CE":52}
+	}
 	dens_mtech={"CSE":54,"BT":38,"EE":74,"ME":103,"CE":85,"Design":33,"CL":68,"DS":18}
 	dens_others={"M.A Humanities":34,"M.S Energy":8,"M.Sc Physics":14,"M.Sc Chemistry":22,"M.Sc Mathematics":30}
 	btech_total=0
 	mtech_total=0
 	others_total=0
-	for i in dens_btech:
-		btech_total+=dens_btech[i]
+	for i in dens_btech[years]:
+		btech_total+=dens_btech[years][i]
 	for i in dens_mtech:
 		mtech_total+=dens_mtech[i]
 	for i in dens_others:
 		others_total+=dens_others[i]
-	btech_all=Student.objects.filter(programs__in=['B.Tech','B.Des']).filter(placed=True)
-	mtech_all=Student.objects.filter(programs__in=['M.Tech','M.Des']).filter(placed=True)
-	others_all=Student.objects.filter(programs__in=['M.Sc','M.S',"M.A"]).filter(placed=True)
+	btech_all=Student.objects.filter(programs__in=['B.Tech','B.Des']).filter(placed=True, year_placed=years)
+	mtech_all=Student.objects.filter(programs__in=['M.Tech','M.Des']).filter(placed=True, year_placed=years)
+	others_all=Student.objects.filter(programs__in=['M.Sc','M.S',"M.A"]).filter(placed=True, year_placed=years)
 
 	btech_placed=len(btech_all)
 	mtech_placed=len(mtech_all)
@@ -136,7 +139,7 @@ def charts(request):
 			continue
 		if(bch=="Design"):
 			num=len(Student.objects.filter(programs='B.Des').filter(
-				branch__branchName=bch).filter(placed=True))
+				branch__branchName=bch).filter(placed=True, year_placed=years))
 			den = dens_btech[bch]
 		elif(bch=="EE"):
 			num = len(Student.objects.filter(programs='B.Tech').filter(

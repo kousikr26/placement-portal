@@ -46,7 +46,14 @@ class Student(models.Model):
         ('Phd', 'PHD'),
         ('Others', 'Others'),
     ]
-
+	year_placed_enum = [
+		('2023' , '2023'),
+		('2024' , '2024'),
+	]
+	year_placed = models.CharField(
+		max_length=4,
+        choices=year_placed_enum,
+	)
 	programs = models.CharField(
 		max_length=20,
         choices=PROGRAM_CHOICES,
