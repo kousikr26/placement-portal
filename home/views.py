@@ -28,22 +28,29 @@ COMPANY_COUNT=70
 @login_required
 def charts(request):
 
-	years = '2023'
+	years = {'2023','2022'}
 	branches = ["CSE", "MNC", 'DSAI', "EE", "ME", "CE", "CL", "EP", "CST", "BT", "DS","Physics", "Chemistry", "Mathematics", "Design", "Others"]
 	dens_btech={
-		'2022' : {"CSE":83,"MNC":56, "DSAI" : 0 , "EE":116, "ME":70,"CL":58,"EP":22,"CST":38,"BT":49,"Design":26,"CE":52}
+		'2022' : {"CSE":83,"MNC":56, "DSAI" : 0 , "EE":116, "ME":70,"CL":58,"EP":22,"CST":38,"BT":49,"Design":26,"CE":52},
+		'2023' : {"CSE":80,"MNC":51, "DSAI" : 10 , "EE":111, "ME":75,"CL":68,"EP":32,"CST":48,"BT":59,"Design":36,"CE":62}
 	}
-	dens_mtech={"CSE":54,"BT":38,"EE":74,"ME":103,"CE":85,"Design":33,"CL":68,"DS":18}
-	dens_others={"M.A Humanities":34,"M.S Energy":8,"M.Sc Physics":14,"M.Sc Chemistry":22,"M.Sc Mathematics":30}
+	dens_mtech={
+		'2022':{"CSE":54,"BT":38,"EE":74,"ME":103,"CE":85,"Design":33,"CL":68,"DS":18},
+		'2023' : {"CSE":64,"BT":48,"EE":84,"ME":113,"CE":95,"Design":43,"CL":78,"DS":28}
+		}
+	dens_others={
+		'2022':{"M.A Humanities":34,"M.S Energy":8,"M.Sc Physics":14,"M.Sc Chemistry":22,"M.Sc Mathematics":30},
+		'2023':{"M.A Humanities":35,"M.S Energy":18,"M.Sc Physics":24,"M.Sc Chemistry":52,"M.Sc Mathematics":60}
+	}
 	btech_total=0
 	mtech_total=0
 	others_total=0
 	for i in dens_btech[years]:
 		btech_total+=dens_btech[years][i]
-	for i in dens_mtech:
-		mtech_total+=dens_mtech[i]
-	for i in dens_others:
-		others_total+=dens_others[i]
+	for i in dens_mtech[years]:
+		mtech_total+=dens_mtech[years][i]
+	for i in dens_others[years]:
+		others_total+=dens_others[years][i]
 	btech_all=Student.objects.filter(programs__in=['B.Tech','B.Des']).filter(placed=True, year_placed=years)
 	mtech_all=Student.objects.filter(programs__in=['M.Tech','M.Des']).filter(placed=True, year_placed=years)
 	others_all=Student.objects.filter(programs__in=['M.Sc','M.S',"M.A"]).filter(placed=True, year_placed=years)
@@ -60,23 +67,23 @@ def charts(request):
 	comp_counts_mtech={}
 	comp_counts_others={}
 
-	for i in btech_all:
+	for i in btech_all[years]:
 		if(i.company in comp_counts_btech):
-			comp_counts_btech[i.company]+=1
+			comp_counts_btech[years][i.company]+=1
 		else:
-			comp_counts_btech[i.company]=1
+			comp_counts_btech[years][i.company]=1
 
-	for i in mtech_all:
+	for i in mtech_all[years]:
 		if(i.company in comp_counts_mtech):
-			comp_counts_mtech[i.company]+=1
+			comp_counts_mtech[years][i.company]+=1
 		else:
-			comp_counts_mtech[i.company]=1
+			comp_counts_mtech[years][i.company]=1
 
 	for i in others_all:
 		if(i.company in comp_counts_others):
-			comp_counts_others[i.company]+=1
+			comp_counts_others[years][i.company]+=1
 		else:
-			comp_counts_others[i.company]=1
+			comp_counts_others[years][i.company]=1
 
 	comp_btech_counts=list(comp_counts_btech.values())
 	comp_mtech_counts=list(comp_counts_mtech.values())
@@ -101,30 +108,30 @@ def charts(request):
 	comp_count_lis_mtech=[]
 	comp_count_lis_others=[]
 
-	for i in comp_counts_btech:
+	for i in comp_counts_btech[years]:
 		tmp={}
-		if(i=="" or comp_counts_btech[i]<btech_threshold):
+		if(i=="" or comp_counts_btech[years][i]<btech_threshold):
 			continue
 		tmp["tag"]=i
-		tmp["weight"]=comp_counts_btech[i]
+		tmp["weight"]=comp_counts_btech[years][i]
 		tmp["urlval"]=i.replace(' ','%20')
 		comp_count_lis_btech.append(tmp)
 
-	for i in comp_counts_mtech:
+	for i in comp_counts_mtech[years]:
 		tmp={}
-		if(i=="" or comp_counts_mtech[i]<mtech_threshold):
+		if(i=="" or comp_counts_mtech[years][i]<mtech_threshold):
 			continue
 		tmp["tag"]=i
-		tmp["weight"]=comp_counts_mtech[i]
+		tmp["weight"]=comp_counts_mtech[years][i]
 		tmp["urlval"]=i.replace(' ','%20')
 		comp_count_lis_mtech.append(tmp)
 
-	for i in comp_counts_others:
+	for i in comp_counts_others[years]:
 		tmp={}
-		if(i=="" or comp_counts_others[i]<others_threshold):
+		if(i=="" or comp_counts_others[years][i]<others_threshold):
 			continue
 		tmp["tag"]=i
-		tmp["weight"]=comp_counts_others[i]
+		tmp["weight"]=comp_counts_others[years][i]
 		tmp["urlval"]=i.replace(' ','%20')
 		comp_count_lis_others.append(tmp)
 
@@ -132,10 +139,10 @@ def charts(request):
 	mtech_branchwise_placements = []
 	others_branchwise_placements=[]
 
-	for bch in branches:
+	for bch in branches[years]:
 		tmp={}
 		tmp["group"]=bch
-		if bch not in dens_btech:
+		if bch not in dens_btech[years]:
 			continue
 		if(bch=="Design"):
 			num=len(Student.objects.filter(programs='B.Des').filter(
@@ -154,7 +161,7 @@ def charts(request):
 		tmp["num"]=num
 		tmp["den"]=den
 		btech_branchwise_placements.append(tmp)
-	for bch in branches:
+	for bch in branches[years]:
 		tmp = {}
 		tmp["group"] = bch
 		if bch not in dens_mtech:
@@ -177,16 +184,16 @@ def charts(request):
 		tmp["den"]=den
 		mtech_branchwise_placements.append(tmp)
 
-	for i in dens_others:
+	for i in dens_others[years]:
 		bch=list(i.split())[1].strip()
 
 		tmp = {}
 		tmp["group"] = i
-		if i not in dens_others:
+		if i not in dens_others[years]:
 			continue
 
 		num = len(others_all.filter(branch__branchName=bch))
-		den = dens_others[i]
+		den = dens_others[years][i]
 		if(num == 0):
 			continue
 		tmp["value"] = round((num/den)*100,2)
