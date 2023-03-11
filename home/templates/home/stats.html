@@ -140,9 +140,22 @@ Charts
         <br>
         <br>
         <div style="text-align:center;">
-
-          <a class="btn btn-primary " style="background-color: #023e8a;color:#fff" href="{% url "home:table"%}"
+          <div class="year_filter">
+            <div class="col-6 col-lg-3" style="display: inline-block;max-width: 299px;">
+              <div class="form-group">
+                <label for="branch">Currently showing</label>
+                <select class="form-control" id="program_filter" style="border-color: #7774e7;">
+                  <option selected="true" value="2023">2023</option>
+                  <option value="2022">2022</option>
+                  <option value="2021">2021</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="tab_view">
+            <a class="btn btn-primary " style="background-color: #023e8a;color:#fff" href="{% url "home:table"%}"
             role="button">Tabular View</a>
+          </div>
         </div>
         <div style="margin-bottom:200px"></div>
         <style>
