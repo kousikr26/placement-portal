@@ -216,7 +216,7 @@ def charts(request):
 			"company_count_others":comp_count_lis_others
 			}
 
-	print(context)
+	
 	onlydata = request.GET.get('data')
 	if onlydata is None:
 		return render(request, "home/stats.html", context )
