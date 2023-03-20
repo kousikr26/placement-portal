@@ -217,8 +217,11 @@ def charts(request):
 			}
 
 	print(context)
-	return JsonResponse(context, safe=False)
-	# return render(request, "home/stats.html", {'data':context, 'years' : all_years } )
+	onlydata = request.GET.get('data')
+	if onlydata is None:
+		return render(request, "home/stats.html", context )
+	else:
+		return JsonResponse(context, safe=False)
 ################################################################################
 # function to render the table
 
