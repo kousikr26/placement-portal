@@ -217,8 +217,8 @@ def charts(request):
 			}
 
 	print(context)
-	return JsonResponse(context, safe=False)
-	# return render(request, "home/stats.html", {'data':context, 'years' : all_years } )
+	# return JsonResponse({'data':context, 'years' : all_years }, safe=False)
+	return render(request, "home/stats.html", {'data':context, 'years' : all_years } )
 ################################################################################
 # function to render the table
 

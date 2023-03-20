@@ -10,7 +10,28 @@ Charts
       margin-top: -300px;
     }
   }
+  #year_form{
+    display: flex;
+    align-items: center;
+  }
 
+  #year_form1{
+    display: flex;
+   justify-content: center;
+   align-items: center;
+  padding-bottom:20px;
+  }
+  @media(max-width:600px) {
+  #year_form{
+    display: none;
+  }
+  
+  }
+  @media(min-width:601px) {
+  #year_form1{
+    display: none;
+  }
+}
   @media(min-width: 1300px) {
     .marg_class {
       margin-left: -90px;
@@ -34,16 +55,26 @@ Charts
 <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
 
 
-  <div class="container-fluid">
+  <div class="container-fluid ">
 
     <a class="navbar-brand order-0 hov_class" href="{% url 'home:home' %}" style="cursor: pointer;"> <img
         style="max-width: 35px;max-height: 35px;"
         src="{% static 'images/logo.png' %}">Placement Statistics</a>
+        <div  id="year_form">
+    
+          <select class="form-control"  style="border-color: #7774e7;">
+            
+            <option  selected="true" value="	2023">2023</option>
+            <option value="2022">2022</option>
+          </select>
+        </div>
+
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
       aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
+   
     </button>
-
+ 
     <div class="collapse navbar-collapse" id="navbarColor01">
       <ul class="navbar-nav ml-auto">
 
@@ -78,7 +109,7 @@ Charts
           <a class="nav-link" href="{% url 'signin' %}">Click here to Login
           </a>
         </li>
-
+ 
         <a class="nav-item nav-link text-white hov_class" href="{% url 'signin' %}" style="cursor: pointer;"></a>
         {% endif %}
 
@@ -96,6 +127,14 @@ Charts
 
 
 <!-- Add 2 buttons -->
+<div  id="year_form1" >
+<div>
+    <select class="form-control" id="program_filter" style="border-color: #7774e7;">
+      <option selected="true"  value="	2023">2023</option>
+      <option value="2022">2022</option>
+    </select>
+</div>
+</div>
 <div style="text-align:center;margin-top:0.5rem;display:block">
 
   <div class="btn-group btn-toggle mb-3">
