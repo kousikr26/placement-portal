@@ -195,7 +195,7 @@ Charts
         <link rel="stylesheet" type="text/css" href="{% static 'home/barchart.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'home/wordcloud.css' %}">
         <script>
-        //  console.log(dropdown_listner);
+       
           var delayBarChart = 100000;
           var data1 = {{ btech_percent_placed| safe }};
           var data2 = {{ mtech_percent_placed| safe }};
@@ -217,8 +217,22 @@ Charts
             fetch("http://127.0.0.1:8082/placement-portal/charts/?data=1&year="+dropdown.value)
               .then((response) => response.json())
               .then((data) => {
-
-                console.log(data);
+                 data1 = data.btech_percent_placed;
+                 data2 =data.mtech_percent_placed;
+                btech_placed_frac = data1["Placed"] / (data1["Placed"] + data1["Not placed"]);
+                mtech_placed_frac = data2["Placed"] / (data2["Placed"] + data2["Not placed"]);
+                data3 =data.btech_branchwise_placements;
+                data4 = data.mtech_branchwise_placements;
+                data5 = data.company_count;
+                data6 = data.company_count_mtech;
+                data7 = data.others_percent_placed;
+                data8 = data.others_branchwise_placements;
+                data9 = data.company_count_others;
+                others_placed_frac = data7["Placed"] / (data7["Placed"] + data7["Not placed"]);
+                btech();
+                mtech();
+                others();
+           
               })
           })
    
