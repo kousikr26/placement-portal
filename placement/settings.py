@@ -26,13 +26,12 @@ SECRET_KEY = 'hfaeq1p=f6t7p+m7vdc8ru*8j4=4m)7(-7+2yy)2(j54tw!ik*'
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 if not DEBUG:
     SECURE_SSL_REDIRECT = True
-else :
-    SECURE_SSL_REDIRECT = False
+
 # AUTH_USER_MODEL = "authentication.User"
 
 # Application definition
