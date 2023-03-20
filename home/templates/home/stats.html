@@ -63,9 +63,9 @@ Charts
         <div  id="year_form" >
     
           <select class="form-control year_dropdown"  style="border-color: #7774e7;">
-            
-            <option  selected="true" value="	2023">2023</option>
-            <option value="2022">2022</option>
+            {% for x in years %}
+              <option value={{x}}>{{x}}</option>
+            {%endfor%}
           </select>
         </div>
 
@@ -130,8 +130,9 @@ Charts
 <div  id="year_form1" >
 <div>
     <select class="form-control year_dropdown" id="program_filter" style="border-color: #7774e7;">
-      <option selected="true"  value="	2023">2023</option>
-      <option value="2022">2022</option>
+      {% for x in years %}
+        <option value={{x}}>{{x}}</option>
+      {%endfor%}
     </select>
 </div>
 </div>
@@ -215,6 +216,33 @@ Charts
             
 
             fetch("http://127.0.0.1:8082/placement-portal/charts/?data=1&year="+dropdown.value)
+              .then((response) => response.json())
+              .then((data) => {
+                 data1 = data.btech_percent_placed;
+                 data2 =data.mtech_percent_placed;
+                btech_placed_frac = data1["Placed"] / (data1["Placed"] + data1["Not placed"]);
+                mtech_placed_frac = data2["Placed"] / (data2["Placed"] + data2["Not placed"]);
+                data3 =data.btech_branchwise_placements;
+                data4 = data.mtech_branchwise_placements;
+                data5 = data.company_count;
+                data6 = data.company_count_mtech;
+                data7 = data.others_percent_placed;
+                data8 = data.others_branchwise_placements;
+                data9 = data.company_count_others;
+                others_placed_frac = data7["Placed"] / (data7["Placed"] + data7["Not placed"]);
+                btech();
+                mtech();
+                others();
+           
+              })
+          })
+
+          var dropdown1=document.getElementsByClassName('year_dropdown')[1];
+       
+          dropdown1.addEventListener("click", function(e) {
+            
+
+            fetch("http://127.0.0.1:8082/placement-portal/charts/?data=1&year="+dropdown1.value)
               .then((response) => response.json())
               .then((data) => {
                  data1 = data.btech_percent_placed;

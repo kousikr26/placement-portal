@@ -23,12 +23,12 @@ def handler404(request,exception,template_name='404.html'):
 def handler500(request):
     return render(request,'500.html')
 
+all_years = ['2023','2022']
 
 COMPANY_COUNT=70
 @login_required
 def charts(request):
 
-	all_years = ['2023','2022']
 	branches = ["CSE", "MNC", 'DSAI', "EE", "ME", "CE", "CL", "EP", "CST", "BT", "DS","Physics", "Chemistry", "Mathematics", "Design", "Others"]
 	dens_btech={
 		'2022' : {"CSE":83,"MNC":56, "DSAI" : 0 , "EE":116, "ME":70,"CL":58,"EP":22,"CST":38,"BT":49,"Design":26,"CE":52},
@@ -213,7 +213,8 @@ def charts(request):
 			"others_branchwise_placements":json.dumps(others_branchwise_placements),
 			"company_count":comp_count_lis_btech,
 			"company_count_mtech":comp_count_lis_mtech,
-			"company_count_others":comp_count_lis_others
+			"company_count_others":comp_count_lis_others,
+			"years" : all_years,
 			}
 
 	
@@ -234,7 +235,7 @@ def get_table(request):
 		students  = Student.objects.filter(placed=True)
 
 	branches = Branch.objects.all()
-	context = {'students':students,'branches':branches}
+	context = {'students':students,'branches':branches, "years": all_years}
 	return render(request,'home/table_home.html',context)
 
 ################################################################################
