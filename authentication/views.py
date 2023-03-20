@@ -11,7 +11,7 @@ from django.contrib.auth import authenticate, login, logout
 import re
 
 User._meta.get_field('email')._unique = True
-User._meta.get_field('username')._unique = True
+User._meta.get_field('username')._unique = False
 
 def initialize_context(request):
   context = {}
