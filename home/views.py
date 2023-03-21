@@ -31,12 +31,12 @@ def charts(request):
 	
 	branches = ["CSE", "MNC", "EE", "ME", "CE", "CL", "EP", "CST", "BT", "DS","Physics", "Chemistry", "Mathematics", "Design", "Others"]
 	dens_btech={
-		'2022' : {"CSE":83,"MNC":56,"EE":116,"ME":70,"CL":58,"EP":22,"CST":38,"BT":49,"Design":26,"CE":52},
-		'2023' : {"CSE":80,"MNC":51, "DSAI" : 10 , "EE":111, "ME":75,"CL":68,"EP":32,"CST":48,"BT":59,"Design":36,"CE":62}
+		'2022' : {"CSE":80,"MNC":56, "DSAI" : 0 , "EE":116, "ME":70,"CL":58,"EP":22,"CST":38,"BT":49,"Design":26,"CE":52},
+		'2023' : {"CSE":108,"MNC":68, "DSAI" : 0 , "EE":154, "ME":101,"CL":69,"EP":42,"CST":43,"BT":55,"Design":50,"CE":79}
 	}
 	dens_mtech={
 		'2022':{"CSE":54,"BT":38,"EE":74,"ME":103,"CE":85,"Design":33,"CL":68,"DS":18},
-		'2023' : {"CSE":64,"BT":48,"EE":84,"ME":113,"CE":95,"Design":43,"CL":78,"DS":28}
+		'2023' : {"CSE":60,"BT":35,"EE":68,"ME":90,"CE":94,"Design":43,"CL":57,"DS":18}
 		}
 	dens_others={
 		'2022':{"M.A Humanities":34,"M.S Energy":8,"M.Sc Physics":14,"M.Sc Chemistry":22,"M.Sc Mathematics":30},
