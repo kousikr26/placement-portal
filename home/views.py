@@ -28,10 +28,10 @@ all_years = ['2023','2022']
 COMPANY_COUNT=70
 @login_required
 def charts(request):
-
-	branches = ["CSE", "MNC", 'DSAI', "EE", "ME", "CE", "CL", "EP", "CST", "BT", "DS","Physics", "Chemistry", "Mathematics", "Design", "Others"]
+	
+	branches = ["CSE", "MNC", "EE", "ME", "CE", "CL", "EP", "CST", "BT", "DS","Physics", "Chemistry", "Mathematics", "Design", "Others"]
 	dens_btech={
-		'2022' : {"CSE":83,"MNC":56, "DSAI" : 0 , "EE":116, "ME":70,"CL":58,"EP":22,"CST":38,"BT":49,"Design":26,"CE":52},
+		'2022' : {"CSE":83,"MNC":56,"EE":116,"ME":70,"CL":58,"EP":22,"CST":38,"BT":49,"Design":26,"CE":52},
 		'2023' : {"CSE":80,"MNC":51, "DSAI" : 10 , "EE":111, "ME":75,"CL":68,"EP":32,"CST":48,"BT":59,"Design":36,"CE":62}
 	}
 	dens_mtech={
@@ -250,6 +250,7 @@ def ajax_table_filter(request):
 		program = request.GET.get('program')
 		sortid = request.GET.get('sortid')
 		company = request.GET.get('company')
+		year = request.GET.get('year')
 		students = Student.objects.filter(placed=True)
 		if company:
 			students= students.filter(company=company)
@@ -258,6 +259,8 @@ def ajax_table_filter(request):
 			students = students.filter(branch=branch)
 		if program!='all':
 			students = students.filter(programs=program)
+		if year!='all':
+			students = students.filter(year_placed=year)
 
 		students = students.order_by(Lower(sortid))
 		data['table_data_html'] = render_to_string('home/table_data.html',{'students':students})
