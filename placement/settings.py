@@ -46,10 +46,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'authentication',
+    'django_extensions',
     'ccd',
     'bootstrap4',
     'widget_tweaks',
-
 ]
 
 MIDDLEWARE = [
@@ -161,3 +161,5 @@ DATA_UPLOAD_MAX_NUMBER_FIELDS = 102400
 # 250MB - 214958080
 # 500MB - 429916160
 MAX_UPLOAD_SIZE = "5242880"
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
