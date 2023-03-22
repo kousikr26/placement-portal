@@ -31,8 +31,8 @@ def charts(request):
 	
 	branches = ["CSE", "MNC", "EE", "ME", "CE", "CL", "EP", "CST", "BT", "DS","Physics", "Chemistry", "Mathematics", "Design", "Others"]
 	dens_btech={
-		'2022' : {"CSE":80,"MNC":56, "DSAI" : 0 , "EE":116, "ME":70,"CL":58,"EP":22,"CST":38,"BT":49,"Design":26,"CE":52},
-		'2023' : {"CSE":108,"MNC":68, "DSAI" : 0 , "EE":154, "ME":101,"CL":69,"EP":42,"CST":43,"BT":55,"Design":50,"CE":79}
+		'2022' : {"CSE":80,"MNC":56, "EE":116, "ME":70,"CL":58,"EP":22,"CST":38,"BT":49,"Design":26,"CE":52},
+		'2023' : {"CSE":108,"MNC":68 , "EE":154, "ME":101,"CL":69,"Physics":42,"CST":43,"BT":55,"Design":50,"CE":79}
 	}
 	dens_mtech={
 		'2022':{"CSE":54,"BT":38,"EE":74,"ME":103,"CE":85,"Design":33,"CL":68,"DS":18},
@@ -145,19 +145,19 @@ def charts(request):
 	for bch in branches:
 		tmp={}
 		tmp["group"]=bch
-		if bch not in dens_btech:
+		if bch not in dens_btech[years]:
 			continue
 		if(bch=="Design"):
 			num=len(Student.objects.filter(programs='B.Des').filter(
 				branch__branchName=bch).filter(placed=True, year_placed=years))
-			den = dens_btech[bch]
+			den = dens_btech[years][bch]
 		elif(bch=="EE"):
 			num = len(Student.objects.filter(programs='B.Tech').filter(
-				branch__branchName__in=["ECE","EEE"]).filter(placed=True))
-			den = dens_btech[bch]
+				branch__branchName__in=["ECE","EEE","EE"]).filter(placed=True))
+			den = dens_btech[years][bch]
 		else:
 			num = len(btech_all.filter(branch__branchName=bch))
-			den = dens_btech[bch]
+			den = dens_btech[years][bch]
 		if(num==0):
 			continue
 		tmp["value"] = round((num/den)*100,2)
@@ -167,19 +167,19 @@ def charts(request):
 	for bch in branches:
 		tmp = {}
 		tmp["group"] = bch
-		if bch not in dens_mtech:
+		if bch not in dens_mtech[years]:
 			continue
 		if(bch=="Design"):
 			num=len(Student.objects.filter(programs='M.Des').filter(
 				branch__branchName=bch).filter(placed=True))
-			den = dens_mtech[bch]
+			den = dens_mtech[years][bch]
 		elif(bch=="EE"):
 			num = len(Student.objects.filter(programs='M.Tech').filter(
 				branch__branchName__in=["ECE","EEE"]).filter(placed=True))
-			den = dens_mtech[bch]
+			den = dens_mtech[years][bch]
 		else:
 			num = len(mtech_all.filter(branch__branchName=bch))
-			den = dens_mtech[bch]
+			den = dens_mtech[years][bch]
 		if(num == 0):
 			continue
 		tmp["value"] = round((num/den)*100,2)
@@ -252,18 +252,27 @@ def ajax_table_filter(request):
 		company = request.GET.get('company')
 		year = request.GET.get('year')
 		students = Student.objects.filter(placed=True)
+		print(branch)
+		print(program)
+		print(sortid)
+		print(company)
 		if company:
+			print("fdFVDFV")
 			students= students.filter(company=company)
 		if branch!='all':
+			print(branch)
 			branch = Branch.objects.get(branchName=branch)
+			print(branch)
 			students = students.filter(branch=branch)
 		if program!='all':
 			students = students.filter(programs=program)
 		if year!='all':
 			students = students.filter(year_placed=year)
-
+		print(students)
 		students = students.order_by(Lower(sortid))
-		data['table_data_html'] = render_to_string('home/table_data.html',{'students':students})
+		branches = Branch.objects.all()
+		context = {'students':students,'branches':branches, "years": all_years}
+		data['table_data_html'] = render_to_string('home/table_data.html',context)
 		data['success'] = True
 	else:
 		data['success'] = False
