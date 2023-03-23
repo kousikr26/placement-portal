@@ -133,8 +133,8 @@ def ajax_update_database(request):
                  "Year": 'year_placed',
                 }
         headings_required = ["Name", "Roll No.", "Program","Branch","Day","Company","Placed","Sector","Profile","Slot","Year"]
-        # print(sorted(headings))
-        # print(sorted(headings_required))
+        print(sorted(headings))
+        print(sorted(headings_required))
         if sorted(headings)==sorted(headings_required):
             # print(len(data_list))
             for i in range(len(data_list)):
