@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -19,14 +22,11 @@ TEMPLATES_DIR =os.path.join(BASE_DIR,'templates')
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'hfaeq1p=f6t7p+m7vdc8ru*8j4=4m)7(-7+2yy)2(j54tw!ik*'
-
-
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'hfaeq1p=f6t7p+m7vdc8ru*8j4=4m)7(-7+2yy)2(j54tw!ik*')
 
 ALLOWED_HOSTS = ["*"]
 if not DEBUG:
