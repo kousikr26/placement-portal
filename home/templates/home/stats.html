@@ -220,7 +220,7 @@ Charts
           dropdown1.addEventListener("click", function(e) {
             
 
-            fetch("http://127.0.0.1:8082/placement-portal/charts/?data=1&year="+dropdown1.value)
+            fetch("/placement-stats/charts/?data=1&year="+dropdown1.value)
               .then((response) => response.json())
               .then((data) => {
                  data1 = data.btech_percent_placed;

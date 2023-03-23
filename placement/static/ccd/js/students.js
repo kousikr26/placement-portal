@@ -45,7 +45,7 @@ $(function() {
     var getBranch = function() {
         console.log("getting branches");
         $.ajax({
-            url: '/placement-portal/ccd/ajax/get/branches/',
+            url: '/placement-stats/ccd/ajax/get/branches/',
             type: 'GET',
             dataType: 'json',
             beforeSend: function (){
@@ -119,7 +119,7 @@ $(function() {
         var program = $('#program_filter').val();
         var sortid = $('#sort').val();
         $.ajax({
-            url: '/placement-portal/ccd/ajax/filter/',
+            url: '/placement-stats/ccd/ajax/filter/',
             type: 'GET',
             data: {
                 'branch': branch,

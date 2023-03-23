@@ -1,5 +1,5 @@
 
-# placement-portal
+# placement-stats
 
 ### A django portal for displaying placement statistics
 

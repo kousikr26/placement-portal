@@ -853,7 +853,7 @@ window.addEventListener('load', () => {
     // function to get all files using ajax and update the files list html
     var loadFilesList = function() {
         $.ajax({
-            url: '/placement-portal/ccd/files',
+            url: '/placement-stats/ccd/files',
             type: 'get',
             dataType: 'json',
             success: function(data) {
@@ -898,7 +898,7 @@ window.addEventListener('load', () => {
     // function to load FileForm
     var loadFileForm = function() {
         $.ajax({
-            url: '/placement-portal/ccd/ajax/upload-file',
+            url: '/placement-stats/ccd/ajax/upload-file',
             type: 'get',
             dataType: 'json',
             // beforeSend: function() {
@@ -918,7 +918,7 @@ window.addEventListener('load', () => {
         var formData = new FormData(this);
         // var form = $(this);
         $.ajax({
-            url: '/placement-portal/ccd/ajax/upload-file',
+            url: '/placement-stats/ccd/ajax/upload-file',
             data: formData,
             type: 'post',
             cache: false,
@@ -1186,7 +1186,7 @@ window.addEventListener('load', () => {
         var program = $('#program_filter').val();
         var sortid = $('#sort').val();
         $.ajax({
-            url: '/placement-portal/ccd/ajax/filter/',
+            url: '/placement-stats/ccd/ajax/filter/',
             type: 'GET',
             data: {
                 'branch': branch,
@@ -1287,7 +1287,7 @@ window.addEventListener('load', () => {
                     var update_type = $('#update_type').val();
                     $.ajax({
                         contentType: 'application/json; charset=utf-8',
-                        url: '/placement-portal/ccd/ajax/update-database',
+                        url: '/placement-stats/ccd/ajax/update-database',
                         type: 'POST',
                         data: JSON.stringify({
                             'headings': headings,
