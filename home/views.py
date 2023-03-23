@@ -187,25 +187,15 @@ def charts(request):
 		tmp["den"]=den
 		mtech_branchwise_placements.append(tmp)
 
-<<<<<<< HEAD
-	for i in dens_others:
-		bch=list(i.split())[1].strip()
-=======
 	for i in dens_others[years]:
->>>>>>> 6a612208a30daef0d72231cc26c173e81b707e74
 
 		tmp = {}
 		tmp["group"] = i
 		if i not in dens_others:
 			continue
 
-<<<<<<< HEAD
-		num = len(others_all.filter(branch__branchName=bch))
-		den = dens_others[i]
-=======
 		num = len(others_all.filter(branch__branchName=i))
 		den = dens_others[years][i]
->>>>>>> 6a612208a30daef0d72231cc26c173e81b707e74
 		if(num == 0):
 			continue
 		tmp["value"] = round((num/den)*100,2)
