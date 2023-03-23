@@ -252,23 +252,15 @@ def ajax_table_filter(request):
 		company = request.GET.get('company')
 		year = request.GET.get('year')
 		students = Student.objects.filter(placed=True)
-		print(branch)
-		print(program)
-		print(sortid)
-		print(company)
 		if company:
-			print("fdFVDFV")
 			students= students.filter(company=company)
 		if branch!='all':
-			print(branch)
 			branch = Branch.objects.get(branchName=branch)
-			print(branch)
 			students = students.filter(branch=branch)
 		if program!='all':
 			students = students.filter(programs=program)
-		if year!='all':
+		if year!='all' and year is not None:
 			students = students.filter(year_placed=year)
-		print(students)
 		students = students.order_by(Lower(sortid))
 		branches = Branch.objects.all()
 		context = {'students':students,'branches':branches, "years": all_years}
