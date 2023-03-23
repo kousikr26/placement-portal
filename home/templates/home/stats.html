@@ -217,7 +217,7 @@ Charts
           dropdown.addEventListener("click", function(e) {
             
 
-            fetch("http://127.0.0.1:8082/placement-portal/charts/?data=1&year="+dropdown.value)
+            fetch("https://swc.iitg.ac.in/placement-statistics/charts/?data=1&year="+dropdown.value)
               .then((response) => response.json())
               .then((data) => {
                  data1 = data.btech_percent_placed;
@@ -232,10 +232,9 @@ Charts
                 data8 = data.others_branchwise_placements;
                 data9 = data.company_count_others;
                 others_placed_frac = data7["Placed"] / (data7["Placed"] + data7["Not placed"]);
-                btech();
-                mtech();
                 others();
-           
+                mtech();
+                btech();
               })
           })
 
@@ -259,10 +258,9 @@ Charts
                 data8 = data.others_branchwise_placements;
                 data9 = data.company_count_others;
                 others_placed_frac = data7["Placed"] / (data7["Placed"] + data7["Not placed"]);
-                btech();
-                mtech();
                 others();
-           
+                mtech();
+                btech();
               })
           })
    
