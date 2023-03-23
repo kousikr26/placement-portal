@@ -130,10 +130,11 @@ def ajax_update_database(request):
                  "Sector":'sector',
                  "Profile":'profile',
                  "Slot":'slot',
+                 "Year": 'year_placed',
                 }
-        headings_required = ["Name", "Roll No.", "Program","Branch","Day","Company","Placed","Sector","Profile","Slot",]
-        # print(sorted(headings))
-        # print(sorted(headings_required))
+        headings_required = ["Name", "Roll No.", "Program","Branch","Day","Company","Placed","Sector","Profile","Slot","Year"]
+        print(sorted(headings))
+        print(sorted(headings_required))
         if sorted(headings)==sorted(headings_required):
             # print(len(data_list))
             for i in range(len(data_list)):
@@ -160,6 +161,7 @@ def ajax_update_database(request):
                         # if i<5:
                         #     print(student_dict)
                         is_exist = Student.objects.filter(roll = student_dict['roll']).count()
+                        # branch_exist = Student.objects.filter(branch = student_dict['branch_id']).count()
                         if update_type=="1":
                             if is_exist:
                                 obj= Student.objects.get(roll=student_dict['roll'])
@@ -172,6 +174,7 @@ def ajax_update_database(request):
                                 obj.sector = student_dict['sector']
                                 obj.profile = student_dict['profile']
                                 obj.slot = student_dict['slot']
+                                obj.year_placed = student_dict['year_placed']
                                 obj.save()
                         elif update_type=="2":
                             if not is_exist:
@@ -188,16 +191,15 @@ def ajax_update_database(request):
                                 obj.sector = student_dict['sector']
                                 obj.profile = student_dict['profile']
                                 obj.slot = student_dict['slot']
+                                obj.year_placed = student_dict['year_placed']
                                 obj.save()
                             else:
                                 obj = Student.objects.create(**student_dict)
+                    
 
             context['success']=True
         else:
             print("headers are not matching!")
-
-
-
 
 
     return JsonResponse(context)

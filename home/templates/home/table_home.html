@@ -61,7 +61,7 @@ Table
 	}
 
 	li {
-		ul,
+	
 		margin: 0px;
 		list-style-type: none;
 	}
@@ -558,6 +558,18 @@ Table
 									</div>
 								</div>
 
+								<div class="col-6 col-lg-3" style="display: inline-block;max-width: 299px;">
+									<div class="form-group">
+										<label for="year">Year</label>
+										<select class="form-control" id="year_filter" style="border-color: #7774e7;">
+											<option selected="true" value="all">All</option>
+											{% for x in years %}
+												<option value={{x}}>{{x}}</option>
+											{%endfor%}
+										</select>
+									</div>
+								</div>
+
 
 								<div class="col-6 col-lg-3" style="display: inline-block;max-width: 299px;">
 									<div class="form-group">
@@ -769,6 +781,7 @@ Table
 		var company = params.get("company");
 		var branch = $('#branch_filter').val();
 		var program = $('#program_filter').val();
+		var year = $('#year_filter').val();
 		var sortid = $('#sort').val();
 		$.ajax({
 			url: '/placement-portal/ajax/tableFilter',
@@ -778,6 +791,7 @@ Table
 				'sortid': sortid,
 				'program': program,
 				'company': company,
+				'year': year,
 			},
 			dataType: 'json',
 			success: function(data) {
@@ -800,6 +814,7 @@ Table
 	$('#sort').on('change', ajax_filter);
 	$('#branch_filter').on('change', ajax_filter);
 	$('#program_filter').on('change', ajax_filter);
+	$('#year_filter').on('change', ajax_filter);
 
 
 	////////////////////////////////////////////////////////////////////////////////////

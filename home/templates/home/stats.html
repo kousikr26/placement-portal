@@ -39,6 +39,15 @@ Charts
     <a class="navbar-brand order-0 hov_class" href="{% url 'home:home' %}" style="cursor: pointer;"> <img
         style="max-width: 35px;max-height: 35px;"
         src="{% static 'images/logo.png' %}">Placement Statistics</a>
+        <div  id="year_form" >
+    
+          <select class="form-control year_dropdown"  style="border-color: #7774e7;">
+            {% for x in years %}
+              <option value={{x}}>{{x}}</option>
+            {%endfor%}
+          </select>
+        </div>
+
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
       aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -96,6 +105,18 @@ Charts
 
 
 <!-- Add 2 buttons -->
+<<<<<<< HEAD
+=======
+<div  id="year_form1" >
+<div>
+    <select class="form-control year_dropdown" id="program_filter" style="border-color: #7774e7;">
+      {% for x in years %}
+        <option value={{x}}>{{x}}</option>
+      {%endfor%}
+    </select>
+</div>
+</div>
+>>>>>>> 6a612208a30daef0d72231cc26c173e81b707e74
 <div style="text-align:center;margin-top:0.5rem;display:block">
 
   <div class="btn-group btn-toggle mb-3">
@@ -140,9 +161,11 @@ Charts
         <br>
         <br>
         <div style="text-align:center;">
-
-          <a class="btn btn-primary " style="background-color: #023e8a;color:#fff" href="{% url "home:table"%}"
+        
+          <div class="tab_view">
+            <a class="btn btn-primary " style="background-color: #023e8a;color:#fff" href="{% url "home:table"%}"
             role="button">Tabular View</a>
+          </div>
         </div>
         <div style="margin-bottom:200px"></div>
         <style>
@@ -169,6 +192,61 @@ Charts
           var data8 = {{ others_branchwise_placements| safe}};
           var data9 = {{ company_count_others| safe}};
           var others_placed_frac = data7["Placed"] / (data7["Placed"] + data7["Not placed"]);
+<<<<<<< HEAD
+=======
+          var dropdown=document.getElementsByClassName('year_dropdown')[0];
+       
+          dropdown.addEventListener("click", function(e) {
+            
+
+            fetch("https://swc.iitg.ac.in/placement-statistics/charts/?data=1&year="+dropdown.value)
+              .then((response) => response.json())
+              .then((data) => {
+                 data1 = data.btech_percent_placed;
+                 data2 =data.mtech_percent_placed;
+                btech_placed_frac = data1["Placed"] / (data1["Placed"] + data1["Not placed"]);
+                mtech_placed_frac = data2["Placed"] / (data2["Placed"] + data2["Not placed"]);
+                data3 =data.btech_branchwise_placements;
+                data4 = data.mtech_branchwise_placements;
+                data5 = data.company_count;
+                data6 = data.company_count_mtech;
+                data7 = data.others_percent_placed;
+                data8 = data.others_branchwise_placements;
+                data9 = data.company_count_others;
+                others_placed_frac = data7["Placed"] / (data7["Placed"] + data7["Not placed"]);
+                others();
+                mtech();
+                btech();
+              })
+          })
+
+          var dropdown1=document.getElementsByClassName('year_dropdown')[1];
+       
+          dropdown1.addEventListener("click", function(e) {
+            
+
+            fetch("http://127.0.0.1:8082/placement-portal/charts/?data=1&year="+dropdown1.value)
+              .then((response) => response.json())
+              .then((data) => {
+                 data1 = data.btech_percent_placed;
+                 data2 =data.mtech_percent_placed;
+                btech_placed_frac = data1["Placed"] / (data1["Placed"] + data1["Not placed"]);
+                mtech_placed_frac = data2["Placed"] / (data2["Placed"] + data2["Not placed"]);
+                data3 =data.btech_branchwise_placements;
+                data4 = data.mtech_branchwise_placements;
+                data5 = data.company_count;
+                data6 = data.company_count_mtech;
+                data7 = data.others_percent_placed;
+                data8 = data.others_branchwise_placements;
+                data9 = data.company_count_others;
+                others_placed_frac = data7["Placed"] / (data7["Placed"] + data7["Not placed"]);
+                others();
+                mtech();
+                btech();
+              })
+          })
+   
+>>>>>>> 6a612208a30daef0d72231cc26c173e81b707e74
         </script>
       </div>
 
