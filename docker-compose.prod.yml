@@ -6,6 +6,7 @@ services:
     build:
       context: .
     image: placement_stats
+    command: sh -c /app/entrypoint.prod
     container_name: placement_stats
     volumes:
         - "./db.sqlite3:/app/db.sqlite3"

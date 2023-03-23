@@ -149,13 +149,8 @@ def charts(request):
 			continue
 		if(bch=="Design"):
 			num=len(Student.objects.filter(programs='B.Des').filter(
-<<<<<<< HEAD
-				branch__branchName=bch).filter(placed=True))
-			den = dens_btech[bch]
-=======
 				branch__branchName=bch).filter(placed=True, year_placed=years))
 			den = dens_btech[years][bch]
->>>>>>> 6a612208a30daef0d72231cc26c173e81b707e74
 		elif(bch=="EE"):
 			num = len(Student.objects.filter(programs='B.Tech').filter(
 				branch__branchName__in=["ECE","EEE","EE"]).filter(placed=True, year_placed=years))
