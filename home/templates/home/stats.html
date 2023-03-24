@@ -284,17 +284,17 @@ Charts
             fetch("/placement-stats/charts/?data=1&year="+dropdown1.value)
               .then((response) => response.json())
               .then((data) => {
-                 data1 = data.btech_percent_placed;
-                 data2 =data.mtech_percent_placed;
+                 data1 = JSON.parse(data.btech_percent_placed);
+                 data2 =JSON.parse(data.mtech_percent_placed);
                 btech_placed_frac = data1["Placed"] / (data1["Placed"] + data1["Not placed"]);
                 mtech_placed_frac = data2["Placed"] / (data2["Placed"] + data2["Not placed"]);
-                data3 =data.btech_branchwise_placements;
-                data4 = data.mtech_branchwise_placements;
-                data5 = data.company_count;
-                data6 = data.company_count_mtech;
-                data7 = data.others_percent_placed;
-                data8 = data.others_branchwise_placements;
-                data9 = data.company_count_others;
+                data3 =JSON.parse(data.btech_branchwise_placements);
+                data4 = JSON.parse(data.mtech_branchwise_placements);
+                data5 = JSON.parse(data.company_count);
+                data6 = JSON.parse(data.company_count_mtech);
+                data7 = JSON.parse(data.others_percent_placed);
+                data8 = JSON.parse(data.others_branchwise_placements);
+                data9 = JSON.parse(data.company_count_others);
                 others_placed_frac = data7["Placed"] / (data7["Placed"] + data7["Not placed"]);
                 others();
                 mtech();
