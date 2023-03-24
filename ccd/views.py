@@ -179,7 +179,7 @@ def ajax_update_database(request):
                         elif update_type=="2":
                             if not is_exist:
                                 print("qwqwqwqw")
-                                obj = Student(student_dict)
+                                obj = Student(**student_dict)
                                 print(obj)
                                 print("sdsdsd")
                                 obj.full_clean()
