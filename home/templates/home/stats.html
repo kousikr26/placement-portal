@@ -217,7 +217,7 @@ Charts
           dropdown.addEventListener("click", function(e) {
             
 
-            fetch("https://swc.iitg.ac.in/placement-statistics/charts/?data=1&year="+dropdown.value)
+            fetch("/placement-stats/charts/?data=1&year="+dropdown.value)
               .then((response) => response.json())
               .then((data) => {
                  data1 = data.btech_percent_placed;
