@@ -192,7 +192,6 @@ def ajax_update_database(request):
                                 obj.slot = student_dict['slot']
                                 obj.year_placed = student_dict['year_placed']
                                 print(obj)
-                                obj.save()
                                 print("sdsdsd")
                                 print(obj)
                                 try:
