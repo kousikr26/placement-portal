@@ -197,7 +197,9 @@ def ajax_update_database(request):
                                 obj.save()
                                 print(obj)
                             else:
+                                print("Df")
                                 obj = Student.objects.create(**student_dict)
+                                print("done")
                     
 
             context['success']=True
