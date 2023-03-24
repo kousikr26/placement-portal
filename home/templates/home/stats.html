@@ -198,7 +198,45 @@ Charts
         <link rel="stylesheet" type="text/css" href="{% static 'home/barchart.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'home/wordcloud.css' %}">
         <script>
-       
+          function btech() {
+            updateGauge(currentpos, btech_placed_frac);
+            updateBarChart(data3);
+            plot_cloud(data5);
+            document.getElementById("mtech-button").classList.remove("active");
+            document.getElementById("mtech-button").classList.remove("btn-primary");
+            document.getElementById("mtech-button").classList.add("btn-default");
+            document.getElementById("others-button").classList.remove("active");
+            document.getElementById("others-button").classList.remove("btn-primary");
+            document.getElementById("others-button").classList.add("btn-default");
+            document.getElementById("btech-button").classList.add("btn-primary");
+            document.getElementById("btech-button").classList.add("active");
+          }
+          function mtech() {
+            updateGauge(currentpos, mtech_placed_frac);
+            updateBarChart(data4);
+            plot_cloud(data6);
+            document.getElementById("btech-button").classList.remove("active");
+            document.getElementById("btech-button").classList.remove("btn-primary");
+            document.getElementById("btech-button").classList.add("btn-default");
+            document.getElementById("others-button").classList.remove("active");
+            document.getElementById("others-button").classList.remove("btn-primary");
+            document.getElementById("others-button").classList.add("btn-default");
+            document.getElementById("mtech-button").classList.add("btn-primary");
+            document.getElementById("mtech-button").classList.add("active");
+          }
+          function others() {
+            updateGauge(currentpos, others_placed_frac);
+            updateBarChart(data8);
+            plot_cloud(data9);
+            document.getElementById("mtech-button").classList.remove("active");
+            document.getElementById("mtech-button").classList.remove("btn-primary");
+            document.getElementById("mtech-button").classList.add("btn-default");
+            document.getElementById("btech-button").classList.remove("active");
+            document.getElementById("btech-button").classList.remove("btn-primary");
+            document.getElementById("btech-button").classList.add("btn-default");
+            document.getElementById("others-button").classList.add("btn-primary");
+            document.getElementById("others-button").classList.add("active");
+          }
           var delayBarChart = 100000;
           var data1 = {{ btech_percent_placed| safe }};
           var data2 = {{ mtech_percent_placed| safe }};
