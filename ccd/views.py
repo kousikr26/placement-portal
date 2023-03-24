@@ -180,6 +180,8 @@ def ajax_update_database(request):
                             if not is_exist:
                                 obj = Student.objects.create(**student_dict)
                         elif update_type=="3":
+                            print("fdfvdfv")
+                            print(is_exist)
                             if is_exist:
                                 obj= Student.objects.get(roll=student_dict['roll'])
                                 obj.name = student_dict['name']
@@ -193,6 +195,7 @@ def ajax_update_database(request):
                                 obj.slot = student_dict['slot']
                                 obj.year_placed = student_dict['year_placed']
                                 obj.save()
+                                print(obj)
                             else:
                                 obj = Student.objects.create(**student_dict)
                     
