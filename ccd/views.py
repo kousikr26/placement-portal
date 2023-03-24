@@ -178,7 +178,11 @@ def ajax_update_database(request):
                                 obj.save()
                         elif update_type=="2":
                             if not is_exist:
-                                obj = Student.objects.create(**student_dict)
+                                print("qwqwqwqw")
+                                obj = Student(student_dict)
+                                print("sdsdsd")
+                                obj.save()
+                                print(obj)
                         elif update_type=="3":
                             print("fdfvdfv")
                             print(is_exist)
