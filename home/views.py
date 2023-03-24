@@ -191,7 +191,7 @@ def charts(request):
 
 		tmp = {}
 		tmp["group"] = i
-		if i not in dens_others:
+		if i not in dens_others[years]:
 			continue
 
 		num = len(others_all.filter(branch__branchName=i))
@@ -203,7 +203,8 @@ def charts(request):
 		tmp["den"]=den
 		others_branchwise_placements.append(tmp)
 
-	context = {"btech_percent_placed": btech_percent_placed,
+	context = {
+			"btech_percent_placed": btech_percent_placed,
 			"mtech_percent_placed": mtech_percent_placed,
 			"others_percent_placed":others_percent_placed,
 			"btech_branchwise_placements": json.dumps(btech_branchwise_placements),
@@ -215,8 +216,12 @@ def charts(request):
 			"years" : all_years,
 			}
 
-	# print(context)
-	return render(request, "home/stats.html",context )
+	
+	onlydata = request.GET.get('data')
+	if onlydata is None:
+		return render(request, "home/stats.html", context )
+	else:
+		return JsonResponse(context, safe=False)
 ################################################################################
 # function to render the table
 
