@@ -184,12 +184,14 @@ def ajax_update_database(request):
                                 obj.programs = student_dict['programs']
                                 obj.branch_id = student_dict['branch_id']
                                 obj.day = student_dict['day']
+                                print("hi")
                                 obj.company = student_dict['company']
                                 obj.placed = student_dict['placed']
                                 obj.sector = student_dict['sector']
                                 obj.profile = student_dict['profile']
                                 obj.slot = student_dict['slot']
                                 obj.year_placed = student_dict['year_placed']
+                                print(obj)
                                 obj.save()
                                 print("sdsdsd")
                                 print(obj)
