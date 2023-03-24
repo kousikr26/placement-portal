@@ -182,6 +182,7 @@ def ajax_update_database(request):
                                 obj = Student(student_dict)
                                 print("sdsdsd")
                                 print(obj)
+                                obj.full_clean()
                                 try:
                                     obj.save()
                                 except:
