@@ -31,7 +31,7 @@ def charts(request):
 	
 	branches = ["CSE", "MNC", "EE", "ME", "CE", "CL", "EP", "CST", "BT", "DS","Physics", "Chemistry", "Mathematics", "Design", "Others"]
 	dens_btech={
-		'2022' : {"CSE":80,"MNC":56, "EE":116, "ME":70,"CL":58,"EP":22,"CST":38,"BT":49,"Design":26,"CE":52},
+		'2022' : {"CSE":83,"MNC":56, "EE":116, "ME":70,"CL":58,"EP":22,"CST":38,"BT":49,"Design":26,"CE":52},
 		'2023' : {"CSE":108,"MNC":68 , "EE":154, "ME":101,"CL":69,"Physics":42,"CST":43,"BT":55,"Design":50,"CE":79}
 	}
 	dens_mtech={

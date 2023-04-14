@@ -60,14 +60,14 @@ Charts
     <a class="navbar-brand order-0 hov_class" href="{% url 'home:home' %}" style="cursor: pointer;"> <img
         style="max-width: 35px;max-height: 35px;"
         src="{% static 'images/logo.png' %}">Placement Statistics</a>
-        <div  id="year_form" >
+        {% comment %} <div  id="year_form" >
     
           <select class="form-control year_dropdown"  style="border-color: #7774e7;">
             {% for x in years %}
               <option value={{x}}>{{x}}</option>
             {%endfor%}
           </select>
-        </div>
+        </div> {% endcomment %}
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
       aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
@@ -129,11 +129,11 @@ Charts
 <!-- Add 2 buttons -->
 <div  id="year_form1" >
 <div>
-    <select class="form-control year_dropdown" id="program_filter" style="border-color: #7774e7;">
+    {% comment %} <select class="form-control year_dropdown" id="program_filter" style="border-color: #7774e7;">
       {% for x in years %}
         <option value={{x}}>{{x}}</option>
       {%endfor%}
-    </select>
+    </select> {% endcomment %}
 </div>
 </div>
 <div style="text-align:center;margin-top:0.5rem;display:block">
