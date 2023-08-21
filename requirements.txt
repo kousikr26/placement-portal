@@ -7,3 +7,4 @@ django_forms_bootstrap==3.1.0
 django-bootstrap4
 selenium
 django-allauth
+django_extensions

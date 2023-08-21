@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -7,16 +9,26 @@
   </title>
   <meta charset="UTF-8">
   <meta name="keywords" content="IITG, IITG placements,IITG Placement Statistics, ccd IITG, IITG placement portal, SWC IITG,IIT Guwahati">
-  <meta name="description" content="A dashboard for viewing IIT Guwahati Placement 2020-21 statistics">
+  <meta name="description" content="A dashboard for viewing IIT Guwahati Placement statistics">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/minty/bootstrap.min.css" >
   <link rel="icon" href="https://upload.wikimedia.org/wikipedia/en/thumb/1/12/IIT_Guwahati_Logo.svg/1200px-IIT_Guwahati_Logo.svg.png">
   {# bootstrap css #}
   <style media="screen">
-    body{
-      background-color: #e2e2e2;
+    * {
+    margin: 0;
+    padding: 0;
+    font-family: "Montserrat", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     }
 
+    body{
+      background-color: #e2e2e2;
+      max-height: 100%;
+    }
+
+    .main_hsdds{
+      display: none;
+    }
     .jumbotron{
       background-color: #e2e2e2;
     }
@@ -29,6 +41,92 @@
       background-color: #023e8a;
     }
 
+    .loader h1 {
+    position: absolute;
+    color: transparent;
+    transform: translate(-50%, -50%);
+    white-space: inherit;
+}
+
+.loader h1:nth-child(1) {
+    color: transparent;
+    -webkit-text-stroke: 1px rgb(24, 61, 133);
+}
+
+.loader h1:nth-child(2) {
+    color: rgb(24, 61, 133);
+    animation: animate 2s ease-in-out infinite;
+}
+
+@keyframes animate {
+
+    0%,100% {
+        clip-path: polygon(100% 100%, 0% 100% , 0.00% 91.41%, 1.00% 91.26%, 2.00% 90.85%, 3.00% 90.26%, 4.00% 89.59%, 5.00% 88.97%, 6.00% 88.50%, 7.00% 88.29%, 8.00% 88.36%, 9.00% 88.71%, 10.00% 89.27%, 11.00% 89.93%, 12.00% 90.58%, 13.00% 91.09%, 14.00% 91.37%, 15.00% 91.37%, 16.00% 91.08%, 17.00% 90.57%, 18.00% 89.92%, 19.00% 89.26%, 20.00% 88.70%, 21.00% 88.36%, 22.00% 88.29%, 23.00% 88.51%, 24.00% 88.97%, 25.00% 89.60%, 26.00% 90.27%, 27.00% 90.86%, 28.00% 91.27%, 29.00% 91.41%, 30.00% 91.26%, 31.00% 90.85%, 32.00% 90.25%, 33.00% 89.58%, 34.00% 88.96%, 35.00% 88.50%, 36.00% 88.29%, 37.00% 88.37%, 38.00% 88.72%, 39.00% 89.28%, 40.00% 89.94%, 41.00% 90.59%, 42.00% 91.10%, 43.00% 91.37%, 44.00% 91.37%, 45.00% 91.08%, 46.00% 90.56%, 47.00% 89.91%, 48.00% 89.25%, 49.00% 88.70%, 50.00% 88.36%, 51.00% 88.29%, 52.00% 88.51%, 53.00% 88.98%, 54.00% 89.61%, 55.00% 90.28%, 56.00% 90.87%, 57.00% 91.27%, 58.00% 91.41%, 59.00% 91.25%, 60.00% 90.84%, 61.00% 90.24%, 62.00% 89.57%, 63.00% 88.95%, 64.00% 88.49%, 65.00% 88.29%, 66.00% 88.37%, 67.00% 88.73%, 68.00% 89.29%, 69.00% 89.95%, 70.00% 90.60%, 71.00% 91.10%, 72.00% 91.37%, 73.00% 91.36%, 74.00% 91.07%, 75.00% 90.55%, 76.00% 89.90%, 77.00% 89.24%, 78.00% 88.69%, 79.00% 88.35%, 80.00% 88.29%, 81.00% 88.52%, 82.00% 88.99%, 83.00% 89.62%, 84.00% 90.29%, 85.00% 90.88%, 86.00% 91.27%, 87.00% 91.41%, 88.00% 91.25%, 89.00% 90.83%, 90.00% 90.23%, 91.00% 89.56%, 92.00% 88.94%, 93.00% 88.49%, 94.00% 88.29%, 95.00% 88.37%, 96.00% 88.73%, 97.00% 89.30%, 98.00% 89.96%, 99.00% 90.61%, 100.00% 91.11%);
+    }
+
+    50% {
+        clip-path: polygon(100% 100%, 0% 100% , 0.00% 14.06%, 1.00% 14.21%, 2.00% 14.61%, 3.00% 15.21%, 4.00% 15.88%, 5.00% 16.50%, 6.00% 16.96%, 7.00% 17.18%, 8.00% 17.10%, 9.00% 16.76%, 10.00% 16.20%, 11.00% 15.54%, 12.00% 14.89%, 13.00% 14.38%, 14.00% 14.10%, 15.00% 14.10%, 16.00% 14.38%, 17.00% 14.90%, 18.00% 15.55%, 19.00% 16.21%, 20.00% 16.76%, 21.00% 17.11%, 22.00% 17.18%, 23.00% 16.96%, 24.00% 16.50%, 25.00% 15.87%, 26.00% 15.20%, 27.00% 14.61%, 28.00% 14.20%, 29.00% 14.06%, 30.00% 14.21%, 31.00% 14.62%, 32.00% 15.22%, 33.00% 15.89%, 34.00% 16.51%, 35.00% 16.97%, 36.00% 17.18%, 37.00% 17.10%, 38.00% 16.75%, 39.00% 16.19%, 40.00% 15.53%, 41.00% 14.88%, 42.00% 14.37%, 43.00% 14.10%, 44.00% 14.10%, 45.00% 14.39%, 46.00% 14.91%, 47.00% 15.56%, 48.00% 16.22%, 49.00% 16.77%, 50.00% 17.11%, 51.00% 17.18%, 52.00% 16.95%, 53.00% 16.49%, 54.00% 15.86%, 55.00% 15.19%, 56.00% 14.60%, 57.00% 14.20%, 58.00% 14.06%, 59.00% 14.22%, 60.00% 14.63%, 61.00% 15.23%, 62.00% 15.90%, 63.00% 16.52%, 64.00% 16.97%, 65.00% 17.18%, 66.00% 17.10%, 67.00% 16.74%, 68.00% 16.18%, 69.00% 15.52%, 70.00% 14.87%, 71.00% 14.37%, 72.00% 14.09%, 73.00% 14.10%, 74.00% 14.40%, 75.00% 14.92%, 76.00% 15.57%, 77.00% 16.23%, 78.00% 16.78%, 79.00% 17.11%, 80.00% 17.18%, 81.00% 16.95%, 82.00% 16.48%, 83.00% 15.85%, 84.00% 15.18%, 85.00% 14.59%, 86.00% 14.19%, 87.00% 14.06%, 88.00% 14.22%, 89.00% 14.64%, 90.00% 15.24%, 91.00% 15.91%, 92.00% 16.53%, 93.00% 16.98%, 94.00% 17.18%, 95.00% 17.10%, 96.00% 16.74%, 97.00% 16.17%, 98.00% 15.51%, 99.00% 14.86%, 100.00% 14.36%);
+    }
+}
+
+.quote {
+    color: #000000;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-bottom: 1%;
+    text-align: center;
+    height: fit-content;
+    position: fixed;
+    bottom: 0;
+    font-style: italic;
+    width: 96%;
+}
+
+.logo img {
+    height: 7rem;
+}
+
+.loader {
+    position: relative;
+    margin-left: 6.9rem;
+}
+
+.loader h1 {
+    font-size: 2em;
+    font-weight: 700;
+}
+
+.load-content {
+    display: flex;
+    max-width: inherit;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    min-height: 80vh;
+}
+
+@media screen and (max-width:640px) {
+
+    .load-content{
+        max-height: 60vh;
+    }
+    .logo{
+        height: 14vh !important;
+    }
+    #icon{
+        height: 14vh;
+    }
+    .loader{
+        position: relative;
+        min-width: 14vh;
+        margin-left: 6rem;
+    }
+    .quote{
+        font-size: 0.8rem;
+    }
+}
 
 
 
@@ -42,11 +140,32 @@
 </head>
 
 <body>
-  {% block content %}
+  <div id="loading_page">
+    <div class="load-content">
+      <div class="logo" >
+          <img id="icon" src="{% static 'images/swc_icon.svg' %}">
+      </div>
+      <div class="loader">
+          <h1>Students'
+Web
+Committee</h1>
+          <h1>Students'
+Web
+Committee</h1>
+      </div>
+  </div>
+  <div class="quote" data-quote></div>
 
-  {% endblock %}
+  </div>
 
+  <div class="main_hsdds" id="main_hss">
 
+    {% block content %}
+    
+    {% endblock %}
+    
+    
+  </div>
 
 </body>
 
@@ -54,7 +173,31 @@
 <!-- jQuery and JS bundle w/ Popper.js -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+<script>
+  
+  let quotes = []
 
+  fetch("{% static 'data/quotes.json' %}")
+    .then(res => res.json())
+    .then(data => {
+      quotes = data['quotes']
+      const r = Math.floor(Math.random() * 12)
+      const quote = document.querySelector("[data-quote]")
+      quote.textContent = quotes[r]["quote"]
+    })
+
+    window.setTimeout(()=>{
+      var loading_page = document.getElementById("loading_page");
+      var main_page = document.getElementById("main_hss");
+
+      loading_page.style.display="none";
+      main_page.style.display="block";
+    },((Math.random() * 2500)+1000))
+
+
+    
+
+</script>
 {% block scripts %}
 
 {% endblock %}

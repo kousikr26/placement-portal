@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -19,18 +22,15 @@ TEMPLATES_DIR =os.path.join(BASE_DIR,'templates')
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'hfaeq1p=f6t7p+m7vdc8ru*8j4=4m)7(-7+2yy)2(j54tw!ik*'
-
-
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'hfaeq1p=f6t7p+m7vdc8ru*8j4=4m)7(-7+2yy)2(j54tw!ik*')
 
 ALLOWED_HOSTS = ["*"]
-if not DEBUG:
-    SECURE_SSL_REDIRECT = True
+# if not DEBUG:
+#     SECURE_SSL_REDIRECT = True
 
 # AUTH_USER_MODEL = "authentication.User"
 
@@ -45,10 +45,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'authentication',
+    'django_extensions',
     'ccd',
     'bootstrap4',
     'widget_tweaks',
-
 ]
 
 MIDDLEWARE = [
@@ -130,7 +130,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
-STATIC_URL = '/placement-portal/static/'
+STATIC_URL = '/placement-stats/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
@@ -140,7 +140,7 @@ STATICFILES_FINDERS = [
     # searches in STATIC subfolder of each app
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
-MEDIA_URL = "/placement-portal/media/"
+MEDIA_URL = "/placement-stats/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
 LOGIN_URL="signin"
@@ -160,3 +160,5 @@ DATA_UPLOAD_MAX_NUMBER_FIELDS = 102400
 # 250MB - 214958080
 # 500MB - 429916160
 MAX_UPLOAD_SIZE = "5242880"
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+

@@ -10,7 +10,28 @@ Charts
       margin-top: -300px;
     }
   }
+  #year_form{
+    display: flex;
+    align-items: center;
+  }
 
+  #year_form1{
+    display: flex;
+   justify-content: center;
+   align-items: center;
+  padding-bottom:20px;
+  }
+  @media(max-width:600px) {
+  #year_form{
+    display: none;
+  }
+  
+  }
+  @media(min-width:601px) {
+  #year_form1{
+    display: none;
+  }
+}
   @media(min-width: 1300px) {
     .marg_class {
       margin-left: -90px;
@@ -34,16 +55,26 @@ Charts
 <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
 
 
-  <div class="container-fluid">
+  <div class="container-fluid ">
 
     <a class="navbar-brand order-0 hov_class" href="{% url 'home:home' %}" style="cursor: pointer;"> <img
         style="max-width: 35px;max-height: 35px;"
         src="{% static 'images/logo.png' %}">Placement Statistics</a>
+        {% comment %} <div  id="year_form" >
+    
+          <select class="form-control year_dropdown"  style="border-color: #7774e7;">
+            {% for x in years %}
+              <option value={{x}}>{{x}}</option>
+            {%endfor%}
+          </select>
+        </div> {% endcomment %}
+
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
       aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
+   
     </button>
-
+ 
     <div class="collapse navbar-collapse" id="navbarColor01">
       <ul class="navbar-nav ml-auto">
 
@@ -78,7 +109,7 @@ Charts
           <a class="nav-link" href="{% url 'signin' %}">Click here to Login
           </a>
         </li>
-
+ 
         <a class="nav-item nav-link text-white hov_class" href="{% url 'signin' %}" style="cursor: pointer;"></a>
         {% endif %}
 
@@ -96,6 +127,15 @@ Charts
 
 
 <!-- Add 2 buttons -->
+<div  id="year_form1" >
+<div>
+    {% comment %} <select class="form-control year_dropdown" id="program_filter" style="border-color: #7774e7;">
+      {% for x in years %}
+        <option value={{x}}>{{x}}</option>
+      {%endfor%}
+    </select> {% endcomment %}
+</div>
+</div>
 <div style="text-align:center;margin-top:0.5rem;display:block">
 
   <div class="btn-group btn-toggle mb-3">
@@ -140,9 +180,11 @@ Charts
         <br>
         <br>
         <div style="text-align:center;">
-
-          <a class="btn btn-primary " style="background-color: #023e8a;color:#fff" href="{% url "home:table"%}"
+        
+          <div class="tab_view">
+            <a class="btn btn-primary " style="background-color: #023e8a;color:#fff" href="{% url "home:table"%}"
             role="button">Tabular View</a>
+          </div>
         </div>
         <div style="margin-bottom:200px"></div>
         <style>
@@ -156,6 +198,45 @@ Charts
         <link rel="stylesheet" type="text/css" href="{% static 'home/barchart.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'home/wordcloud.css' %}">
         <script>
+          function btech() {
+            updateGauge(currentpos, btech_placed_frac);
+            updateBarChart(data3);
+            plot_cloud(data5);
+            document.getElementById("mtech-button").classList.remove("active");
+            document.getElementById("mtech-button").classList.remove("btn-primary");
+            document.getElementById("mtech-button").classList.add("btn-default");
+            document.getElementById("others-button").classList.remove("active");
+            document.getElementById("others-button").classList.remove("btn-primary");
+            document.getElementById("others-button").classList.add("btn-default");
+            document.getElementById("btech-button").classList.add("btn-primary");
+            document.getElementById("btech-button").classList.add("active");
+          }
+          function mtech() {
+            updateGauge(currentpos, mtech_placed_frac);
+            updateBarChart(data4);
+            plot_cloud(data6);
+            document.getElementById("btech-button").classList.remove("active");
+            document.getElementById("btech-button").classList.remove("btn-primary");
+            document.getElementById("btech-button").classList.add("btn-default");
+            document.getElementById("others-button").classList.remove("active");
+            document.getElementById("others-button").classList.remove("btn-primary");
+            document.getElementById("others-button").classList.add("btn-default");
+            document.getElementById("mtech-button").classList.add("btn-primary");
+            document.getElementById("mtech-button").classList.add("active");
+          }
+          function others() {
+            updateGauge(currentpos, others_placed_frac);
+            updateBarChart(data8);
+            plot_cloud(data9);
+            document.getElementById("mtech-button").classList.remove("active");
+            document.getElementById("mtech-button").classList.remove("btn-primary");
+            document.getElementById("mtech-button").classList.add("btn-default");
+            document.getElementById("btech-button").classList.remove("active");
+            document.getElementById("btech-button").classList.remove("btn-primary");
+            document.getElementById("btech-button").classList.add("btn-default");
+            document.getElementById("others-button").classList.add("btn-primary");
+            document.getElementById("others-button").classList.add("active");
+          }
           var delayBarChart = 100000;
           var data1 = {{ btech_percent_placed| safe }};
           var data2 = {{ mtech_percent_placed| safe }};
@@ -169,6 +250,58 @@ Charts
           var data8 = {{ others_branchwise_placements| safe}};
           var data9 = {{ company_count_others| safe}};
           var others_placed_frac = data7["Placed"] / (data7["Placed"] + data7["Not placed"]);
+          var dropdown=document.getElementsByClassName('year_dropdown')[0];
+       
+          dropdown.addEventListener("click", function(e) {
+            
+
+            fetch("/placement-stats/charts/?data=1&year="+dropdown.value)
+              .then((response) => response.json())
+              .then((data) => {
+                data1 = JSON.parse(data.btech_percent_placed);
+                data2 =JSON.parse(data.mtech_percent_placed);
+               btech_placed_frac = data1["Placed"] / (data1["Placed"] + data1["Not placed"]);
+               mtech_placed_frac = data2["Placed"] / (data2["Placed"] + data2["Not placed"]);
+               data3 =JSON.parse(data.btech_branchwise_placements);
+               data4 = data.mtech_branchwise_placements;
+               data5 = data.company_count;
+               data6 = data.company_count_mtech;
+               data7 = JSON.parse(data.others_percent_placed);
+               data8 = JSON.parse(data.others_branchwise_placements);
+               data9 = data.company_count_others;
+               others_placed_frac = data7["Placed"] / (data7["Placed"] + data7["Not placed"]);
+                others();
+                mtech();
+                btech();
+              })
+          })
+
+          var dropdown1=document.getElementsByClassName('year_dropdown')[1];
+       
+          dropdown1.addEventListener("click", function(e) {
+            
+
+            fetch("/placement-stats/charts/?data=1&year="+dropdown1.value)
+              .then((response) => response.json())
+              .then((data) => {
+                 data1 = JSON.parse(data.btech_percent_placed);
+                 data2 =JSON.parse(data.mtech_percent_placed);
+                btech_placed_frac = data1["Placed"] / (data1["Placed"] + data1["Not placed"]);
+                mtech_placed_frac = data2["Placed"] / (data2["Placed"] + data2["Not placed"]);
+                data3 =JSON.parse(data.btech_branchwise_placements);
+                data4 = data.mtech_branchwise_placements;
+                data5 = data.company_count;
+                data6 = data.company_count_mtech;
+                data7 = JSON.parse(data.others_percent_placed);
+                data8 = JSON.parse(data.others_branchwise_placements);
+                data9 = data.company_count_others;
+                others_placed_frac = data7["Placed"] / (data7["Placed"] + data7["Not placed"]);
+                others();
+                mtech();
+                btech();
+              })
+          })
+   
         </script>
       </div>
 

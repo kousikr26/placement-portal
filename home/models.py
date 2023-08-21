@@ -46,11 +46,20 @@ class Student(models.Model):
         ('Phd', 'PHD'),
         ('Others', 'Others'),
     ]
-
+	
 	programs = models.CharField(
 		max_length=20,
         choices=PROGRAM_CHOICES,
         default='B.Tech',
+	)
+	year_placed_enum = [
+		('2023' , '2023'),
+		('2022' , '2022'),
+	]
+	year_placed = models.CharField(
+		max_length=4,
+        choices=year_placed_enum,
+		default='',
 	)
 	branch = models.ForeignKey(Branch,on_delete=models.CASCADE)
 	day=models.IntegerField(validators=[MaxValueValidator(10),MinValueValidator(0)],default=0, blank=True,null=True)
